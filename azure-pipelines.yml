@@ -8,6 +8,8 @@ trigger:
 
 pool:
   name: BUILD-0
+workspace:
+    clean: all
 
 steps:
   - task: Npm@1
@@ -34,3 +36,5 @@ steps:
     displayName: 'Publish Artifact'
     inputs:
       PathtoPublish: '$(build.artifactstagingdirectory)'
+
+    
