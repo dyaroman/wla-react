@@ -15,7 +15,7 @@ steps:
   inputs:
     command: custom
     verbose: false
-    customCommand: 'install --production --registry http://localhost:4873/'
+    customCommand: 'install --registry http://localhost:4873/'
 
 - task: Npm@1
   displayName: 'Build All'
