@@ -1,0 +1,36 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  name: BUILD-0
+
+steps:
+- task: Npm@1
+  displayName: 'npm install custom'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'install --production --registry http://localhost:4873/'
+
+- task: Npm@1
+  displayName: 'Build All'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run build'
+    
+- task: ArchiveFiles@2
+  displayName: 'Archive from folder build\'
+  inputs:
+    rootFolderOrFile: 'build\'
+    includeRootFolder: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
