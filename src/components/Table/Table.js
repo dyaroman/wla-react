@@ -5,8 +5,8 @@ import FilterField from '../FilterField/FilterField';
 import FilterTitle from '../FilterTitle/FilterTitle';
 import MobileFieldTitle from '../MobileFieldTitle/MobileFieldTitle';
 
-function Table({tableDataFromServer, sort, setSort, filters, setFilters}) {
-    const [tableData, setTableData] = useState(tableDataFromServer);
+function Table({data, sort, setSort, filters, setFilters}) {
+    const [tableData, setTableData] = useState(data);
 
     useEffect(() => {
         updateTableData();
@@ -112,7 +112,7 @@ function Table({tableDataFromServer, sort, setSort, filters, setFilters}) {
     }
 
     function updateTableData() {
-        let updatedData = tableDataFromServer;
+        let updatedData = [...tableData];
 
         for (const filterKey in filters) {
             if (filters[filterKey] !== '') {

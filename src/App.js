@@ -1,9 +1,10 @@
 import {useCallback, useEffect, useState} from 'react';
 import Loader from './components/Loader/Loader';
 import Table from './components/Table/Table';
+import Info from './components/Info/Info';
 
 function App() {
-    const [tableDataFromServer, setTableDataFromServer] = useState([]);
+    const [websitesData, setWebsitesData] = useState();
     const [loaded, setLoaded] = useState(false);
     const [sort, setSort] = useState({
         sortColumn: '',
@@ -31,7 +32,7 @@ function App() {
         try {
             const response = await fetch(dataFileURL);
             const data = await response.json();
-            setTableDataFromServer(data);
+            setWebsitesData(data);
             setLoaded(true);
         } catch (e) {
             console.error(e);
@@ -78,13 +79,19 @@ function App() {
     }, [filters, sort]);
 
     return <>
-        {loaded ? <Table
-            tableDataFromServer={tableDataFromServer}
-            sort={sort}
-            setSort={setSort}
-            filters={filters}
-            setFilters={setFilters}
-        /> : <Loader/>}
+        {loaded ? <>
+            <Info
+                timestamp={websitesData['timestamp']}
+                commit={websitesData['commit']}
+            />
+            <Table
+                data={websitesData['websites']}
+                sort={sort}
+                setSort={setSort}
+                filters={filters}
+                setFilters={setFilters}
+            />
+        </> : <Loader/>}
     </>
 }
 
