@@ -4,33 +4,33 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+  - master
 
 pool:
   name: BUILD-0
 
 steps:
-- task: Npm@1
-  displayName: 'npm install custom'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'install --production --registry http://localhost:4873/'
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'install --registry http://localhost:4873/'
 
-- task: Npm@1
-  displayName: 'Build All'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run build'
-    
-- task: ArchiveFiles@2
-  displayName: 'Archive from folder build\'
-  inputs:
-    rootFolderOrFile: 'build\'
-    includeRootFolder: false
+  - task: Npm@1
+    displayName: 'npm build'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'run build'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
+  - task: ArchiveFiles@2
+    displayName: 'Archive folder build'
+    inputs:
+      rootFolderOrFile: 'build\'
+      includeRootFolder: false
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact'
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)'
