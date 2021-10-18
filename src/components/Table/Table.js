@@ -112,7 +112,7 @@ function Table({data, sort, setSort, filters, setFilters}) {
     }
 
     function updateTableData() {
-        let updatedData = [...tableData];
+        let updatedData = [...data];
 
         for (const filterKey in filters) {
             if (filters[filterKey] !== '') {
