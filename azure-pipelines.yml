@@ -18,14 +18,14 @@ steps:
     customCommand: 'install --production --registry http://localhost:4873/'
 
 - task: Npm@1
-  displayName: 'Build All Production'
+  displayName: 'Build All'
   inputs:
     command: custom
     verbose: false
     customCommand: 'run build'
     
 - task: ArchiveFiles@2
-  displayName: 'Archive build\'
+  displayName: 'Archive from folder build\'
   inputs:
     rootFolderOrFile: 'build\'
     includeRootFolder: false
