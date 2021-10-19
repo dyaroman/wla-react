@@ -26,6 +26,7 @@ function App() {
   useEffect(() => {
     getWebsitesData();
     getURLParams();
+    // eslint-disable-next-line
   }, []);
 
   async function getWebsitesData() {

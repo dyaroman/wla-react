@@ -14,6 +14,7 @@ function Table({data, sort, setSort, filters, setFilters}) {
       ...filters,
       ...sort,
     });
+    // eslint-disable-next-line
   }, [
     filters,
     sort,
