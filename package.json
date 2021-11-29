@@ -17,6 +17,14 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "./node_modules/.bin/nano-staged"
+    }
+  },
+  "nano-staged": {
+    "*.{js,jsx,scss}": "prettier --write"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -34,5 +42,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "husky": "^4.3.8",
+    "nano-staged": "^0.3.1",
+    "prettier": "^2.5.0"
   }
 }
