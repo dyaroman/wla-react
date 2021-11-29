@@ -1,6 +1,6 @@
-function MobileFieldTitle({text}) {
+function MobileFieldTitle({ text }) {
   if (text) {
-    return <span className="mobile-field-title">{text}</span>
+    return <span className="mobile-field-title">{text}</span>;
   } else {
     return null;
   }

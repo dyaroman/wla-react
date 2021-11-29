@@ -1,6 +1,6 @@
-import {NO_DATA} from '../../misc/constants';
+import { NO_DATA } from "../../misc/constants";
 
-function Tags({tags, filters, setFilters, placeholder = NO_DATA}) {
+function Tags({ tags, filters, setFilters, placeholder = NO_DATA }) {
   function tagClickHandler(e) {
     const updatedTags = filters.tags;
     const currentTag = e.target.innerText;
@@ -18,17 +18,23 @@ function Tags({tags, filters, setFilters, placeholder = NO_DATA}) {
   if (Array.isArray(tags) && tags.length > 0) {
     const list = tags.sort().map((tag) => {
       const tagActive = [...filters.tags]
-        .map(tag => tag.toLowerCase())
-        .includes(tag.toLowerCase()) ? '' : null;
-      return (<li key={tag}>
-        <button
-          className="tags__btn"
-          data-tag-active={tagActive}
-          onClick={tagClickHandler}
-        >{tag}</button>
-      </li>);
+        .map((tag) => tag.toLowerCase())
+        .includes(tag.toLowerCase())
+        ? ""
+        : null;
+      return (
+        <li key={tag}>
+          <button
+            className="tags__btn"
+            data-tag-active={tagActive}
+            onClick={tagClickHandler}
+          >
+            {tag}
+          </button>
+        </li>
+      );
     });
-    return (<ul className="tags">{list}</ul>);
+    return <ul className="tags">{list}</ul>;
   } else {
     return placeholder;
   }
