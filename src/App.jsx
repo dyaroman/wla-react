@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Loader } from "./components/Loader/Loader";
-import { Table } from "./components/Table/Table";
-import { Info } from "./components/Info/Info";
-import { getURLParams, getWebsitesData } from "./features/table/table.actions";
+import { Loader } from './components/Loader/Loader';
+import { Table } from './components/Table/Table';
+import { Info } from './components/Info/Info';
+import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
   const dispatch = useDispatch();
-  const unauthorized = useSelector((state) => state["table"].unauthorized);
+  const unauthorized = useSelector((state) => state['table'].unauthorized);
   const websitesDataLoaded = useSelector(
-    (state) => state["table"].websitesDataLoaded
+    (state) => state['table'].websitesDataLoaded
   );
 
   useEffect(() => {

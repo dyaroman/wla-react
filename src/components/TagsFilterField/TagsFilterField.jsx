@@ -1,4 +1,4 @@
-import { MobileFieldTitle } from "../MobileFieldTitle/MobileFieldTitle";
+import { MobileFieldTitle } from '../MobileFieldTitle/MobileFieldTitle';
 
 export function TagsFilterField({ children }) {
   return (

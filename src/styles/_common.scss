@@ -8,7 +8,9 @@ body {
   box-sizing: border-box;
 }
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   font-family: inherit;
   line-height: inherit;
 

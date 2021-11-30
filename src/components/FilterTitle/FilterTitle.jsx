@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import { SORT_UPDATED } from "../../features/table/table.constants";
+import { SORT_UPDATED } from '../../features/table/table.constants';
 
 export function FilterTitle({ columnName, text }) {
   const dispatch = useDispatch();
-  const { sort } = useSelector((state) => state["table"]);
+  const { sort } = useSelector((state) => state['table']);
   let sortDirection = null;
-  if (sort.sortColumn === columnName && sort.sortDirection !== "") {
+  if (sort.sortColumn === columnName && sort.sortDirection !== '') {
     sortDirection = sort.sortDirection;
   }
 
@@ -14,12 +14,12 @@ export function FilterTitle({ columnName, text }) {
     const { sortColName, sortColDirection } = e.target.dataset;
     const newSort = {};
     if (sortColName !== sort.sortColumn) {
-      newSort["sortColumn"] = sortColName;
+      newSort['sortColumn'] = sortColName;
     }
-    if (sortColDirection === undefined || sortColDirection === "desc") {
-      newSort["sortDirection"] = "asc";
+    if (sortColDirection === undefined || sortColDirection === 'desc') {
+      newSort['sortDirection'] = 'asc';
     } else {
-      newSort["sortDirection"] = "desc";
+      newSort['sortDirection'] = 'desc';
     }
     dispatch({
       type: SORT_UPDATED,

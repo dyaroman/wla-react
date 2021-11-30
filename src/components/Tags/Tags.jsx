@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import { NO_DATA } from "../../misc/constants";
-import { FILTERS_UPDATED } from "../../features/table/table.constants";
+import { NO_DATA } from '../../misc/constants';
+import { FILTERS_UPDATED } from '../../features/table/table.constants';
 
 export function Tags({ items, placeholder = NO_DATA }) {
   const dispatch = useDispatch();
-  const { filters } = useSelector((state) => state["table"]);
+  const { filters } = useSelector((state) => state['table']);
 
   function onClick(e) {
     let updatedTags = [...filters.tags];
@@ -30,7 +30,7 @@ export function Tags({ items, placeholder = NO_DATA }) {
         tagActive = filters.tags
           .map((tag) => tag.toLowerCase())
           .includes(tag.toLowerCase())
-          ? ""
+          ? ''
           : null;
       }
       return (

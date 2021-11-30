@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
 export function Info() {
-  const { timestamp = "", commit = "" } = useSelector(
-    (state) => state["table"].websitesData
+  const { timestamp = '', commit = '' } = useSelector(
+    (state) => state['table'].websitesData
   );
 
   return (
@@ -10,7 +10,7 @@ export function Info() {
       {timestamp && <h4>Data last updated: {timestamp}</h4>}
       {commit && (
         <h4>
-          Commit:{" "}
+          Commit:{' '}
           <a
             href={`https://dev.azure.com/myorg/websites/_git/websites/commit/${commit}`}
             target="_blank"
