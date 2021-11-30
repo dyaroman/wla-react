@@ -1,8 +1,19 @@
-import MobileFieldTitle from "../MobileFieldTitle/MobileFieldTitle";
+import { useDispatch, useSelector } from "react-redux";
 
-function FilterField({ name, value, onChange, placeholder }) {
-  function onChangeHandler(e) {
-    onChange(name, e.target.value);
+import { MobileFieldTitle } from "../MobileFieldTitle/MobileFieldTitle";
+import { FILTERS_UPDATED } from "../../features/table/table.constants";
+
+export function FilterField({ name, placeholder }) {
+  const dispatch = useDispatch();
+  const { filters } = useSelector((state) => state["table"]);
+
+  function onChange(e) {
+    dispatch({
+      type: FILTERS_UPDATED,
+      payload: {
+        [name]: e.target.value,
+      },
+    });
   }
 
   return (
@@ -11,12 +22,10 @@ function FilterField({ name, value, onChange, placeholder }) {
       <input
         type="text"
         className="input"
-        onChange={onChangeHandler}
+        onChange={onChange}
         placeholder={placeholder}
-        value={value}
+        value={filters[name]}
       />
     </>
   );
 }
-
-export default FilterField;

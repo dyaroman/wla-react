@@ -1,224 +1,84 @@
-import { useEffect, useState } from "react";
-import {
-  filterTableData,
-  sortTableData,
-  updateURL,
-} from "../../misc/functions";
-import FilterField from "../FilterField/FilterField";
-import FilterTitle from "../FilterTitle/FilterTitle";
-import Tags from "../Tags/Tags";
-import TagsFilterField from "../TagsFilterField/TagsFilterField";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function Table({ data, sort, setSort, filters, setFilters }) {
-  const [tableData, setTableData] = useState(data);
+import { FilterField } from "../FilterField/FilterField";
+import { FilterTitle } from "../FilterTitle/FilterTitle";
+import { Tags } from "../Tags/Tags";
+import { TagsFilterField } from "../TagsFilterField/TagsFilterField";
+import { updateTableData } from "../../features/table/table.actions";
+import { updateURL } from "../../misc/functions";
+
+export function Table() {
+  const dispatch = useDispatch();
+  const { sort, filters, preparedData } = useSelector(
+    (state) => state["table"]
+  );
 
   useEffect(() => {
-    updateTableData();
+    dispatch(updateTableData());
     updateURL({
       ...filters,
       ...sort,
     });
-    // eslint-disable-next-line
-  }, [filters, sort]);
-
-  function updateTableData() {
-    let updatedData = [...data];
-
-    for (const filterKey in filters) {
-      if (filters[filterKey] !== "") {
-        updatedData = filterTableData(
-          filterKey,
-          filters[filterKey],
-          updatedData
-        );
-      }
-    }
-
-    if (sort.sortDirection === "asc") {
-      updatedData = sortTableData(updatedData, sort.sortColumn);
-    } else if (sort.sortDirection === "desc") {
-      updatedData = sortTableData(updatedData, sort.sortColumn).reverse();
-    }
-
-    setTableData(updatedData);
-  }
-
-  function filterFieldChangeHandler(filterName, filterValue) {
-    setFilters({
-      ...filters,
-      [filterName]: filterValue,
-    });
-  }
-
-  function sortTableHandler(e) {
-    const { sortColName, sortColDirection } = e.target.dataset;
-    const newSort = {};
-    if (sortColName !== sort.sortColumn) {
-      newSort["sortColumn"] = sortColName;
-    }
-    if (sortColDirection === undefined || sortColDirection === "desc") {
-      newSort["sortDirection"] = "asc";
-    } else {
-      newSort["sortDirection"] = "desc";
-    }
-    setSort({
-      ...sort,
-      ...newSort,
-    });
-  }
+  }, [dispatch, filters, sort]);
 
   return (
     <table>
       <thead>
         <tr>
           <th>#</th>
-          <FilterTitle
-            text="Website"
-            columnName="website"
-            sort={sort}
-            onClickHandler={sortTableHandler}
-          />
-          <FilterTitle
-            text="Template"
-            columnName="template"
-            sort={sort}
-            onClickHandler={sortTableHandler}
-          />
-          <FilterTitle
-            text="CampaignId"
-            columnName="campaignId"
-            sort={sort}
-            onClickHandler={sortTableHandler}
-          />
-          <FilterTitle
-            text="Main Form"
-            columnName="mainForm"
-            sort={sort}
-            onClickHandler={sortTableHandler}
-          />
-          <FilterTitle
-            text="Alt Form"
-            columnName="altForm"
-            sort={sort}
-            onClickHandler={sortTableHandler}
-          />
-          <FilterTitle
-            text="Owner"
-            columnName="owner"
-            sort={sort}
-            onClickHandler={sortTableHandler}
-          />
-          <FilterTitle
-            text="GTM key"
-            columnName="gtmKey"
-            sort={sort}
-            onClickHandler={sortTableHandler}
-          />
-          <FilterTitle
-            text="Company Name"
-            columnName="companyName"
-            sort={sort}
-            onClickHandler={sortTableHandler}
-          />
-          <FilterTitle
-            text="Email"
-            columnName="email"
-            sort={sort}
-            onClickHandler={sortTableHandler}
-          />
-          <FilterTitle text="Tags" />
+          <FilterTitle text="Website" columnName="website" />
+          <FilterTitle text="Template" columnName="template" />
+          <FilterTitle text="CampaignId" columnName="campaignId" />
+          <FilterTitle text="Main Form" columnName="mainForm" />
+          <FilterTitle text="Alt Form" columnName="altForm" />
+          <FilterTitle text="Owner" columnName="owner" />
+          <FilterTitle text="GTM key" columnName="gtmKey" />
+          <FilterTitle text="Company Name" columnName="companyName" />
+          <FilterTitle text="Email" columnName="email" />
+          <th>Tags</th>
         </tr>
 
         <tr>
           <th />
           <th>
-            <FilterField
-              name={"website"}
-              value={filters["website"]}
-              onChange={filterFieldChangeHandler}
-              placeholder={"website"}
-            />
+            <FilterField name={"website"} placeholder={"website"} />
           </th>
           <th>
-            <FilterField
-              name={"template"}
-              value={filters["template"]}
-              onChange={filterFieldChangeHandler}
-              placeholder={"template"}
-            />
+            <FilterField name={"template"} placeholder={"template"} />
           </th>
           <th>
-            <FilterField
-              name={"campaignId"}
-              value={filters["campaignId"]}
-              onChange={filterFieldChangeHandler}
-              placeholder={"campaign id"}
-            />
+            <FilterField name={"campaignId"} placeholder={"campaign id"} />
           </th>
           <th>
-            <FilterField
-              name={"mainForm"}
-              value={filters["mainForm"]}
-              onChange={filterFieldChangeHandler}
-              placeholder={"main form"}
-            />
+            <FilterField name={"mainForm"} placeholder={"main form"} />
           </th>
           <th>
-            <FilterField
-              name={"altForm"}
-              value={filters["altForm"]}
-              onChange={filterFieldChangeHandler}
-              placeholder={"alt form"}
-            />
+            <FilterField name={"altForm"} placeholder={"alt form"} />
           </th>
           <th>
-            <FilterField
-              name={"owner"}
-              value={filters["owner"]}
-              onChange={filterFieldChangeHandler}
-              placeholder={"owner"}
-            />
+            <FilterField name={"owner"} placeholder={"owner"} />
           </th>
           <th>
-            <FilterField
-              name={"gtmKey"}
-              value={filters["gtmKey"]}
-              onChange={filterFieldChangeHandler}
-              placeholder={"gtm key"}
-            />
+            <FilterField name={"gtmKey"} placeholder={"gtm key"} />
           </th>
           <th>
-            <FilterField
-              name={"companyName"}
-              value={filters["companyName"]}
-              onChange={filterFieldChangeHandler}
-              placeholder={"company name"}
-            />
+            <FilterField name={"companyName"} placeholder={"company name"} />
           </th>
           <th>
-            <FilterField
-              name={"email"}
-              value={filters["email"]}
-              onChange={filterFieldChangeHandler}
-              placeholder={"email"}
-            />
+            <FilterField name={"email"} placeholder={"email"} />
           </th>
           <th>
             <TagsFilterField>
-              <Tags
-                tags={[...filters["tags"]]}
-                filters={filters}
-                setFilters={setFilters}
-                placeholder="select tags below"
-              />
+              <Tags items={filters["tags"]} placeholder="select tags below" />
             </TagsFilterField>
           </th>
         </tr>
       </thead>
 
       <tbody>
-        {tableData.length ? (
-          tableData.map((website, index) => (
+        {preparedData.length ? (
+          preparedData.map((website, index) => (
             <tr key={website["folderName"]}>
               <td data-title="#">{index + 1}</td>
               <td data-title="website">
@@ -243,11 +103,7 @@ function Table({ data, sort, setSort, filters, setFilters }) {
               <td data-title="Company Name">{website["companyName"]}</td>
               <td data-title="Email">{website["email"]}</td>
               <td data-title="Tags">
-                <Tags
-                  tags={website["tags"]}
-                  filters={filters}
-                  setFilters={setFilters}
-                />
+                <Tags items={website["tags"]} />
               </td>
             </tr>
           ))
@@ -262,5 +118,3 @@ function Table({ data, sort, setSort, filters, setFilters }) {
     </table>
   );
 }
-
-export default Table;

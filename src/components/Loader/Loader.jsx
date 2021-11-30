@@ -1,4 +1,4 @@
-function Loader() {
+export function Loader() {
   return (
     <div className="loader">
       <div className="lds-spinner">
@@ -18,5 +18,3 @@ function Loader() {
     </div>
   );
 }
-
-export default Loader;

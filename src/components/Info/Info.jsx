@@ -1,4 +1,10 @@
-function Info({ timestamp, commit }) {
+import { useSelector } from "react-redux";
+
+export function Info() {
+  const { timestamp = "", commit = "" } = useSelector(
+    (state) => state["table"].websitesData
+  );
+
   return (
     <section className="info">
       {timestamp && <h4>Data last updated: {timestamp}</h4>}
@@ -17,5 +23,3 @@ function Info({ timestamp, commit }) {
     </section>
   );
 }
-
-export default Info;

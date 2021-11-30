@@ -12,10 +12,10 @@ export function updateURL(sortAndFilterState) {
   for (const key in sortAndFilterState) {
     switch (key) {
       case 'tags':
-        if (sortAndFilterState[key].size === 0) {
+        if (sortAndFilterState[key].length === 0) {
           params.delete(key);
         } else {
-          params.set(key, [...sortAndFilterState[key]].join());
+          params.set(key, sortAndFilterState[key].join());
         }
         break;
       default:

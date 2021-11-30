@@ -1,6 +1,6 @@
-import MobileFieldTitle from "../MobileFieldTitle/MobileFieldTitle";
+import { MobileFieldTitle } from "../MobileFieldTitle/MobileFieldTitle";
 
-function TagsFilterField({ children }) {
+export function TagsFilterField({ children }) {
   return (
     <>
       <MobileFieldTitle text="tags" />
@@ -8,5 +8,3 @@ function TagsFilterField({ children }) {
     </>
   );
 }
-
-export default TagsFilterField;

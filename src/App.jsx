@@ -1,107 +1,40 @@
-import { useEffect, useState } from "react";
-import Loader from "./components/Loader/Loader";
-import Table from "./components/Table/Table";
-import Info from "./components/Info/Info";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function App() {
-  const [websitesData, setWebsitesData] = useState();
-  const [loaded, setLoaded] = useState(false);
-  const [sort, setSort] = useState({
-    sortColumn: "",
-    sortDirection: "",
-  });
-  const [filters, setFilters] = useState({
-    website: "",
-    template: "",
-    campaignId: "",
-    mainForm: "",
-    altForm: "",
-    owner: "",
-    gtmKey: "",
-    companyName: "",
-    email: "",
-    tags: new Set(),
-  });
+import { Loader } from "./components/Loader/Loader";
+import { Table } from "./components/Table/Table";
+import { Info } from "./components/Info/Info";
+import { getURLParams, getWebsitesData } from "./features/table/table.actions";
+
+export function App() {
+  const dispatch = useDispatch();
+  const unauthorized = useSelector((state) => state["table"].unauthorized);
+  const websitesDataLoaded = useSelector(
+    (state) => state["table"].websitesDataLoaded
+  );
 
   useEffect(() => {
-    getWebsitesData();
-    getURLParams();
-    // eslint-disable-next-line
-  }, []);
+    dispatch(getWebsitesData());
+    dispatch(getURLParams());
+  }, [dispatch]);
 
-  async function getWebsitesData() {
-    const dataFileURL = `${process.env.REACT_APP_WEBSITES_DATA_URL}/websites-data.json`;
-    try {
-      const response = await fetch(dataFileURL);
-      const data = await response.json();
-      setWebsitesData(data);
-      setLoaded(true);
-    } catch (e) {
-      console.error(e);
-    }
+  if (websitesDataLoaded === false) {
+    return <Loader />;
   }
 
-  function getURLParams() {
-    const newSort = {};
-    const newFilters = {};
-    const params = new URLSearchParams(window.location.search);
-    params.forEach((value, key) => {
-      switch (key) {
-        case "sortColumn":
-        case "sortDirection":
-          newSort[key] = value;
-          break;
-
-        case "website":
-        case "template":
-        case "campaignId":
-        case "mainForm":
-        case "altForm":
-        case "owner":
-        case "gtmKey":
-        case "companyName":
-        case "email":
-          newFilters[key] = value;
-          break;
-        case "tags":
-          newFilters[key] = new Set(value.split(","));
-          break;
-
-        default:
-          break;
-      }
-    });
-    setSort({
-      ...sort,
-      ...newSort,
-    });
-    setFilters({
-      ...filters,
-      ...newFilters,
-    });
+  if (unauthorized === true) {
+    return (
+      <>
+        <h1>Unauthorized</h1>
+        <p>Please check your connection</p>
+      </>
+    );
   }
 
   return (
     <>
-      {loaded ? (
-        <>
-          <Info
-            timestamp={websitesData["timestamp"]}
-            commit={websitesData["commit"]}
-          />
-          <Table
-            data={websitesData["websites"]}
-            sort={sort}
-            setSort={setSort}
-            filters={filters}
-            setFilters={setFilters}
-          />
-        </>
-      ) : (
-        <Loader />
-      )}
+      <Info />
+      <Table />
     </>
   );
 }
-
-export default App;
