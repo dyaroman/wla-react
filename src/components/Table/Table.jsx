@@ -69,9 +69,7 @@ export function Table() {
             <FilterField name={'email'} placeholder={'email'} />
           </th>
           <th>
-            <TagsFilterField>
-              <Tags items={filters['tags']} placeholder="select tags below" />
-            </TagsFilterField>
+            <TagsFilterField />
           </th>
         </tr>
       </thead>
