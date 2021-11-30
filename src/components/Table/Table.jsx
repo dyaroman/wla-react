@@ -40,7 +40,7 @@ export function Table() {
         </tr>
 
         <tr>
-          <th />
+          <th>{preparedData.length}</th>
           <th>
             <FilterField name={'website'} placeholder={'website'} />
           </th>
