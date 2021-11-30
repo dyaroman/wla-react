@@ -1,4 +1,4 @@
-import {NO_DATA} from './constants';
+import { NO_DATA } from './constants';
 
 export function search(where, what) {
   return String(where).toLowerCase().includes(String(what).toLowerCase());
@@ -12,10 +12,10 @@ export function updateURL(sortAndFilterState) {
   for (const key in sortAndFilterState) {
     switch (key) {
       case 'tags':
-        if (sortAndFilterState[key].size === 0) {
+        if (sortAndFilterState[key].length === 0) {
           params.delete(key);
         } else {
-          params.set(key, [...sortAndFilterState[key]].join());
+          params.set(key, sortAndFilterState[key].join());
         }
         break;
       default:
@@ -35,18 +35,26 @@ export function updateURL(sortAndFilterState) {
 }
 
 export function filterTableData(filterBy, filterValue, websites) {
-  return websites.filter(website => {
+  return websites.filter((website) => {
     switch (filterBy) {
       case 'website':
-        return website['folderName'] && search(website['folderName'], filterValue);
+        return (
+          website['folderName'] && search(website['folderName'], filterValue)
+        );
       case 'mainForm':
-        return website['MAIN_FORM'] && search(website['MAIN_FORM']['NAME'], filterValue);
+        return (
+          website['MAIN_FORM'] &&
+          search(website['MAIN_FORM']['NAME'], filterValue)
+        );
       case 'altForm':
-        return website['ALT_FORM'] && search(website['ALT_FORM']['NAME'], filterValue);
+        return (
+          website['ALT_FORM'] &&
+          search(website['ALT_FORM']['NAME'], filterValue)
+        );
       case 'tags':
-        return [...filterValue].every(
-          filterTag => website['tags']
-            .map(tag => tag.toLowerCase())
+        return [...filterValue].every((filterTag) =>
+          website['tags']
+            .map((tag) => tag.toLowerCase())
             .includes(filterTag.toLowerCase())
         );
       case 'owner':
@@ -65,7 +73,7 @@ export function filterTableData(filterBy, filterValue, websites) {
 export function sortTableData(array, sortColumn) {
   const noDataItems = [];
   const sortedArray = [...array]
-    .filter(item => {
+    .filter((item) => {
       switch (sortColumn) {
         case 'mainForm':
           if (item['MAIN_FORM'] && item['MAIN_FORM']['NAME'] === NO_DATA) {
@@ -102,14 +110,21 @@ export function sortTableData(array, sortColumn) {
         case 'mainForm':
           let aValue = a['MAIN_FORM'] && a['MAIN_FORM']['NAME'];
           let bValue = b['MAIN_FORM'] && b['MAIN_FORM']['NAME'];
-          return String(aValue).toLowerCase() > String(bValue).toLowerCase() ? 1 : -1;
+          return String(aValue).toLowerCase() > String(bValue).toLowerCase()
+            ? 1
+            : -1;
         case 'altForm': {
           let aValue = a['ALT_FORM'] && a['ALT_FORM']['NAME'];
           let bValue = b['ALT_FORM'] && b['ALT_FORM']['NAME'];
-          return String(aValue).toLowerCase() > String(bValue).toLowerCase() ? 1 : -1;
+          return String(aValue).toLowerCase() > String(bValue).toLowerCase()
+            ? 1
+            : -1;
         }
         case 'website':
-          return String(a['folderName']).toLowerCase() > String(b['folderName']).toLowerCase() ? 1 : -1;
+          return String(a['folderName']).toLowerCase() >
+            String(b['folderName']).toLowerCase()
+            ? 1
+            : -1;
         case 'campaignId':
           return Number(a[sortColumn]) > Number(b[sortColumn]) ? 1 : -1;
         case 'owner':
@@ -117,7 +132,10 @@ export function sortTableData(array, sortColumn) {
         case 'email':
         case 'template':
         case 'gtmKey':
-          return String(a[sortColumn]).toLowerCase() > String(b[sortColumn]).toLowerCase() ? 1 : -1;
+          return String(a[sortColumn]).toLowerCase() >
+            String(b[sortColumn]).toLowerCase()
+            ? 1
+            : -1;
         default:
           return 0;
       }
