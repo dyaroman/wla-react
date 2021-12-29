@@ -63,6 +63,8 @@ export function filterTableData(filterBy, filterValue, websites) {
       case 'campaignId':
       case 'template':
       case 'gtmKey':
+      case 'address1':
+      case 'address2':
         return website[filterBy] && search(website[filterBy], filterValue);
       default:
         return website;
@@ -95,6 +97,8 @@ export function sortTableData(array, sortColumn) {
         case 'gtmKey':
         case 'companyName':
         case 'email':
+        case 'address1':
+        case 'address2':
           if (item[sortColumn] === NO_DATA) {
             noDataItems.push(item);
             return false;
@@ -132,6 +136,8 @@ export function sortTableData(array, sortColumn) {
         case 'email':
         case 'template':
         case 'gtmKey':
+        case 'address1':
+        case 'address2':
           return String(a[sortColumn]).toLowerCase() >
             String(b[sortColumn]).toLowerCase()
             ? 1

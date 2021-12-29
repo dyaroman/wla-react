@@ -1,6 +1,7 @@
 import {
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
+  SET_WEBSITE_DATA_STRUCTURE,
   SET_WEBSITES_DATA,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
@@ -9,6 +10,7 @@ import {
 
 const initialState = {
   unauthorized: false,
+  websiteDataStructure: null,
   websitesData: null,
   websitesDataLoaded: false,
   filters: {
@@ -36,6 +38,11 @@ export function tableReducer(state = initialState, action) {
       return {
         ...state,
         unauthorized: action.payload,
+      };
+    case SET_WEBSITE_DATA_STRUCTURE:
+      return {
+        ...state,
+        websiteDataStructure: action.payload,
       };
     case SET_WEBSITES_DATA:
       return {

@@ -1,4 +1,5 @@
 export const SET_WEBSITES_DATA = 'setWebsitesData';
+export const SET_WEBSITE_DATA_STRUCTURE = 'setWebsiteDataStructure';
 export const WEBSITES_DATA_LOADED = 'websitesDataLoaded';
 export const WEBSITES_DATA_UNAUTHORIZED_ERROR = 'websitesDataUnauthorizedError';
 

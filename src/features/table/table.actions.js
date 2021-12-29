@@ -1,6 +1,7 @@
 import {
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
+  SET_WEBSITE_DATA_STRUCTURE,
   SET_WEBSITES_DATA,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
@@ -24,6 +25,12 @@ export function getWebsitesData() {
           type: SET_WEBSITES_DATA,
           payload: data,
         });
+        if (data && data.websites && data.websites[0]) {
+          dispatch({
+            type: SET_WEBSITE_DATA_STRUCTURE,
+            payload: Object.keys(data.websites[0]),
+          });
+        }
       }
       dispatch({
         type: WEBSITES_DATA_LOADED,
@@ -56,6 +63,8 @@ export function getURLParams() {
         case 'gtmKey':
         case 'companyName':
         case 'email':
+        case 'address1':
+        case 'address2':
           newFilters[key] = value;
           break;
         case 'tags':

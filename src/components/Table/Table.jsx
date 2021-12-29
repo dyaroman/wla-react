@@ -10,7 +10,7 @@ import { updateURL } from '../../misc/functions';
 
 export function Table() {
   const dispatch = useDispatch();
-  const { sort, filters, preparedData } = useSelector(
+  const { sort, filters, preparedData, websiteDataStructure } = useSelector(
     (state) => state['table']
   );
 
@@ -22,6 +22,13 @@ export function Table() {
     });
   }, [dispatch, filters, sort]);
 
+  const campaignIdColumn = websiteDataStructure.includes('campaignId');
+  const altFormColumn = websiteDataStructure.includes('ALT_FORM');
+  const ownerColumn = websiteDataStructure.includes('owner');
+  const gtmKeyColumn = websiteDataStructure.includes('gtmKey');
+  const address1Column = websiteDataStructure.includes('address1');
+  const address2Column = websiteDataStructure.includes('address2');
+
   return (
     <table>
       <thead>
@@ -29,13 +36,23 @@ export function Table() {
           <th>#</th>
           <FilterTitle text="Website" columnName="website" />
           <FilterTitle text="Template" columnName="template" />
-          <FilterTitle text="CampaignId" columnName="campaignId" />
+          {campaignIdColumn && (
+            <FilterTitle text="CampaignId" columnName="campaignId" />
+          )}
           <FilterTitle text="Main Form" columnName="mainForm" />
-          <FilterTitle text="Alt Form" columnName="altForm" />
-          <FilterTitle text="Owner" columnName="owner" />
-          <FilterTitle text="GTM key" columnName="gtmKey" />
+          {altFormColumn && (
+            <FilterTitle text="Alt Form" columnName="altForm" />
+          )}
+          {ownerColumn && <FilterTitle text="Owner" columnName="owner" />}
+          {gtmKeyColumn && <FilterTitle text="GTM key" columnName="gtmKey" />}
           <FilterTitle text="Company Name" columnName="companyName" />
           <FilterTitle text="Email" columnName="email" />
+          {address1Column && (
+            <FilterTitle text="Address 1" columnName="address1" />
+          )}
+          {address2Column && (
+            <FilterTitle text="Address 2" columnName="address2" />
+          )}
           <th>Tags</th>
         </tr>
 
@@ -47,27 +64,45 @@ export function Table() {
           <th>
             <FilterField name={'template'} placeholder={'template'} />
           </th>
-          <th>
-            <FilterField name={'campaignId'} placeholder={'campaign id'} />
-          </th>
+          {campaignIdColumn && (
+            <th>
+              <FilterField name={'campaignId'} placeholder={'campaign id'} />
+            </th>
+          )}
           <th>
             <FilterField name={'mainForm'} placeholder={'main form'} />
           </th>
-          <th>
-            <FilterField name={'altForm'} placeholder={'alt form'} />
-          </th>
-          <th>
-            <FilterField name={'owner'} placeholder={'owner'} />
-          </th>
-          <th>
-            <FilterField name={'gtmKey'} placeholder={'gtm key'} />
-          </th>
+          {altFormColumn && (
+            <th>
+              <FilterField name={'altForm'} placeholder={'alt form'} />
+            </th>
+          )}
+          {ownerColumn && (
+            <th>
+              <FilterField name={'owner'} placeholder={'owner'} />
+            </th>
+          )}
+          {gtmKeyColumn && (
+            <th>
+              <FilterField name={'gtmKey'} placeholder={'gtm key'} />
+            </th>
+          )}
           <th>
             <FilterField name={'companyName'} placeholder={'company name'} />
           </th>
           <th>
             <FilterField name={'email'} placeholder={'email'} />
           </th>
+          {address1Column && (
+            <th>
+              <FilterField name={'address1'} placeholder={'address 1'} />
+            </th>
+          )}
+          {address2Column && (
+            <th>
+              <FilterField name={'address2'} placeholder={'address 2'} />
+            </th>
+          )}
           <th>
             <TagsFilterField />
           </th>
@@ -76,35 +111,54 @@ export function Table() {
 
       <tbody>
         {preparedData.length ? (
-          preparedData.map((website, index) => (
-            <tr key={website['folderName']}>
-              <td data-title="#">{index + 1}</td>
-              <td data-title="website">
-                <a
-                  href={`https://${website['currentHost']}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {website['folderName']}
-                </a>
-              </td>
-              <td data-title="Template">{website['template']}</td>
-              <td data-title="CampaignId">{website['campaignId']}</td>
-              <td data-title="Main Form">
-                {website['MAIN_FORM'] && website['MAIN_FORM']['NAME']}
-              </td>
-              <td data-title="Alt Form">
-                {website['ALT_FORM'] && website['ALT_FORM']['NAME']}
-              </td>
-              <td data-title="Owner">{website['owner']}</td>
-              <td data-title="GTM key">{website['gtmKey']}</td>
-              <td data-title="Company Name">{website['companyName']}</td>
-              <td data-title="Email">{website['email']}</td>
-              <td data-title="Tags">
-                <Tags items={website['tags']} />
-              </td>
-            </tr>
-          ))
+          preparedData.map((website, index) => {
+            const {
+              folderName,
+              currentHost,
+              template,
+              campaignId,
+              MAIN_FORM,
+              ALT_FORM,
+              owner,
+              gtmKey,
+              companyName,
+              email,
+              address1,
+              address2,
+              tags,
+            } = website;
+            return (
+              <tr key={folderName}>
+                <td data-title="#">{index + 1}</td>
+                <td data-title="website">
+                  <a
+                    href={`https://${currentHost}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {folderName}
+                  </a>
+                </td>
+                <td data-title="Template">{template}</td>
+                {campaignIdColumn && (
+                  <td data-title="CampaignId">{campaignId}</td>
+                )}
+                <td data-title="Main Form">{MAIN_FORM && MAIN_FORM['NAME']}</td>
+                {altFormColumn && (
+                  <td data-title="Alt Form">{ALT_FORM['NAME']}</td>
+                )}
+                {ownerColumn && <td data-title="Owner">{owner}</td>}
+                {gtmKeyColumn && <td data-title="GTM key">{gtmKey}</td>}
+                <td data-title="Company Name">{companyName}</td>
+                <td data-title="Email">{email}</td>
+                {address1Column && <td data-title="Address 1">{address1}</td>}
+                {address2Column && <td data-title="Address 2">{address2}</td>}
+                <td data-title="Tags">
+                  <Tags items={tags} />
+                </td>
+              </tr>
+            );
+          })
         ) : (
           <tr>
             <td colSpan="100" align="center" style={{ gap: 0 }}>
