@@ -1,8 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { CLEAR_FILTERS } from '../../features/table/table.constants';
 
 export function Info() {
+  const dispatch = useDispatch();
   const { preparedData, websitesData } = useSelector((state) => state['table']);
   const { timestamp = '', commit = '', repoPath = '' } = websitesData;
+
+  function onClickClearAll() {
+    dispatch({
+      type: CLEAR_FILTERS,
+    });
+  }
 
   return (
     <section className="info">
@@ -25,6 +34,7 @@ export function Info() {
           {preparedData.length}
         </h4>
       )}
+      <button onClick={onClickClearAll}>clear all</button>
     </section>
   );
 }

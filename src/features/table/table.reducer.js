@@ -1,4 +1,5 @@
 import {
+  CLEAR_FILTERS,
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
   SET_WEBSITE_DATA_STRUCTURE,
@@ -8,11 +9,7 @@ import {
   WEBSITES_DATA_UNAUTHORIZED_ERROR,
 } from './table.constants';
 
-const initialState = {
-  unauthorized: false,
-  websiteDataStructure: null,
-  websitesData: null,
-  websitesDataLoaded: false,
+const initialFilters = {
   filters: {
     website: '',
     template: '',
@@ -25,10 +22,20 @@ const initialState = {
     email: '',
     tags: [],
   },
+};
+const initialSorts = {
   sort: {
     sortColumn: '',
     sortDirection: '',
   },
+};
+const initialState = {
+  ...initialFilters,
+  ...initialSorts,
+  unauthorized: false,
+  websiteDataStructure: null,
+  websitesData: null,
+  websitesDataLoaded: false,
   preparedData: [],
 };
 
@@ -69,6 +76,12 @@ export function tableReducer(state = initialState, action) {
           ...state.filters,
           ...action.payload,
         },
+      };
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        ...initialFilters,
+        ...initialSorts,
       };
     case PREPARED_DATA_UPDATED:
       return {
