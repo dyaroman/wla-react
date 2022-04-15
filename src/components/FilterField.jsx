@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { MobileFieldTitle } from './MobileFieldTitle';
+import { FieldTitle } from './FieldTitle';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 
 export function FilterField({ name, placeholder }) {
@@ -18,14 +18,15 @@ export function FilterField({ name, placeholder }) {
 
   return (
     <>
-      <MobileFieldTitle text={placeholder} />
-      <input
-        type="text"
-        className="input"
-        onChange={onChange}
-        placeholder={placeholder}
-        value={filters[name]}
-      />
+      <FieldTitle text={placeholder}>
+        <input
+          type="text"
+          className="input"
+          onChange={onChange}
+          placeholder={placeholder}
+          value={filters[name]}
+        />
+      </FieldTitle>
     </>
   );
 }

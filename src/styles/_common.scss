@@ -37,16 +37,16 @@ a {
   }
 }
 
-.mobile-field-title {
+.field-title {
+  display: block;
+}
+
+.field-title__text {
   display: inline-block;
   margin-bottom: 5px;
 
   font-size: 14px;
-  color: $light-text-color;
-
-  @media (min-width: 992px) {
-    display: none;
-  }
+  color: $dark-text-color;
 }
 
 .input {
@@ -57,5 +57,5 @@ a {
   font-family: inherit;
   font-size: inherit;
 
-  border: none;
+  border: 2px solid $brand-dark-color;
 }

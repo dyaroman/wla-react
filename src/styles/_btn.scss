@@ -5,7 +5,7 @@
   font-size: 14px;
   color: $light-text-color;
 
-  border: 2px solid $brand-light-color;
+  border: none;
   background-color: $brand-dark-color;
 
   @include hover() {

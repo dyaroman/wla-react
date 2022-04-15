@@ -1,0 +1,11 @@
+.filters__content {
+  max-width: 460px;
+  display: grid;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  @media (min-width: 992px) {
+    max-width: 1200px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

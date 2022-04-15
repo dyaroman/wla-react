@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 
-import { MobileFieldTitle } from './MobileFieldTitle';
+import { FieldTitle } from './FieldTitle';
 import { Tags } from './Tags';
 
 export function TagsFilterField() {
@@ -23,12 +23,15 @@ export function TagsFilterField() {
     setTags(getTags);
   }, [filters.tags, getTags]);
 
+  if (!tags) {
+    return null;
+  }
+
   return (
-    <>
-      <MobileFieldTitle text="tags" />
-      <div className="tags-filter">
-        <Tags items={tags} placeholder="select tags below" />
-      </div>
-    </>
+    <div style={{ gridColumn: '1 / -1' }}>
+      <FieldTitle text="tags">
+        <Tags items={tags} />
+      </FieldTitle>
+    </div>
   );
 }

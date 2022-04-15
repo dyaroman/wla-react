@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { NO_DATA } from '../misc/constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 
-export function Tags({ items, placeholder = NO_DATA }) {
+export function Tags({ items }) {
   const dispatch = useDispatch();
   const { filters } = useSelector((state) => state['table']);
 
@@ -23,30 +22,31 @@ export function Tags({ items, placeholder = NO_DATA }) {
     });
   }
 
-  if (Array.isArray(items) && items.length > 0) {
-    const list = items.sort().map((tag) => {
-      let tagActive = null;
-      if (Array.isArray(filters.tags)) {
-        tagActive = filters.tags
-          .map((tag) => tag.toLowerCase())
-          .includes(tag.toLowerCase())
-          ? ''
-          : null;
-      }
-      return (
-        <li key={tag}>
-          <button
-            className="tags__btn"
-            data-tag-active={tagActive}
-            onClick={onClick}
-          >
-            {tag}
-          </button>
-        </li>
-      );
-    });
-    return <ul className="tags">{list}</ul>;
-  } else {
-    return placeholder;
+  if (!items) {
+    return null;
   }
+
+  const list = items.sort().map((tag) => {
+    let tagActive = null;
+    if (Array.isArray(filters.tags)) {
+      tagActive = filters.tags
+        .map((tag) => tag.toLowerCase())
+        .includes(tag.toLowerCase())
+        ? ''
+        : null;
+    }
+    return (
+      <li key={tag}>
+        <button
+          className="tags__btn"
+          data-tag-active={tagActive}
+          onClick={onClick}
+        >
+          {tag}
+        </button>
+      </li>
+    );
+  });
+
+  return <ul className="tags">{list}</ul>;
 }

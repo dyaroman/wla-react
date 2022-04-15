@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from './components/Loader';
 import { Table } from './components/Table';
 import { Info } from './components/Info';
+import { Filters } from './components/Filters';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
@@ -34,6 +35,7 @@ export function App() {
   return (
     <>
       <Info />
+      <Filters />
       <Table />
     </>
   );
