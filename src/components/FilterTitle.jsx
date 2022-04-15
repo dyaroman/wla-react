@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { SORT_UPDATED } from '../../features/table/table.constants';
+import { SORT_UPDATED } from '../features/table/table.constants';
 
 export function FilterTitle({ columnName, text }) {
   const dispatch = useDispatch();

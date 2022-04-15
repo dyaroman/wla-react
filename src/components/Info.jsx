@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CLEAR_FILTERS } from '../../features/table/table.constants';
+import { CLEAR_FILTERS } from '../features/table/table.constants';
 
 export function Info() {
   const dispatch = useDispatch();

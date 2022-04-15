@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 
-import { MobileFieldTitle } from '../MobileFieldTitle/MobileFieldTitle';
-import { Tags } from '../Tags/Tags';
+import { MobileFieldTitle } from './MobileFieldTitle';
+import { Tags } from './Tags';
 
 export function TagsFilterField() {
   const { filters, preparedData } = useSelector((state) => state['table']);

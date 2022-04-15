@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { MobileFieldTitle } from '../MobileFieldTitle/MobileFieldTitle';
-import { FILTERS_UPDATED } from '../../features/table/table.constants';
+import { MobileFieldTitle } from './MobileFieldTitle';
+import { FILTERS_UPDATED } from '../features/table/table.constants';
 
 export function FilterField({ name, placeholder }) {
   const dispatch = useDispatch();

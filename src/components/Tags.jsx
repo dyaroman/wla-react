@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { NO_DATA } from '../../misc/constants';
-import { FILTERS_UPDATED } from '../../features/table/table.constants';
+import { NO_DATA } from '../misc/constants';
+import { FILTERS_UPDATED } from '../features/table/table.constants';
 
 export function Tags({ items, placeholder = NO_DATA }) {
   const dispatch = useDispatch();

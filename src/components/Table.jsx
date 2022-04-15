@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FilterField } from '../FilterField/FilterField';
-import { FilterTitle } from '../FilterTitle/FilterTitle';
-import { Tags } from '../Tags/Tags';
-import { TagsFilterField } from '../TagsFilterField/TagsFilterField';
-import { updateTableData } from '../../features/table/table.actions';
-import { updateURL } from '../../misc/functions';
+import { FilterField } from './FilterField';
+import { FilterTitle } from './FilterTitle';
+import { Tags } from './Tags';
+import { TagsFilterField } from './TagsFilterField';
+import { updateTableData } from '../features/table/table.actions';
+import { updateURL } from '../misc/functions';
 
 export function Table() {
   const dispatch = useDispatch();
