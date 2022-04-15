@@ -1,0 +1,151 @@
+table {
+  position: relative;
+
+  display: block;
+  margin: 1.5em auto;
+  max-width: 460px;
+
+  border-collapse: collapse;
+
+  @media (min-width: 992px) {
+    display: table;
+    max-width: initial;
+  }
+}
+
+thead {
+  @media (max-width: 991px) {
+    display: block;
+    margin-bottom: 20px;
+
+    tr:first-child {
+      display: none;
+    }
+
+    tr {
+      display: grid;
+      grid-template-columns: 1fr;
+
+      background-color: $brand-dark-color;
+    }
+
+    th:first-child {
+      display: none;
+    }
+  }
+
+  @media (min-width: 992px) {
+    position: sticky;
+    top: 0;
+    display: table-header-group;
+  }
+}
+
+tr {
+  border: 2px solid $brand-dark-color;
+
+  @media (min-width: 992px) {
+    border-top: none;
+  }
+}
+
+thead tr {
+  color: $light-text-color;
+
+  @media (min-width: 992px) {
+    border-bottom: none;
+  }
+}
+
+tbody {
+  display: block;
+
+  @media (min-width: 992px) {
+    display: table-row-group;
+  }
+}
+
+tbody tr {
+  display: block;
+  margin-bottom: 20px;
+
+  color: $dark-text-color;
+
+  background-color: $brand-light-color;
+
+  &:nth-child(even) {
+    background-color: $brand-average-color;
+  }
+
+  @media (min-width: 992px) {
+    display: table-row;
+    margin-bottom: 0;
+  }
+}
+
+th {
+  padding: 10px;
+
+  text-align: left;
+
+  &[data-sort-col-name] {
+    user-select: none;
+
+    @include hover() {
+      cursor: pointer;
+    }
+  }
+
+  &[data-sort-col-direction]::after {
+    padding-left: 3px;
+
+    font-size: 0.7em;
+    line-height: 0.7em;
+  }
+
+  &[data-sort-col-direction='asc']::after {
+    content: '▲';
+  }
+
+  &[data-sort-col-direction='desc']::after {
+    content: '▼';
+  }
+
+  @media (min-width: 992px) {
+    background-color: $brand-dark-color;
+  }
+}
+
+td {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: 15px;
+
+  & + & {
+    border-top: 2px solid $brand-dark-color;
+  }
+
+  &::before {
+    content: attr(data-title);
+  }
+
+  @media (min-width: 992px) {
+    display: table-cell;
+    gap: 0;
+
+    border-bottom: none;
+
+    white-space: nowrap;
+
+    & + & {
+      border-top: none;
+      border-left: 2px solid $brand-dark-color;
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+}
