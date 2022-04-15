@@ -18,7 +18,7 @@ export function Info() {
             target="_blank"
             rel="noreferrer"
           >
-            {commit.substr(0, 10)}
+            {commit.substring(0, 10)}
           </a>
         </h4>
       )}
