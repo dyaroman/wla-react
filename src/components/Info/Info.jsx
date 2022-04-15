@@ -34,7 +34,9 @@ export function Info() {
           {preparedData.length}
         </h4>
       )}
-      <button onClick={onClickClearAll}>clear all</button>
+      <button className="btn" onClick={onClickClearAll}>
+        clear all
+      </button>
     </section>
   );
 }

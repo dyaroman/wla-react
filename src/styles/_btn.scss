@@ -1,0 +1,14 @@
+.btn {
+  display: inline-block;
+  padding: 11px 22px;
+
+  font-size: 14px;
+  color: $light-text-color;
+
+  border: 2px solid $brand-light-color;
+  background-color: $brand-dark-color;
+
+  @include hover() {
+    cursor: pointer;
+  }
+}
