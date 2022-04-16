@@ -2,7 +2,7 @@
   display: inline-block;
   padding: 11px 22px;
 
-  font-size: 14px;
+  font-size: inherit;
   color: $light-text-color;
 
   border: none;
@@ -10,5 +10,9 @@
 
   @include hover() {
     cursor: pointer;
+  }
+
+  &--danger {
+    background-color: $accent-third-color;
   }
 }

@@ -30,7 +30,7 @@ export function Filters() {
         <FilterField name={'address2'} placeholder={'address 2'} />
         <TagsFilterField />
       </div>
-      <button className="btn" onClick={onClick}>
+      <button className="btn btn--danger" onClick={onClick}>
         clear all
       </button>
     </section>
