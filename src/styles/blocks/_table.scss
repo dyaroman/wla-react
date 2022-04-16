@@ -6,44 +6,56 @@ table {
 
   border-collapse: collapse;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     display: table;
     max-width: initial;
   }
 }
 
 thead {
-  @media (max-width: 991px) {
-    display: block;
-    margin-bottom: 20px;
+  display: block;
+  margin-bottom: 20px;
+
+  tr:first-child,
+  th:first-child {
+    display: none;
+  }
+
+  tr {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    background-color: $brand-dark-color;
+  }
+
+  @include media-breakpoint-up(lg) {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    display: table-header-group;
+    margin-bottom: 0;
 
     tr:first-child {
-      display: none;
-    }
-
-    tr {
-      display: grid;
-      grid-template-columns: 1fr;
-
-      background-color: $brand-dark-color;
+      display: table-row;
     }
 
     th:first-child {
-      display: none;
+      display: table-cell;
     }
-  }
 
-  @media (min-width: 992px) {
-    position: sticky;
-    top: 0;
-    display: table-header-group;
+    tr {
+      display: table-row;
+
+      background-color: initial;
+    }
   }
 }
 
 tr {
   border: 2px solid $brand-dark-color;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     border-top: none;
   }
 }
@@ -51,7 +63,7 @@ tr {
 thead tr {
   color: $light-text-color;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     border-bottom: none;
   }
 }
@@ -60,11 +72,11 @@ tbody {
   display: grid;
   gap: 10px;
 
-  @media (min-width: 768px) {
+  @include media-breakpoint-up(md) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     display: table-row-group;
   }
 }
@@ -80,7 +92,7 @@ tbody tr {
     background-color: $brand-average-color;
   }
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     display: table-row;
   }
 }
@@ -113,7 +125,7 @@ th {
     content: '▼';
   }
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     background-color: $brand-dark-color;
   }
 }
@@ -135,13 +147,13 @@ td {
     content: attr(data-title);
   }
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     display: table-cell;
     gap: 0;
 
-    border-bottom: none;
-
     white-space: nowrap;
+
+    border-bottom: none;
 
     & + & {
       border-top: none;

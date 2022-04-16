@@ -31,7 +31,7 @@ a {
   padding-right: 5px;
   min-height: 100vh;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     padding-left: 15px;
     padding-right: 15px;
   }
