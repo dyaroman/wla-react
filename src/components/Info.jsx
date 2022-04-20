@@ -1,11 +1,8 @@
 import { useSelector } from 'react-redux';
 
 export function Info() {
-  const {
-    timestamp = '',
-    commit = '',
-    repoPath = '',
-  } = useSelector((state) => state['table'].websitesData);
+  const { preparedData, websitesData } = useSelector((state) => state['table']);
+  const { timestamp = '', commit = '', repoPath = '' } = websitesData;
 
   return (
     <section className="info">
@@ -18,8 +15,14 @@ export function Info() {
             target="_blank"
             rel="noreferrer"
           >
-            {commit.substr(0, 10)}
+            {commit.substring(0, 10)}
           </a>
+        </h4>
+      )}
+      {preparedData && (
+        <h4>
+          {preparedData.length === 1 ? 'Result' : 'Results'}:{' '}
+          {preparedData.length}
         </h4>
       )}
     </section>

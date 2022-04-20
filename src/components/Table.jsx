@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FilterField } from '../FilterField/FilterField';
-import { FilterTitle } from '../FilterTitle/FilterTitle';
-import { Tags } from '../Tags/Tags';
-import { TagsFilterField } from '../TagsFilterField/TagsFilterField';
-import { updateTableData } from '../../features/table/table.actions';
-import { updateURL } from '../../misc/functions';
+import { FilterTitle } from './FilterTitle';
+import { updateTableData } from '../features/table/table.actions';
+import { updateURL } from '../misc/functions';
 
 export function Table() {
   const dispatch = useDispatch();
@@ -53,59 +50,6 @@ export function Table() {
           {address2Column && (
             <FilterTitle text="Address 2" columnName="address2" />
           )}
-          <th>Tags</th>
-        </tr>
-
-        <tr>
-          <th>{preparedData.length}</th>
-          <th>
-            <FilterField name={'website'} placeholder={'website'} />
-          </th>
-          <th>
-            <FilterField name={'template'} placeholder={'template'} />
-          </th>
-          {campaignIdColumn && (
-            <th>
-              <FilterField name={'campaignId'} placeholder={'campaign id'} />
-            </th>
-          )}
-          <th>
-            <FilterField name={'mainForm'} placeholder={'main form'} />
-          </th>
-          {altFormColumn && (
-            <th>
-              <FilterField name={'altForm'} placeholder={'alt form'} />
-            </th>
-          )}
-          {ownerColumn && (
-            <th>
-              <FilterField name={'owner'} placeholder={'owner'} />
-            </th>
-          )}
-          {gtmKeyColumn && (
-            <th>
-              <FilterField name={'gtmKey'} placeholder={'gtm key'} />
-            </th>
-          )}
-          <th>
-            <FilterField name={'companyName'} placeholder={'company name'} />
-          </th>
-          <th>
-            <FilterField name={'email'} placeholder={'email'} />
-          </th>
-          {address1Column && (
-            <th>
-              <FilterField name={'address1'} placeholder={'address 1'} />
-            </th>
-          )}
-          {address2Column && (
-            <th>
-              <FilterField name={'address2'} placeholder={'address 2'} />
-            </th>
-          )}
-          <th>
-            <TagsFilterField />
-          </th>
         </tr>
       </thead>
 
@@ -125,7 +69,6 @@ export function Table() {
               email,
               address1,
               address2,
-              tags,
             } = website;
             return (
               <tr key={folderName}>
@@ -153,9 +96,6 @@ export function Table() {
                 <td data-title="Email">{email}</td>
                 {address1Column && <td data-title="Address 1">{address1}</td>}
                 {address2Column && <td data-title="Address 2">{address2}</td>}
-                <td data-title="Tags">
-                  <Tags items={tags} />
-                </td>
               </tr>
             );
           })

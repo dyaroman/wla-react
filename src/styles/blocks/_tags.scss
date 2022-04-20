@@ -1,0 +1,29 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.tags__btn {
+  display: block;
+  padding: 12px;
+  margin: 0;
+
+  font-size: inherit;
+  color: $light-text-color;
+
+  border: none;
+  background-color: $brand-dark-color;
+
+  @include hover() {
+    cursor: pointer;
+  }
+
+  &[data-tag-active] {
+    background-color: $accent-primary-color;
+  }
+}

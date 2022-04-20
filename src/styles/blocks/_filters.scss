@@ -1,0 +1,14 @@
+.filters__content {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-breakpoint-up(lg) {
+    max-width: 1200px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
