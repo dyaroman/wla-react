@@ -63,6 +63,7 @@ export function filterTableData(filterBy, filterValue, websites) {
       case 'campaignId':
       case 'template':
       case 'gtmKey':
+      case 'recaptchaKey':
       case 'address1':
       case 'address2':
         return website[filterBy] && search(website[filterBy], filterValue);
@@ -95,6 +96,7 @@ export function sortTableData(array, sortColumn) {
         case 'campaignId':
         case 'owner':
         case 'gtmKey':
+        case 'recaptchaKey':
         case 'companyName':
         case 'email':
         case 'address1':
@@ -136,6 +138,7 @@ export function sortTableData(array, sortColumn) {
         case 'email':
         case 'template':
         case 'gtmKey':
+        case 'recaptchaKey':
         case 'address1':
         case 'address2':
           return String(a[sortColumn]).toLowerCase() >

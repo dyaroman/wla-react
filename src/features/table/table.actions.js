@@ -61,6 +61,7 @@ export function getURLParams() {
         case 'altForm':
         case 'owner':
         case 'gtmKey':
+        case 'recaptchaKey':
         case 'companyName':
         case 'email':
         case 'address1':

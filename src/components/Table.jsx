@@ -23,6 +23,7 @@ export function Table() {
   const altFormColumn = websiteDataStructure.includes('ALT_FORM');
   const ownerColumn = websiteDataStructure.includes('owner');
   const gtmKeyColumn = websiteDataStructure.includes('gtmKey');
+  const recaptchaKeyColumn = websiteDataStructure.includes('recaptchaKey');
   const address1Column = websiteDataStructure.includes('address1');
   const address2Column = websiteDataStructure.includes('address2');
 
@@ -42,6 +43,9 @@ export function Table() {
           )}
           {ownerColumn && <FilterTitle text="Owner" columnName="owner" />}
           {gtmKeyColumn && <FilterTitle text="GTM key" columnName="gtmKey" />}
+          {recaptchaKeyColumn && (
+            <FilterTitle text="ReCaptcha key" columnName="recaptchaKey" />
+          )}
           <FilterTitle text="Company Name" columnName="companyName" />
           <FilterTitle text="Email" columnName="email" />
           {address1Column && (
@@ -65,6 +69,7 @@ export function Table() {
               ALT_FORM,
               owner,
               gtmKey,
+              recaptchaKey,
               companyName,
               email,
               address1,
@@ -92,6 +97,9 @@ export function Table() {
                 )}
                 {ownerColumn && <td data-title="Owner">{owner}</td>}
                 {gtmKeyColumn && <td data-title="GTM key">{gtmKey}</td>}
+                {recaptchaKeyColumn && (
+                  <td data-title="ReCaptcha key">{recaptchaKey}</td>
+                )}
                 <td data-title="Company Name">{companyName}</td>
                 <td data-title="Email">{email}</td>
                 {address1Column && <td data-title="Address 1">{address1}</td>}

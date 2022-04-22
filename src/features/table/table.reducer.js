@@ -18,6 +18,7 @@ const initialFilters = {
     altForm: '',
     owner: '',
     gtmKey: '',
+    recaptchaKey: '',
     companyName: '',
     email: '',
     tags: [],

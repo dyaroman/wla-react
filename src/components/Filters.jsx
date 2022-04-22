@@ -24,6 +24,7 @@ export function Filters() {
         <FilterField name={'altForm'} placeholder={'alt form'} />
         <FilterField name={'owner'} placeholder={'owner'} />
         <FilterField name={'gtmKey'} placeholder={'gtm key'} />
+        <FilterField name={'recaptchaKey'} placeholder={'recaptcha key'} />
         <FilterField name={'companyName'} placeholder={'company name'} />
         <FilterField name={'email'} placeholder={'email'} />
         <FilterField name={'address1'} placeholder={'address 1'} />
