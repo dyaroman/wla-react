@@ -17,16 +17,14 @@ export function FilterField({ name, placeholder }) {
   }
 
   return (
-    <>
-      <FieldTitle text={placeholder}>
-        <input
-          type="text"
-          className="input"
-          onChange={onChange}
-          placeholder={placeholder}
-          value={filters[name]}
-        />
-      </FieldTitle>
-    </>
+    <FieldTitle text={placeholder}>
+      <input
+        type="text"
+        className="input"
+        onChange={onChange}
+        placeholder={placeholder}
+        value={filters[name]}
+      />
+    </FieldTitle>
   );
 }
