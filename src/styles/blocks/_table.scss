@@ -78,6 +78,8 @@ tbody {
 }
 
 tbody th {
+  font-weight: 400;
+
   @include media-breakpoint-up(lg) {
     position: sticky;
     left: -$border-width;
