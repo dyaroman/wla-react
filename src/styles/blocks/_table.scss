@@ -13,7 +13,6 @@
 table {
   display: block;
 
-  border-collapse: separate;
   border-spacing: 0;
 
   @include media-breakpoint-up(lg) {
@@ -22,131 +21,11 @@ table {
 }
 
 thead {
-  display: block;
-
-  tr:first-child,
-  th:first-child {
-    display: none;
-  }
-
-  tr {
-    display: grid;
-    grid-template-columns: 1fr;
-
-    background-color: $brand-dark-color;
-  }
+  display: none;
 
   @include media-breakpoint-up(lg) {
     display: table-header-group;
-
-    tr:first-child {
-      display: table-row;
-    }
-
-    th:first-child {
-      display: table-cell;
-    }
-
-    tr {
-      display: table-row;
-
-      background-color: initial;
-    }
-
-    th {
-      position: sticky;
-      top: 0;
-      left: 0;
-      z-index: 10;
-    }
   }
-}
-
-tr {
-  border: $border-width solid $brand-dark-color;
-
-  @include media-breakpoint-up(lg) {
-    border: none;
-  }
-}
-
-thead tr {
-  color: $light-text-color;
-
-  @include media-breakpoint-up(lg) {
-    border-bottom: none;
-  }
-}
-
-tbody {
-  display: grid;
-  gap: 0.5rem;
-
-  @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include media-breakpoint-up(lg) {
-    display: table-row-group;
-  }
-}
-
-tbody tr {
-  display: block;
-
-  color: $dark-text-color;
-
-  &,
-  & th {
-    background-color: $brand-light-color;
-  }
-
-  &:nth-child(even) {
-    &,
-    & th {
-      background-color: $brand-average-color;
-    }
-  }
-
-  @include media-breakpoint-up(lg) {
-    display: table-row;
-  }
-}
-
-tbody tr + tr {
-  td,
-  th {
-    @include media-breakpoint-up(lg) {
-      border-top: $border-width solid $brand-dark-color;
-    }
-  }
-}
-
-tbody th {
-  @include media-breakpoint-up(lg) {
-    position: sticky;
-    left: 0;
-
-    &::after {
-      content: '';
-
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-
-      display: block;
-      width: $border-width;
-
-      background-color: $brand-dark-color;
-    }
-  }
-}
-
-th {
-  padding: 0.5rem;
-
-  text-align: left;
 }
 
 thead th {
@@ -174,22 +53,89 @@ thead th {
   }
 
   @include media-breakpoint-up(lg) {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    color: $light-text-color;
+
     background-color: $brand-dark-color;
   }
 }
 
+tbody {
+  display: grid;
+  gap: 0.5rem;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-breakpoint-up(lg) {
+    display: table-row-group;
+  }
+}
+
+tbody th {
+  @include media-breakpoint-up(lg) {
+    position: sticky;
+    left: -$border-width;
+
+    background-color: inherit;
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+
+      display: block;
+      width: $border-width;
+
+      background-color: $brand-dark-color;
+    }
+  }
+}
+
+tr {
+  display: block;
+
+  border: $border-width solid $brand-dark-color;
+  background-color: $brand-light-color;
+
+  &:nth-child(even) {
+    background-color: $brand-average-color;
+  }
+
+  @include media-breakpoint-up(lg) {
+    display: table-row;
+
+    border: none;
+  }
+}
+
+tr + tr {
+  td,
+  th {
+    @include media-breakpoint-up(lg) {
+      border-top: $border-width solid $brand-dark-color;
+    }
+  }
+}
+
+th,
 td {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 0.5rem;
   gap: 0.5rem;
+  padding: 0.5rem;
 
+  text-align: left;
   word-break: break-word;
-
-  & + & {
-    border-top: $border-width solid $brand-dark-color;
-  }
 
   &::before {
     content: attr(data-title);
@@ -200,13 +146,7 @@ td {
     gap: 0;
 
     white-space: nowrap;
-
     border-bottom: none;
-
-    & + & {
-      border-top: none;
-      border-left: $border-width solid $brand-dark-color;
-    }
 
     &::before {
       display: none;
@@ -214,16 +154,21 @@ td {
   }
 }
 
-td + td {
+td + td,
+th + th,
+td + th,
+th + td {
+  border-top: $border-width solid $brand-dark-color;
+
   @include media-breakpoint-up(lg) {
-    border-left: $border-width solid $brand-dark-color;
+    border-top: none;
   }
 }
 
-tbody td {
+td + td,
+th + th,
+td + th {
   @include media-breakpoint-up(lg) {
-    &:first-child {
-      border-right: $border-width solid $brand-dark-color;
-    }
+    border-left: $border-width solid $brand-dark-color;
   }
 }
