@@ -1,14 +1,23 @@
-table {
-  position: relative;
-
-  display: block;
+.table {
+  width: 100%;
   margin: 1.5em 0;
 
-  border-collapse: collapse;
+  @include media-breakpoint-up(lg) {
+    max-height: calc(100vh - 3em);
+
+    border: 2px solid $brand-dark-color;
+    overflow: auto;
+  }
+}
+
+table {
+  display: block;
+
+  border-collapse: separate;
+  border-spacing: 0;
 
   @include media-breakpoint-up(lg) {
     display: table;
-    max-width: initial;
   }
 }
 
@@ -29,10 +38,6 @@ thead {
   }
 
   @include media-breakpoint-up(lg) {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-
     display: table-header-group;
     margin-bottom: 0;
 
@@ -49,6 +54,13 @@ thead {
 
       background-color: initial;
     }
+
+    th {
+      position: sticky;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
   }
 }
 
@@ -56,7 +68,7 @@ tr {
   border: 2px solid $brand-dark-color;
 
   @include media-breakpoint-up(lg) {
-    border-top: none;
+    border: none;
   }
 }
 
@@ -86,10 +98,16 @@ tbody tr {
 
   color: $dark-text-color;
 
-  background-color: $brand-light-color;
+  &,
+  & th {
+    background-color: $brand-light-color;
+  }
 
   &:nth-child(even) {
-    background-color: $brand-average-color;
+    &,
+    & th {
+      background-color: $brand-average-color;
+    }
   }
 
   @include media-breakpoint-up(lg) {
@@ -97,11 +115,43 @@ tbody tr {
   }
 }
 
+tbody tr + tr {
+  td,
+  th {
+    @include media-breakpoint-up(lg) {
+      border-top: 2px solid $brand-dark-color;
+    }
+  }
+}
+
+tbody th {
+  @include media-breakpoint-up(lg) {
+    position: sticky;
+    left: -1px;
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+
+      display: block;
+      width: 2px;
+
+      background-color: $brand-dark-color;
+    }
+  }
+}
+
 th {
   padding: 10px;
 
   text-align: left;
+}
 
+thead th {
   &[data-sort-col-name] {
     user-select: none;
 
@@ -162,6 +212,20 @@ td {
 
     &::before {
       display: none;
+    }
+  }
+}
+
+td + td {
+  @include media-breakpoint-up(lg) {
+    border-left: 2px solid $brand-dark-color;
+  }
+}
+
+tbody td {
+  @include media-breakpoint-up(lg) {
+    &:first-child {
+      border-right: 2px solid $brand-dark-color;
     }
   }
 }

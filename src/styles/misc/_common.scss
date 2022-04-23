@@ -19,14 +19,15 @@ body {
 
 a {
   color: $link-text-color;
+
+  @include hover() {
+    text-decoration: none;
+  }
 }
 
 @include focus();
 
 .container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: max-content;
   padding-left: 5px;
   padding-right: 5px;
   min-height: 100vh;
