@@ -25,17 +25,15 @@ a {
   }
 }
 
+h4 {
+  margin: 0.5rem 0;
+}
+
 @include focus();
 
 .container {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 0 0.5rem;
   min-height: 100vh;
-
-  @include media-breakpoint-up(lg) {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
 }
 
 .field-title {
@@ -44,7 +42,7 @@ a {
 
 .field-title__text {
   display: inline-block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 
   color: $dark-text-color;
 }
@@ -52,11 +50,11 @@ a {
 .input {
   width: 100%;
   height: 40px;
-  padding: 0 5px;
+  padding: 0 0.5rem;
 
   font-family: inherit;
   font-size: inherit;
 
   border-radius: 0;
-  border: 2px solid $brand-dark-color;
+  border: $border-width solid $brand-dark-color;
 }

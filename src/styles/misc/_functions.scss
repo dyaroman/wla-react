@@ -1,0 +1,11 @@
+@function px2rem($size) {
+  $remSize: $size / 16; //Default font size on html element is 100%, equivalent to 16px;
+
+  @return #{$remSize}rem;
+}
+
+@function px2em($size, $font-size) {
+  $emSize: $size / $font-size;
+
+  @return #{$emSize}em;
+}

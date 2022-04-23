@@ -1,7 +1,7 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
 
@@ -10,7 +10,7 @@
 
 .tags__btn {
   display: block;
-  padding: 12px;
+  padding: px2rem(12);
   margin: 0;
 
   font-size: inherit;

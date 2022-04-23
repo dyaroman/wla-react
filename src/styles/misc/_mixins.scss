@@ -12,7 +12,8 @@
   @if $revert {
     box-shadow: none;
   } @else {
-    box-shadow: 0 0 0 2px $focus-inner-color, 0 0 0 4px $focus-outer-color;
+    box-shadow: 0 0 0 $border-width $focus-inner-color,
+      0 0 0 2 * $border-width $focus-outer-color;
   }
 }
 
