@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterTitle } from './FilterTitle';
+import { Tags } from './Tags';
 import { updateTableData } from '../features/table/table.actions';
 import { updateURL } from '../misc/functions';
 
@@ -55,6 +56,7 @@ export function Table() {
             {address2Column && (
               <FilterTitle text="Address 2" columnName="address2" />
             )}
+            <th>Tags</th>
           </tr>
         </thead>
 
@@ -75,6 +77,7 @@ export function Table() {
                 email,
                 address1,
                 address2,
+                tags,
               } = website;
               return (
                 <tr key={folderName}>
@@ -107,6 +110,9 @@ export function Table() {
                   <td data-title="Email">{email}</td>
                   {address1Column && <td data-title="Address 1">{address1}</td>}
                   {address2Column && <td data-title="Address 2">{address2}</td>}
+                  <td data-title="Tags">
+                    <Tags items={tags} />
+                  </td>
                 </tr>
               );
             })

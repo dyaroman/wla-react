@@ -27,3 +27,15 @@
     background-color: $accent-primary-color;
   }
 }
+
+td .tags {
+  @include media-breakpoint-up(lg) {
+    flex-wrap: nowrap;
+  }
+}
+
+td .tags__btn {
+  @include media-breakpoint-up(lg) {
+    padding: px2rem(3);
+  }
+}
