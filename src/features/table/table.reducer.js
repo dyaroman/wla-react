@@ -22,6 +22,7 @@ const initialFilters = {
     companyName: '',
     email: '',
     emailLegal: '',
+    effectiveDate: '',
     tags: [],
   },
 };

@@ -61,6 +61,7 @@ export function filterTableData(filterBy, filterValue, websites) {
       case 'companyName':
       case 'email':
       case 'emailLegal':
+      case 'effectiveDate':
       case 'campaignId':
       case 'template':
       case 'gtmKey':
@@ -101,6 +102,7 @@ export function sortTableData(array, sortColumn) {
         case 'companyName':
         case 'email':
         case 'emailLegal':
+        case 'effectiveDate':
         case 'address1':
         case 'address2':
           if (item[sortColumn] === NO_DATA) {
@@ -139,6 +141,7 @@ export function sortTableData(array, sortColumn) {
         case 'companyName':
         case 'email':
         case 'emailLegal':
+        case 'effectiveDate':
         case 'template':
         case 'gtmKey':
         case 'recaptchaKey':
