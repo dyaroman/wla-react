@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterField } from './FilterField';
 import { TagsFilterField } from './TagsFilterField';
@@ -6,15 +7,29 @@ import { CLEAR_FILTERS } from '../features/table/table.constants';
 
 export function Filters() {
   const dispatch = useDispatch();
+  const { preparedData } = useSelector((state) => state['table']);
+  const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
 
-  function onClick() {
+  function onClearClick() {
     dispatch({
       type: CLEAR_FILTERS,
     });
   }
 
+  async function onCopyWebsitesClick() {
+    const dataToCopy = preparedData.map((e) => e.folderName).join('\n');
+    try {
+      await navigator.clipboard.writeText(dataToCopy);
+      setCopyWebsitesBtnText('copied');
+    } catch (e) {
+      console.log(`Error due to copy websites list to clipboard`, e);
+    } finally {
+      setTimeout(() => setCopyWebsitesBtnText('copy'), 1000);
+    }
+  }
+
   return (
-    <section className={'filters'}>
+    <section className="filters">
       <h4>Filters:</h4>
       <div className="filters__content">
         <FilterField name={'website'} placeholder={'website'} />
@@ -31,9 +46,16 @@ export function Filters() {
         <FilterField name={'address2'} placeholder={'address 2'} />
         <TagsFilterField />
       </div>
-      <button className="btn btn--danger" onClick={onClick}>
-        clear all
-      </button>
+      <div className="btn-group">
+        <button className="btn btn--danger" onClick={onClearClick}>
+          clear all
+        </button>
+      </div>
+      <div className="btn-group">
+        <button className="btn" onClick={onCopyWebsitesClick}>
+          {copyWebsitesBtnText} websites
+        </button>
+      </div>
     </section>
   );
 }
