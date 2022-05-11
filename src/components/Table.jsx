@@ -27,6 +27,7 @@ export function Table() {
   const recaptchaKeyColumn = websiteDataStructure.includes('recaptchaKey');
   const address1Column = websiteDataStructure.includes('address1');
   const address2Column = websiteDataStructure.includes('address2');
+  const emailLegalColumn = websiteDataStructure.includes('emailLegal');
 
   return (
     <section className="table">
@@ -50,6 +51,9 @@ export function Table() {
             )}
             <FilterTitle text="Company Name" columnName="companyName" />
             <FilterTitle text="Email" columnName="email" />
+            {emailLegalColumn && (
+              <FilterTitle text="Email Legal" columnName="emailLegal" />
+            )}
             {address1Column && (
               <FilterTitle text="Address 1" columnName="address1" />
             )}
@@ -75,6 +79,7 @@ export function Table() {
                 recaptchaKey,
                 companyName,
                 email,
+                emailLegal,
                 address1,
                 address2,
                 tags,
@@ -108,6 +113,9 @@ export function Table() {
                   )}
                   <td data-title="Company Name">{companyName}</td>
                   <td data-title="Email">{email}</td>
+                  {emailLegalColumn && (
+                    <td data-title="Email Legal">{emailLegal}</td>
+                  )}
                   {address1Column && <td data-title="Address 1">{address1}</td>}
                   {address2Column && <td data-title="Address 2">{address2}</td>}
                   <td data-title="Tags">

@@ -42,6 +42,7 @@ export function Filters() {
         <FilterField name={'recaptchaKey'} placeholder={'recaptcha key'} />
         <FilterField name={'companyName'} placeholder={'company name'} />
         <FilterField name={'email'} placeholder={'email'} />
+        <FilterField name={'emailLegal'} placeholder={'email legal'} />
         <FilterField name={'address1'} placeholder={'address 1'} />
         <FilterField name={'address2'} placeholder={'address 2'} />
         <TagsFilterField />

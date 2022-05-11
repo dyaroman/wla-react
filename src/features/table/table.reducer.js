@@ -21,6 +21,7 @@ const initialFilters = {
     recaptchaKey: '',
     companyName: '',
     email: '',
+    emailLegal: '',
     tags: [],
   },
 };
