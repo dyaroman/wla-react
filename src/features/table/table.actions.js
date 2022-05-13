@@ -1,17 +1,17 @@
 import {
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
-  SET_WEBSITE_DATA_STRUCTURE,
   SET_WEBSITES_DATA,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
   WEBSITES_DATA_UNAUTHORIZED_ERROR,
 } from './table.constants';
 import { filterTableData, sortTableData } from '../../misc/functions';
+import { WEBSITES_DATA_FILENAME } from '../../misc/constants';
 
 export function getWebsitesData() {
   return async function (dispatch) {
-    const dataFileURL = `${process.env.REACT_APP_WEBSITES_DATA_URL}/websites-data.json`;
+    const dataFileURL = `${process.env.REACT_APP_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
     try {
       const response = await fetch(dataFileURL);
       if (response.status === 401) {
@@ -25,12 +25,6 @@ export function getWebsitesData() {
           type: SET_WEBSITES_DATA,
           payload: data,
         });
-        if (data && data.websites && data.websites[0]) {
-          dispatch({
-            type: SET_WEBSITE_DATA_STRUCTURE,
-            payload: Object.keys(data.websites[0]),
-          });
-        }
       }
       dispatch({
         type: WEBSITES_DATA_LOADED,
@@ -54,28 +48,16 @@ export function getURLParams() {
           newSort[key] = value;
           break;
 
-        case 'website':
-        case 'template':
-        case 'campaignId':
-        case 'mainForm':
-        case 'altForm':
-        case 'owner':
-        case 'gtmKey':
-        case 'recaptchaKey':
-        case 'companyName':
-        case 'email':
-        case 'address1':
-        case 'address2':
-          newFilters[key] = value;
-          break;
         case 'tags':
           newFilters[key] = value.split(',');
           break;
 
         default:
+          newFilters[key] = value;
           break;
       }
     });
+    // todo maybe join dispatches?
     dispatch({
       type: SORT_UPDATED,
       payload: newSort,
