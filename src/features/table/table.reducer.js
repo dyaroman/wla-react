@@ -24,6 +24,8 @@ const initialFilters = {
     email: '',
     emailLegal: '',
     effectiveDate: '',
+    address1: '',
+    address2: '',
     tags: [],
   },
 };
