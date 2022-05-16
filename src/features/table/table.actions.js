@@ -57,7 +57,6 @@ export function getURLParams() {
           break;
       }
     });
-    // todo maybe join dispatches?
     dispatch({
       type: SORT_UPDATED,
       payload: newSort,
