@@ -29,7 +29,7 @@ thead {
 }
 
 thead th {
-  &[data-sort-col-name] {
+  &[data-sort-column] {
     user-select: none;
 
     @include hover() {
@@ -37,18 +37,18 @@ thead th {
     }
   }
 
-  &[data-sort-col-direction]::after {
+  &[data-sort-direction]::after {
     padding-left: 3px;
 
     font-size: 0.7em;
     line-height: 0.7em;
   }
 
-  &[data-sort-col-direction='asc']::after {
+  &[data-sort-direction='asc']::after {
     content: '▲';
   }
 
-  &[data-sort-col-direction='desc']::after {
+  &[data-sort-direction='desc']::after {
     content: '▼';
   }
 

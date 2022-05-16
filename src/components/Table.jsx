@@ -38,7 +38,7 @@ export function Table() {
               <FilterTitle
                 key={column}
                 text={fromCamelCaseToWords(column)}
-                columnName={column}
+                column={column}
               />
             ))}
           </tr>
