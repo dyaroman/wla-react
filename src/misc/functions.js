@@ -51,13 +51,13 @@ export function filterTableData(filterBy, filterValue, websites) {
   });
 }
 
-export function sortTableData(array, sortColumn) {
+export function sortTableData(array, column) {
   const noDataItems = [];
   const sortedArray = [...array]
     .filter((item) => {
-      switch (sortColumn) {
+      switch (column) {
         default:
-          if (item[sortColumn] === NO_DATA) {
+          if (item[column] === NO_DATA) {
             noDataItems.push(item);
             return false;
           } else {
@@ -66,13 +66,13 @@ export function sortTableData(array, sortColumn) {
       }
     })
     .sort((a, b) => {
-      switch (sortColumn) {
+      switch (column) {
         case 'campaignId':
-          return Number(a[sortColumn]) > Number(b[sortColumn]) ? 1 : -1;
+          return Number(a[column]) > Number(b[column]) ? 1 : -1;
 
         default:
-          return String(a[sortColumn]).toLowerCase() >
-            String(b[sortColumn]).toLowerCase()
+          return String(a[column]).toLowerCase() >
+            String(b[column]).toLowerCase()
             ? 1
             : -1;
       }

@@ -43,8 +43,8 @@ export function getURLParams() {
     const params = new URLSearchParams(window.location.search);
     params.forEach((value, key) => {
       switch (key) {
-        case 'sortColumn':
-        case 'sortDirection':
+        case 'column':
+        case 'direction':
           newSort[key] = value;
           break;
 
@@ -84,10 +84,10 @@ export function updateTableData() {
       }
     }
 
-    if (sort.sortDirection === 'asc') {
-      updatedData = sortTableData(updatedData, sort.sortColumn);
-    } else if (sort.sortDirection === 'desc') {
-      updatedData = sortTableData(updatedData, sort.sortColumn).reverse();
+    if (sort.direction === 'asc') {
+      updatedData = sortTableData(updatedData, sort.column);
+    } else if (sort.direction === 'desc') {
+      updatedData = sortTableData(updatedData, sort.column).reverse();
     }
 
     dispatch({

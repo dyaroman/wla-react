@@ -5,21 +5,21 @@ import { SORT_UPDATED } from '../features/table/table.constants';
 export function FilterTitle({ columnName, text }) {
   const dispatch = useDispatch();
   const { sort } = useSelector((state) => state['table']);
-  let sortDirection = null;
-  if (sort.sortColumn === columnName && sort.sortDirection !== '') {
-    sortDirection = sort.sortDirection;
+  let direction = null;
+  if (sort.column === columnName && sort.direction !== '') {
+    direction = sort.direction;
   }
 
   function onClick(e) {
     const { sortColName, sortColDirection } = e.target.dataset;
     const newSort = {};
-    if (sortColName !== sort.sortColumn) {
-      newSort['sortColumn'] = sortColName;
+    if (sortColName !== sort.column) {
+      newSort['column'] = sortColName;
     }
     if (sortColDirection === undefined || sortColDirection === 'desc') {
-      newSort['sortDirection'] = 'asc';
+      newSort['direction'] = 'asc';
     } else {
-      newSort['sortDirection'] = 'desc';
+      newSort['direction'] = 'desc';
     }
     dispatch({
       type: SORT_UPDATED,
@@ -30,7 +30,7 @@ export function FilterTitle({ columnName, text }) {
   return (
     <th
       data-sort-col-name={columnName ? columnName : null}
-      data-sort-col-direction={sortDirection}
+      data-sort-col-direction={direction}
       data-qa={columnName}
       onClick={onClick}
     >

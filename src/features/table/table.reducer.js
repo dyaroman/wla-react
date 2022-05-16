@@ -31,8 +31,8 @@ const initialFilters = {
 };
 const initialSorts = {
   sort: {
-    sortColumn: '',
-    sortDirection: '',
+    column: '',
+    direction: '',
   },
 };
 const initialState = {
