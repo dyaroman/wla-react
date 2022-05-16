@@ -31,6 +31,7 @@ export function FilterTitle({ columnName, text }) {
     <th
       data-sort-col-name={columnName ? columnName : null}
       data-sort-col-direction={sortDirection}
+      data-qa={columnName}
       onClick={onClick}
     >
       {text}

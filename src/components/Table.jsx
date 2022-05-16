@@ -49,8 +49,10 @@ export function Table() {
             preparedData.map((websiteData, index) => {
               return (
                 <tr key={websiteData.website}>
-                  <td data-title="#">{index + 1}</td>
-                  <th data-title="website">
+                  <td data-title="#" data-qa="#">
+                    {index + 1}
+                  </td>
+                  <th data-title="website" data-qa="website">
                     <a
                       href={`https://${websiteData.host}`}
                       target="_blank"
@@ -64,12 +66,13 @@ export function Table() {
                     .map((column) => (
                       <td
                         data-title={fromCamelCaseToWords(column)}
+                        data-qa={column}
                         key={column}
                       >
                         {websiteData[column]}
                       </td>
                     ))}
-                  <td data-title="Tags">
+                  <td data-title="Tags" data-qa="tags">
                     <Tags items={websiteData.tags} />
                   </td>
                 </tr>

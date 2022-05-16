@@ -13,8 +13,8 @@ export function Info() {
 
   return (
     <section className="info">
-      {ENV && <h4>ENV: {ENV}</h4>}
-      {timestamp && <h4>Data last updated: {timestamp}</h4>}
+      {ENV && <h4 data-qa="env">ENV: {ENV}</h4>}
+      {timestamp && <h4 data-qa="timestamp">Data last updated: {timestamp}</h4>}
       {repoPath && commit && (
         <h4>
           Commit:{' '}
@@ -22,13 +22,14 @@ export function Info() {
             href={`https://dev.azure.com/myorg/${repoPath}/commit/${commit}`}
             target="_blank"
             rel="noreferrer"
+            data-qa="commit"
           >
             {commit.substring(0, 10)}
           </a>
         </h4>
       )}
       {preparedData && (
-        <h4>
+        <h4 data-qa="results">
           {preparedData.length === 1 ? 'Result' : 'Results'}:{' '}
           {preparedData.length}
         </h4>

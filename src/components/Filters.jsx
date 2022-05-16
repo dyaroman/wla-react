@@ -50,12 +50,20 @@ export function Filters() {
         <TagsFilterField />
       </div>
       <div className="btn-group">
-        <button className="btn btn--danger" onClick={onClearClick}>
+        <button
+          className="btn btn--danger"
+          onClick={onClearClick}
+          data-qa="clearAll"
+        >
           clear all
         </button>
       </div>
       <div className="btn-group">
-        <button className="btn" onClick={onCopyWebsitesClick}>
+        <button
+          className="btn"
+          onClick={onCopyWebsitesClick}
+          data-qa="copyWebsites"
+        >
           {copyWebsitesBtnText} websites
         </button>
       </div>

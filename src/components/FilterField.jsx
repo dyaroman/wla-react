@@ -20,6 +20,8 @@ export function FilterField({ name, placeholder }) {
     <FieldTitle text={placeholder}>
       <input
         type="text"
+        name={name}
+        data-qa={name}
         className="input"
         onChange={onChange}
         placeholder={placeholder}
