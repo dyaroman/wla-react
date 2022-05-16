@@ -11,12 +11,12 @@ export function FilterTitle({ column, text }) {
   }
 
   function onClick(e) {
-    const { sortColName, sortColDirection } = e.target.dataset;
+    const { sortColumn, sortDirection } = e.target.dataset;
     const newSort = {};
-    if (sortColName !== sort.column) {
-      newSort['column'] = sortColName;
+    if (sortColumn !== sort.column) {
+      newSort['column'] = sortColumn;
     }
-    if (sortColDirection === undefined || sortColDirection === 'desc') {
+    if (sortDirection === undefined || sortDirection === 'desc') {
       newSort['direction'] = 'asc';
     } else {
       newSort['direction'] = 'desc';
