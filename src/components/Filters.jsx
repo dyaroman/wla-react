@@ -58,15 +58,17 @@ export function Filters() {
           clear all
         </button>
       </div>
-      <div className="btn-group">
-        <button
-          className="btn"
-          onClick={onCopyWebsitesClick}
-          data-qa="copyWebsites"
-        >
-          {copyWebsitesBtnText} websites
-        </button>
-      </div>
+      {preparedData.length !== 0 && (
+        <div className="btn-group">
+          <button
+            className="btn"
+            onClick={onCopyWebsitesClick}
+            data-qa="copyWebsites"
+          >
+            {copyWebsitesBtnText} websites
+          </button>
+        </div>
+      )}
     </section>
   );
 }
