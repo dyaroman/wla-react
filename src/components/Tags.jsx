@@ -22,7 +22,7 @@ export function Tags({ items }) {
     });
   }
 
-  if (!items) {
+  if (items.length === 0) {
     return null;
   }
 

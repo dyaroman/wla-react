@@ -23,7 +23,7 @@ export function TagsFilterField() {
     setTags(getTags);
   }, [filters.tags, getTags]);
 
-  if (!tags) {
+  if (tags.length === 0) {
     return null;
   }
 
