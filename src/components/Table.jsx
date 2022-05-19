@@ -28,6 +28,8 @@ export function Table() {
     content = (
       <h4>No data to show. Please check "{WEBSITES_DATA_FILENAME}" file.</h4>
     );
+  } else if (preparedData.length === 0) {
+    return <h4>No data to show, please change your filters.</h4>;
   } else {
     content = (
       <table>
@@ -45,46 +47,36 @@ export function Table() {
         </thead>
 
         <tbody>
-          {preparedData.length ? (
-            preparedData.map((websiteData, index) => {
-              return (
-                <tr key={websiteData.website}>
-                  <td data-title="#" data-qa="#">
-                    {index + 1}
+          {preparedData.map((websiteData, index) => (
+            <tr key={websiteData.website}>
+              <td data-title="#" data-qa="#">
+                {index + 1}
+              </td>
+              <th data-title="website" data-qa="website">
+                <a
+                  href={`https://${websiteData.host}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {websiteData.website}
+                </a>
+              </th>
+              {columns
+                .filter((e) => ['website', 'tags'].includes(e) === false)
+                .map((column) => (
+                  <td
+                    data-title={fromCamelCaseToWords(column)}
+                    data-qa={column}
+                    key={column}
+                  >
+                    {websiteData[column]}
                   </td>
-                  <th data-title="website" data-qa="website">
-                    <a
-                      href={`https://${websiteData.host}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {websiteData.website}
-                    </a>
-                  </th>
-                  {columns
-                    .filter((e) => ['website', 'tags'].includes(e) === false)
-                    .map((column) => (
-                      <td
-                        data-title={fromCamelCaseToWords(column)}
-                        data-qa={column}
-                        key={column}
-                      >
-                        {websiteData[column]}
-                      </td>
-                    ))}
-                  <td data-title="Tags" data-qa="tags">
-                    <Tags items={websiteData.tags} />
-                  </td>
-                </tr>
-              );
-            })
-          ) : (
-            <tr>
-              <td colSpan="100" align="center" style={{ gap: 0 }}>
-                no data, please change your filters
+                ))}
+              <td data-title="Tags" data-qa="tags">
+                <Tags items={websiteData.tags} />
               </td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     );
