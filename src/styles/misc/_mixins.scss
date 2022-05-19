@@ -18,15 +18,15 @@
 }
 
 @mixin focus() {
-  &:focus {
+  :focus {
     @include focus-styles();
   }
 
-  &:focus:not(:focus-visible) {
+  :focus:not(:focus-visible) {
     @include focus-styles($revert: true);
   }
 
-  &:focus-visible {
+  :focus-visible {
     @include focus-styles();
   }
 }
