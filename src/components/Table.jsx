@@ -29,7 +29,9 @@ export function Table() {
       <h4>No data to show. Please check "{WEBSITES_DATA_FILENAME}" file.</h4>
     );
   } else if (preparedData.length === 0) {
-    return <h4>No data to show, please change your filters.</h4>;
+    return (
+      <h4 data-qa="badFilters">No data to show, please change your filters.</h4>
+    );
   } else {
     content = (
       <table>
