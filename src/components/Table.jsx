@@ -52,7 +52,10 @@ export function Table() {
               <td data-title="#" data-qa="#">
                 {index + 1}
               </td>
-              <th data-title="website" data-qa="website">
+              <th
+                data-title={fromCamelCaseToWords('website')}
+                data-qa="website"
+              >
                 <a
                   href={`https://${websiteData.host}`}
                   target="_blank"
@@ -72,7 +75,7 @@ export function Table() {
                     {websiteData[column]}
                   </td>
                 ))}
-              <td data-title="Tags" data-qa="tags">
+              <td data-title={fromCamelCaseToWords('tags')} data-qa="tags">
                 <Tags items={websiteData.tags} />
               </td>
             </tr>
