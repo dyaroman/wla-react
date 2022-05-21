@@ -1,41 +1,71 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
   branches:
     include:
       - master
-      - feature/*
 
 pool:
   name: BUILD-0
+  demands: npm
 workspace:
   clean: all
 
-steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      command: custom
-      verbose: false
-      customCommand: 'ci --production --registry http://localhost:4873/'
+resources:
+  repositories:
+    - repository: ui-tests
+      name: Websites App/ui-tests
 
-  - task: Npm@1
-    displayName: 'npm build'
-    inputs:
-      command: custom
-      verbose: false
-      customCommand: 'run build'
+stages:
+  - stage: ui-tests
+    steps:
+      - task: NodeTool@0
+          displayName: 'use node 14'
+          inputs:
+            versionSpec: 14.x
+            checkLatest: true
 
-  - task: ArchiveFiles@2
-    displayName: 'Archive folder build'
-    inputs:
-      rootFolderOrFile: 'build\'
-      includeRootFolder: false
+      - task: Npm@1
+        displayName: '[app]: npm ci'
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'ci --production --registry http://localhost:4873/'
 
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact'
-    inputs:
-      PathtoPublish: '$(build.artifactstagingdirectory)'
+      - task: Npm@1
+        displayName: '[app]: npm build'
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'run build'
+
+      - checkout: ui-tests
+        displayName: 'checkout ui tests'
+
+      - task: Npm@1
+        displayName: '[tests]: npm ci'
+        workingDirectory: $(Build.SourcesDirectory)/ui-tests/
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'ci --production --registry http://localhost:4873/'
+
+      - script: npx serve -s build
+        displayName: '[app]: npx serve'
+
+      - task: Npm@1
+          displayName: '[tests]: run local tests'
+          workingDirectory: $(Build.SourcesDirectory)/ui-tests/
+          inputs:
+            command: custom
+            verbose: false
+            customCommand: 'run codeceptjs:local:headless'
+
+      - task: ArchiveFiles@2
+        displayName: 'Archive folder build'
+        inputs:
+          rootFolderOrFile: 'build\'
+          includeRootFolder: false
+
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact'
+        inputs:
+          PathtoPublish: '$(build.artifactstagingdirectory)'
