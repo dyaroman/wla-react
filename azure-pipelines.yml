@@ -6,66 +6,69 @@ trigger:
 pool:
   name: BUILD-0
   demands: npm
-workspace:
-  clean: all
 
 resources:
   repositories:
     - repository: ui-tests
       name: Websites App/ui-tests
+      type: git
 
-stages:
-  - stage: ui-tests
-    steps:
-      - task: NodeTool@0
-          displayName: 'use node 14'
-          inputs:
-            versionSpec: 14.x
-            checkLatest: true
+steps:
+  - task: NodeTool@0
+    displayName: 'use node 14'
+    inputs:
+      versionSpec: 14.x
+      checkLatest: true
 
-      - task: Npm@1
-        displayName: '[app]: npm ci'
-        inputs:
-          command: custom
-          verbose: false
-          customCommand: 'ci --production --registry http://localhost:4873/'
+  - checkout: self
+    displayName: '[app]: checkout'
 
-      - task: Npm@1
-        displayName: '[app]: npm build'
-        inputs:
-          command: custom
-          verbose: false
-          customCommand: 'run build'
+  - task: Npm@1
+    displayName: '[app]: npm ci'
+    inputs:
+      command: custom
+      verbose: false
+      workingDir: websites-list-app
+      customCommand: 'ci --production --registry http://localhost:4873/'
 
-      - checkout: ui-tests
-        displayName: 'checkout ui tests'
+  - task: Npm@1
+    displayName: '[app]: npm build'
+    inputs:
+      command: custom
+      verbose: false
+      workingDir: websites-list-app
+      customCommand: 'run build'
 
-      - task: Npm@1
-        displayName: '[tests]: npm ci'
-        workingDirectory: $(Build.SourcesDirectory)/ui-tests/
-        inputs:
-          command: custom
-          verbose: false
-          customCommand: 'ci --production --registry http://localhost:4873/'
+  - checkout: ui-tests
+    displayName: '[tests]: checkout'
 
-      - script: npx serve -s build
-        displayName: '[app]: npx serve'
+  - task: Npm@1
+    displayName: '[tests]: npm ci'
+    inputs:
+      command: custom
+      verbose: false
+      workingDir: ui-tests
+      customCommand: 'ci --production --registry http://localhost:4873/'
 
-      - task: Npm@1
-          displayName: '[tests]: run local tests'
-          workingDirectory: $(Build.SourcesDirectory)/ui-tests/
-          inputs:
-            command: custom
-            verbose: false
-            customCommand: 'run codeceptjs:local:headless'
+  - script: npx serve -s build
+    displayName: '[app]: npx serve'
+    workingDirectory: ui-tests
 
-      - task: ArchiveFiles@2
-        displayName: 'Archive folder build'
-        inputs:
-          rootFolderOrFile: 'build\'
-          includeRootFolder: false
+  - task: Npm@1
+    displayName: '[tests]: run local tests'
+    inputs:
+      command: custom
+      verbose: false
+      workingDir: ui-tests
+      customCommand: 'run codeceptjs:local:headless'
 
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact'
-        inputs:
-          PathtoPublish: '$(build.artifactstagingdirectory)'
+  - task: ArchiveFiles@2
+    displayName: 'Archive folder build'
+    inputs:
+      rootFolderOrFile: 'websites-list-app\build\'
+      includeRootFolder: false
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact'
+    inputs:
+      pathToPublish: '$(Build.ArtifactStagingDirectory)'
