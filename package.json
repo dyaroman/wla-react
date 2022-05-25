@@ -14,7 +14,7 @@
     }
   },
   "nano-staged": {
-    "*.{js,jsx,scss}": "prettier --write"
+    "**/*": "prettier --write --ignore-unknown"
   },
   "browserslist": {
     "production": [
