@@ -9,35 +9,35 @@ pool:
 
 steps:
   - task: NodeTool@0
-    displayName: 'use node 14'
+    displayName: "use node 14"
     inputs:
       versionSpec: 14.x
       checkLatest: true
 
   - checkout: self
-    displayName: '[app]: checkout'
+    displayName: "checkout"
 
   - task: Npm@1
-    displayName: '[app]: npm ci'
+    displayName: "npm ci"
     inputs:
       command: custom
       verbose: false
-      customCommand: 'ci --production --registry http://localhost:4873/'
+      customCommand: "ci --production --registry http://localhost:4873/"
 
   - task: Npm@1
-    displayName: '[app]: npm build'
+    displayName: "npm build"
     inputs:
       command: custom
       verbose: false
-      customCommand: 'run build'
+      customCommand: "run build"
 
   - task: ArchiveFiles@2
-    displayName: 'Archive folder build'
+    displayName: "archive folder build"
     inputs:
       rootFolderOrFile: 'build\'
       includeRootFolder: false
 
   - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact'
+    displayName: "publish artifact"
     inputs:
-      pathToPublish: '$(Build.ArtifactStagingDirectory)'
+      pathToPublish: "$(Build.ArtifactStagingDirectory)"
