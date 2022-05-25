@@ -7,12 +7,6 @@ pool:
   name: BUILD-0
   demands: npm
 
-#resources:
-#  repositories:
-#    - repository: ui-tests
-#      name: Websites App/ui-tests
-#      type: git
-
 steps:
   - task: NodeTool@0
     displayName: 'use node 14'
@@ -28,7 +22,6 @@ steps:
     inputs:
       command: custom
       verbose: false
-#      workingDir: websites-list-app
       customCommand: 'ci --production --registry http://localhost:4873/'
 
   - task: Npm@1
@@ -36,36 +29,11 @@ steps:
     inputs:
       command: custom
       verbose: false
-#      workingDir: websites-list-app
       customCommand: 'run build'
-
-#  - checkout: ui-tests
-#    displayName: '[tests]: checkout'
-#
-#  - task: Npm@1
-#    displayName: '[tests]: npm ci'
-#    inputs:
-#      command: custom
-#      verbose: false
-#      workingDir: ui-tests
-#      customCommand: 'ci --production --registry http://localhost:4873/'
-#
-#  - script: npx serve -s -n build
-#    displayName: '[app]: npx serve'
-#    workingDirectory: ui-tests
-#
-#  - task: Npm@1
-#    displayName: '[tests]: run local tests'
-#    inputs:
-#      command: custom
-#      verbose: false
-#      workingDir: ui-tests
-#      customCommand: 'run codeceptjs:local:headless'
 
   - task: ArchiveFiles@2
     displayName: 'Archive folder build'
     inputs:
-#      rootFolderOrFile: 'websites-list-app\build\'
       rootFolderOrFile: 'build\'
       includeRootFolder: false
 
