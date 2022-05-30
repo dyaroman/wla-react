@@ -22,7 +22,7 @@ steps:
     inputs:
       command: custom
       verbose: false
-      customCommand: "ci --production --registry http://localhost:4873/"
+      customCommand: "ci --only=prod --registry http://localhost:4873/"
 
   - task: Npm@1
     displayName: "npm build"
