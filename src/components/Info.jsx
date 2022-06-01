@@ -27,8 +27,8 @@ export function Info() {
         </h4>
       )}
       {preparedData && (
-        <h4 data-qa="results">
-          {preparedData.length === 1 ? "Result" : "Results"}:{" "}
+        <h4 data-qa="websitesNumber">
+          {preparedData.length === 1 ? "Website" : "Websites"}:{" "}
           {preparedData.length}
         </h4>
       )}
