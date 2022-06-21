@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterTitle } from './FilterTitle';
 import { Tags } from './Tags';
+import { Highlight } from './Highlight';
 import { updateTableData } from '../features/table/table.actions';
 import { fromCamelCaseToWords, updateURL } from '../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../misc/constants';
@@ -63,7 +64,10 @@ export function Table() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {websiteData.website}
+                  <Highlight
+                    text={websiteData.website}
+                    highlight={filters.website}
+                  />
                 </a>
               </th>
               {columns
@@ -74,7 +78,10 @@ export function Table() {
                     data-qa={column}
                     key={column}
                   >
-                    {websiteData[column]}
+                    <Highlight
+                      text={websiteData[column]}
+                      highlight={filters[column]}
+                    />
                   </td>
                 ))}
               <td data-title={fromCamelCaseToWords('tags')} data-qa="tags">
