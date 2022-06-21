@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 export function Info() {
-  const { preparedData, websitesData } = useSelector((state) => state["table"]);
-  const { timestamp = "", commit = "", repoPath = "", ENV = "" } = websitesData;
+  const { preparedData, websitesData } = useSelector((state) => state['table']);
+  const { timestamp = '', commit = '', repoPath = '', ENV = '' } = websitesData;
 
   useEffect(() => {
     document.title = `[${ENV}]: ${process.env.REACT_APP_PAGE_TITLE}`;
@@ -15,7 +15,7 @@ export function Info() {
       {timestamp && <h4 data-qa="timestamp">Data last updated: {timestamp}</h4>}
       {repoPath && commit && (
         <h4>
-          Commit:{" "}
+          Commit:{' '}
           <a
             href={`https://dev.azure.com/myorg/${repoPath}/commit/${commit}`}
             target="_blank"
@@ -28,7 +28,7 @@ export function Info() {
       )}
       {preparedData && (
         <h4 data-qa="websitesNumber">
-          {preparedData.length === 1 ? "Website" : "Websites"}:{" "}
+          {preparedData.length === 1 ? 'Website' : 'Websites'}:{' '}
           {preparedData.length}
         </h4>
       )}
