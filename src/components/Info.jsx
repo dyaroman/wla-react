@@ -6,7 +6,9 @@ export function Info() {
   const { timestamp = '', commit = '', repoPath = '', env = '' } = websitesData;
 
   useEffect(() => {
-    document.title = `[${env}]: ${process.env.REACT_APP_PAGE_TITLE}`;
+    if (env !== '') {
+      document.title = `[${env}]: ${process.env.REACT_APP_PAGE_TITLE}`;
+    }
   }, [env]);
 
   return (
