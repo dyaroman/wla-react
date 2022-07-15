@@ -4,8 +4,7 @@ trigger:
       - master
 
 pool:
-  name: BUILD-0
-  demands: npm
+  vmImage: 'ubuntu-20.04'
 
 steps:
   - task: NodeTool@0
@@ -34,7 +33,7 @@ steps:
   - task: ArchiveFiles@2
     displayName: 'archive folder build'
     inputs:
-      rootFolderOrFile: 'build\'
+      rootFolderOrFile: 'build'
       includeRootFolder: false
 
   - task: PublishBuildArtifacts@1
