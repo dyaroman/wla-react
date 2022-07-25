@@ -58,7 +58,7 @@ thead th {
     left: 0;
     z-index: 10;
 
-    color: $light-text-color;
+    color: choose-contrast-color($brand-dark-color);
 
     background-color: $brand-dark-color;
   }

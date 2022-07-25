@@ -1,0 +1,43 @@
+@use 'sass:math';
+@use 'sass:color';
+
+@function _linear-channel-value($channel-value) {
+  $normalized-channel-value: math.div($channel-value, 255);
+  @if $normalized-channel-value < 0.03928 {
+    @return math.div($normalized-channel-value, 12.92);
+  }
+
+  @return math.pow(math.div($normalized-channel-value + 0.055, 1.055), 2.4);
+}
+
+// Calculate the luminance for a color.
+// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+@function _luminance($color) {
+  $red: _linear-channel-value(color.red($color));
+  $green: _linear-channel-value(color.green($color));
+  $blue: _linear-channel-value(color.blue($color));
+
+  @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
+}
+
+// Calculate the contrast ratio between two colors.
+// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+@function _contrast($back, $front) {
+  $backLum: _luminance($back) + 0.05;
+  $foreLum: _luminance($front) + 0.05;
+
+  @return math.div(math.max($backLum, $foreLum), math.min($backLum, $foreLum));
+}
+
+// Determine whether to use dark or light text on top of given color to meet accessibility standards for contrast.
+// Returns 'dark' if the given color is light and 'light' if the given color is dark.
+@function choose-contrast-color($color) {
+  $lightContrast: _contrast($color, #fff);
+  $darkContrast: _contrast($color, #000);
+
+  @if ($lightContrast > $darkContrast) {
+    @return #fff;
+  } @else {
+    @return #000;
+  }
+}

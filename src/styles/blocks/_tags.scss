@@ -14,7 +14,7 @@
   margin: 0;
 
   font-size: inherit;
-  color: $light-text-color;
+  color: choose-contrast-color($brand-dark-color);
 
   border: none;
   background-color: $brand-dark-color;
@@ -24,6 +24,8 @@
   }
 
   &[data-tag-active] {
+    color: choose-contrast-color($accent-primary-color);
+
     background-color: $accent-primary-color;
   }
 }
