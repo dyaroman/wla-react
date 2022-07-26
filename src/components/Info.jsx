@@ -3,11 +3,19 @@ import { useEffect } from 'react';
 
 export function Info() {
   const { preparedData, websitesData } = useSelector((state) => state['table']);
-  const { timestamp = '', commit = '', repoPath = '', env = '' } = websitesData;
+  const {
+    commit = '',
+    env = '',
+    project = '',
+    repoPath = '',
+    timestamp = '',
+  } = websitesData;
 
   useEffect(() => {
     if (env !== '') {
-      document.title = `[${env}]: ${process.env.REACT_APP_PAGE_TITLE}`;
+      document.title = `${project && `[${project}]`}[${env}]: ${
+        process.env.REACT_APP_PAGE_TITLE
+      }`;
     }
   }, [env]);
 
