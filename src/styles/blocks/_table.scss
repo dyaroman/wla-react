@@ -17,6 +17,7 @@ table {
 
   @include media-breakpoint-up(lg) {
     display: table;
+    width: 100%;
   }
 }
 
