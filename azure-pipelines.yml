@@ -46,7 +46,7 @@ stages:
               pathToPublish: '$(Build.ArtifactStagingDirectory)'
 
   - stage: DeployDev
-    dependsOn: Bild
+    dependsOn: Build
     jobs:
       - deployment: deployment
         pool:
@@ -59,7 +59,7 @@ stages:
               steps: 
               - task: ExtractFiles@1
                 inputs:
-                  archiveFilePatterns: '$(Agent.BuildDirectory)/websites-list-app/drop//*.zip'
+                  archiveFilePatterns: '$(Agent.BuildDirectory)/websites-list-app/drop/*.zip'
                   destinationFolder: '$(Agent.BuildDirectory)/ExtractedFiles'
                   cleanDestinationFolder: true
                   overwriteExistingFiles: false
