@@ -40,3 +40,9 @@ steps:
     displayName: 'publish artifact'
     inputs:
       pathToPublish: '$(Build.ArtifactStagingDirectory)'
+
+
+  - task: IISWebAppDeploymentOnMachineGroup@0
+    inputs:
+      WebSiteName: 'dev.example.com'
+      Package: '$(Agent.BuildDirectory)/drop/websites-list-app/'
