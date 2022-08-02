@@ -45,4 +45,4 @@ steps:
   - task: IISWebAppDeploymentOnMachineGroup@0
     inputs:
       WebSiteName: 'dev.example.com'
-      Package: '$(Agent.BuildDirectory)/drop/websites-list-app/'
+      Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
