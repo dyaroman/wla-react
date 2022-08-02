@@ -59,12 +59,12 @@ stages:
               steps: 
               - task: ExtractFiles@1
                 inputs:
-                  archiveFilePatterns: '$(Agent.BuildDirectory)/websites-list-app/drop/*.zip'
-                  destinationFolder: '$(Agent.BuildDirectory)/ExtractedFiles'
+                  archiveFilePatterns: '**/*.zip'
+                  destinationFolder: '/ExtractedFiles'
                   cleanDestinationFolder: true
                   overwriteExistingFiles: false
 
               - task: IISWebAppDeploymentOnMachineGroup@0
                 inputs:
                   WebSiteName: 'dev.example.com'
-                  Package: '$(Agent.BuildDirectory)/ExtractedFiles'
+                  Package: '/ExtractedFiles'
