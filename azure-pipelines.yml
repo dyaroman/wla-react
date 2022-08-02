@@ -4,7 +4,7 @@ trigger:
       - master
 
 pool:
-  vmImage: 'ubuntu-20.04'
+  vmImage: 'windows-2022'
 
 stages:
   - stage: Build
@@ -50,7 +50,7 @@ stages:
     jobs:
       - deployment: deployment
         pool:
-          vmImage: 'ubuntu-20.04'
+          vmImage: 'windows-2022'
         displayName: 'dev.example.com'
         environment: WebsitesApp-Dev
         strategy:
