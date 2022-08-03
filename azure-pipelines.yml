@@ -4,67 +4,39 @@ trigger:
       - master
 
 pool:
-  vmImage: 'windows-2022'
+  vmImage: 'ubuntu-20.04'
 
-stages:
-  - stage: Build
-    jobs:
-      - job: Build
-        steps:
-          - task: NodeTool@0
-            displayName: 'use node 14'
-            inputs:
-              versionSpec: 14.x
-              checkLatest: true
+steps:
+  - task: NodeTool@0
+    displayName: 'use node 14'
+    inputs:
+      versionSpec: 14.x
+      checkLatest: true
 
-          - checkout: self
-            displayName: 'checkout'
+  - checkout: self
+    displayName: 'checkout'
 
-          - task: Npm@1
-            displayName: 'npm ci'
-            inputs:
-              command: custom
-              verbose: false
-              customCommand: 'ci --only=prod'
+  - task: Npm@1
+    displayName: 'npm ci'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'ci --only=prod'
 
-          - task: Npm@1
-            displayName: 'npm build'
-            inputs:
-              command: custom
-              verbose: false
-              customCommand: 'run build'
+  - task: Npm@1
+    displayName: 'npm build'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'run build'
 
-          - task: ArchiveFiles@2
-            displayName: 'archive folder build'
-            inputs:
-              rootFolderOrFile: 'build'
-              includeRootFolder: false
+  - task: ArchiveFiles@2
+    displayName: 'archive folder build'
+    inputs:
+      rootFolderOrFile: 'build'
+      includeRootFolder: false
 
-          - task: PublishBuildArtifacts@1
-            displayName: 'publish artifact'
-            inputs:
-              pathToPublish: '$(Build.ArtifactStagingDirectory)'
-
-  - stage: DeployDev
-    dependsOn: Build
-    jobs:
-      - deployment: deployment
-        pool:
-          vmImage: 'windows-2022'
-        displayName: 'dev.example.com'
-        environment: WebsitesApp-Dev
-        strategy:
-          runOnce:
-            deploy:
-              steps: 
-              - task: ExtractFiles@1
-                inputs:
-                  archiveFilePatterns: '**/*.zip'
-                  destinationFolder: '/ExtractedFiles'
-                  cleanDestinationFolder: true
-                  overwriteExistingFiles: false
-
-              - task: IISWebAppDeploymentOnMachineGroup@0
-                inputs:
-                  WebSiteName: 'dev.example.com'
-                  Package: '/ExtractedFiles'
+  - task: PublishBuildArtifacts@1
+    displayName: 'publish artifact'
+    inputs:
+      pathToPublish: '$(Build.ArtifactStagingDirectory)'
