@@ -60,12 +60,12 @@ stages:
               steps: 
               - task: ExtractFiles@1
                 inputs:
-                  archiveFilePatterns: '**/*.zip'
-                  destinationFolder: '/ExtractedFiles'
+                  archiveFilePatterns: '$(System.DefaultWorkingDirectory)\**\*.zip'
+                  destinationFolder: '$(System.DefaultWorkingDirectory)\ExtractedFiles'
                   cleanDestinationFolder: true
                   overwriteExistingFiles: false
 
               - task: IISWebAppDeploymentOnMachineGroup@0
                 inputs:
                   WebSiteName: 'dev.example.com'
-                  Package: '/ExtractedFiles'
+                  Package: '$(System.DefaultWorkingDirectory)\ExtractedFiles'
