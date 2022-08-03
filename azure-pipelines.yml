@@ -60,7 +60,7 @@ stages:
               steps: 
               - task: ExtractFiles@1
                 inputs:
-                  archiveFilePatterns: '$(System.DefaultWorkingDirectory)\**\*.zip'
+                  archiveFilePatterns: '$(System.DefaultWorkingDirectory)\_websites-list-app\drop\*.zip'
                   destinationFolder: '$(System.DefaultWorkingDirectory)\ExtractedFiles'
                   cleanDestinationFolder: true
                   overwriteExistingFiles: false
