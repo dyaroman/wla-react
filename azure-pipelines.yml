@@ -53,7 +53,7 @@ stages:
         pool:
           vmImage: 'windows-2022'
         displayName: 'dev.example.com'
-        environment: WebsitesApp-Dev
+        environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
           runOnce:
             deploy:
