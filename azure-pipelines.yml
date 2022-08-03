@@ -53,19 +53,41 @@ stages:
         pool:
           vmImage: 'windows-2022'
         displayName: 'dev.example.com'
-        environment: WebsitesApp-Dev
+        environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
           runOnce:
             deploy:
               steps: 
+              - powershell: |
+                  $artifactsList = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/websites-list-app/drop"
+                  Write-Host "List of Artifacts in drop: " $artifactsList
+                                                          
+                  $artifactPath = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/websites-list-app/drop/*" -Include *.zip | % { $_.FullName }
+                  Write-Host "Path to zip file: " + $artifactPath
+
+
+                  $artifactsList = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/_websites-list-app/drop"
+                  Write-Host "List of Artifacts in drop: " $artifactsList
+                                                          
+                  $artifactPath = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/_websites-list-app/drop/*" -Include *.zip | % { $_.FullName }
+                  Write-Host "Path to zip file: " + $artifactPath
+
+
+                  $artifactsList = Get-ChildItem -Path "$(Agent.BuildDirectory)/_websites-list-app/drop/*.zip"
+                  Write-Host "List of Artifacts in drop: " $artifactsList
+
+                  $artifactsList = Get-ChildItem -Path "$(Agent.BuildDirectory)/websites-list-app/drop/*.zip"
+                  Write-Host "List of Artifacts in drop: " $artifactsList
+
+                  displayName: 'Create/publish websites'
               - task: ExtractFiles@1
                 inputs:
-                  archiveFilePatterns: '$(Agent.BuildDirectory)/websites-list-app/drop/*.zip'
-                  destinationFolder: '/ExtractedFiles'
+                  archiveFilePatterns: '$(System.DefaultWorkingDirectory)\_websites-list-app\drop\*.zip'
+                  destinationFolder: '$(System.DefaultWorkingDirectory)\ExtractedFiles'
                   cleanDestinationFolder: true
                   overwriteExistingFiles: false
 
               - task: IISWebAppDeploymentOnMachineGroup@0
                 inputs:
                   WebSiteName: 'dev.example.com'
-                  Package: '/ExtractedFiles'
+                  Package: '$(System.DefaultWorkingDirectory)\ExtractedFiles'
