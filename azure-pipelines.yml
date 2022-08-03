@@ -59,27 +59,10 @@ stages:
             deploy:
               steps: 
               - powershell: |
-                  $artifactsList = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/websites-list-app/drop"
-                  Write-Host "List of Artifacts in drop: " $artifactsList
-                                                          
-                  $artifactPath = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/websites-list-app/drop/*" -Include *.zip | % { $_.FullName }
-                  Write-Host "Path to zip file: " + $artifactPath
-
-
-                  $artifactsList = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/_websites-list-app/drop"
-                  Write-Host "List of Artifacts in drop: " $artifactsList
-                                                          
-                  $artifactPath = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/_websites-list-app/drop/*" -Include *.zip | % { $_.FullName }
-                  Write-Host "Path to zip file: " + $artifactPath
-
-
-                  $artifactsList = Get-ChildItem -Path "$(Agent.BuildDirectory)/_websites-list-app/drop/*.zip"
+                  $artifactsList = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/"
                   Write-Host "List of Artifacts in drop: " $artifactsList
 
-                  $artifactsList = Get-ChildItem -Path "$(Agent.BuildDirectory)/websites-list-app/drop/*.zip"
-                  Write-Host "List of Artifacts in drop: " $artifactsList
-
-                  displayName: 'Create/publish websites'
+                  displayName: 'Shell and power bleat'
               - task: ExtractFiles@1
                 inputs:
                   archiveFilePatterns: '$(System.DefaultWorkingDirectory)\_websites-list-app\drop\*.zip'
