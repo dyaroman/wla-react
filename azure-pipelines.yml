@@ -53,19 +53,19 @@ stages:
         pool:
           vmImage: 'windows-2022'
         displayName: 'dev.example.com'
-        environment: WebsitesApp-Dev.WebsitesApp-Dev
+        environment: WebsitesApp-Dev
         strategy:
           runOnce:
             deploy:
               steps: 
               - task: ExtractFiles@1
                 inputs:
-                  archiveFilePatterns: '$(System.DefaultWorkingDirectory)\_websites-list-app\drop\*.zip'
-                  destinationFolder: '$(System.DefaultWorkingDirectory)\ExtractedFiles'
+                  archiveFilePatterns: '$(Agent.BuildDirectory)/websites-list-app/drop/*.zip'
+                  destinationFolder: '/ExtractedFiles'
                   cleanDestinationFolder: true
                   overwriteExistingFiles: false
 
               - task: IISWebAppDeploymentOnMachineGroup@0
                 inputs:
                   WebSiteName: 'dev.example.com'
-                  Package: '$(System.DefaultWorkingDirectory)\ExtractedFiles'
+                  Package: '/ExtractedFiles'
