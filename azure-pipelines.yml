@@ -59,10 +59,14 @@ stages:
             deploy:
               steps: 
               - powershell: |
-                  $artifactsList = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/"
+                  $artifactsList = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)\ExtractedFiles\"
                   Write-Host "List of Artifacts in drop: " $artifactsList
 
-                displayName: 'Shell and power bleat'
+                  Write-Host "code 2 "
+                  $artifactsList = Get-ChildItem -Path "$(Agent.BuildDirectory)/"
+                  Write-Host "List of Artifacts in drop: " $artifactsList
+
+                displayName: 'Shell and power'
               - task: ExtractFiles@1
                 inputs:
                   archiveFilePatterns: '$(System.DefaultWorkingDirectory)\_websites-list-app\drop\*.zip'
