@@ -62,7 +62,7 @@ stages:
                   $artifactsList = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/"
                   Write-Host "List of Artifacts in drop: " $artifactsList
 
-                  displayName: 'Shell and power bleat'
+                displayName: 'Shell and power bleat'
               - task: ExtractFiles@1
                 inputs:
                   archiveFilePatterns: '$(System.DefaultWorkingDirectory)\_websites-list-app\drop\*.zip'
