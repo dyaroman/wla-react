@@ -66,6 +66,10 @@ stages:
                   $artifactsList = Get-ChildItem -Path "$(Agent.BuildDirectory)/"
                   Write-Host "List of Artifacts in drop: " $artifactsList
 
+                  Write-Host "code 3 "
+                  $artifactsList = Get-ChildItem -Path "$(Agent.BuildDirectory)/drop/"
+                  Write-Host "List of Artifacts in drop: " $artifactsList
+
                 displayName: 'Shell and power'
               - task: ExtractFiles@1
                 inputs:
