@@ -35,50 +35,26 @@ stages:
               verbose: false
               customCommand: 'run build'
 
-          - task: ArchiveFiles@2
-            displayName: 'archive folder build'
-            inputs:
-              rootFolderOrFile: 'build'
-              includeRootFolder: false
-
-          - task: PublishBuildArtifacts@1
-            displayName: 'publish artifact'
-            inputs:
-              pathToPublish: '$(Build.ArtifactStagingDirectory)'
+          - publish: $(Build.SourcesDirectory)/build
+            artifact: wla
+            displayName: publish artifact wla
 
   - stage: DeployDev
     dependsOn: Build
     jobs:
       - deployment: deployment
-        pool:
-          vmImage: 'windows-2022'
         displayName: 'dev.example.com'
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
           runOnce:
             deploy:
-              steps: 
-              - powershell: |
-                  $artifactsList = Get-ChildItem -Path "$(System.DefaultWorkingDirectory)\ExtractedFiles\"
-                  Write-Host "List of Artifacts in drop: " $artifactsList
+              steps:
+                - download: current
+                  artifact: wla
+                  patterns: '**/*.*'
+                  displayName: download artifact wla
 
-                  Write-Host "code 2 "
-                  $artifactsList = Get-ChildItem -Path "$(Agent.BuildDirectory)/"
-                  Write-Host "List of Artifacts in drop: " $artifactsList
-
-                  Write-Host "code 3 "
-                  $artifactsList = Get-ChildItem -Path "$(Agent.BuildDirectory)/drop/"
-                  Write-Host "List of Artifacts in drop: " $artifactsList
-
-                displayName: 'Shell and power'
-              - task: ExtractFiles@1
-                inputs:
-                  archiveFilePatterns: '$(System.DefaultWorkingDirectory)\_websites-list-app\drop\*.zip'
-                  destinationFolder: '$(System.DefaultWorkingDirectory)\ExtractedFiles'
-                  cleanDestinationFolder: true
-                  overwriteExistingFiles: false
-
-              - task: IISWebAppDeploymentOnMachineGroup@0
-                inputs:
-                  WebSiteName: 'dev.example.com'
-                  Package: '$(System.DefaultWorkingDirectory)\ExtractedFiles'
+                - task: IISWebAppDeploymentOnMachineGroup@0
+                  inputs:
+                    WebSiteName: 'dev.example.com'
+                    Package: '$(Pipeline.Workspace)\wla'
