@@ -3,15 +3,15 @@ import { useEffect } from 'react';
 
 export function Info() {
   const { preparedData, websitesData } = useSelector((state) => state['table']);
-  const { timestamp = '', commit = '', repoPath = '', ENV = '' } = websitesData;
+  const { timestamp = '', commit = '', repoPath = '', env = '' } = websitesData;
 
   useEffect(() => {
-    document.title = `[${ENV}]: ${process.env.REACT_APP_PAGE_TITLE}`;
-  }, [ENV]);
+    document.title = `[${env}]: ${process.env.REACT_APP_PAGE_TITLE}`;
+  }, [env]);
 
   return (
     <section className="info">
-      {ENV && <h4 data-qa="env">ENV: {ENV}</h4>}
+      {env && <h4 data-qa="env">env: {env}</h4>}
       {timestamp && <h4 data-qa="timestamp">Data last updated: {timestamp}</h4>}
       {repoPath && commit && (
         <h4>
