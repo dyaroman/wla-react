@@ -1,7 +1,14 @@
 import { NO_DATA } from './constants';
 
 export function search(where, what) {
-  return String(where).toLowerCase().includes(String(what).toLowerCase());
+  where = String(where).toLowerCase();
+  what = String(what).toLowerCase();
+
+  if (what.startsWith('=')) {
+    return where === what.slice(1);
+  } else {
+    return where.includes(what);
+  }
 }
 
 export function updateURL(sortAndFilterState) {

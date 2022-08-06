@@ -66,7 +66,7 @@ export function Table() {
                 >
                   <Highlight
                     text={websiteData.website}
-                    highlight={filters.website}
+                    highlight={filters.website.replace('=', '')}
                   />
                 </a>
               </th>
@@ -80,7 +80,7 @@ export function Table() {
                   >
                     <Highlight
                       text={websiteData[column]}
-                      highlight={filters[column]}
+                      highlight={filters[column].replace('=', '')}
                     />
                   </td>
                 ))}

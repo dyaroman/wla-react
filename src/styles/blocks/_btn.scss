@@ -3,7 +3,7 @@
   padding: px2rem(12) px2rem(22);
 
   font-size: inherit;
-  color: $light-text-color;
+  color: choose-contrast-color($brand-dark-color);
 
   border: none;
   background-color: $brand-dark-color;
@@ -13,6 +13,8 @@
   }
 
   &--danger {
+    color: choose-contrast-color($accent-third-color);
+
     background-color: $accent-third-color;
   }
 }

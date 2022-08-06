@@ -10,7 +10,11 @@ export function Highlight({ text = '', highlight = '' }) {
     return text;
   }
 
-  const regex = new RegExp(`(${highlight})`, 'gi');
+  function escapeRegex(string) {
+    return string.replace(/[\-\/\\^$*+?.()|\[\]{}]/g, '\\$&');
+  }
+
+  const regex = new RegExp(`(${escapeRegex(highlight)})`, 'gi');
   const parts = text.split(regex);
 
   return (

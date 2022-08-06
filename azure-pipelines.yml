@@ -5,7 +5,7 @@ trigger:
       - feature/*
 
 pool:
-  vmImage: 'windows-2022'
+  vmImage: 'ubuntu-20.04'
 
 stages:
   - stage: Build
