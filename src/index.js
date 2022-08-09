@@ -14,3 +14,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+console.log(`app commit: ${process.env.REACT_APP_VERSION}`);
