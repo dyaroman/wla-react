@@ -15,4 +15,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-console.log(`app commit: ${process.env.REACT_APP_VERSION}`);
+console.log(`app commit: ${process.env.REACT_APP_VERSION.substring(0, 8)}`);

@@ -32,7 +32,7 @@ export function Info() {
             rel="noreferrer"
             data-qa="commit"
           >
-            {commit.substring(0, 10)}
+            {commit.substring(0, 8)}
           </a>
         </h4>
       )}
