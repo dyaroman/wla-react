@@ -148,7 +148,7 @@ td {
     display: table-cell;
     gap: 0;
 
-    white-space: nowrap;
+    white-space: pre;
     border-bottom: none;
 
     &::before {
