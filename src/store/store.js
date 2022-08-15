@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
@@ -9,9 +9,7 @@ const composeEnhancers = composeWithDevTools({
   traceLimit: 10,
 });
 
-const middleware = [thunk];
-
 export const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(...middleware))
+  composeEnhancers(applyMiddleware(thunk))
 );

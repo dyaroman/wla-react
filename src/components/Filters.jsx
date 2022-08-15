@@ -57,9 +57,7 @@ export function Filters() {
         >
           clear all
         </button>
-      </div>
-      {preparedData.length !== 0 && (
-        <div className="btn-group">
+        {preparedData.length !== 0 && (
           <button
             className="btn"
             onClick={onCopyWebsitesClick}
@@ -67,8 +65,8 @@ export function Filters() {
           >
             {copyWebsitesBtnText} websites
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }

@@ -4,9 +4,7 @@
   "scripts": {
     "start": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start",
     "build": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build",
-    "postbuild": "node postBuild.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "postbuild": "node postBuild.js"
   },
   "husky": {
     "hooks": {
@@ -29,9 +27,6 @@
     ]
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",

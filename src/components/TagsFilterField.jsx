@@ -29,7 +29,7 @@ export function TagsFilterField() {
 
   return (
     <div style={{ gridColumn: '1 / -1' }}>
-      <FieldTitle text="Tags" clickable={false}>
+      <FieldTitle text="Tags:" clickable={false}>
         <Tags items={tags} />
       </FieldTitle>
     </div>
