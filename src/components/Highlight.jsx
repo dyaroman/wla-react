@@ -6,7 +6,7 @@ export function Highlight({ text = '', highlight = '' }) {
     return null;
   }
 
-  if (highlight.trim() === '') {
+  if (highlight === '') {
     return text;
   }
 
