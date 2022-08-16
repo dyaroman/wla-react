@@ -74,7 +74,13 @@ export function updateTableData() {
     let updatedData = [...websitesData['websites']];
 
     for (const filterKey in filters) {
-      if (filters[filterKey] === '' || filters[filterKey] === '=') {
+      if (
+        filters[filterKey] === '' ||
+        filters[filterKey] === '=' ||
+        filters[filterKey] === '==' ||
+        filters[filterKey] === '!' ||
+        filters[filterKey] === '!='
+      ) {
         continue;
       }
       updatedData = filterTableData(filterKey, filters[filterKey], updatedData);

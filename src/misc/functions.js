@@ -4,8 +4,10 @@ export function search(where, what) {
   where = String(where).toLowerCase();
   what = String(what).toLowerCase();
 
-  if (what.startsWith('=')) {
-    return where === what.slice(1);
+  if (what.startsWith('==')) {
+    return where === what.slice(2);
+  } else if (what.startsWith('!=')) {
+    return where !== what.slice(2);
   } else {
     return where.includes(what);
   }

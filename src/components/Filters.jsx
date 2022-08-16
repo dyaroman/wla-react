@@ -39,7 +39,7 @@ export function Filters() {
       <h4>Filters:</h4>
       <div className="filters__content">
         {columns
-          .filter((e) => ['tags'].includes(e) === false)
+          .filter((e) => e !== 'tags')
           .map((column) => (
             <FilterField
               key={column}
