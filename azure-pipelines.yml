@@ -35,9 +35,17 @@ stages:
               verbose: false
               customCommand: 'run build'
 
-          - publish: $(Build.SourcesDirectory)/build
-            artifact: wla
-            displayName: publish artifact wla
+          - task: ArchiveFiles@2
+            displayName: 'archive build'
+            inputs:
+              rootFolderOrFile: '$(Build.SourcesDirectory)/build'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+
+          - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+            artifact: drop
+            displayName: 'publish artifact wla'
 
   - stage: DeployDev
     dependsOn: Build
@@ -50,11 +58,11 @@ stages:
             deploy:
               steps:
                 - download: current
-                  artifact: wla
-                  patterns: '**/*.*'
-                  displayName: download artifact wla
+                  artifact: drop
+                  patterns: '$(Build.BuildId).zip'
+                  displayName: 'download artifact wla'
 
                 - task: IISWebAppDeploymentOnMachineGroup@0
                   inputs:
-                    WebSiteName: 'dev.example.com'
-                    Package: '$(Pipeline.Workspace)\wla'
+                    webSiteName: 'dev.example.com'
+                    package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
