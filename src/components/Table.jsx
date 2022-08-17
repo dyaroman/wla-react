@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FilterTitle } from './FilterTitle';
 import { Tags } from './Tags';
 import { Highlight } from './Highlight';
+import { Cell } from './Cell';
+import { ColorCell } from './ColorCell';
 import { updateTableData } from '../features/table/table.actions';
 import { fromCamelCaseToWords, updateURL } from '../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../misc/constants';
@@ -25,7 +27,7 @@ export function Table() {
 
   let content;
 
-  if (websitesData.websites.length === 0) {
+  if (websitesData['websites'].length === 0) {
     content = (
       <h4>No data to show. Please check "{WEBSITES_DATA_FILENAME}" file.</h4>
     );
@@ -72,18 +74,34 @@ export function Table() {
               </th>
               {columns
                 .filter((e) => ['website', 'tags'].includes(e) === false)
-                .map((column) => (
-                  <td
-                    data-title={fromCamelCaseToWords(column)}
-                    data-qa={column}
-                    key={column}
-                  >
-                    <Highlight
-                      text={websiteData[column]}
-                      highlight={filters[column]}
-                    />
-                  </td>
-                ))}
+                .map((column) => {
+                  if (column === 'mainFormTheme' || column === 'altFormTheme') {
+                    let color;
+                    if (column === 'mainFormTheme') {
+                      color = websiteData['mainFormPrimaryColor'];
+                    } else if (column === 'altFormTheme') {
+                      color = websiteData['altFormPrimaryColor'];
+                    }
+
+                    return (
+                      <ColorCell key={column} column={column} color={color}>
+                        <Highlight
+                          text={websiteData[column]}
+                          highlight={filters[column]}
+                        />
+                      </ColorCell>
+                    );
+                  } else {
+                    return (
+                      <Cell key={column} column={column}>
+                        <Highlight
+                          text={websiteData[column]}
+                          highlight={filters[column]}
+                        />
+                      </Cell>
+                    );
+                  }
+                })}
               <td data-title={fromCamelCaseToWords('tags')} data-qa="tags">
                 <Tags items={websiteData.tags} />
               </td>

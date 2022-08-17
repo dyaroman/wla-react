@@ -12,7 +12,7 @@ export function Filters() {
   const { columns } = websitesData;
   const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
 
-  if (websitesData.websites.length === 0) {
+  if (websitesData['websites'].length === 0) {
     return null;
   }
 
