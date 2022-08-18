@@ -8,9 +8,9 @@ pool:
   vmImage: 'ubuntu-20.04'
 
 stages:
-  - stage: Build
+  - stage: build
     jobs:
-      - job: Build
+      - job: build
         steps:
           - task: NodeTool@0
             displayName: 'use node 14'
@@ -47,10 +47,10 @@ stages:
             artifact: drop
             displayName: 'publish artifact wla'
 
-  - stage: DeployDev
-    dependsOn: Build
+  - stage: deploy
+    dependsOn: build
     jobs:
-      - deployment: deployment
+      - deployment: dev
         displayName: 'dev.example.com'
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
@@ -65,4 +65,21 @@ stages:
                 - task: IISWebAppDeploymentOnMachineGroup@0
                   inputs:
                     webSiteName: 'dev.example.com'
+                    package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+
+      - deployment: prod
+        displayName: 'prod.example.com'
+        environment: WebsitesApp-Dev.WebsitesApp-Dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  artifact: drop
+                  patterns: '$(Build.BuildId).zip'
+                  displayName: 'download artifact wla'
+
+                - task: IISWebAppDeploymentOnMachineGroup@0
+                  inputs:
+                    webSiteName: 'prod.example.com'
                     package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
