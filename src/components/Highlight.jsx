@@ -6,12 +6,12 @@ export function Highlight({ text = '', highlight = '' }) {
     highlight = highlight.slice(2);
   }
 
-  if (text.trim() === '') {
+  if (text === '') {
     return null;
   }
 
   if (highlight === '') {
-    return text;
+    return <span>{text}</span>;
   }
 
   function escapeRegex(string) {
