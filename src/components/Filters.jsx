@@ -5,6 +5,7 @@ import { FilterField } from './FilterField';
 import { TagsFilterField } from './TagsFilterField';
 import { CLEAR_FILTERS } from '../features/table/table.constants';
 import { fromCamelCaseToWords } from '../misc/functions';
+import { useKeyPress } from '../hooks/useKeyPress';
 
 export function Filters() {
   const dispatch = useDispatch();
@@ -12,8 +13,17 @@ export function Filters() {
   const { columns } = websitesData;
   const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
 
+  useKeyPress('meta+shift+f', onSearchShortcut);
+  useKeyPress('ctrl+shift+f', onSearchShortcut);
+
   if (websitesData['websites'].length === 0) {
     return null;
+  }
+
+  function onSearchShortcut(event) {
+    event.preventDefault();
+    document.querySelector('input').focus();
+    document.querySelector('input').select();
   }
 
   function onClearClick() {
