@@ -6,6 +6,13 @@ import './styles/index.scss';
 import { App } from './App';
 import { store } from './store/store';
 
+// http to https redirect
+if (process.env.NODE_ENV !== 'development' && location.protocol !== 'https:') {
+  location.replace(
+    `https:${location.href.substring(location.protocol.length)}`
+  );
+}
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
