@@ -108,6 +108,7 @@ tr {
 
   border: $border-width solid $brand-dark-color;
   background-color: $brand-light-color;
+  transition: 0.3s;
 
   &:nth-child(even) {
     background-color: $brand-average-color;
@@ -117,6 +118,12 @@ tr {
     display: table-row;
 
     border: none;
+  }
+
+  @include hover() {
+    color: choose-contrast-color($row-bg--hover);
+
+    background-color: $row-bg--hover;
   }
 }
 
