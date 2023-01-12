@@ -16,6 +16,9 @@ export function Filters() {
   useKeyPress('meta+shift+f', onSearchShortcut);
   useKeyPress('ctrl+shift+f', onSearchShortcut);
 
+  useKeyPress('meta+shift+c', onCopyShortcut);
+  useKeyPress('ctrl+shift+c', onCopyShortcut);
+
   if (websitesData['websites'].length === 0) {
     return null;
   }
@@ -24,6 +27,16 @@ export function Filters() {
     event.preventDefault();
     document.querySelector('input').focus();
     document.querySelector('input').select();
+  }
+
+  async function onCopyShortcut(event) {
+    event.preventDefault();
+    const dataToCopy = preparedData.map((e) => e.website).join(',');
+    try {
+      await navigator.clipboard.writeText(dataToCopy);
+    } catch (e) {
+      console.log(`Error due to copy websites list to clipboard`, e);
+    }
   }
 
   function onClearClick() {
