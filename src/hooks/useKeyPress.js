@@ -3,8 +3,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 export const useKeyPress = (hotkey = '', callback, node = null) => {
   hotkey = hotkey.replace(/ /g, '').toLowerCase();
 
-  if (hotkey.match(/[^+a-z0-9]/g)) {
-    throw new Error(`hotkey could contain only '+a-z0-9'`);
+  if (hotkey.match(/[^+a-z0-9?]/g)) {
+    throw new Error(`hotkey could contain only '+a-z0-9?'`);
   }
 
   const keys = hotkey.split('+');

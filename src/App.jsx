@@ -5,6 +5,7 @@ import { Loader } from './components/Loader';
 import { Table } from './components/Table';
 import { Info } from './components/Info';
 import { Filters } from './components/Filters';
+import { InfoModal } from './components/InfoModal';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
@@ -34,6 +35,7 @@ export function App() {
 
   return (
     <>
+      <InfoModal />
       <Info />
       <Filters />
       <Table />

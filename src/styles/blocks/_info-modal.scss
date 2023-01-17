@@ -1,0 +1,46 @@
+.info-modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 100;
+
+  font-size: 1rem;
+  color: $brand-dark-color;
+
+  border: $border-width solid $brand-dark-color;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+
+  @include hover() {
+    color: $brand-light-color;
+
+    background-color: $brand-dark-color;
+    cursor: pointer;
+  }
+}
+
+.info-modal {
+  li {
+    line-height: 1.2;
+  }
+
+  li + li {
+    margin-top: 0.5rem;
+  }
+}
+
+.info-modal__content {
+  max-width: 600px;
+
+  :first-child {
+    margin-top: 0;
+  }
+}

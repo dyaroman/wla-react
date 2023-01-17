@@ -22,7 +22,6 @@ export function Info() {
   return (
     <section className="info">
       {env && <h4 data-qa="env">env: {env}</h4>}
-      {timestamp && <h4 data-qa="timestamp">Data last updated: {timestamp}</h4>}
       {repoPath && commit && (
         <h4>
           Commit:{' '}
@@ -36,6 +35,7 @@ export function Info() {
           </a>
         </h4>
       )}
+      {timestamp && <h4 data-qa="timestamp">Data last updated: {timestamp}</h4>}
       {preparedData && (
         <h4 data-qa="websitesNumber">
           {preparedData.length === 1 ? 'Website' : 'Websites'}:{' '}
