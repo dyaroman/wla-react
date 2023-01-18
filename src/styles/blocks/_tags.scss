@@ -9,24 +9,11 @@
 }
 
 .tags__btn {
-  display: block;
   padding: px2rem(12);
-  margin: 0;
-
-  font-size: inherit;
-  color: choose-contrast-color($brand-dark-color);
-
-  border: none;
-  background-color: $brand-dark-color;
-
-  @include hover() {
-    cursor: pointer;
-  }
 
   &[data-tag-active] {
-    color: choose-contrast-color($accent-primary-color);
-
-    background-color: $accent-primary-color;
+    --btn-bg: #198754;
+    --btn-border-color: #198754;
   }
 }
 

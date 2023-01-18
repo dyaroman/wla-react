@@ -1,15 +1,30 @@
-$accent-primary-color: #228b22;
-$accent-secondary-color: #0006ff;
-$accent-third-color: #ff6347;
-
-$brand-dark-color: #000;
-$brand-average-color: #ebebeb;
-$brand-light-color: #fff;
-
-$focus-inner-color: #fff;
-$focus-outer-color: #000;
-
-$row-bg--hover: yellow;
-$link-text-color: $accent-secondary-color;
-
+$row-bg--hover: #fff3cd;
 $border-width: 2px;
+
+:root {
+  --body-bg: #fff;
+  --body-color: #212529;
+  --link-color: #0d6efd;
+  --secondary-color: rgba(33, 37, 41, 0.75);
+  --border-color: #dee2e6;
+  --table-striped-bg: #f2f2f2;
+
+  --focus-inner-color: var(--body-color);
+  --focus-outer-color: var(--border-color);
+
+  --btn-color: #fff;
+  --btn-bg: #6c757d;
+  --btn-border-color: #6c757d;
+  --btn-hover-color: #fff;
+  --btn-hover-bg: #5c636a;
+  --btn-hover-border-color: #565e64;
+
+  @media (prefers-color-scheme: dark) {
+    --body-bg: #212529;
+    --body-color: #adb5bd;
+    --link-color: #6ea8fe;
+    --secondary-color: rgba(173, 181, 189, 0.75);
+    --border-color: #495057;
+    --table-striped-bg: #2c3034;
+  }
+}

@@ -7,7 +7,7 @@ import { NO_DATA } from '../misc/constants';
 export function ColorCell({ column, color, children }) {
   const [transparent, setTransparent] = useState(false);
   const styles = {
-    transition: '0.3s',
+    transition: 'background-color 0.3s',
   };
 
   let title = null;

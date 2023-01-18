@@ -6,8 +6,10 @@ body {
   font-family: 'Cascadia Code', 'Monaco', 'Lucida Console', monospace;
   font-size: 1rem;
   line-height: 1;
+  color: var(--body-color);
 
   box-sizing: border-box;
+  background-color: var(--body-bg);
 }
 
 *,
@@ -25,7 +27,7 @@ body {
 }
 
 a {
-  color: $link-text-color;
+  color: var(--link-color);
 
   @include hover() {
     text-decoration: none;
@@ -39,10 +41,10 @@ h4 {
 code {
   padding: 0 0.25rem;
 
-  color: choose-contrast-color($brand-average-color);
+  color: var(--body-bg);
 
   border-radius: $border-width;
-  background-color: $brand-average-color;
+  background-color: var(--body-color);
 }
 
 .container {
@@ -57,8 +59,6 @@ code {
 .field-title__text {
   display: inline-block;
   margin-bottom: 0.5rem;
-
-  color: $brand-dark-color;
 }
 
 .input {
@@ -68,7 +68,13 @@ code {
 
   font-family: inherit;
   font-size: inherit;
+  color: inherit;
 
   border-radius: 0;
-  border: $border-width solid $brand-dark-color;
+  border: $border-width solid var(--border-color);
+  background-color: var(--body-bg);
+}
+
+::placeholder {
+  color: var(--secondary-color);
 }

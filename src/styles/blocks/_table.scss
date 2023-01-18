@@ -5,7 +5,7 @@
   @include media-breakpoint-up(lg) {
     max-height: calc(100vh - 1em);
 
-    border: $border-width solid $brand-dark-color;
+    border: $border-width solid var(--border-color);
     overflow: auto;
   }
 }
@@ -59,9 +59,10 @@ thead th {
     left: 0;
     z-index: 10;
 
-    color: choose-contrast-color($brand-dark-color);
+    color: var(--btn-color);
 
-    background-color: $brand-dark-color;
+    border-bottom: $border-width solid var(--border-color);
+    background-color: var(--btn-bg);
   }
 }
 
@@ -87,18 +88,26 @@ tbody th {
 
     background-color: inherit;
 
+    &::before,
     &::after {
       content: '';
 
       position: absolute;
       top: 0;
       bottom: 0;
-      right: 0;
 
       display: block;
       width: $border-width;
 
-      background-color: $brand-dark-color;
+      background-color: var(--border-color);
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: -$border-width;
     }
   }
 }
@@ -106,12 +115,12 @@ tbody th {
 tr {
   display: block;
 
-  border: $border-width solid $brand-dark-color;
-  background-color: $brand-light-color;
+  border: $border-width solid var(--border-color);
+  background-color: var(--table-striped-bg);
   transition: 0.3s;
 
   &:nth-child(even) {
-    background-color: $brand-average-color;
+    background-color: var(--body-bg);
   }
 
   @include media-breakpoint-up(lg) {
@@ -131,7 +140,7 @@ tr + tr {
   td,
   th {
     @include media-breakpoint-up(lg) {
-      border-top: $border-width solid $brand-dark-color;
+      border-top: $border-width solid var(--border-color);
     }
   }
 }
@@ -141,6 +150,7 @@ td {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
 
@@ -149,6 +159,8 @@ td {
 
   &::before {
     content: attr(data-title);
+
+    font-weight: 700;
   }
 
   @include media-breakpoint-up(lg) {
@@ -168,7 +180,7 @@ td + td,
 th + th,
 td + th,
 th + td {
-  border-top: $border-width solid $brand-dark-color;
+  border-top: $border-width solid var(--border-color);
 
   @include media-breakpoint-up(lg) {
     border-top: none;
@@ -176,9 +188,8 @@ th + td {
 }
 
 td + td,
-th + th,
-td + th {
+th + th {
   @include media-breakpoint-up(lg) {
-    border-left: $border-width solid $brand-dark-color;
+    border-left: $border-width solid var(--border-color);
   }
 }

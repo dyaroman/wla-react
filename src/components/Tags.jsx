@@ -38,7 +38,7 @@ export function Tags({ items }) {
     return (
       <li key={tag}>
         <button
-          className="tags__btn"
+          className="btn  tags__btn"
           data-qa={tag}
           data-tag-active={tagActive}
           onClick={onClick}

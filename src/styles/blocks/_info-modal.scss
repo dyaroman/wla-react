@@ -12,22 +12,24 @@
   z-index: 100;
 
   font-size: 1rem;
-  color: $brand-dark-color;
+  color: var(--body-color);
 
-  border: $border-width solid $brand-dark-color;
+  border: $border-width solid var(--border-color);
   border-radius: 50%;
-  background-color: #fff;
+  background-color: var(--body-bg);
   transition: background-color 0.3s, color 0.3s;
 
   @include hover() {
-    color: $brand-light-color;
-
-    background-color: $brand-dark-color;
     cursor: pointer;
   }
 }
 
 .info-modal {
+  color: var(--body-color);
+
+  border: $border-width solid var(--border-color);
+  background-color: var(--body-bg);
+
   li {
     line-height: 1.2;
   }

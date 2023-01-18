@@ -3,18 +3,26 @@
   padding: px2rem(12) px2rem(22);
 
   font-size: inherit;
-  color: choose-contrast-color($brand-dark-color);
+  color: var(--btn-color);
 
-  border: none;
-  background-color: $brand-dark-color;
+  border: 2px solid var(--btn-border-color);
+  background-color: var(--btn-bg);
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
 
   @include hover() {
+    color: var(--btn-hover-color);
+
+    background-color: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border-color);
     cursor: pointer;
   }
 
   &--danger {
-    color: choose-contrast-color($accent-third-color);
-
-    background-color: $accent-third-color;
+    --btn-color: #fff;
+    --btn-bg: #dc3545;
+    --btn-border-color: #dc3545;
+    --btn-hover-color: #fff;
+    --btn-hover-bg: #bb2d3b;
+    --btn-hover-border-color: #b02a37;
   }
 }
