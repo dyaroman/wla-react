@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Loader } from './components/Loader';
-import { Table } from './components/Table';
+import { Controls } from './components/Controls';
 import { Info } from './components/Info';
 import { Filters } from './components/Filters';
+import { Table } from './components/Table';
 import { InfoModal } from './components/InfoModal';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
@@ -35,10 +36,11 @@ export function App() {
 
   return (
     <>
-      <InfoModal />
+      <Controls />
       <Info />
       <Filters />
       <Table />
+      <InfoModal />
     </>
   );
 }

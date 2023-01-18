@@ -39,7 +39,7 @@ const initialSorts = {
     direction: '',
   },
 };
-const initialState = {
+const tableInitialState = {
   ...initialFilters,
   ...initialSorts,
   unauthorized: false,
@@ -48,7 +48,7 @@ const initialState = {
   preparedData: [],
 };
 
-export function tableReducer(state = initialState, action) {
+export function tableReducer(state = tableInitialState, action) {
   switch (action.type) {
     case WEBSITES_DATA_UNAUTHORIZED_ERROR:
       return {
