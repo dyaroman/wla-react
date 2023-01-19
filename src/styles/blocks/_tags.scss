@@ -8,23 +8,18 @@
   list-style: none;
 }
 
-.tags__btn {
-  padding: px2rem(12);
-
-  &[data-tag-active] {
-    --btn-bg: #198754;
-    --btn-border-color: #198754;
-  }
-}
-
 td .tags {
   @include media-breakpoint-up(lg) {
     flex-wrap: nowrap;
   }
 }
 
-td .tags__btn {
-  @include media-breakpoint-up(lg) {
-    padding: px2rem(3);
-  }
+td .checkbox {
+  gap: px2rem(3);
+  padding: px2rem(3);
+}
+
+td .checkbox__icon {
+  width: 20px;
+  height: 20px;
 }

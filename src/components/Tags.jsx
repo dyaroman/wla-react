@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Checkbox } from './Checkbox';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 
 export function Tags({ items }) {
   const dispatch = useDispatch();
   const { filters } = useSelector((state) => state['table']);
 
-  function onClick(e) {
+  function onChange(tag) {
     let updatedTags = [...filters.tags];
-    const currentTag = e.target.innerText;
-    if (updatedTags.includes(currentTag)) {
-      updatedTags = updatedTags.filter((item) => item !== currentTag);
+    if (updatedTags.includes(tag)) {
+      updatedTags = updatedTags.filter((item) => item !== tag);
     } else {
-      updatedTags.push(currentTag);
+      updatedTags.push(tag);
     }
     dispatch({
       type: FILTERS_UPDATED,
@@ -27,24 +27,19 @@ export function Tags({ items }) {
   }
 
   const list = items.sort().map((tag) => {
-    let tagActive = null;
+    let tagActive = false;
     if (Array.isArray(filters.tags)) {
       tagActive = filters.tags
         .map((tag) => tag.toLowerCase())
-        .includes(tag.toLowerCase())
-        ? ''
-        : null;
+        .includes(tag.toLowerCase());
     }
     return (
       <li key={tag}>
-        <button
-          className="btn  tags__btn"
-          data-qa={tag}
-          data-tag-active={tagActive}
-          onClick={onClick}
-        >
-          {tag}
-        </button>
+        <Checkbox
+          label={tag}
+          checked={tagActive}
+          onChange={onChange.bind(null, tag)}
+        />
       </li>
     );
   });
