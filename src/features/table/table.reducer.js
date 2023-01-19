@@ -5,7 +5,6 @@ import {
   SET_WEBSITES_DATA,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
-  WEBSITES_DATA_UNAUTHORIZED_ERROR,
 } from './table.constants';
 
 const initialFilters = {
@@ -42,7 +41,6 @@ const initialSorts = {
 const tableInitialState = {
   ...initialFilters,
   ...initialSorts,
-  unauthorized: false,
   websitesData: null,
   websitesDataLoaded: false,
   preparedData: [],
@@ -50,11 +48,6 @@ const tableInitialState = {
 
 export function tableReducer(state = tableInitialState, action) {
   switch (action.type) {
-    case WEBSITES_DATA_UNAUTHORIZED_ERROR:
-      return {
-        ...state,
-        unauthorized: action.payload,
-      };
     case SET_WEBSITES_DATA:
       return {
         ...state,

@@ -1,8 +1,9 @@
-import { TOGGLE_INFO_MODAL, TOGGLE_THEME } from './app.constants';
+import { TOGGLE_INFO_MODAL, TOGGLE_THEME, UNAUTHORIZED } from './app.constants';
 
 const appInitialState = {
   infoModalOpen: false,
   theme: 'light',
+  unauthorized: false,
 };
 
 export function appReducer(state = appInitialState, action) {
@@ -16,6 +17,11 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         theme: action.payload === 'dark' ? 'dark' : 'light',
+      };
+    case UNAUTHORIZED:
+      return {
+        ...state,
+        unauthorized: action.payload,
       };
     default:
       return state;

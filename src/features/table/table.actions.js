@@ -4,8 +4,8 @@ import {
   SET_WEBSITES_DATA,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
-  WEBSITES_DATA_UNAUTHORIZED_ERROR,
 } from './table.constants';
+import { UNAUTHORIZED } from '../app/app.constants';
 import { filterTableData, sortTableData } from '../../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../../misc/constants';
 
@@ -16,7 +16,7 @@ export function getWebsitesData() {
       const response = await fetch(dataFileURL);
       if (response.status === 401) {
         dispatch({
-          type: WEBSITES_DATA_UNAUTHORIZED_ERROR,
+          type: UNAUTHORIZED,
           payload: true,
         });
       } else {
@@ -74,13 +74,7 @@ export function updateTableData() {
     let updatedData = [...websitesData['websites']];
 
     for (const filterKey in filters) {
-      if (
-        filters[filterKey] === '' ||
-        filters[filterKey] === '=' ||
-        filters[filterKey] === '==' ||
-        filters[filterKey] === '!' ||
-        filters[filterKey] === '!='
-      ) {
+      if (['', '=', '==', '!', '!='].includes(filters[filterKey])) {
         continue;
       }
       updatedData = filterTableData(filterKey, filters[filterKey], updatedData);
