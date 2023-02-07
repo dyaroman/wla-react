@@ -85,6 +85,7 @@ tbody th {
   @include media-breakpoint-up(lg) {
     position: sticky;
     left: -$border-width;
+    z-index: 10;
 
     background-color: inherit;
 
