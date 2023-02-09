@@ -25,7 +25,6 @@ const initialFilters = {
     mainFormTheme: '',
     mainLeadType: '',
     owner: '',
-    recaptchaKey: '',
     state: '',
     tags: [],
     template: '',
