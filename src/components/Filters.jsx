@@ -61,16 +61,19 @@ export function Filters() {
     <section className="filters">
       <h4>Filters:</h4>
       <div className="filters__content">
-        {columns
-          .filter((e) => e !== 'tags')
-          .map((column) => (
-            <FilterField
-              key={column}
-              name={column}
-              placeholder={fromCamelCaseToWords(column)}
-            />
-          ))}
-        <TagsFilterField />
+        {columns.map((column) => {
+          if (column === 'tags') {
+            return <TagsFilterField key={column} />;
+          } else {
+            return (
+              <FilterField
+                key={column}
+                name={column}
+                placeholder={fromCamelCaseToWords(column)}
+              />
+            );
+          }
+        })}
       </div>
       <div className="btn-group">
         <button

@@ -57,32 +57,36 @@ export function Table() {
               <td data-title="#" data-qa="#">
                 {index + 1}
               </td>
-              <th
-                data-title={fromCamelCaseToWords('website')}
-                data-qa="website"
-              >
-                <a
-                  href={`https://${websiteData.host}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Highlight
-                    text={websiteData.website}
-                    highlight={filters.website}
-                  />
-                </a>
-              </th>
-              {columns
-                .filter((e) => ['website', 'tags'].includes(e) === false)
-                .map((column) => {
-                  if (column === 'mainFormTheme' || column === 'altFormTheme') {
+              {columns.map((column) => {
+                switch (column) {
+                  case 'website':
+                    return (
+                      <th
+                        data-title={fromCamelCaseToWords('website')}
+                        data-qa="website"
+                        key={column}
+                      >
+                        <a
+                          href={`https://${websiteData.host}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <Highlight
+                            text={websiteData.website}
+                            highlight={filters.website}
+                          />
+                        </a>
+                      </th>
+                    );
+
+                  case 'mainFormTheme':
+                  case 'altFormTheme': {
                     let color;
                     if (column === 'mainFormTheme') {
                       color = websiteData['mainFormPrimaryColor'];
                     } else if (column === 'altFormTheme') {
                       color = websiteData['altFormPrimaryColor'];
                     }
-
                     return (
                       <ColorCell key={column} column={column} color={color}>
                         <Highlight
@@ -91,7 +95,20 @@ export function Table() {
                         />
                       </ColorCell>
                     );
-                  } else {
+                  }
+
+                  case 'tags':
+                    return (
+                      <td
+                        data-title={fromCamelCaseToWords('tags')}
+                        data-qa="tags"
+                        key={column}
+                      >
+                        <Tags items={websiteData.tags} />
+                      </td>
+                    );
+
+                  default:
                     return (
                       <Cell key={column} column={column}>
                         <Highlight
@@ -100,11 +117,8 @@ export function Table() {
                         />
                       </Cell>
                     );
-                  }
-                })}
-              <td data-title={fromCamelCaseToWords('tags')} data-qa="tags">
-                <Tags items={websiteData.tags} />
-              </td>
+                }
+              })}
             </tr>
           ))}
         </tbody>
