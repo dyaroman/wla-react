@@ -11,7 +11,7 @@ import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
   const dispatch = useDispatch();
-  const unauthorized = useSelector((state) => state['app'].unauthorized);
+  const { unauthorized, requestError } = useSelector((state) => state['app']);
   const websitesDataLoaded = useSelector(
     (state) => state['table'].websitesDataLoaded
   );
@@ -30,6 +30,15 @@ export function App() {
       <>
         <h1>Unauthorized</h1>
         <p>Please check your connection</p>
+      </>
+    );
+  }
+
+  if (requestError) {
+    return (
+      <>
+        <h1>Error due to request.</h1>
+        <p>Status code: {requestError}</p>
       </>
     );
   }

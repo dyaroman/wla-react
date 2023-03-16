@@ -1,9 +1,15 @@
-import { TOGGLE_INFO_MODAL, TOGGLE_THEME, UNAUTHORIZED } from './app.constants';
+import {
+  REQUEST_ERROR,
+  TOGGLE_INFO_MODAL,
+  TOGGLE_THEME,
+  UNAUTHORIZED,
+} from './app.constants';
 
 const appInitialState = {
   infoModalOpen: false,
   theme: 'light',
   unauthorized: false,
+  requestError: null,
 };
 
 export function appReducer(state = appInitialState, action) {
@@ -22,6 +28,11 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         unauthorized: action.payload,
+      };
+    case REQUEST_ERROR:
+      return {
+        ...state,
+        requestError: action.payload,
       };
     default:
       return state;
