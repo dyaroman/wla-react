@@ -13,9 +13,9 @@ stages:
       - job: build
         steps:
           - task: NodeTool@0
-            displayName: 'use node 14'
+            displayName: 'use node 18.16.x'
             inputs:
-              versionSpec: 14.x
+              versionSpec: 18.16.x
               checkLatest: true
 
           - checkout: self
@@ -26,7 +26,7 @@ stages:
             inputs:
               command: custom
               verbose: false
-              customCommand: 'ci --only=prod'
+              customCommand: 'ci --omit=dev'
 
           - task: Npm@1
             displayName: 'npm build'
