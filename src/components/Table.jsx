@@ -80,12 +80,19 @@ export function Table() {
                     );
 
                   case 'mainFormTheme':
-                  case 'altFormTheme': {
+                  case 'altFormTheme':
+                  case 'mainFormEsTheme': {
                     let color;
-                    if (column === 'mainFormTheme') {
-                      color = websiteData['mainFormPrimaryColor'];
-                    } else if (column === 'altFormTheme') {
-                      color = websiteData['altFormPrimaryColor'];
+                    switch (column) {
+                      case 'mainFormTheme':
+                        color = websiteData['mainFormPrimaryColor'];
+                        break;
+                      case 'altFormTheme':
+                        color = websiteData['altFormPrimaryColor'];
+                        break;
+                      case 'mainFormEsTheme':
+                        color = websiteData['mainFormEsPrimaryColor'];
+                        break;
                     }
                     return (
                       <ColorCell key={column} column={column} color={color}>
