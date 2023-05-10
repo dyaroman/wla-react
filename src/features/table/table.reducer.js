@@ -13,7 +13,7 @@ const initialFilters = {
     address2: '',
     altForm: '',
     altFormTheme: '',
-    altLeadType: '',
+    altFormLeadType: '',
     campaignId: '',
     companyName: '',
     county: '',
