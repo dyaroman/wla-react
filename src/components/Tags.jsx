@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Checkbox } from './Checkbox';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
+import { NO_DATA } from '../misc/constants';
 
 export function Tags({ items }) {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export function Tags({ items }) {
   }
 
   if (items.length === 0) {
-    return null;
+    return NO_DATA;
   }
 
   const list = items.sort().map((tag) => {
