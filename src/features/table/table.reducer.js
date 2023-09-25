@@ -3,6 +3,7 @@ import {
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
   SET_WEBSITES_DATA,
+  SHOWED_COLUMNS_UPDATED,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
@@ -46,6 +47,7 @@ const tableInitialState = {
   websitesData: null,
   websitesDataLoaded: false,
   preparedData: [],
+  showedColumns: [],
 };
 
 export function tableReducer(state = tableInitialState, action) {
@@ -54,6 +56,7 @@ export function tableReducer(state = tableInitialState, action) {
       return {
         ...state,
         websitesData: action.payload,
+        showedColumns: action.payload?.columns || [],
       };
     case WEBSITES_DATA_LOADED:
       return {
@@ -86,6 +89,11 @@ export function tableReducer(state = tableInitialState, action) {
       return {
         ...state,
         preparedData: action.payload,
+      };
+    case SHOWED_COLUMNS_UPDATED:
+      return {
+        ...state,
+        showedColumns: action.payload,
       };
     default:
       return state;
