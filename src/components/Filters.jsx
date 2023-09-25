@@ -58,8 +58,8 @@ export function Filters() {
   }
 
   return (
-    <section className="filters">
-      <h4>Filters:</h4>
+    <details open className="filters">
+      <summary>Filters:</summary>
       <div className="filters__content">
         {columns.map((column) => {
           if (column === 'tags') {
@@ -93,6 +93,6 @@ export function Filters() {
           </button>
         )}
       </div>
-    </section>
+    </details>
   );
 }

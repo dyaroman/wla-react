@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 
-import { FieldTitle } from './FieldTitle';
 import { Tags } from './Tags';
 
 export function TagsFilterField() {
@@ -29,9 +28,10 @@ export function TagsFilterField() {
 
   return (
     <div style={{ gridColumn: '1 / -1' }}>
-      <FieldTitle text="Tags:" clickable={false}>
+      <details open>
+        <summary>Tags:</summary>
         <Tags items={tags} />
-      </FieldTitle>
+      </details>
     </div>
   );
 }
