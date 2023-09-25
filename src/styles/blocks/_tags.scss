@@ -14,12 +14,8 @@ td .tags {
   }
 }
 
-td .checkbox {
-  gap: px2rem(3);
+.tags .checkbox {
   padding: px2rem(3);
-}
 
-td .checkbox__icon {
-  width: 20px;
-  height: 20px;
+  border: $border-width solid var(--body-color);
 }
