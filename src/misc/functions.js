@@ -91,6 +91,9 @@ export function sortTableData(array, column) {
 }
 
 export function fromCamelCaseToWords(str) {
-  const result = str.replace(/([A-Z\d])/g, ' $1');
-  return result.charAt(0).toUpperCase() + result.slice(1);
+  return str
+    .split(/(?=[A-Z0-9])/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+    .replace(/([A-Z]+) /g, '$1');
 }
