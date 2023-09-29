@@ -7,6 +7,7 @@ import { Highlight } from './Highlight';
 import { Cell } from './Cell';
 import { ColorCell } from './ColorCell';
 import { TableControls } from './TableControls';
+import { ImgCell } from './ImgCell';
 import { updateTableData } from '../features/table/table.actions';
 import { fromCamelCaseToWords, updateURL } from '../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../misc/constants';
@@ -77,6 +78,21 @@ export function Table() {
                               />
                             </a>
                           </th>
+                        );
+
+                      case 'OG':
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            <ImgCell
+                              sources={websiteData['OG'].map(
+                                (path) => `https://${websiteData.host}/${path}`
+                              )}
+                            />
+                          </td>
                         );
 
                       case 'mainFormTheme':

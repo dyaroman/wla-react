@@ -48,6 +48,7 @@ const tableInitialState = {
   websitesDataLoaded: false,
   preparedData: [],
   showedColumns: [],
+  hiddenColumns: [],
 };
 
 export function tableReducer(state = tableInitialState, action) {
@@ -57,6 +58,7 @@ export function tableReducer(state = tableInitialState, action) {
         ...state,
         websitesData: action.payload,
         showedColumns: action.payload?.columns || [],
+        hiddenColumns: action.payload?.hiddenColumns || [],
       };
     case WEBSITES_DATA_LOADED:
       return {

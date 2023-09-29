@@ -1,0 +1,14 @@
+.images {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+  }
+}
+
+.images__item {
+  height: 100px;
+  object-fit: contain;
+}

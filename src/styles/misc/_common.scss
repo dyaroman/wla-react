@@ -74,6 +74,10 @@ code {
   color: var(--secondary-color);
 }
 
+details {
+  display: inline-block;
+}
+
 summary {
   @include hover() {
     cursor: pointer;

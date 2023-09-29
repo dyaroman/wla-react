@@ -6,29 +6,47 @@ import { fromCamelCaseToWords } from '../misc/functions';
 
 export function TableControls() {
   const dispatch = useDispatch();
-  const { websitesData, showedColumns } = useSelector(
+  const { websitesData, showedColumns, hiddenColumns } = useSelector(
     (state) => state['table']
   );
-  const { columns } = websitesData;
+  const {
+    columns: showedColumnsOriginal,
+    hiddenColumns: hiddenColumnsOriginal,
+  } = websitesData;
 
   function onChange(column) {
-    let newShowedColumns = [...showedColumns];
-    if (newShowedColumns.includes(column)) {
-      newShowedColumns = newShowedColumns.filter((col) => col !== column);
+    const columnsOrderOrigin = [
+      ...showedColumnsOriginal,
+      ...hiddenColumnsOriginal,
+    ];
+    let updatedShowedColumns = [...showedColumns];
+    if (updatedShowedColumns.includes(column)) {
+      updatedShowedColumns = updatedShowedColumns.filter(
+        (col) => col !== column
+      );
     } else {
-      newShowedColumns.push(column);
+      updatedShowedColumns.push(column);
     }
-    newShowedColumns.sort((a, b) => columns.indexOf(a) - columns.indexOf(b));
+    updatedShowedColumns.sort(
+      (a, b) => columnsOrderOrigin.indexOf(a) - columnsOrderOrigin.indexOf(b)
+    );
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
-      payload: newShowedColumns,
+      payload: updatedShowedColumns,
+    });
+  }
+
+  function onClickHideAllColumns() {
+    dispatch({
+      type: SHOWED_COLUMNS_UPDATED,
+      payload: [],
     });
   }
 
   function onClickRestoreDefaultColumns() {
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
-      payload: columns,
+      payload: showedColumnsOriginal,
     });
   }
 
@@ -37,7 +55,7 @@ export function TableControls() {
       <details>
         <summary>Showed columns:</summary>
         <ul className="showed-columns">
-          {columns.map((column) => (
+          {[...showedColumnsOriginal, ...hiddenColumns].map((column) => (
             <li key={column} className="showed-columns__item">
               <Checkbox
                 label={fromCamelCaseToWords(column)}
@@ -47,9 +65,14 @@ export function TableControls() {
             </li>
           ))}
         </ul>
-        <button className="btn" onClick={onClickRestoreDefaultColumns}>
-          restore defaults columns
-        </button>
+        <div className="btn-group">
+          <button className="btn" onClick={onClickHideAllColumns}>
+            hide all columns
+          </button>
+          <button className="btn" onClick={onClickRestoreDefaultColumns}>
+            restore defaults columns
+          </button>
+        </div>
       </details>
     </section>
   );
