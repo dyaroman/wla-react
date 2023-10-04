@@ -10,7 +10,7 @@ import { TableControls } from './TableControls';
 import { ImgCell } from './ImgCell';
 import { updateTableData } from '../features/table/table.actions';
 import { fromCamelCaseToWords, updateURL } from '../misc/functions';
-import { WEBSITES_DATA_FILENAME } from '../misc/constants';
+import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/constants';
 
 export function Table() {
   const dispatch = useDispatch();
@@ -80,20 +80,24 @@ export function Table() {
                           </th>
                         );
 
-                      case 'OG':
+                      case 'OG': {
+                        const images = websiteData['OG'].map(
+                          (path) => `https://${websiteData.host}/${path}`
+                        );
                         return (
                           <td
                             data-title={fromCamelCaseToWords(column)}
                             data-qa={column}
                             key={column}
                           >
-                            <ImgCell
-                              sources={websiteData['OG'].map(
-                                (path) => `https://${websiteData.host}/${path}`
-                              )}
-                            />
+                            {images.length ? (
+                              <ImgCell sources={images} />
+                            ) : (
+                              NO_DATA
+                            )}
                           </td>
                         );
+                      }
 
                       case 'mainFormTheme':
                       case 'altFormTheme':
@@ -127,7 +131,11 @@ export function Table() {
                             data-qa="tags"
                             key={column}
                           >
-                            <Tags items={websiteData.tags} />
+                            {websiteData.tags.length ? (
+                              <Tags items={websiteData.tags} />
+                            ) : (
+                              NO_DATA
+                            )}
                           </td>
                         );
 
