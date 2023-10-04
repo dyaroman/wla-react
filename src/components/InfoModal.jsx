@@ -9,8 +9,10 @@ export function InfoModal() {
   const dialog = useRef(null);
 
   useEffect(() => {
+    document.addEventListener('click', globalClickHandler);
     dialog.current.addEventListener('keydown', keyDownHandler);
     return () => {
+      document.removeEventListener('click', globalClickHandler);
       dialog.current.removeEventListener('keydown', keyDownHandler);
     };
   }, []);
@@ -27,6 +29,11 @@ export function InfoModal() {
     if (event.key === 'Escape') {
       onCloseModalClick();
     }
+  }
+
+  function globalClickHandler(event) {
+    if (event.target !== dialog.current) return;
+    onCloseModalClick();
   }
 
   function onCloseModalClick() {
