@@ -7,11 +7,11 @@ export function FilterField({ name, placeholder }) {
   const dispatch = useDispatch();
   const { filters } = useSelector((state) => state['table']);
 
-  function onChange(e) {
+  function onChange(event) {
     dispatch({
       type: FILTERS_UPDATED,
       payload: {
-        [name]: e.target.value,
+        [name]: event.target.value,
       },
     });
   }

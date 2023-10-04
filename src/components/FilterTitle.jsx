@@ -10,8 +10,8 @@ export function FilterTitle({ column, text }) {
     direction = sort.direction;
   }
 
-  function onClick(e) {
-    const { sortColumn, sortDirection } = e.target.dataset;
+  function onClick(event) {
+    const { sortColumn, sortDirection } = event.target.dataset;
     const newSort = {};
     if (sortColumn !== sort.column) {
       newSort['column'] = sortColumn;
