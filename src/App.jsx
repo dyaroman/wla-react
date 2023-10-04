@@ -22,7 +22,7 @@ export function App() {
   }, [dispatch]);
 
   if (websitesDataLoaded === false) {
-    return <Loader />;
+    return <Loader fixed={true} />;
   }
 
   if (unauthorized === true) {
