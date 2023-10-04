@@ -11,4 +11,8 @@
 .images__item {
   height: 100px;
   object-fit: contain;
+
+  @include hover() {
+    cursor: pointer;
+  }
 }

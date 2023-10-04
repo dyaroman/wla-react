@@ -40,8 +40,6 @@
   padding: 0 !important;
 
   border: 0 !important;
-  clip: rect(1px 1px 1px 1px); // IE6, IE7
-  //stylelint-disable-next-line
   clip: rect(1px, 1px, 1px, 1px);
   overflow: hidden !important;
 

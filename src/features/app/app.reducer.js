@@ -1,5 +1,6 @@
 import {
   REQUEST_ERROR,
+  TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL,
   TOGGLE_THEME,
   UNAUTHORIZED,
@@ -7,6 +8,7 @@ import {
 
 const appInitialState = {
   infoModalOpen: false,
+  imgPreviewUrl: null,
   theme: 'light',
   unauthorized: false,
   requestError: null,
@@ -18,6 +20,11 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         infoModalOpen: action.payload,
+      };
+    case TOGGLE_IMG_PREVIEW_MODAL:
+      return {
+        ...state,
+        imgPreviewUrl: action.payload,
       };
     case TOGGLE_THEME:
       return {

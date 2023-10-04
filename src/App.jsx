@@ -7,6 +7,7 @@ import { Info } from './components/Info';
 import { Filters } from './components/Filters';
 import { Table } from './components/Table';
 import { InfoModal } from './components/InfoModal';
+import { ImgPreviewModal } from './components/ImgPreviewModal';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
@@ -50,6 +51,7 @@ export function App() {
       <Filters />
       <Table />
       <InfoModal />
+      <ImgPreviewModal />
     </>
   );
 }
