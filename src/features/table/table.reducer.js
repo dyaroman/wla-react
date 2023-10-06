@@ -9,6 +9,7 @@ import {
 } from './table.constants';
 
 const initialFilters = {
+  // todo: how to remove default values for every filter?
   filters: {
     address1: '',
     address2: '',
@@ -16,6 +17,7 @@ const initialFilters = {
     altFormTheme: '',
     altFormLeadType: '',
     campaignId: '',
+    campaignUid: '',
     companyName: '',
     county: '',
     effectiveDate: '',
@@ -33,6 +35,7 @@ const initialFilters = {
     tags: [],
     template: '',
     website: '',
+    vmGroup: '',
   },
 };
 const initialSorts = {
@@ -48,7 +51,6 @@ const tableInitialState = {
   websitesDataLoaded: false,
   preparedData: [],
   showedColumns: [],
-  hiddenColumns: [],
 };
 
 export function tableReducer(state = tableInitialState, action) {
@@ -57,8 +59,9 @@ export function tableReducer(state = tableInitialState, action) {
       return {
         ...state,
         websitesData: action.payload,
-        showedColumns: action.payload?.columns || [],
-        hiddenColumns: action.payload?.hiddenColumns || [],
+        showedColumns: Object.keys(action.payload.columns).filter(
+          (column) => action.payload.columns[column]['showColumn']
+        ),
       };
     case WEBSITES_DATA_LOADED:
       return {

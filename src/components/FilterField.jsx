@@ -8,6 +8,7 @@ export function FilterField({ name, placeholder }) {
   const { filters } = useSelector((state) => state['table']);
 
   function onChange(event) {
+    // todo: when filter value change and this column is hidden, need to show it
     dispatch({
       type: FILTERS_UPDATED,
       payload: {

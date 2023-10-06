@@ -61,19 +61,18 @@ export function Filters() {
     <details open className="filters">
       <summary>Filters:</summary>
       <div className="filters__content">
-        {columns.map((column) => {
-          if (column === 'tags') {
-            return <TagsFilterField key={column} />;
-          } else {
-            return (
-              <FilterField
-                key={column}
-                name={column}
-                placeholder={fromCamelCaseToWords(column)}
-              />
-            );
-          }
+        {Object.keys(columns).map((column) => {
+          if (column === 'tags' || !columns[column]['renderFilter'])
+            return null;
+          return (
+            <FilterField
+              key={column}
+              name={column}
+              placeholder={fromCamelCaseToWords(column)}
+            />
+          );
         })}
+        {Object.keys(columns).includes('tags') && <TagsFilterField />}
       </div>
       <div className="btn-group">
         <button

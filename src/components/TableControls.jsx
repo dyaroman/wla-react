@@ -6,19 +6,13 @@ import { fromCamelCaseToWords } from '../misc/functions';
 
 export function TableControls() {
   const dispatch = useDispatch();
-  const { websitesData, showedColumns, hiddenColumns } = useSelector(
-    (state) => state['table']
-  );
   const {
-    columns: showedColumnsOriginal,
-    hiddenColumns: hiddenColumnsOriginal,
-  } = websitesData;
+    websitesData: { columns },
+    showedColumns,
+  } = useSelector((state) => state['table']);
 
   function onChange(column) {
-    const columnsOrderOrigin = [
-      ...showedColumnsOriginal,
-      ...hiddenColumnsOriginal,
-    ];
+    const columnsOrderOrigin = Object.keys(columns);
     let updatedShowedColumns = [...showedColumns];
     if (updatedShowedColumns.includes(column)) {
       updatedShowedColumns = updatedShowedColumns.filter(
@@ -46,7 +40,9 @@ export function TableControls() {
   function onClickRestoreDefaultColumns() {
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
-      payload: showedColumnsOriginal,
+      payload: Object.keys(columns).filter(
+        (column) => columns[column]['showColumn']
+      ),
     });
   }
 
@@ -55,15 +51,18 @@ export function TableControls() {
       <details>
         <summary>Showed columns:</summary>
         <ul className="showed-columns">
-          {[...showedColumnsOriginal, ...hiddenColumns].map((column) => (
-            <li key={column} className="showed-columns__item">
-              <Checkbox
-                label={fromCamelCaseToWords(column)}
-                checked={showedColumns.includes(column)}
-                onChange={onChange.bind(this, column)}
-              />
-            </li>
-          ))}
+          {Object.keys(columns).map((column) => {
+            if (!columns[column]['renderColumn']) return null;
+            return (
+              <li key={column} className="showed-columns__item">
+                <Checkbox
+                  label={fromCamelCaseToWords(column)}
+                  checked={showedColumns.includes(column)}
+                  onChange={onChange.bind(this, column)}
+                />
+              </li>
+            );
+          })}
         </ul>
         <div className="btn-group">
           <button className="btn" onClick={onClickHideAllColumns}>
