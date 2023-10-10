@@ -9,7 +9,8 @@ import { ColorCell } from './ColorCell';
 import { TableControls } from './TableControls';
 import { ImgCell } from './ImgCell';
 import { updateTableData } from '../features/table/table.actions';
-import { fromCamelCaseToWords, updateURL } from '../misc/functions';
+import { updateURL } from '../features/app/app.actions';
+import { fromCamelCaseToWords } from '../misc/functions';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/constants';
 
 export function Table() {
@@ -19,11 +20,13 @@ export function Table() {
 
   useEffect(() => {
     dispatch(updateTableData());
-    updateURL({
-      ...filters,
-      ...sort,
-    });
-  }, [dispatch, filters, sort]);
+    dispatch(
+      updateURL({
+        ...filters,
+        ...sort,
+      })
+    );
+  }, [filters, sort]);
 
   if (websitesData['websites'].length === 0) {
     return (
