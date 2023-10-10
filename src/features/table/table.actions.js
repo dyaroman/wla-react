@@ -148,6 +148,5 @@ export function updateTableData() {
 }
 
 export function getQueryParamValue(key) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(key);
+  return new URLSearchParams(window.location.search).get(key);
 }
