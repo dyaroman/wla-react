@@ -19,8 +19,13 @@ export function App() {
 
   useEffect(() => {
     dispatch(getWebsitesData());
-    dispatch(getURLParams());
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    if (websitesDataLoaded) {
+      dispatch(getURLParams());
+    }
+  }, [websitesDataLoaded]);
 
   if (websitesDataLoaded === false) {
     return <Loader fixed={true} />;
