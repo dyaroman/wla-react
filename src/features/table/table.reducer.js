@@ -8,45 +8,12 @@ import {
   WEBSITES_DATA_LOADED,
 } from './table.constants';
 
-const initialFilters = {
-  // todo: how to remove default values for every filter?
-  filters: {
-    address1: '',
-    address2: '',
-    altForm: '',
-    altFormTheme: '',
-    altFormLeadType: '',
-    campaignId: '',
-    campaignUid: '',
-    companyName: '',
-    county: '',
-    effectiveDate: '',
-    email: '',
-    emailLegal: '',
-    gtmKey: '',
-    mainForm: '',
-    mainFormTheme: '',
-    mainFormLeadType: '',
-    mainFormEs: '',
-    mainFormEsTheme: '',
-    mainFormEsLeadType: '',
-    owner: '',
-    state: '',
-    tags: [],
-    template: '',
-    website: '',
-    vmGroup: '',
-  },
-};
-const initialSorts = {
+const tableInitialState = {
+  filters: {},
   sort: {
     column: '',
     direction: '',
   },
-};
-const tableInitialState = {
-  ...initialFilters,
-  ...initialSorts,
   websitesData: null,
   websitesDataLoaded: false,
   preparedData: [],
@@ -55,14 +22,27 @@ const tableInitialState = {
 
 export function tableReducer(state = tableInitialState, action) {
   switch (action.type) {
-    case SET_WEBSITES_DATA:
+    case SET_WEBSITES_DATA: {
+      const filters = {
+        ...state.filters,
+      };
+      const { columns } = action.payload;
+      Object.keys(columns)
+        .filter((column) => columns[column]['renderFilter'])
+        .filter((column) => !state.filters[column])
+        .forEach((column) => {
+          if (column === 'tags') filters[column] = [];
+          else filters[column] = '';
+        });
       return {
         ...state,
         websitesData: action.payload,
-        showedColumns: Object.keys(action.payload.columns).filter(
-          (column) => action.payload.columns[column]['showColumn']
+        showedColumns: Object.keys(columns).filter(
+          (column) => columns[column]['showColumn']
         ),
+        filters,
       };
+    }
     case WEBSITES_DATA_LOADED:
       return {
         ...state,
@@ -84,12 +64,21 @@ export function tableReducer(state = tableInitialState, action) {
           ...action.payload,
         },
       };
-    case CLEAR_FILTERS:
+    case CLEAR_FILTERS: {
+      const filters = {};
+      for (const k in state.filters) {
+        if (k === 'tags') filters[k] = [];
+        else filters[k] = '';
+      }
       return {
         ...state,
-        ...initialFilters,
-        ...initialSorts,
+        filters,
+        sort: {
+          column: '',
+          direction: '',
+        },
       };
+    }
     case PREPARED_DATA_UPDATED:
       return {
         ...state,
