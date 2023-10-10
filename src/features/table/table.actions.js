@@ -83,11 +83,15 @@ export function getURLParams() {
     if (!getState().table.websitesDataLoaded) return;
     const newSort = {};
     const newFilters = {};
-    const { filters, sort } = getState().table;
+    const { filters, sort, websitesData } = getState().table;
     const params = new URLSearchParams(window.location.search);
     if (!params['size']) return;
     for (const [key, value] of params) {
-      if (![...Object.keys(filters), ...Object.keys(sort)].includes(key)) {
+      if (
+        ![...Object.keys(websitesData.columns), ...Object.keys(sort)].includes(
+          key
+        )
+      ) {
         continue;
       }
       switch (key) {
