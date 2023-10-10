@@ -79,6 +79,8 @@ export function getWebsitesData() {
 
 export function getURLParams() {
   return function (dispatch, getState) {
+    // read url params only after websites data loaded, because we get filters from data
+    if (!getState().table.websitesDataLoaded) return;
     const newSort = {};
     const newFilters = {};
     const { filters, sort } = getState().table;
