@@ -4,6 +4,7 @@ import {
   TOGGLE_INFO_MODAL,
   TOGGLE_THEME,
   UNAUTHORIZED,
+  URL_PARAMS_READ,
 } from './app.constants';
 
 const appInitialState = {
@@ -12,6 +13,7 @@ const appInitialState = {
   theme: 'light',
   unauthorized: false,
   requestError: null,
+  urlParamsRead: false,
 };
 
 export function appReducer(state = appInitialState, action) {
@@ -40,6 +42,11 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         requestError: action.payload,
+      };
+    case URL_PARAMS_READ:
+      return {
+        ...state,
+        urlParamsRead: action.payload,
       };
     default:
       return state;

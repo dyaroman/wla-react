@@ -5,8 +5,12 @@ import {
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
-import { REQUEST_ERROR, UNAUTHORIZED } from '../app/app.constants';
 import { filterTableData, sortTableData } from '../../misc/functions';
+import {
+  REQUEST_ERROR,
+  UNAUTHORIZED,
+  URL_PARAMS_READ,
+} from '../app/app.constants';
 import { WEBSITES_DATA_FILENAME } from '../../misc/constants';
 
 export function getWebsitesData() {
@@ -102,6 +106,10 @@ export function getURLParams() {
     dispatch({
       type: FILTERS_UPDATED,
       payload: newFilters,
+    });
+    dispatch({
+      type: URL_PARAMS_READ,
+      payload: true,
     });
   };
 }
