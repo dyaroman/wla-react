@@ -5,12 +5,16 @@ import {
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
-import { filterTableData, sortTableData } from '../../misc/functions';
 import {
   REQUEST_ERROR,
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from '../app/app.constants';
+import {
+  deepEqual,
+  filterTableData,
+  sortTableData,
+} from '../../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../../misc/constants';
 
 export function getWebsitesData() {
@@ -99,14 +103,18 @@ export function getURLParams() {
           break;
       }
     }
-    dispatch({
-      type: SORT_UPDATED,
-      payload: newSort,
-    });
-    dispatch({
-      type: FILTERS_UPDATED,
-      payload: newFilters,
-    });
+    if (!deepEqual(sort, newSort)) {
+      dispatch({
+        type: SORT_UPDATED,
+        payload: newSort,
+      });
+    }
+    if (!deepEqual(filters, newFilters)) {
+      dispatch({
+        type: FILTERS_UPDATED,
+        payload: newFilters,
+      });
+    }
     dispatch({
       type: URL_PARAMS_READ,
       payload: true,
