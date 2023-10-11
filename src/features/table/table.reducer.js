@@ -84,11 +84,16 @@ export function tableReducer(state = tableInitialState, action) {
         ...state,
         preparedData: action.payload,
       };
-    case SHOWED_COLUMNS_UPDATED:
+    case SHOWED_COLUMNS_UPDATED: {
+      const { columns } = state.websitesData;
       return {
         ...state,
-        showedColumns: action.payload,
+        showedColumns: action.payload.sort(
+          (a, b) =>
+            Object.keys(columns).indexOf(a) - Object.keys(columns).indexOf(b)
+        ),
       };
+    }
     default:
       return state;
   }

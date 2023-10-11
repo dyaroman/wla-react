@@ -12,7 +12,6 @@ export function TableControls() {
   } = useSelector((state) => state['table']);
 
   function onChange(column) {
-    const columnsOrderOrigin = Object.keys(columns);
     let updatedShowedColumns = [...showedColumns];
     if (updatedShowedColumns.includes(column)) {
       updatedShowedColumns = updatedShowedColumns.filter(
@@ -21,9 +20,6 @@ export function TableControls() {
     } else {
       updatedShowedColumns.push(column);
     }
-    updatedShowedColumns.sort(
-      (a, b) => columnsOrderOrigin.indexOf(a) - columnsOrderOrigin.indexOf(b)
-    );
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
       payload: updatedShowedColumns,

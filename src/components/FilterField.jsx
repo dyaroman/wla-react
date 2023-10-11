@@ -1,14 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FieldTitle } from './FieldTitle';
-import { FILTERS_UPDATED } from '../features/table/table.constants';
+import {
+  FILTERS_UPDATED,
+  SHOWED_COLUMNS_UPDATED,
+} from '../features/table/table.constants';
 
 export function FilterField({ name, placeholder }) {
   const dispatch = useDispatch();
-  const { filters } = useSelector((state) => state['table']);
+  const { filters, showedColumns } = useSelector((state) => state['table']);
 
   function onChange(event) {
-    // todo: when filter value change and this column is hidden, need to show it
+    if (!showedColumns.includes(name)) {
+      dispatch({
+        type: SHOWED_COLUMNS_UPDATED,
+        payload: [...showedColumns, name],
+      });
+    }
     dispatch({
       type: FILTERS_UPDATED,
       payload: {
