@@ -83,8 +83,8 @@ export function Table() {
                           </th>
                         );
 
-                      case 'OG': {
-                        const images = websiteData['OG'].map(
+                      case 'ogImage': {
+                        const images = websiteData['ogImage'].map(
                           (path) => `https://${websiteData.host}/${path}`
                         );
                         return (
