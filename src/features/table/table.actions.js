@@ -10,11 +10,7 @@ import {
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from '../app/app.constants';
-import {
-  deepEqual,
-  filterTableData,
-  sortTableData,
-} from '../../misc/functions';
+import { filterTableData, sortTableData } from '../../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../../misc/constants';
 
 export function getWebsitesData() {
@@ -83,39 +79,37 @@ export function getURLParams() {
     if (!getState().table.websitesDataLoaded) return;
     const newSort = {};
     const newFilters = {};
-    const { filters, sort, websitesData } = getState().table;
+    const { sort, websitesData } = getState().table;
     const params = new URLSearchParams(window.location.search);
-    if (!params['size']) return;
-    for (const [key, value] of params) {
-      if (
-        ![...Object.keys(websitesData.columns), ...Object.keys(sort)].includes(
-          key
-        )
-      ) {
-        continue;
-      }
-      switch (key) {
-        case 'column':
-        case 'direction':
-          newSort[key] = value;
-          break;
+    if (params['size']) {
+      for (const [key, value] of params) {
+        if (
+          ![
+            ...Object.keys(websitesData.columns),
+            ...Object.keys(sort),
+          ].includes(key)
+        ) {
+          continue;
+        }
+        switch (key) {
+          case 'column':
+          case 'direction':
+            newSort[key] = value;
+            break;
 
-        case 'tags':
-          newFilters[key] = value.split(',');
-          break;
+          case 'tags':
+            newFilters[key] = value.split(',');
+            break;
 
-        default:
-          newFilters[key] = value;
-          break;
+          default:
+            newFilters[key] = value;
+            break;
+        }
       }
-    }
-    if (!deepEqual(sort, newSort)) {
       dispatch({
         type: SORT_UPDATED,
         payload: newSort,
       });
-    }
-    if (!deepEqual(filters, newFilters)) {
       dispatch({
         type: FILTERS_UPDATED,
         payload: newFilters,
