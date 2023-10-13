@@ -12,12 +12,11 @@ export function Info() {
   } = websitesData;
 
   useEffect(() => {
-    if (env !== '') {
-      document.title = `${project && `[${project}]`}[${env}]: ${
-        process.env.REACT_APP_PAGE_TITLE
-      }`;
-    }
-  }, [env]);
+    if (project === '' && env === '') return;
+    document.title = `${project && `[${project}]`}${env && `[${env}]`}: ${
+      process.env.REACT_APP_PAGE_TITLE
+    }`;
+  }, [project, env]);
 
   return (
     <section className="info">
