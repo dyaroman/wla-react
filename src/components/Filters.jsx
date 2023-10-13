@@ -31,7 +31,7 @@ export function Filters() {
 
   async function onCopyShortcut(event) {
     event.preventDefault();
-    const dataToCopy = preparedData.map((e) => e.website).join(',');
+    const dataToCopy = preparedData.map((e) => e['website']).join(',');
     try {
       await navigator.clipboard.writeText(dataToCopy);
     } catch (e) {
@@ -46,7 +46,7 @@ export function Filters() {
   }
 
   async function onCopyWebsitesClick() {
-    const dataToCopy = preparedData.map((e) => e.website).join('\n');
+    const dataToCopy = preparedData.map((e) => e['website']).join('\n');
     try {
       await navigator.clipboard.writeText(dataToCopy);
       setCopyWebsitesBtnText('copied');

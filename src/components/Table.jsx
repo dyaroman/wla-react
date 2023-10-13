@@ -57,7 +57,7 @@ export function Table() {
 
             <tbody>
               {preparedData.map((websiteData, index) => (
-                <tr key={websiteData.website}>
+                <tr key={websiteData['website']}>
                   <td data-title="#" data-qa="#">
                     {index + 1}
                   </td>
@@ -76,8 +76,8 @@ export function Table() {
                               rel="noreferrer"
                             >
                               <Highlight
-                                text={websiteData.website}
-                                highlight={filters.website}
+                                text={websiteData['website']}
+                                highlight={filters['website']}
                               />
                             </a>
                           </th>
