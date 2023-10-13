@@ -34,14 +34,17 @@ export function tableReducer(state = tableInitialState, action) {
           if (column === 'tags') filters[column] = [];
           else filters[column] = '';
         });
-      return {
+      const updatedState = {
         ...state,
-        websitesData: action.payload,
-        showedColumns: Object.keys(columns).filter(
-          (column) => columns[column]['showColumn']
-        ),
         filters,
+        websitesData: action.payload,
       };
+      if (!state.websitesDataLoaded) {
+        updatedState['showedColumns'] = Object.keys(columns).filter(
+          (column) => columns[column]['showColumn']
+        );
+      }
+      return updatedState;
     }
     case WEBSITES_DATA_LOADED:
       return {

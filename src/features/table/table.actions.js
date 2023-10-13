@@ -2,6 +2,7 @@ import {
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
   SET_WEBSITES_DATA,
+  SHOWED_COLUMNS_UPDATED,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
@@ -79,7 +80,7 @@ export function getURLParams() {
     if (!getState().table.websitesDataLoaded) return;
     const newSort = {};
     const newFilters = {};
-    const { sort, websitesData } = getState().table;
+    const { sort, websitesData, showedColumns } = getState().table;
     const params = new URLSearchParams(window.location.search);
     if (params['size']) {
       for (const [key, value] of params) {
@@ -113,6 +114,10 @@ export function getURLParams() {
       dispatch({
         type: FILTERS_UPDATED,
         payload: newFilters,
+      });
+      dispatch({
+        type: SHOWED_COLUMNS_UPDATED,
+        payload: [...new Set([...showedColumns, ...Object.keys(newFilters)])],
       });
     }
     dispatch({
