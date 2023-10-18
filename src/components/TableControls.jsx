@@ -33,6 +33,17 @@ export function TableControls() {
     });
   }
 
+  function onClickShowAllColumns() {
+    dispatch({
+      type: SHOWED_COLUMNS_UPDATED,
+      payload: [
+        ...Object.keys(columns).filter(
+          (column) => columns[column]['renderColumn']
+        ),
+      ],
+    });
+  }
+
   function onClickRestoreDefaultColumns() {
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
@@ -61,11 +72,26 @@ export function TableControls() {
           })}
         </ul>
         <div className="btn-group">
-          <button className="btn" onClick={onClickHideAllColumns}>
+          <button
+            className="btn"
+            onClick={onClickShowAllColumns}
+            data-qa="showAllColumns"
+          >
+            show all columns
+          </button>
+          <button
+            className="btn"
+            onClick={onClickHideAllColumns}
+            data-qa="hideAllColumns"
+          >
             hide all columns
           </button>
-          <button className="btn" onClick={onClickRestoreDefaultColumns}>
-            restore defaults columns
+          <button
+            className="btn"
+            onClick={onClickRestoreDefaultColumns}
+            data-qa="restoreDefaultColumns"
+          >
+            restore default columns
           </button>
         </div>
       </details>
