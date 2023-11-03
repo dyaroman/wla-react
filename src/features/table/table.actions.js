@@ -11,7 +11,11 @@ import {
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from '../app/app.constants';
-import { filterTableData, sortTableData } from '../../misc/functions';
+import {
+  filterTableData,
+  getQueryParamValue,
+  sortTableData,
+} from '../../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../../misc/constants';
 
 export function getWebsitesData() {
@@ -150,8 +154,4 @@ export function updateTableData() {
       payload: updatedData,
     });
   };
-}
-
-export function getQueryParamValue(key) {
-  return new URLSearchParams(window.location.search).get(key);
 }

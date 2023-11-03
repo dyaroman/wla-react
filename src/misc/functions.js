@@ -59,6 +59,10 @@ export function sortTableData(array, column) {
   return [...sortedArray, ...noDataItems];
 }
 
+export function getQueryParamValue(key) {
+  return new URLSearchParams(window.location.search).get(key);
+}
+
 export function fromCamelCaseToWords(str) {
   return str
     .split(/(?=[A-Z0-9])/)
