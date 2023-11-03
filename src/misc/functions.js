@@ -70,3 +70,28 @@ export function fromCamelCaseToWords(str) {
     .join(' ')
     .replace(/([A-Z]+) /g, '$1');
 }
+
+export function convertUrlToEnv(website = '', env = '', project = '') {
+  const lowerWebsite = website.replaceAll('.', '_').toLowerCase();
+
+  switch (project) {
+    case 'websites':
+      switch (env) {
+        case 'dev':
+          return `${lowerWebsite}.example.com`;
+        case 'prod':
+          return website.toLowerCase();
+      }
+      break;
+    case 'websites':
+      switch (env) {
+        case 'demo':
+          return `${lowerWebsite}.dev.example.com`;
+        case 'prod':
+          return website.toLowerCase();
+      }
+      break;
+  }
+
+  return null;
+}
