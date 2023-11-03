@@ -75,6 +75,20 @@ export function InfoModal() {
             pipeline as "websites" parameter value
           </li>
         </ul>
+
+        <h3>Convert links to env:</h3>
+        <p>
+          To convert links to specific env, add search parameter{' '}
+          <code>convertLinksTo</code> to URL with one of two values:
+        </p>
+        <ul>
+          <li>
+            <code>dev</code> to convert links to dev env
+          </li>
+          <li>
+            <code>prod</code> to convert links to prod env
+          </li>
+        </ul>
       </section>
 
       <button className="btn" onClick={onCloseModalClick}>

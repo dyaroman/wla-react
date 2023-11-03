@@ -13,10 +13,6 @@
     }
   }
 
-  li {
-    line-height: 1.2;
-  }
-
   li + li {
     margin-top: 0.5rem;
   }
@@ -26,6 +22,7 @@
   max-width: 600px;
 
   word-break: break-word;
+  line-height: 1.2;
 
   :first-child {
     margin-top: 0;
