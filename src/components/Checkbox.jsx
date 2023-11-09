@@ -4,6 +4,7 @@ export function Checkbox({ label, checked, onChange }) {
       <input
         type="checkbox"
         className="checkbox__input"
+        name={label}
         checked={checked}
         onChange={onChange}
       />
