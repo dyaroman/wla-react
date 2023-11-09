@@ -89,6 +89,13 @@ export function InfoModal() {
             <code>prod</code> to convert links to prod env
           </li>
         </ul>
+
+        <h3>Quick search:</h3>
+        <p>
+          Hold <code>OPTION</code> or <code>ALT</code> key and click on some
+          table cell to insert text from cell in appropriate search field and
+          move focus on it.
+        </p>
       </section>
 
       <button className="btn" onClick={onCloseModalClick}>

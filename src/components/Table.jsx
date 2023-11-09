@@ -16,12 +16,13 @@ import {
   getQueryParamValue,
 } from '../misc/functions';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/constants';
+import { FILTERS_UPDATED } from '../features/table/table.constants';
 
 export function Table() {
   const dispatch = useDispatch();
   const { sort, filters, preparedData, websitesData, showedColumns } =
     useSelector((state) => state['table']);
-  const { env, project } = websitesData;
+  const { env, project, columns } = websitesData;
   const convertLinksTo =
     getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
   const convertLinks = convertLinksTo && convertLinksTo !== env;
@@ -35,6 +36,34 @@ export function Table() {
       })
     );
   }, [filters, sort]);
+
+  function onBodyClick(event) {
+    if (!event.altKey) return;
+    const cell = event.target.closest('td,th');
+    if (!cell) return;
+    const fieldName = cell && cell.dataset.qa;
+    if (!fieldName) return;
+    for (const column in columns) {
+      if (!columns[column]['renderFilter']) continue;
+      if (fieldName !== column) continue;
+      const field = document.querySelector(
+        `.filters input[data-qa='${fieldName}']`
+      );
+      if (!field) return;
+      const filters = document.querySelector('details.filters');
+      if (filters && !filters.open) {
+        filters.setAttribute('open', 'true');
+      }
+      dispatch({
+        type: FILTERS_UPDATED,
+        payload: {
+          [fieldName]: cell.innerText.trim(),
+        },
+      });
+      field.focus();
+      setTimeout(() => field.select());
+    }
+  }
 
   if (websitesData['websites'].length === 0) {
     return (
@@ -63,7 +92,7 @@ export function Table() {
               </tr>
             </thead>
 
-            <tbody>
+            <tbody onClick={onBodyClick}>
               {preparedData.map((websiteData, index) => {
                 const host =
                   (convertLinks &&
