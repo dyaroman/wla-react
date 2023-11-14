@@ -1,20 +1,36 @@
 {
-  "name": "websites-list-app",
-  "short_name": "wla",
+  "name": "Websites List App",
+  "short_name": "WLA",
+  "theme_color": "#fff",
+  "background_color": "#fff",
+  "start_url": "../",
+  "display": "standalone",
+  "orientation": "any",
   "icons": [
     {
-      "src": "android-chrome-192x192.png",
-      "sizes": "192x192",
+      "src": "1024x1024.png",
+      "sizes": "1024x1024",
       "type": "image/png"
     },
     {
-      "src": "android-chrome-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "maskable-1024x1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#fff",
-  "background_color": "#fff"
+  "screenshots": [
+    {
+      "src": "screenshot-390x844.png",
+      "type": "image/jpeg",
+      "sizes": "390x844",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshot-1280x720.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "form_factor": "wide"
+    }
+  ]
 }
