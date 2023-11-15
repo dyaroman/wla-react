@@ -34,9 +34,8 @@ export function Filters() {
       });
     }
     setTimeout(() => {
-      document.querySelector('input').focus();
       document.querySelector('input').select();
-    }, 0);
+    });
   }
 
   async function onCopyShortcut(event) {

@@ -64,7 +64,6 @@ export function Table() {
           [fieldName]: cell.innerText.trim(),
         },
       });
-      field.focus();
       setTimeout(() => field.select());
     }
   }
