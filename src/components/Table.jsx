@@ -17,9 +17,11 @@ import {
 } from '../misc/functions';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
+import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
 
 export function Table() {
   const dispatch = useDispatch();
+  const { filtersCollapse } = useSelector((state) => state['app']);
   const { sort, filters, preparedData, websitesData, showedColumns } =
     useSelector((state) => state['table']);
   const { env, project, columns } = websitesData;
@@ -50,9 +52,11 @@ export function Table() {
         `.filters input[data-qa='${fieldName}']`
       );
       if (!field) return;
-      const filters = document.querySelector('details.filters');
-      if (filters && !filters.open) {
-        filters.setAttribute('open', 'true');
+      if (filtersCollapse) {
+        dispatch({
+          type: TOGGLE_FILTERS_COLLAPSE,
+          payload: false,
+        });
       }
       dispatch({
         type: FILTERS_UPDATED,

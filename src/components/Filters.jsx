@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FilterField } from './FilterField';
 import { TagsFilterField } from './TagsFilterField';
 import { CLEAR_FILTERS } from '../features/table/table.constants';
+import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
 import { fromCamelCaseToWords } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
 
 export function Filters() {
   const dispatch = useDispatch();
+  const { filtersCollapse } = useSelector((state) => state['app']);
   const { preparedData, websitesData } = useSelector((state) => state['table']);
   const { columns } = websitesData;
   const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
@@ -25,8 +27,16 @@ export function Filters() {
 
   function onSearchShortcut(event) {
     event.preventDefault();
-    document.querySelector('input').focus();
-    document.querySelector('input').select();
+    if (filtersCollapse) {
+      dispatch({
+        type: TOGGLE_FILTERS_COLLAPSE,
+        payload: false,
+      });
+    }
+    setTimeout(() => {
+      document.querySelector('input').focus();
+      document.querySelector('input').select();
+    }, 0);
   }
 
   async function onCopyShortcut(event) {
@@ -45,6 +55,14 @@ export function Filters() {
     });
   }
 
+  function onSummaryClick(event) {
+    event.preventDefault();
+    dispatch({
+      type: TOGGLE_FILTERS_COLLAPSE,
+      payload: !filtersCollapse,
+    });
+  }
+
   async function onCopyWebsitesClick() {
     const dataToCopy = preparedData.map((e) => e['website']).join('\n');
     try {
@@ -58,8 +76,8 @@ export function Filters() {
   }
 
   return (
-    <details open className="filters">
-      <summary>Filters:</summary>
+    <details open={!filtersCollapse} className="filters">
+      <summary onClick={onSummaryClick}>Filters:</summary>
       <div className="filters__content">
         {Object.keys(columns).map((column) => {
           if (column === 'tags' || !columns[column]['renderFilter'])

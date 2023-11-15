@@ -1,5 +1,6 @@
 import {
   REQUEST_ERROR,
+  TOGGLE_FILTERS_COLLAPSE,
   TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL,
   TOGGLE_THEME,
@@ -8,6 +9,7 @@ import {
 } from './app.constants';
 
 const appInitialState = {
+  filtersCollapse: true,
   infoModalOpen: false,
   imgPreviewUrl: null,
   theme: 'light',
@@ -18,6 +20,11 @@ const appInitialState = {
 
 export function appReducer(state = appInitialState, action) {
   switch (action.type) {
+    case TOGGLE_FILTERS_COLLAPSE:
+      return {
+        ...state,
+        filtersCollapse: action.payload,
+      };
     case TOGGLE_INFO_MODAL:
       return {
         ...state,
