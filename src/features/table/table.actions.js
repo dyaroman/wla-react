@@ -134,19 +134,18 @@ export function getURLParams() {
 export function updateTableData() {
   return function (dispatch, getState) {
     const { websitesData, filters, sort } = getState().table;
-    let updatedData = [...websitesData['websites']];
-
-    for (const filterKey in filters) {
-      if (['', '=', '==', '!', '!='].includes(filters[filterKey])) {
-        continue;
+    const filteredData = filterTableData(
+      [...websitesData['websites']],
+      filters
+    );
+    let updatedData = filteredData;
+    if (sort.direction) {
+      const sortedData = sortTableData(filteredData, sort.column);
+      if (sort.direction === 'asc') {
+        updatedData = sortedData;
+      } else if (sort.direction === 'desc') {
+        updatedData = sortedData.reverse();
       }
-      updatedData = filterTableData(filterKey, filters[filterKey], updatedData);
-    }
-
-    if (sort.direction === 'asc') {
-      updatedData = sortTableData(updatedData, sort.column);
-    } else if (sort.direction === 'desc') {
-      updatedData = sortTableData(updatedData, sort.column).reverse();
     }
 
     dispatch({

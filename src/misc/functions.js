@@ -13,19 +13,33 @@ export function search(where, what) {
   }
 }
 
-export function filterTableData(filterBy, filterValue, websites) {
+export function filterTableData(websites, filters) {
   return websites.filter((website) => {
-    switch (filterBy) {
-      case 'tags':
-        return [...filterValue].every((filterTag) =>
-          website['tags']
-            .map((tag) => tag.toLowerCase())
-            .includes(filterTag.toLowerCase())
-        );
+    for (const filter in filters) {
+      if (['', '=', '==', '!', '!='].includes(filters[filter])) {
+        continue;
+      }
+      switch (filter) {
+        case 'tags':
+          if (
+            ![...filters[filter]].every((filterTag) =>
+              website['tags']
+                .map((tag) => tag.toLowerCase())
+                .includes(filterTag.toLowerCase())
+            )
+          ) {
+            return false;
+          }
+          break;
 
-      default:
-        return website[filterBy] && search(website[filterBy], filterValue);
+        default:
+          if (!(website[filter] && search(website[filter], filters[filter]))) {
+            return false;
+          }
+          break;
+      }
     }
+    return true;
   });
 }
 
