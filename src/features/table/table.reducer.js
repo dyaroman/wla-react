@@ -91,10 +91,12 @@ export function tableReducer(state = tableInitialState, action) {
       const { columns } = state.websitesData;
       return {
         ...state,
-        showedColumns: action.payload.sort(
-          (a, b) =>
-            Object.keys(columns).indexOf(a) - Object.keys(columns).indexOf(b)
-        ),
+        showedColumns: action.payload
+          .filter((column) => Object.keys(columns).includes(column))
+          .sort(
+            (a, b) =>
+              Object.keys(columns).indexOf(a) - Object.keys(columns).indexOf(b)
+          ),
       };
     }
     default:
