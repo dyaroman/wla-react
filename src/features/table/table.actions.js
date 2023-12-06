@@ -87,6 +87,7 @@ export function getURLParams() {
     const { sort, websitesData, showedColumns } = getState().table;
     const params = new URLSearchParams(window.location.search);
     if (params['size']) {
+      const sortedColumns = [];
       for (const [key, value] of params) {
         if (
           ![
@@ -98,6 +99,9 @@ export function getURLParams() {
         }
         switch (key) {
           case 'column':
+            newSort[key] = value;
+            sortedColumns.push(value);
+            break;
           case 'direction':
             newSort[key] = value;
             break;
@@ -121,7 +125,13 @@ export function getURLParams() {
       });
       dispatch({
         type: SHOWED_COLUMNS_UPDATED,
-        payload: [...new Set([...showedColumns, ...Object.keys(newFilters)])],
+        payload: [
+          ...new Set([
+            ...showedColumns,
+            ...sortedColumns,
+            ...Object.keys(newFilters),
+          ]),
+        ],
       });
     }
     dispatch({
