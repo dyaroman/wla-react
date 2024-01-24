@@ -4,7 +4,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { Tags } from './Tags';
 
 export function TagsFilterField() {
-  const { filters, preparedData } = useSelector((state) => state['table']);
+  const filters = useSelector((state) => state['table'].filters);
+  const preparedData = useSelector((state) => state['table'].preparedData);
   const getTags = useCallback(() => {
     const tags = [];
     for (const website of preparedData) {

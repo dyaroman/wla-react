@@ -5,7 +5,7 @@ import { FILTERS_UPDATED } from '../features/table/table.constants';
 
 export function Tags({ items }) {
   const dispatch = useDispatch();
-  const { filters } = useSelector((state) => state['table']);
+  const filters = useSelector((state) => state['table'].filters);
 
   function onChange(tag) {
     let updatedTags = [...filters.tags];

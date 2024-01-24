@@ -8,7 +8,8 @@ import {
 
 export function FilterField({ name, placeholder }) {
   const dispatch = useDispatch();
-  const { filters, showedColumns } = useSelector((state) => state['table']);
+  const filters = useSelector((state) => state['table'].filters);
+  const showedColumns = useSelector((state) => state['table'].showedColumns);
 
   function onChange(event) {
     if (!showedColumns.includes(name)) {

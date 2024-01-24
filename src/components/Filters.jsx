@@ -10,8 +10,9 @@ import { useKeyPress } from '../hooks/useKeyPress';
 
 export function Filters() {
   const dispatch = useDispatch();
-  const { filtersCollapse } = useSelector((state) => state['app']);
-  const { preparedData, websitesData } = useSelector((state) => state['table']);
+  const filtersCollapse = useSelector((state) => state['app'].filtersCollapse);
+  const preparedData = useSelector((state) => state['table'].preparedData);
+  const websitesData = useSelector((state) => state['table'].websitesData);
   const { columns } = websitesData;
   const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
 

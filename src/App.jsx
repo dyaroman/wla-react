@@ -12,7 +12,8 @@ import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
   const dispatch = useDispatch();
-  const { unauthorized, requestError } = useSelector((state) => state['app']);
+  const unauthorized = useSelector((state) => state['app'].unauthorized);
+  const requestError = useSelector((state) => state['app'].requestError);
   const websitesDataLoaded = useSelector(
     (state) => state['table'].websitesDataLoaded,
   );

@@ -2,7 +2,8 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 export function Info() {
-  const { preparedData, websitesData } = useSelector((state) => state['table']);
+  const preparedData = useSelector((state) => state['table'].preparedData);
+  const websitesData = useSelector((state) => state['table'].websitesData);
   const {
     commit = '',
     env = '',

@@ -6,10 +6,9 @@ import { fromCamelCaseToWords } from '../misc/functions';
 
 export function TableControls() {
   const dispatch = useDispatch();
-  const {
-    websitesData: { columns },
-    showedColumns,
-  } = useSelector((state) => state['table']);
+  const showedColumns = useSelector((state) => state['table'].showedColumns);
+  const websitesData = useSelector((state) => state['table'].websitesData);
+  const { columns } = websitesData;
 
   function onChange(column) {
     let updatedShowedColumns = [...showedColumns];

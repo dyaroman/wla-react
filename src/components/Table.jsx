@@ -21,9 +21,12 @@ import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
 
 export function Table() {
   const dispatch = useDispatch();
-  const { filtersCollapse } = useSelector((state) => state['app']);
-  const { sort, filters, preparedData, websitesData, showedColumns } =
-    useSelector((state) => state['table']);
+  const filtersCollapse = useSelector((state) => state['app'].filtersCollapse);
+  const sort = useSelector((state) => state['table'].sort);
+  const filters = useSelector((state) => state['table'].filters);
+  const preparedData = useSelector((state) => state['table'].preparedData);
+  const showedColumns = useSelector((state) => state['table'].showedColumns);
+  const websitesData = useSelector((state) => state['table'].websitesData);
   const { env, project, columns } = websitesData;
   const convertLinksTo =
     getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');

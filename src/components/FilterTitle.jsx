@@ -4,7 +4,7 @@ import { SORT_UPDATED } from '../features/table/table.constants';
 
 export function FilterTitle({ column, text }) {
   const dispatch = useDispatch();
-  const { sort } = useSelector((state) => state['table']);
+  const sort = useSelector((state) => state['table'].sort);
   let direction = null;
   if (sort.column === column && sort.direction !== '') {
     direction = sort.direction;
