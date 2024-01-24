@@ -35,7 +35,7 @@ export function Table() {
       updateURL({
         ...filters,
         ...sort,
-      })
+      }),
     );
   }, [filters, sort]);
 
@@ -49,7 +49,7 @@ export function Table() {
       if (!columns[column]['renderFilter']) continue;
       if (fieldName !== column) continue;
       const field = document.querySelector(
-        `.filters input[data-qa='${fieldName}']`
+        `.filters input[data-qa='${fieldName}']`,
       );
       if (!field) return;
       if (filtersCollapse) {
@@ -102,7 +102,7 @@ export function Table() {
                     convertUrlToEnv(
                       websiteData['website'],
                       convertLinksTo,
-                      project
+                      project,
                     )) ||
                   websiteData['host'];
                 return (
@@ -134,7 +134,7 @@ export function Table() {
 
                         case 'ogImage': {
                           const images = websiteData['ogImage'].map(
-                            (path) => `https://${host}/${path}`
+                            (path) => `https://${host}/${path}`,
                           );
                           return (
                             <td

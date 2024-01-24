@@ -14,7 +14,7 @@ export function App() {
   const dispatch = useDispatch();
   const { unauthorized, requestError } = useSelector((state) => state['app']);
   const websitesDataLoaded = useSelector(
-    (state) => state['table'].websitesDataLoaded
+    (state) => state['table'].websitesDataLoaded,
   );
 
   useEffect(() => {

@@ -25,7 +25,7 @@ export function filterTableData(websites, filters) {
             ![...filters[filter]].every((filterTag) =>
               website['tags']
                 .map((tag) => tag.toLowerCase())
-                .includes(filterTag.toLowerCase())
+                .includes(filterTag.toLowerCase()),
             )
           ) {
             return false;

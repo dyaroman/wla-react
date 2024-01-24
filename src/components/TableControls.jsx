@@ -15,7 +15,7 @@ export function TableControls() {
     let updatedShowedColumns = [...showedColumns];
     if (updatedShowedColumns.includes(column)) {
       updatedShowedColumns = updatedShowedColumns.filter(
-        (col) => col !== column
+        (col) => col !== column,
       );
     } else {
       updatedShowedColumns.push(column);
@@ -38,7 +38,7 @@ export function TableControls() {
       type: SHOWED_COLUMNS_UPDATED,
       payload: [
         ...Object.keys(columns).filter(
-          (column) => columns[column]['renderColumn']
+          (column) => columns[column]['renderColumn'],
         ),
       ],
     });
@@ -48,7 +48,7 @@ export function TableControls() {
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
       payload: Object.keys(columns).filter(
-        (column) => columns[column]['showColumn']
+        (column) => columns[column]['showColumn'],
       ),
     });
   }

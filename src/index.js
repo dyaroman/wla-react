@@ -9,7 +9,7 @@ import { store } from './store/store';
 // http to https redirect
 if (process.env.NODE_ENV !== 'development' && location.protocol !== 'https:') {
   location.replace(
-    `https:${location.href.substring(location.protocol.length)}`
+    `https:${location.href.substring(location.protocol.length)}`,
   );
 }
 
@@ -20,7 +20,7 @@ root.render(
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 console.log(`app commit: ${process.env.REACT_APP_VERSION.substring(0, 8)}`);

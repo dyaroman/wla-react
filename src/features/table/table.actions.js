@@ -31,7 +31,7 @@ export function getWebsitesData() {
             const { env, project } = websitesData;
             try {
               const { commit, timestamp } = await fetch(
-                `https://backend.example.com/getInfo?key=YOUR_API_KEY&project=${project}&env=${env}`
+                `https://backend.example.com/getInfo?key=YOUR_API_KEY&project=${project}&env=${env}`,
               ).then((res) => res.json());
               if (commit) websitesData.commit = commit;
               if (timestamp) websitesData.timestamp = timestamp;
@@ -41,7 +41,7 @@ export function getWebsitesData() {
 
             try {
               const websitesDataFromBackend = await fetch(
-                `https://backend.example.com/getWebsitesData?key=YOUR_API_KEY&project=${project}&env=${env}`
+                `https://backend.example.com/getWebsitesData?key=YOUR_API_KEY&project=${project}&env=${env}`,
               ).then((res) => res.json());
               if (websitesDataFromBackend && websitesDataFromBackend.length)
                 websitesData.websites = websitesDataFromBackend;
@@ -146,7 +146,7 @@ export function updateTableData() {
     const { websitesData, filters, sort } = getState().table;
     const filteredData = filterTableData(
       [...websitesData['websites']],
-      filters
+      filters,
     );
     let updatedData = filteredData;
     if (sort.direction) {

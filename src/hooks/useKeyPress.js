@@ -36,7 +36,7 @@ export const useKeyPress = (hotkey = '', callback, node = null) => {
         callbackRef.current(event);
       }
     },
-    [hotkey]
+    [hotkey],
   );
 
   useEffect(() => {

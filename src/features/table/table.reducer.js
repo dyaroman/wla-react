@@ -41,7 +41,7 @@ export function tableReducer(state = tableInitialState, action) {
       };
       if (!state.websitesDataLoaded) {
         updatedState['showedColumns'] = Object.keys(columns).filter(
-          (column) => columns[column]['showColumn']
+          (column) => columns[column]['showColumn'],
         );
       }
       return updatedState;
@@ -95,7 +95,7 @@ export function tableReducer(state = tableInitialState, action) {
           .filter((column) => Object.keys(columns).includes(column))
           .sort(
             (a, b) =>
-              Object.keys(columns).indexOf(a) - Object.keys(columns).indexOf(b)
+              Object.keys(columns).indexOf(a) - Object.keys(columns).indexOf(b),
           ),
       };
     }
