@@ -35,6 +35,6 @@
   "devDependencies": {
     "husky": "^8.0.0",
     "nano-staged": "^0.8.0",
-    "prettier": "^2.7.1"
+    "prettier": "^3.2.4"
   }
 }
