@@ -25,30 +25,7 @@ export function getWebsitesData() {
       const response = await fetch(dataFileURL);
       switch (response.status) {
         case 200:
-          let websitesData = await response.json();
-          const useWlaBackend = getQueryParamValue('mode') === 'backend';
-          if (useWlaBackend) {
-            const { env, project } = websitesData;
-            try {
-              const { commit, timestamp } = await fetch(
-                `https://backend.example.com/getInfo?key=YOUR_API_KEY&project=${project}&env=${env}`,
-              ).then((res) => res.json());
-              if (commit) websitesData.commit = commit;
-              if (timestamp) websitesData.timestamp = timestamp;
-            } catch (e) {
-              console.log('Error due to get info from backend', e);
-            }
-
-            try {
-              const websitesDataFromBackend = await fetch(
-                `https://backend.example.com/getWebsitesData?key=YOUR_API_KEY&project=${project}&env=${env}`,
-              ).then((res) => res.json());
-              if (websitesDataFromBackend && websitesDataFromBackend.length)
-                websitesData.websites = websitesDataFromBackend;
-            } catch (e) {
-              console.log('Error due to get websites data from backend', e);
-            }
-          }
+          const websitesData = await response.json();
           dispatch({
             type: SET_WEBSITES_DATA,
             payload: websitesData,
