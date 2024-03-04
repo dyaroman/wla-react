@@ -131,7 +131,7 @@ tr {
   }
 
   @include hover() {
-    color: choose-contrast-color($row-bg--hover);
+    color: contrast-color($row-bg--hover);
 
     background-color: $row-bg--hover;
   }

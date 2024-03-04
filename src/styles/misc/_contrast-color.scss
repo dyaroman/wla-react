@@ -31,7 +31,7 @@
 
 // Determine whether to use dark or light text on top of given color to meet accessibility standards for contrast.
 // Returns 'dark' if the given color is light and 'light' if the given color is dark.
-@function choose-contrast-color($color) {
+@function contrast-color($color) {
   $lightContrast: _contrast($color, #fff);
   $darkContrast: _contrast($color, #000);
 
