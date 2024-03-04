@@ -21,7 +21,7 @@ export function Info() {
 
   return (
     <section className="info">
-      {env && <h4 data-qa="env">env: {env}</h4>}
+      {env && <h4 data-qa="env">Environment: {env}</h4>}
       {repoPath && commit && (
         <h4>
           Commit:{' '}
