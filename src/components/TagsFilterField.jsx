@@ -1,27 +1,9 @@
 import { useSelector } from 'react-redux';
-import { useCallback, useEffect, useState } from 'react';
 
 import { Tags } from './Tags';
 
 export function TagsFilterField() {
-  const filters = useSelector((state) => state['table'].filters);
-  const preparedData = useSelector((state) => state['table'].preparedData);
-  const getTags = useCallback(() => {
-    const tags = [];
-    for (const website of preparedData) {
-      for (const tag of website.tags) {
-        if (tags.includes(tag) === false) {
-          tags.push(tag);
-        }
-      }
-    }
-    return tags;
-  }, [preparedData]);
-  const [tags, setTags] = useState(getTags);
-
-  useEffect(() => {
-    setTags(getTags);
-  }, [filters.tags, getTags]);
+  const tags = useSelector((state) => state['table'].allTags);
 
   if (tags.length === 0) {
     return null;

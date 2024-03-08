@@ -18,15 +18,17 @@ const tableInitialState = {
   websitesDataLoaded: false,
   preparedData: [],
   showedColumns: [],
+  allTags: [],
 };
 
 export function tableReducer(state = tableInitialState, action) {
   switch (action.type) {
     case SET_WEBSITES_DATA: {
+      const { columns, websites } = action.payload;
+      // collect all filters
       const filters = {
         ...state.filters,
       };
-      const { columns } = action.payload;
       Object.keys(columns)
         .filter((column) => columns[column]['renderFilter'])
         .filter((column) => !state.filters[column])
@@ -34,9 +36,19 @@ export function tableReducer(state = tableInitialState, action) {
           if (column === 'tags') filters[column] = [];
           else filters[column] = '';
         });
+      // collect all tags
+      const allTags = [];
+      websites.forEach((website) => {
+        website['tags'].forEach((tag) => {
+          if (!allTags.includes(tag)) {
+            allTags.push(tag);
+          }
+        });
+      });
       const updatedState = {
         ...state,
         filters,
+        allTags,
         websitesData: action.payload,
       };
       if (!state.websitesDataLoaded) {
