@@ -38,6 +38,7 @@
   display: block;
   width: 20px;
   height: 20px;
+  flex-shrink: 0;
 
   border: $border-width solid var(--body-color);
   background-color: var(--body-bg);
