@@ -41,11 +41,27 @@ export function Filters() {
 
   async function onCopyShortcut(event) {
     event.preventDefault();
-    const dataToCopy = preparedData.map((e) => e['website']).join(',');
+    const formattedWebsitesList = preparedData
+      .map((e) => e['website'])
+      .join(',');
+    await handleClipboardCopy(formattedWebsitesList);
+  }
+
+  async function onCopyWebsitesClick() {
+    const formattedWebsitesList = preparedData
+      .map((e) => e['website'])
+      .join('\n');
+    await handleClipboardCopy(formattedWebsitesList);
+  }
+
+  async function handleClipboardCopy(data) {
     try {
-      await navigator.clipboard.writeText(dataToCopy);
+      await navigator.clipboard.writeText(data);
+      setCopyWebsitesBtnText('copied');
     } catch (e) {
       console.log(`Error due to copy websites list to clipboard`, e);
+    } finally {
+      setTimeout(() => setCopyWebsitesBtnText('copy'), 1000);
     }
   }
 
@@ -61,18 +77,6 @@ export function Filters() {
       type: TOGGLE_FILTERS_COLLAPSE,
       payload: !filtersCollapse,
     });
-  }
-
-  async function onCopyWebsitesClick() {
-    const dataToCopy = preparedData.map((e) => e['website']).join('\n');
-    try {
-      await navigator.clipboard.writeText(dataToCopy);
-      setCopyWebsitesBtnText('copied');
-    } catch (e) {
-      console.log(`Error due to copy websites list to clipboard`, e);
-    } finally {
-      setTimeout(() => setCopyWebsitesBtnText('copy'), 1000);
-    }
   }
 
   return (
