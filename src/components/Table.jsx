@@ -111,7 +111,7 @@ export function Table() {
                 return (
                   <tr key={websiteData['website']}>
                     <td data-title="#" data-qa="#">
-                      {index + 1}
+                      {++index}
                     </td>
                     {showedColumns.map((column) => {
                       switch (column) {
