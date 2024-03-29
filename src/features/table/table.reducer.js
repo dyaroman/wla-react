@@ -7,7 +7,7 @@ import {
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
-import { getUniqueTags } from '../../misc/functions';
+import { getQueryParamValue, getUniqueTags } from '../../misc/functions';
 
 const tableInitialState = {
   filters: {},
@@ -47,7 +47,15 @@ export function tableReducer(state = tableInitialState, action) {
         availableTags: allTags,
         websitesData: action.payload,
       };
-      if (!state.websitesDataLoaded) {
+      // get showedColumns from URL
+      const showedColumnsKey = getQueryParamValue('showedColumns');
+      const showedColumnsValue = showedColumnsKey?.split(',');
+      if (
+        showedColumnsValue?.length > 1 ||
+        (showedColumnsValue?.length === 1 && showedColumnsValue[0] !== '')
+      ) {
+        updatedState['showedColumns'] = showedColumnsValue;
+      } else {
         updatedState['showedColumns'] = Object.keys(columns).filter(
           (column) => columns[column]['showColumn'],
         );

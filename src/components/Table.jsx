@@ -36,13 +36,17 @@ export function Table() {
 
   useEffect(() => {
     dispatch(updateTableData());
+  }, [filters, sort]);
+
+  useEffect(() => {
     dispatch(
       updateURL({
         ...filters,
         ...sort,
+        showedColumns,
       }),
     );
-  }, [filters, sort]);
+  }, [filters, sort, showedColumns]);
 
   function onTableBodyClick(event) {
     if (!event.altKey) return;

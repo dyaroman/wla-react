@@ -11,11 +11,7 @@ import {
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from '../app/app.constants';
-import {
-  filterTableData,
-  getQueryParamValue,
-  sortTableData,
-} from '../../misc/functions';
+import { filterTableData, sortTableData } from '../../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
 
 export function getWebsitesData() {

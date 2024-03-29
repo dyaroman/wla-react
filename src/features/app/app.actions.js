@@ -1,33 +1,34 @@
-export function updateURL(sortAndFilterState) {
+export function updateURL(newState) {
   return function (dispatch, getState) {
     if (!getState().app.urlParamsRead) return;
-    if (Object.keys(sortAndFilterState).length === 0) {
+    if (Object.keys(newState).length === 0) {
       return;
     }
     const params = new URLSearchParams(window.location.search);
-    for (const key in sortAndFilterState) {
+    for (const key in newState) {
       switch (key) {
+        case 'showedColumns':
         case 'tags':
-          if (sortAndFilterState[key].length === 0) {
+          if (newState[key].length === 0) {
             params.delete(key);
           } else {
-            params.set(key, sortAndFilterState[key].join());
+            params.set(key, newState[key].join());
           }
           break;
 
         default:
-          if (sortAndFilterState[key] === '') {
+          if (newState[key] === '') {
             params.delete(key);
           } else {
-            params.set(key, sortAndFilterState[key]);
+            params.set(key, newState[key]);
           }
           break;
       }
     }
     if (params.toString() === '') {
-      window.history.pushState({}, '', '/');
+      window.history.replaceState({}, '', '/');
     } else {
-      window.history.pushState({}, '', `?${params}`);
+      window.history.replaceState({}, '', `?${params}`);
     }
   };
 }
