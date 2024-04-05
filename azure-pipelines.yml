@@ -8,38 +8,38 @@ pool:
   vmImage: 'ubuntu-20.04'
 
 stages:
-  - stage: build
+  - stage: Build
     jobs:
-      - job: build
+      - job: Build
         steps:
           - task: NodeTool@0
-            displayName: 'use node 18.16.x'
+            displayName: 'Use node 18.16.x'
             inputs:
               versionSpec: 18.16.x
               checkLatest: true
 
           - checkout: self
-            displayName: 'checkout'
+            displayName: 'Checkout'
 
           - powershell: npm pkg delete scripts.prepare
-            displayName: 'remove prepare script'
+            displayName: 'Remove prepare script'
 
           - task: Npm@1
-            displayName: 'npm ci'
+            displayName: 'Install dependencies'
             inputs:
               command: custom
               verbose: false
               customCommand: 'ci --omit=dev'
 
           - task: Npm@1
-            displayName: 'npm build'
+            displayName: 'Build'
             inputs:
               command: custom
               verbose: false
               customCommand: 'run build'
 
           - task: ArchiveFiles@2
-            displayName: 'archive build'
+            displayName: 'Archive build'
             inputs:
               rootFolderOrFile: '$(Build.SourcesDirectory)/build'
               includeRootFolder: false
@@ -48,13 +48,13 @@ stages:
 
           - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
             artifact: drop
-            displayName: 'publish artifact wla'
+            displayName: 'Publish artifact'
 
-  - stage: deploy
-    dependsOn: build
+  - stage: Deploy
+    dependsOn: Build
     jobs:
       - deployment: dev
-        displayName: 'dev.example.com'
+        displayName: 'Release to dev.example.com'
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
           runOnce:
@@ -63,7 +63,7 @@ stages:
                 - download: current
                   artifact: drop
                   patterns: '$(Build.BuildId).zip'
-                  displayName: 'download artifact wla'
+                  displayName: 'Download artifact wla'
 
                 - task: IISWebAppDeploymentOnMachineGroup@0
                   inputs:
@@ -71,7 +71,7 @@ stages:
                     package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
 
       - deployment: prod
-        displayName: 'prod.example.com'
+        displayName: 'Release to prod.example.com'
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
           runOnce:
@@ -80,7 +80,7 @@ stages:
                 - download: current
                   artifact: drop
                   patterns: '$(Build.BuildId).zip'
-                  displayName: 'download artifact wla'
+                  displayName: 'Download artifact wla'
 
                 - task: IISWebAppDeploymentOnMachineGroup@0
                   inputs:
