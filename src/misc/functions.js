@@ -1,4 +1,4 @@
-import { NO_DATA } from './constants';
+import { NO_DATA } from './misc.constants';
 
 export function search(where, what) {
   where = String(where).toLowerCase();

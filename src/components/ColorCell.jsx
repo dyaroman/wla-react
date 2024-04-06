@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { fromCamelCaseToWords } from '../misc/functions';
 import { getContrastColor } from '../misc/color';
-import { NO_DATA } from '../misc/constants';
+import { NO_DATA } from '../misc/misc.constants';
 
 export function ColorCell({ column, color, children }) {
   const [transparent, setTransparent] = useState(false);

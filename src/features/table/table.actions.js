@@ -16,7 +16,7 @@ import {
   getQueryParamValue,
   sortTableData,
 } from '../../misc/functions';
-import { WEBSITES_DATA_FILENAME } from '../../misc/constants';
+import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
 
 export function getWebsitesData() {
   return async function (dispatch) {

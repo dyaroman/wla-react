@@ -15,7 +15,7 @@ import {
   fromCamelCaseToWords,
   getQueryParamValue,
 } from '../misc/functions';
-import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/constants';
+import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
 
