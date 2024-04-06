@@ -109,3 +109,10 @@ export function convertUrlToEnv(website = '', env = '', project = '') {
 
   return null;
 }
+
+export function triggerGtmEvent(eventName, options = {}) {
+  window.dataLayer?.push({
+    event: eventName,
+    ...options,
+  });
+}

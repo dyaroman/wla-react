@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Checkbox } from './Checkbox';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
+import { triggerGtmEvent } from '../misc/functions';
+import { ADD_TAG, REMOVE_TAG } from '../misc/gtm.constants';
 
 export function Tags({ items }) {
   const dispatch = useDispatch();
@@ -10,8 +12,14 @@ export function Tags({ items }) {
   function onChange(tag) {
     let updatedTags = [...filters.tags];
     if (updatedTags.includes(tag)) {
+      triggerGtmEvent(REMOVE_TAG, {
+        tag_label: tag,
+      });
       updatedTags = updatedTags.filter((item) => item !== tag);
     } else {
+      triggerGtmEvent(ADD_TAG, {
+        tag_label: tag,
+      });
       updatedTags.push(tag);
     }
     dispatch({
