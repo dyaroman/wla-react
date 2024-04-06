@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TOGGLE_THEME } from '../features/app/app.constants';
+import { triggerGtmEvent } from '../misc/functions';
+import { TOGGLE_THEME_GTM_EVENT } from '../misc/gtm.constants';
 
 export function ThemeToggle() {
   const dispatch = useDispatch();
@@ -16,10 +18,20 @@ export function ThemeToggle() {
         type: TOGGLE_THEME,
         payload: 'dark',
       });
+
+      triggerGtmEvent(TOGGLE_THEME_GTM_EVENT, {
+        label: 'dark',
+        method: 'init',
+      });
     } else {
       dispatch({
         type: TOGGLE_THEME,
         payload: 'light',
+      });
+
+      triggerGtmEvent(TOGGLE_THEME_GTM_EVENT, {
+        label: 'light',
+        method: 'init',
       });
     }
 
@@ -39,16 +51,29 @@ export function ThemeToggle() {
   }, [theme]);
 
   function prefersColorSchemeHandler(event) {
+    const newTheme = event.matches ? 'dark' : 'light';
+
     dispatch({
       type: TOGGLE_THEME,
-      payload: event.matches ? 'dark' : 'light',
+      payload: newTheme,
+    });
+
+    triggerGtmEvent(TOGGLE_THEME_GTM_EVENT, {
+      label: newTheme,
+      method: 'media-query',
     });
   }
 
   function onThemeToggleClick() {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
     dispatch({
       type: TOGGLE_THEME,
-      payload: theme === 'dark' ? 'light' : 'dark',
+      payload: newTheme,
+    });
+
+    triggerGtmEvent(TOGGLE_THEME_GTM_EVENT, {
+      label: newTheme,
+      method: 'toggle',
     });
   }
 
