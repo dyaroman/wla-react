@@ -5,6 +5,8 @@ import {
   FILTERS_UPDATED,
   SHOWED_COLUMNS_UPDATED,
 } from '../features/table/table.constants';
+import { triggerGtmEvent } from '../misc/functions';
+import { FILTER_CHANGE } from '../misc/gtm.constants';
 
 export function FilterField({ name, placeholder }) {
   const dispatch = useDispatch();
@@ -18,11 +20,19 @@ export function FilterField({ name, placeholder }) {
         payload: [...showedColumns, name],
       });
     }
+
     dispatch({
       type: FILTERS_UPDATED,
       payload: {
         [name]: event.target.value,
       },
+    });
+  }
+
+  function onBlur(event) {
+    triggerGtmEvent(FILTER_CHANGE, {
+      filter_name: name,
+      filter_value: event.target.value,
     });
   }
 
@@ -34,6 +44,7 @@ export function FilterField({ name, placeholder }) {
         data-qa={name}
         className="input"
         onChange={onChange}
+        onBlur={onBlur}
         placeholder={placeholder}
         value={filters[name]}
       />
