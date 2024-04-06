@@ -14,10 +14,12 @@ import {
   convertUrlToEnv,
   fromCamelCaseToWords,
   getQueryParamValue,
+  triggerGtmEvent,
 } from '../misc/functions';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
+import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
 
 export function Table() {
   const dispatch = useDispatch();
@@ -61,11 +63,16 @@ export function Table() {
           payload: false,
         });
       }
+      const fieldValue = cell.innerText.trim();
       dispatch({
         type: FILTERS_UPDATED,
         payload: {
-          [fieldName]: cell.innerText.trim(),
+          [fieldName]: fieldValue,
         },
+      });
+      triggerGtmEvent(TABLE_CELL_SEARCH, {
+        filter_name: fieldName,
+        filter_value: fieldValue,
       });
       setTimeout(() => field.select());
     }

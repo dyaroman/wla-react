@@ -12,3 +12,5 @@ export const CLEAR_FILTERS_BTN = 'clear_filters_btn';
 export const COPY_WEBSITES_BTN = 'copy_websites_btn';
 
 export const SHORTCUT = 'shortcut';
+
+export const TABLE_CELL_SEARCH = 'table_cell_search';
