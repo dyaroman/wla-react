@@ -5,8 +5,13 @@ import { FilterField } from './FilterField';
 import { TagsFilterField } from './TagsFilterField';
 import { CLEAR_FILTERS } from '../features/table/table.constants';
 import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
-import { fromCamelCaseToWords } from '../misc/functions';
+import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
+import {
+  CLEAR_FILTERS_BTN,
+  COPY_WEBSITES_BTN,
+  SHORTCUT,
+} from '../misc/gtm.constants';
 
 export function Filters() {
   const dispatch = useDispatch();
@@ -16,18 +21,45 @@ export function Filters() {
   const { columns } = websitesData;
   const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
 
-  useKeyPress('meta+shift+f', onSearchShortcut);
-  useKeyPress('ctrl+shift+f', onSearchShortcut);
+  useKeyPress('meta+shift+f', (event) => {
+    event.preventDefault();
+    onSearchShortcut();
+    triggerGtmEvent(SHORTCUT, {
+      method: 'search',
+      label: 'macos,',
+    });
+  });
+  useKeyPress('ctrl+shift+f', (event) => {
+    event.preventDefault();
+    onSearchShortcut();
+    triggerGtmEvent(SHORTCUT, {
+      method: 'search',
+      label: 'windows',
+    });
+  });
 
-  useKeyPress('meta+shift+c', onCopyShortcut);
-  useKeyPress('ctrl+shift+c', onCopyShortcut);
+  useKeyPress('meta+shift+c', (event) => {
+    event.preventDefault();
+    onCopyShortcut();
+    triggerGtmEvent(SHORTCUT, {
+      method: 'copy-websites',
+      label: 'macos',
+    });
+  });
+  useKeyPress('ctrl+shift+c', (event) => {
+    event.preventDefault();
+    onCopyShortcut();
+    triggerGtmEvent(SHORTCUT, {
+      method: 'copy-websites',
+      label: 'windows',
+    });
+  });
 
   if (websitesData['websites'].length === 0) {
     return null;
   }
 
-  function onSearchShortcut(event) {
-    event.preventDefault();
+  function onSearchShortcut() {
     if (filtersCollapse) {
       dispatch({
         type: TOGGLE_FILTERS_COLLAPSE,
@@ -39,8 +71,7 @@ export function Filters() {
     });
   }
 
-  async function onCopyShortcut(event) {
-    event.preventDefault();
+  async function onCopyShortcut() {
     const formattedWebsitesList = preparedData
       .map((e) => e['website'])
       .join(',');
@@ -52,6 +83,8 @@ export function Filters() {
       .map((e) => e['website'])
       .join('\n');
     await handleClipboardCopy(formattedWebsitesList);
+
+    triggerGtmEvent(COPY_WEBSITES_BTN);
   }
 
   async function handleClipboardCopy(data) {
@@ -69,6 +102,8 @@ export function Filters() {
     dispatch({
       type: CLEAR_FILTERS,
     });
+
+    triggerGtmEvent(CLEAR_FILTERS_BTN);
   }
 
   function onSummaryClick(event) {
