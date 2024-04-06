@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
+import { triggerGtmEvent } from '../misc/functions';
+import { CLOSE_INFO_MODAL } from '../misc/gtm.constants';
 
 export function InfoModal() {
   const dispatch = useDispatch();
@@ -41,6 +43,7 @@ export function InfoModal() {
       type: TOGGLE_INFO_MODAL,
       payload: false,
     });
+    triggerGtmEvent(CLOSE_INFO_MODAL);
   }
 
   return (
