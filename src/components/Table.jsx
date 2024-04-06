@@ -42,7 +42,7 @@ export function Table() {
     );
   }, [filters, sort]);
 
-  function onBodyClick(event) {
+  function onTableBodyClick(event) {
     if (!event.altKey) return;
     const cell = event.target.closest('td,th');
     if (!cell) return;
@@ -98,7 +98,7 @@ export function Table() {
               </tr>
             </thead>
 
-            <tbody onClick={onBodyClick}>
+            <tbody onClick={onTableBodyClick}>
               {preparedData.map((websiteData, index) => {
                 const host =
                   (convertLinks &&
