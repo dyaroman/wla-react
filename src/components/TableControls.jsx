@@ -2,7 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Checkbox } from './Checkbox';
 import { SHOWED_COLUMNS_UPDATED } from '../features/table/table.constants';
-import { fromCamelCaseToWords } from '../misc/functions';
+import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
+import {
+  HIDE_ALL_COLUMNS_BTN,
+  RESTORE_DEFAULT_COLUMNS_BTN,
+  SHOW_ALL_COLUMNS_BTN,
+  SHOWED_COLUMN_CHANGE,
+} from '../misc/gtm.constants';
 
 export function TableControls() {
   const dispatch = useDispatch();
@@ -12,16 +18,24 @@ export function TableControls() {
 
   function onChange(column) {
     let updatedShowedColumns = [...showedColumns];
+    const eventInfo = {
+      label: column,
+    };
     if (updatedShowedColumns.includes(column)) {
       updatedShowedColumns = updatedShowedColumns.filter(
         (col) => col !== column,
       );
+      eventInfo.method = 'off';
     } else {
       updatedShowedColumns.push(column);
+      eventInfo.method = 'on';
     }
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
       payload: updatedShowedColumns,
+    });
+    triggerGtmEvent(SHOWED_COLUMN_CHANGE, {
+      ...eventInfo,
     });
   }
 
@@ -30,6 +44,7 @@ export function TableControls() {
       type: SHOWED_COLUMNS_UPDATED,
       payload: [],
     });
+    triggerGtmEvent(HIDE_ALL_COLUMNS_BTN);
   }
 
   function onClickShowAllColumns() {
@@ -41,6 +56,7 @@ export function TableControls() {
         ),
       ],
     });
+    triggerGtmEvent(SHOW_ALL_COLUMNS_BTN);
   }
 
   function onClickRestoreDefaultColumns() {
@@ -50,6 +66,7 @@ export function TableControls() {
         (column) => columns[column]['showColumn'],
       ),
     });
+    triggerGtmEvent(RESTORE_DEFAULT_COLUMNS_BTN);
   }
 
   return (
