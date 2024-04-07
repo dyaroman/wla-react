@@ -13,12 +13,12 @@ export function Tags({ items }) {
     let updatedTags = [...filters.tags];
     if (updatedTags.includes(tag)) {
       triggerGtmEvent(REMOVE_TAG, {
-        tag_label: tag,
+        label: tag,
       });
       updatedTags = updatedTags.filter((item) => item !== tag);
     } else {
       triggerGtmEvent(ADD_TAG, {
-        tag_label: tag,
+        label: tag,
       });
       updatedTags.push(tag);
     }
