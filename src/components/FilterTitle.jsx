@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SORT_UPDATED } from '../features/table/table.constants';
+import { triggerGtmEvent } from '../misc/functions';
+import { TABLE_SORT } from '../misc/gtm.constants';
 
 export function FilterTitle({ column, text }) {
   const dispatch = useDispatch();
@@ -13,17 +15,25 @@ export function FilterTitle({ column, text }) {
   function onClick(event) {
     const { sortColumn, sortDirection } = event.target.dataset;
     const newSort = {};
+    const eventInfo = {
+      label: sortColumn,
+    };
     if (sortColumn !== sort.column) {
       newSort['column'] = sortColumn;
     }
     if (sortDirection === undefined || sortDirection === 'desc') {
       newSort['direction'] = 'asc';
+      eventInfo.method = 'asc';
     } else {
       newSort['direction'] = 'desc';
+      eventInfo.method = 'desc';
     }
     dispatch({
       type: SORT_UPDATED,
       payload: newSort,
+    });
+    triggerGtmEvent(TABLE_SORT, {
+      ...eventInfo,
     });
   }
 

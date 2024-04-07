@@ -14,3 +14,4 @@ export const COPY_WEBSITES_BTN = 'copy_websites_btn';
 export const SHORTCUT = 'shortcut';
 
 export const TABLE_CELL_SEARCH = 'table_cell_search';
+export const TABLE_SORT = 'table_sort';
