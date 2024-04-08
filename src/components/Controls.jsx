@@ -1,7 +1,7 @@
 import { InfoModalBtn } from './InfoModalBtn';
 import { ThemeToggle } from './ThemeToggle';
 
-export function Controls() {
+export function AppControls() {
   return (
     <div className="controls">
       <InfoModalBtn />

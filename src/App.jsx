@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Loader } from './components/Loader';
-import { Controls } from './components/Controls';
+import { AppControls } from './components/Controls';
 import { Info } from './components/Info';
 import { Filters } from './components/Filters';
 import { Table } from './components/Table';
@@ -52,7 +52,7 @@ export function App() {
 
   return (
     <>
-      <Controls />
+      <AppControls />
       <Info />
       <Filters />
       <Table />
