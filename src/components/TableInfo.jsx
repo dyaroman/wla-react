@@ -13,11 +13,19 @@ export function TableInfo() {
   } = websitesData;
 
   useEffect(() => {
-    if (project === '' && env === '') return;
-    document.title = `${project && `[${project}]`}${env && `[${env}]`}: ${
-      process.env.REACT_APP_PAGE_TITLE
-    }`;
-  }, [project, env]);
+    let title = '';
+    if (preparedData) {
+      title += `[${preparedData.length}]`;
+    }
+    if (project) {
+      title += `[${project}]`;
+    }
+    if (env) {
+      title += `[${env}]`;
+    }
+    title += `: ${process.env.REACT_APP_PAGE_TITLE}`;
+    document.title = title;
+  }, [project, env, preparedData]);
 
   return (
     <section className="info">
