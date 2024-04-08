@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Loader } from './components/Loader';
 import { AppControls } from './components/AppControls';
-import { TableInfo } from './components/Info';
+import { TableInfo } from './components/TableInfo';
 import { Filters } from './components/Filters';
 import { Table } from './components/Table';
 import { InfoModal } from './components/InfoModal';
