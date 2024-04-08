@@ -1,6 +1,9 @@
-export function Checkbox({ label, checked, onChange }) {
+export function Checkbox({ label, checked, disabled, onChange }) {
   return (
-    <label className="checkbox" data-qa={label}>
+    <label
+      className={'checkbox' + (disabled ? ' disabled' : '')}
+      data-qa={label}
+    >
       <input
         type="checkbox"
         className="checkbox__input"

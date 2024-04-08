@@ -8,6 +8,7 @@ import { ADD_TAG, REMOVE_TAG } from '../misc/gtm.constants';
 export function Tags({ items }) {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state['table'].filters);
+  const availableTags = useSelector((state) => state['table'].availableTags);
 
   function onChange(tag) {
     let updatedTags = [...filters.tags];
@@ -35,18 +36,20 @@ export function Tags({ items }) {
   }
 
   const list = items.sort().map((tag) => {
-    let tagActive = false;
-    if (Array.isArray(filters.tags)) {
-      tagActive = filters.tags
-        .map((tag) => tag.toLowerCase())
-        .includes(tag.toLowerCase());
-    }
+    const tagChecked = filters?.tags
+      .map((tag) => tag.toLowerCase())
+      .includes(tag.toLowerCase());
+    const tagAvailable = availableTags
+      .map((tag) => tag.toLowerCase())
+      .includes(tag.toLowerCase());
+
     return (
       <li key={tag}>
         <Checkbox
           label={tag}
-          checked={tagActive}
-          onChange={onChange.bind(null, tag)}
+          checked={tagChecked}
+          disabled={!tagAvailable}
+          onChange={tagAvailable ? onChange.bind(null, tag) : undefined}
         />
       </li>
     );

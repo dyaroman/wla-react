@@ -7,6 +7,7 @@ import {
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
+import { getUniqueTags } from '../../misc/functions';
 
 const tableInitialState = {
   filters: {},
@@ -19,6 +20,7 @@ const tableInitialState = {
   preparedData: [],
   showedColumns: [],
   allTags: [],
+  availableTags: [],
 };
 
 export function tableReducer(state = tableInitialState, action) {
@@ -36,19 +38,13 @@ export function tableReducer(state = tableInitialState, action) {
           if (column === 'tags') filters[column] = [];
           else filters[column] = '';
         });
-      // collect all tags
-      const allTags = [];
-      websites.forEach((website) => {
-        website['tags'].forEach((tag) => {
-          if (!allTags.includes(tag)) {
-            allTags.push(tag);
-          }
-        });
-      });
+      // collect all unique tags
+      const allTags = getUniqueTags(websites);
       const updatedState = {
         ...state,
         filters,
         allTags,
+        availableTags: allTags,
         websitesData: action.payload,
       };
       if (!state.websitesDataLoaded) {
@@ -98,6 +94,7 @@ export function tableReducer(state = tableInitialState, action) {
       return {
         ...state,
         preparedData: action.payload,
+        availableTags: getUniqueTags(action.payload),
       };
     case SHOWED_COLUMNS_UPDATED: {
       const { columns } = state.websitesData;

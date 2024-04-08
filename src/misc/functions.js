@@ -116,3 +116,11 @@ export function triggerGtmEvent(eventName, options = {}) {
     ...options,
   });
 }
+
+export function getUniqueTags(websites) {
+  const uniqueTags = websites.reduce((acc, website) => {
+    website.tags.forEach((tag) => acc.add(tag));
+    return acc;
+  }, new Set());
+  return [...uniqueTags];
+}
