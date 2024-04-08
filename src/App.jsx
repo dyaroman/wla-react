@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Loader } from './components/Loader';
 import { AppControls } from './components/AppControls';
-import { Info } from './components/Info';
+import { TableInfo } from './components/Info';
 import { Filters } from './components/Filters';
 import { Table } from './components/Table';
 import { InfoModal } from './components/InfoModal';
@@ -53,7 +53,7 @@ export function App() {
   return (
     <>
       <AppControls />
-      <Info />
+      <TableInfo />
       <Filters />
       <Table />
       <InfoModal />

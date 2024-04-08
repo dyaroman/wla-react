@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-export function Info() {
+export function TableInfo() {
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const {
