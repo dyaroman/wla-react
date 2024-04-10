@@ -16,10 +16,7 @@
   &.disabled {
     opacity: 0.2;
     user-select: none;
-
-    @include hover() {
-      cursor: not-allowed;
-    }
+    pointer-events: none;
   }
 }
 
