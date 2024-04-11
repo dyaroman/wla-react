@@ -48,18 +48,31 @@ export function tableReducer(state = tableInitialState, action) {
         websitesData: action.payload,
       };
       // get showedColumns from URL
-      const showedColumnsKey = getQueryParamValue('showedColumns');
-      const showedColumnsValue = showedColumnsKey?.split(',');
-      if (
-        showedColumnsValue?.length > 1 ||
-        (showedColumnsValue?.length === 1 && showedColumnsValue[0] !== '')
-      ) {
-        updatedState['showedColumns'] = showedColumnsValue;
-      } else {
+      const showedColumns = getQueryParamValue('showedColumns')?.split(',');
+      const renderableColumns = Object.keys(columns).filter(
+        (column) => columns[column]['renderFilter'],
+      );
+      try {
+        if (showedColumns?.length === 1 && showedColumns[0] === '') {
+          throw new Error('empty value');
+        }
+        const filteredColumns = showedColumns.filter((column) =>
+          renderableColumns.includes(column),
+        );
+        if (filteredColumns.length === 0) {
+          throw new Error('invalid values');
+        }
+        updatedState['showedColumns'] = filteredColumns;
+      } catch (e) {
+        // todo add error log to gtm
+        console.log(
+          `Error due to parse "showedColumns" from URL, reason: ${e.message}. Showing default columns.`,
+        );
         updatedState['showedColumns'] = Object.keys(columns).filter(
           (column) => columns[column]['showColumn'],
         );
       }
+
       return updatedState;
     }
     case WEBSITES_DATA_LOADED:
