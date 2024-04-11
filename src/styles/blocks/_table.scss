@@ -59,10 +59,10 @@ thead th {
     left: 0;
     z-index: 10;
 
-    color: var(--btn-text-color);
+    color: var(--body-color);
 
     border-bottom: $border-width solid var(--border-color);
-    background-color: var(--btn-bg-color);
+    background-color: var(--body-bg);
   }
 }
 
