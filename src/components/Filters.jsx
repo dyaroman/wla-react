@@ -26,7 +26,7 @@ export function Filters() {
     onSearchShortcut();
     triggerGtmEvent(SHORTCUT, {
       method: 'search',
-      label: 'macos,',
+      label: 'macos',
     });
   });
   useKeyPress('ctrl+shift+f', (event) => {
