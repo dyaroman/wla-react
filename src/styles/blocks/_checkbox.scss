@@ -7,9 +7,12 @@
   align-items: center;
   gap: px2rem(3);
 
-  transition: opacity 0.3s;
+  transition: 0.3s;
 
   @include hover() {
+    color: var(--body-bg);
+
+    background-color: var(--body-color);
     cursor: pointer;
   }
 
