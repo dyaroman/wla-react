@@ -8,6 +8,14 @@ $border-width: 2px;
   --secondary-color: rgba(33, 37, 41, 0.75);
   --border-color: #dee2e6;
   --table-striped-bg: #f2f2f2;
+
+  --btn-text-color: var(--body-color);
+  --btn-border-color: var(--body-color);
+  --btn-bg-color: var(--body-bg);
+
+  --btn-text-color--hover: var(--body-bg);
+  --btn-border-color--hover: var(--body-color);
+  --btn-bg-color--hover: var(--body-color);
 }
 
 @mixin dark-theme() {
@@ -17,18 +25,19 @@ $border-width: 2px;
   --secondary-color: rgba(173, 181, 189, 0.75);
   --border-color: #495057;
   --table-striped-bg: #2c3034;
+
+  --btn-text-color: var(--body-color);
+  --btn-border-color: var(--body-color);
+  --btn-bg-color: var(--body-bg);
+
+  --btn-text-color--hover: var(--body-bg);
+  --btn-border-color--hover: var(--body-color);
+  --btn-bg-color--hover: var(--body-color);
 }
 
 :root {
   --focus-inner-color: var(--border-color);
   --focus-outer-color: var(--body-color);
-
-  --btn-color: #fff;
-  --btn-bg: #6c757d;
-  --btn-border-color: #6c757d;
-  --btn-hover-color: #fff;
-  --btn-hover-bg: #5c636a;
-  --btn-hover-border-color: #565e64;
 
   @media (prefers-color-scheme: light) {
     @include light-theme();

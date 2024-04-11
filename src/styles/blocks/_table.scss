@@ -59,10 +59,10 @@ thead th {
     left: 0;
     z-index: 10;
 
-    color: var(--btn-color);
+    color: var(--btn-text-color);
 
     border-bottom: $border-width solid var(--border-color);
-    background-color: var(--btn-bg);
+    background-color: var(--btn-bg-color);
   }
 }
 
@@ -70,7 +70,7 @@ tbody {
   display: grid;
   gap: 0.5rem;
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(sm) {
     grid-template-columns: repeat(2, 1fr);
   }
 

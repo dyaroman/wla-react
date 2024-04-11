@@ -1,31 +1,30 @@
 .btn {
-  display: inline-block;
+  display: block;
   padding: px2rem(12) px2rem(22);
 
   font-size: inherit;
-  color: var(--btn-color);
+  color: var(--btn-text-color);
 
   border: 2px solid var(--btn-border-color);
-  background-color: var(--btn-bg);
+  background-color: var(--btn-bg-color);
   transition:
     color 0.15s,
     background-color 0.15s,
     border-color 0.15s;
 
   @include hover() {
-    color: var(--btn-hover-color);
+    color: var(--btn-text-color--hover);
 
-    background-color: var(--btn-hover-bg);
-    border-color: var(--btn-hover-border-color);
+    background-color: var(--btn-bg-color--hover);
+    border-color: var(--btn-border-color--hover);
     cursor: pointer;
   }
 
   &--danger {
-    --btn-color: #fff;
-    --btn-bg: #dc3545;
+    --btn-text-color: #dc3545;
     --btn-border-color: #dc3545;
-    --btn-hover-color: #fff;
-    --btn-hover-bg: #bb2d3b;
-    --btn-hover-border-color: #b02a37;
+
+    --btn-bg-color--hover: #bb2d3b;
+    --btn-border-color--hover: #b02a37;
   }
 }

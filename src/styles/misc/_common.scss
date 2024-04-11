@@ -78,10 +78,6 @@ dialog {
   padding: 0.5rem;
 }
 
-details {
-  display: inline-block;
-}
-
 summary {
   @include hover() {
     cursor: pointer;
