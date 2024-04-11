@@ -117,11 +117,11 @@ tr {
   display: block;
 
   border: $border-width solid var(--border-color);
-  background-color: var(--body-bg);
+  background-color: var(--table-striped-bg);
   transition: 0.3s;
 
   &:nth-child(even) {
-    background-color: var(--table-striped-bg);
+    background-color: var(--body-bg);
   }
 
   @include media-breakpoint-up(lg) {
