@@ -50,6 +50,15 @@ export function updateURL(newState) {
       params.set('showColumns', 'all');
     }
 
+    // check if showColumns is an empty array
+    // in this case we should use alias 'none'
+    if (
+      params.get('showColumns') === null &&
+      newState['showColumns'].length === 0
+    ) {
+      params.set('showColumns', 'none');
+    }
+
     if (params.toString() === '') {
       window.history.replaceState({}, '', '/');
     } else {

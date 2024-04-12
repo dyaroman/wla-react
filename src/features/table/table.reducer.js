@@ -76,8 +76,16 @@ export function tableReducer(state = tableInitialState, action) {
         if (!showColumns) return;
 
         // if showColumns equal to alias 'all'
+        // show all renderable columns
         if (showColumns === 'all') {
           updatedState['showColumns'] = renderableColumns;
+          return;
+        }
+
+        // if shownColumns equal to alias 'none'
+        // hide all columns
+        if (showColumns === 'none') {
+          updatedState['showColumns'] = [];
           return;
         }
 
