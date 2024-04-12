@@ -13,6 +13,9 @@ import {
 export function TableControls() {
   const dispatch = useDispatch();
   const showColumns = useSelector((state) => state['table'].showColumns);
+  const renderableColumns = useSelector(
+    (state) => state['table'].renderableColumns,
+  );
   const defaultShowColumns = useSelector(
     (state) => state['table'].defaultShowColumns,
   );
@@ -51,11 +54,7 @@ export function TableControls() {
   function onClickShowAllColumns() {
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
-      payload: [
-        ...Object.keys(columns).filter(
-          (column) => columns[column]['renderColumn'],
-        ),
-      ],
+      payload: renderableColumns,
     });
     triggerGtmEvent(SHOW_ALL_COLUMNS_BTN);
   }
@@ -73,8 +72,7 @@ export function TableControls() {
       <details>
         <summary>Showed columns:</summary>
         <ul className="showed-columns">
-          {Object.keys(columns).map((column) => {
-            if (!columns[column]['renderColumn']) return null;
+          {renderableColumns.map((column) => {
             return (
               <li key={column} className="showed-columns__item">
                 <Checkbox

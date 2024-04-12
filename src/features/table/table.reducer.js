@@ -20,6 +20,7 @@ const tableInitialState = {
   preparedData: [],
   showColumns: [],
   defaultShowColumns: [],
+  renderableColumns: [],
   allTags: [],
   availableTags: [],
 };
@@ -57,6 +58,12 @@ export function tableReducer(state = tableInitialState, action) {
       );
       updatedState['defaultShowColumns'] = defaultShowColumns;
 
+      // get renderable columns
+      const renderableColumns = Object.keys(columns).filter(
+        (column) => columns[column]['renderColumn'],
+      );
+      updatedState['renderableColumns'] = renderableColumns;
+
       // get showColumns from URL
       if (!state.websitesDataLoaded) {
         updatedState['showColumns'] = defaultShowColumns;
@@ -68,9 +75,6 @@ export function tableReducer(state = tableInitialState, action) {
         // if URL doesn't contain parameter
         if (!showColumns) return;
 
-        const renderableColumns = Object.keys(columns).filter(
-          (column) => columns[column]['renderColumn'],
-        );
         const filteredColumns = showColumns
           .split(',')
           .filter((column) => renderableColumns.includes(column));
