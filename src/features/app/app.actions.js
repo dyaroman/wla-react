@@ -29,13 +29,13 @@ export function updateURL(newState) {
     // in this case we don't want to save it in URL
     const columns = getState()?.table?.websitesData?.columns;
     // todo move default showed columns to store
-    const defaultShowedColumns = Object.keys(columns).filter(
+    const defaultShowColumns = Object.keys(columns).filter(
       (column) => columns[column]['showColumn'],
     );
 
     if (
       newState['showColumns'].every((column) =>
-        defaultShowedColumns.includes(column),
+        defaultShowColumns.includes(column),
       )
     ) {
       params.delete('showColumns');

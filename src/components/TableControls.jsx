@@ -17,22 +17,20 @@ export function TableControls() {
   const { columns } = websitesData;
 
   function onChange(column) {
-    let updatedShowedColumns = [...showColumns];
+    let updatedShowColumns = [...showColumns];
     const eventInfo = {
       label: column,
     };
-    if (updatedShowedColumns.includes(column)) {
-      updatedShowedColumns = updatedShowedColumns.filter(
-        (col) => col !== column,
-      );
+    if (updatedShowColumns.includes(column)) {
+      updatedShowColumns = updatedShowColumns.filter((col) => col !== column);
       eventInfo.method = 'off';
     } else {
-      updatedShowedColumns.push(column);
+      updatedShowColumns.push(column);
       eventInfo.method = 'on';
     }
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
-      payload: updatedShowedColumns,
+      payload: updatedShowColumns,
     });
     triggerGtmEvent(SHOWED_COLUMN_CHANGE, {
       ...eventInfo,
