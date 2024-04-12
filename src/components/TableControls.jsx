@@ -13,6 +13,9 @@ import {
 export function TableControls() {
   const dispatch = useDispatch();
   const showColumns = useSelector((state) => state['table'].showColumns);
+  const defaultShowColumns = useSelector(
+    (state) => state['table'].defaultShowColumns,
+  );
   const websitesData = useSelector((state) => state['table'].websitesData);
   const { columns } = websitesData;
 
@@ -60,9 +63,7 @@ export function TableControls() {
   function onClickRestoreDefaultColumns() {
     dispatch({
       type: SHOWED_COLUMNS_UPDATED,
-      payload: Object.keys(columns).filter(
-        (column) => columns[column]['showColumn'],
-      ),
+      payload: defaultShowColumns,
     });
     triggerGtmEvent(RESTORE_DEFAULT_COLUMNS_BTN);
   }

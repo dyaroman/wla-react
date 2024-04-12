@@ -19,6 +19,7 @@ const tableInitialState = {
   websitesDataLoaded: false,
   preparedData: [],
   showColumns: [],
+  defaultShowColumns: [],
   allTags: [],
   availableTags: [],
 };
@@ -27,6 +28,7 @@ export function tableReducer(state = tableInitialState, action) {
   switch (action.type) {
     case SET_WEBSITES_DATA: {
       const { columns, websites } = action.payload;
+
       // collect all filters
       const filters = {
         ...state.filters,
@@ -38,6 +40,7 @@ export function tableReducer(state = tableInitialState, action) {
           if (column === 'tags') filters[column] = [];
           else filters[column] = '';
         });
+
       // collect all unique tags
       const allTags = getUniqueTags(websites);
       const updatedState = {
@@ -47,6 +50,13 @@ export function tableReducer(state = tableInitialState, action) {
         availableTags: allTags,
         websitesData: action.payload,
       };
+
+      // get default show columns
+      const defaultShowColumns = Object.keys(columns).filter(
+        (column) => columns[column]['showColumn'],
+      );
+      updatedState['defaultShowColumns'] = defaultShowColumns;
+
       // get showColumns from URL
       const showColumns = getQueryParamValue('showColumns')?.split(',');
       const renderableColumns = Object.keys(columns).filter(
@@ -68,9 +78,7 @@ export function tableReducer(state = tableInitialState, action) {
         console.log(
           `Error due to parse "showColumns" from URL, reason: ${e.message}. Showing default columns.`,
         );
-        updatedState['showColumns'] = Object.keys(columns).filter(
-          (column) => columns[column]['showColumn'],
-        );
+        updatedState['showColumns'] = defaultShowColumns;
       }
 
       return updatedState;

@@ -25,13 +25,10 @@ export function updateURL(newState) {
           break;
       }
     }
-    // check if showColumns equal to default columns
+    // check if showColumns equal to defaultShowColumns
     // in this case we don't want to save it in URL
     const columns = getState()?.table?.websitesData?.columns;
-    // todo move default showed columns to store
-    const defaultShowColumns = Object.keys(columns).filter(
-      (column) => columns[column]['showColumn'],
-    );
+    const defaultShowColumns = getState()?.table?.defaultShowColumns;
 
     if (
       newState['showColumns'].every((column) =>
