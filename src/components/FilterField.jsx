@@ -11,13 +11,13 @@ import { FILTER_CHANGE } from '../misc/gtm.constants';
 export function FilterField({ name, placeholder }) {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state['table'].filters);
-  const showedColumns = useSelector((state) => state['table'].showedColumns);
+  const showColumns = useSelector((state) => state['table'].showColumns);
 
   function onChange(event) {
-    if (!showedColumns.includes(name)) {
+    if (!showColumns.includes(name)) {
       dispatch({
         type: SHOWED_COLUMNS_UPDATED,
-        payload: [...showedColumns, name],
+        payload: [...showColumns, name],
       });
     }
 

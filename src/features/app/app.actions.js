@@ -7,7 +7,7 @@ export function updateURL(newState) {
     const params = new URLSearchParams(window.location.search);
     for (const key in newState) {
       switch (key) {
-        case 'showedColumns':
+        case 'showColumns':
         case 'tags':
           if (newState[key].length === 0) {
             params.delete(key);
@@ -25,7 +25,7 @@ export function updateURL(newState) {
           break;
       }
     }
-    // check if showedColumns equal to default columns
+    // check if showColumns equal to default columns
     // in this case we don't want to save it in URL
     const columns = getState()?.table?.websitesData?.columns;
     // todo move default showed columns to store
@@ -34,11 +34,11 @@ export function updateURL(newState) {
     );
 
     if (
-      newState['showedColumns'].every((column) =>
+      newState['showColumns'].every((column) =>
         defaultShowedColumns.includes(column),
       )
     ) {
-      params.delete('showedColumns');
+      params.delete('showColumns');
     }
 
     if (params.toString() === '') {

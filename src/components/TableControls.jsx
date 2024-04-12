@@ -12,12 +12,12 @@ import {
 
 export function TableControls() {
   const dispatch = useDispatch();
-  const showedColumns = useSelector((state) => state['table'].showedColumns);
+  const showColumns = useSelector((state) => state['table'].showColumns);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const { columns } = websitesData;
 
   function onChange(column) {
-    let updatedShowedColumns = [...showedColumns];
+    let updatedShowedColumns = [...showColumns];
     const eventInfo = {
       label: column,
     };
@@ -80,7 +80,7 @@ export function TableControls() {
               <li key={column} className="showed-columns__item">
                 <Checkbox
                   label={fromCamelCaseToWords(column)}
-                  checked={showedColumns.includes(column)}
+                  checked={showColumns.includes(column)}
                   onChange={onChange.bind(this, column)}
                 />
               </li>

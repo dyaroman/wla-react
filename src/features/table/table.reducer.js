@@ -18,7 +18,7 @@ const tableInitialState = {
   websitesData: null,
   websitesDataLoaded: false,
   preparedData: [],
-  showedColumns: [],
+  showColumns: [],
   allTags: [],
   availableTags: [],
 };
@@ -47,28 +47,28 @@ export function tableReducer(state = tableInitialState, action) {
         availableTags: allTags,
         websitesData: action.payload,
       };
-      // get showedColumns from URL
-      const showedColumns = getQueryParamValue('showedColumns')?.split(',');
+      // get showColumns from URL
+      const showColumns = getQueryParamValue('showColumns')?.split(',');
       const renderableColumns = Object.keys(columns).filter(
         (column) => columns[column]['renderFilter'],
       );
       try {
-        if (showedColumns?.length === 1 && showedColumns[0] === '') {
+        if (showColumns?.length === 1 && showColumns[0] === '') {
           throw new Error('empty value');
         }
-        const filteredColumns = showedColumns.filter((column) =>
+        const filteredColumns = showColumns.filter((column) =>
           renderableColumns.includes(column),
         );
         if (filteredColumns.length === 0) {
           throw new Error('invalid values');
         }
-        updatedState['showedColumns'] = filteredColumns;
+        updatedState['showColumns'] = filteredColumns;
       } catch (e) {
         // todo add error log to gtm
         console.log(
-          `Error due to parse "showedColumns" from URL, reason: ${e.message}. Showing default columns.`,
+          `Error due to parse "showColumns" from URL, reason: ${e.message}. Showing default columns.`,
         );
-        updatedState['showedColumns'] = Object.keys(columns).filter(
+        updatedState['showColumns'] = Object.keys(columns).filter(
           (column) => columns[column]['showColumn'],
         );
       }
@@ -121,7 +121,7 @@ export function tableReducer(state = tableInitialState, action) {
       const { columns } = state.websitesData;
       return {
         ...state,
-        showedColumns: action.payload
+        showColumns: action.payload
           .filter((column) => Object.keys(columns).includes(column))
           .sort(
             (a, b) =>

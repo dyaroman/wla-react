@@ -27,7 +27,7 @@ export function Table() {
   const sort = useSelector((state) => state['table'].sort);
   const filters = useSelector((state) => state['table'].filters);
   const preparedData = useSelector((state) => state['table'].preparedData);
-  const showedColumns = useSelector((state) => state['table'].showedColumns);
+  const showColumns = useSelector((state) => state['table'].showColumns);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const { env, project, columns } = websitesData;
   const convertLinksTo =
@@ -43,10 +43,10 @@ export function Table() {
       updateURL({
         ...filters,
         ...sort,
-        showedColumns,
+        showColumns,
       }),
     );
-  }, [filters, sort, showedColumns]);
+  }, [filters, sort, showColumns]);
 
   function onTableBodyClick(event) {
     if (!event.altKey) return;
@@ -99,7 +99,7 @@ export function Table() {
             <thead>
               <tr>
                 <th>#</th>
-                {showedColumns.map((column) => (
+                {showColumns.map((column) => (
                   <FilterTitle
                     key={column}
                     text={fromCamelCaseToWords(column)}
@@ -124,7 +124,7 @@ export function Table() {
                     <td data-title="#" data-qa="#">
                       {++index}
                     </td>
-                    {showedColumns.map((column) => {
+                    {showColumns.map((column) => {
                       switch (column) {
                         case 'website':
                           return (

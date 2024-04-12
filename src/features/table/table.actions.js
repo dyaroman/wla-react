@@ -57,7 +57,7 @@ export function getURLParams() {
     if (!getState().table.websitesDataLoaded) return;
     const newSort = {};
     const newFilters = {};
-    const { sort, websitesData, showedColumns } = getState().table;
+    const { sort, websitesData, showColumns } = getState().table;
     const params = new URLSearchParams(window.location.search);
     if (params['size']) {
       const sortedColumns = [];
@@ -100,7 +100,7 @@ export function getURLParams() {
         type: SHOWED_COLUMNS_UPDATED,
         payload: [
           ...new Set([
-            ...showedColumns,
+            ...showColumns,
             ...sortedColumns,
             ...Object.keys(newFilters),
           ]),
