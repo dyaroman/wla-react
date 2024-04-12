@@ -75,6 +75,12 @@ export function tableReducer(state = tableInitialState, action) {
         // if URL doesn't contain parameter
         if (!showColumns) return;
 
+        // if showColumns equal to alias 'all'
+        if (showColumns === 'all') {
+          updatedState['showColumns'] = renderableColumns;
+          return;
+        }
+
         const filteredColumns = showColumns
           .split(',')
           .filter((column) => renderableColumns.includes(column));

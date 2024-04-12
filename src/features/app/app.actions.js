@@ -38,6 +38,18 @@ export function updateURL(newState) {
       params.delete('showColumns');
     }
 
+    // check if showColumns equal to renderableColumns
+    // in this case we should use alias 'all'
+    const renderableColumns = getState()?.table?.renderableColumns;
+    if (
+      newState['showColumns'].length === renderableColumns.length &&
+      newState['showColumns'].every((column) =>
+        renderableColumns.includes(column),
+      )
+    ) {
+      params.set('showColumns', 'all');
+    }
+
     if (params.toString() === '') {
       window.history.replaceState({}, '', '/');
     } else {
