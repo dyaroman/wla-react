@@ -25,12 +25,12 @@ export function updateURL(newState) {
           break;
       }
     }
+
     // check if showColumns equal to defaultShowColumns
     // in this case we don't want to save it in URL
-    const columns = getState()?.table?.websitesData?.columns;
     const defaultShowColumns = getState()?.table?.defaultShowColumns;
-
     if (
+      newState['showColumns'].length === defaultShowColumns.length &&
       newState['showColumns'].every((column) =>
         defaultShowColumns.includes(column),
       )

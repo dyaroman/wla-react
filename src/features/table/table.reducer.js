@@ -58,27 +58,25 @@ export function tableReducer(state = tableInitialState, action) {
       updatedState['defaultShowColumns'] = defaultShowColumns;
 
       // get showColumns from URL
-      const showColumns = getQueryParamValue('showColumns')?.split(',');
-      const renderableColumns = Object.keys(columns).filter(
-        (column) => columns[column]['renderFilter'],
-      );
-      try {
-        if (showColumns?.length === 1 && showColumns[0] === '') {
-          throw new Error('empty value');
-        }
-        const filteredColumns = showColumns.filter((column) =>
-          renderableColumns.includes(column),
-        );
-        if (filteredColumns.length === 0) {
-          throw new Error('invalid values');
-        }
-        updatedState['showColumns'] = filteredColumns;
-      } catch (e) {
-        // todo add error log to gtm
-        console.log(
-          `Error due to parse "showColumns" from URL, reason: ${e.message}. Showing default columns.`,
-        );
+      if (!state.websitesDataLoaded) {
         updatedState['showColumns'] = defaultShowColumns;
+        getShowColumnsFromUrl();
+      }
+
+      function getShowColumnsFromUrl() {
+        const showColumns = getQueryParamValue('showColumns');
+        // if URL doesn't contain parameter
+        if (!showColumns) return;
+
+        const renderableColumns = Object.keys(columns).filter(
+          (column) => columns[column]['renderColumn'],
+        );
+        const filteredColumns = showColumns
+          .split(',')
+          .filter((column) => renderableColumns.includes(column));
+        if (filteredColumns.length > 0) {
+          updatedState['showColumns'] = filteredColumns;
+        }
       }
 
       return updatedState;
