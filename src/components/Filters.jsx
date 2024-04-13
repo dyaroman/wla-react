@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterField } from './FilterField';
 import { TagsFilterField } from './TagsFilterField';
 import { CLEAR_FILTERS } from '../features/table/table.constants';
 import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
-import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
+import {
+  fromCamelCaseToWords,
+  getQueryParamValue,
+  triggerGtmEvent,
+} from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
 import {
   CLEAR_FILTERS_BTN,
@@ -21,6 +25,16 @@ export function Filters() {
   const websitesData = useSelector((state) => state['table'].websitesData);
   const { columns } = websitesData;
   const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
+
+  useEffect(() => {
+    const filtersOpen = getQueryParamValue(FILTERS_OPEN);
+    if (filtersOpen === '') {
+      dispatch({
+        type: TOGGLE_FILTERS_COLLAPSE,
+        payload: false,
+      });
+    }
+  }, []);
 
   useKeyPress('meta+shift+f', (event) => {
     event.preventDefault();

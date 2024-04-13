@@ -7,6 +7,11 @@ import {
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from './app.constants';
+import {
+  deleteQueryParamValue,
+  setQueryParamValue,
+} from '../../misc/functions';
+import { FILTERS_OPEN } from '../../misc/url.constants';
 
 const appInitialState = {
   filtersCollapse: true,
@@ -21,6 +26,11 @@ const appInitialState = {
 export function appReducer(state = appInitialState, action) {
   switch (action.type) {
     case TOGGLE_FILTERS_COLLAPSE:
+      if (action.payload) {
+        deleteQueryParamValue(FILTERS_OPEN);
+      } else {
+        setQueryParamValue(FILTERS_OPEN, '');
+      }
       return {
         ...state,
         filtersCollapse: action.payload,

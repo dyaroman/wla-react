@@ -78,6 +78,26 @@ export function getQueryParamValue(key) {
   return new URLSearchParams(window.location.search).get(key);
 }
 
+export function setQueryParamValue(key, value) {
+  const searchParams = new URLSearchParams(window.location.search);
+  searchParams.set(key, value);
+  window.history.replaceState(
+    {},
+    '',
+    `${window.location.pathname}?${searchParams}`,
+  );
+}
+
+export function deleteQueryParamValue(key) {
+  const searchParams = new URLSearchParams(window.location.search);
+  searchParams.delete(key);
+  window.history.replaceState(
+    {},
+    '',
+    `${window.location.pathname}?${searchParams}`,
+  );
+}
+
 export function fromCamelCaseToWords(str) {
   return str
     .split(/(?=[A-Z0-9])/)
