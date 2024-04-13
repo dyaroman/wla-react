@@ -27,8 +27,7 @@ export function Filters() {
   const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
 
   useEffect(() => {
-    const filtersOpen = getQueryParamValue(FILTERS_OPEN);
-    if (filtersOpen === '') {
+    if (getQueryParamValue(FILTERS_OPEN) === '') {
       dispatch({
         type: TOGGLE_FILTERS_OPEN,
         payload: true,
