@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 
 import { useKeyPress } from '../hooks/useKeyPress';
-import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
 import { triggerGtmEvent } from '../misc/functions';
+import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
 import { OPEN_INFO_MODAL, SHORTCUT } from '../misc/gtm.constants';
 
 export function InfoModalBtn() {

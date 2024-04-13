@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TOGGLE_THEME } from '../features/app/app.constants';
 import { triggerGtmEvent } from '../misc/functions';
+import { TOGGLE_THEME } from '../features/app/app.constants';
 import { TOGGLE_THEME_GTM_EVENT } from '../misc/gtm.constants';
 
 export function ThemeToggle() {

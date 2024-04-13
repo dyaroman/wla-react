@@ -7,8 +7,8 @@ import {
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
-import { getQueryParamValue, getUniqueTags } from '../../misc/functions';
 import { SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
+import { getQueryParamValue, getUniqueTags } from '../../misc/functions';
 
 const tableInitialState = {
   filters: {},

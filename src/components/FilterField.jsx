@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FieldTitle } from './FieldTitle';
+import { triggerGtmEvent } from '../misc/functions';
 import {
   FILTERS_UPDATED,
   SHOWED_COLUMNS_UPDATED,
 } from '../features/table/table.constants';
-import { triggerGtmEvent } from '../misc/functions';
 import { FILTER_CHANGE } from '../misc/gtm.constants';
 
 export function FilterField({ name, placeholder }) {

@@ -2,12 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import { Checkbox } from './Checkbox';
-import { SHOWED_COLUMNS_UPDATED } from '../features/table/table.constants';
 import {
   fromCamelCaseToWords,
   getQueryParamValue,
   triggerGtmEvent,
 } from '../misc/functions';
+import { SHOWED_COLUMNS_UPDATED } from '../features/table/table.constants';
 import {
   HIDE_ALL_COLUMNS_BTN,
   RESTORE_DEFAULT_COLUMNS_BTN,

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { SORT_UPDATED } from '../features/table/table.constants';
 import { triggerGtmEvent } from '../misc/functions';
+import { SORT_UPDATED } from '../features/table/table.constants';
 import { TABLE_SORT } from '../misc/gtm.constants';
 
 export function FilterTitle({ column, text }) {

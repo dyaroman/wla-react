@@ -11,9 +11,9 @@ import {
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from '../app/app.constants';
-import { filterTableData, sortTableData } from '../../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
 import { TAGS } from '../../misc/url.constants';
+import { filterTableData, sortTableData } from '../../misc/functions';
 
 export function getWebsitesData() {
   return async function (dispatch) {

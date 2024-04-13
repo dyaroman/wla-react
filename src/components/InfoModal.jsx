@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
 import { triggerGtmEvent } from '../misc/functions';
+import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
 import { CLOSE_INFO_MODAL } from '../misc/gtm.constants';
 
 export function InfoModal() {

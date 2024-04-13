@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Checkbox } from './Checkbox';
-import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { triggerGtmEvent } from '../misc/functions';
+import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { ADD_TAG, REMOVE_TAG } from '../misc/gtm.constants';
 
 export function Tags({ items }) {

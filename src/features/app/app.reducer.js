@@ -8,11 +8,11 @@ import {
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from './app.constants';
+import { CUSTOMIZE_COLUMNS_OPEN, FILTERS_OPEN } from '../../misc/url.constants';
 import {
   deleteQueryParamValue,
   setQueryParamValue,
 } from '../../misc/functions';
-import { CUSTOMIZE_COLUMNS_OPEN, FILTERS_OPEN } from '../../misc/url.constants';
 
 const appInitialState = {
   filtersOpen: false,

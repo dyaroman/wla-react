@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterField } from './FilterField';
 import { TagsFilterField } from './TagsFilterField';
-import { CLEAR_FILTERS } from '../features/table/table.constants';
-import { TOGGLE_FILTERS_OPEN } from '../features/app/app.constants';
 import {
   fromCamelCaseToWords,
   getQueryParamValue,
   triggerGtmEvent,
 } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
+import { CLEAR_FILTERS } from '../features/table/table.constants';
+import { TOGGLE_FILTERS_OPEN } from '../features/app/app.constants';
 import {
   CLEAR_FILTERS_BTN,
   COPY_WEBSITES_BTN,
