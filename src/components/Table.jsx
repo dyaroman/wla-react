@@ -20,6 +20,7 @@ import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
 import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
+import { TAGS } from '../misc/url.constants';
 
 export function Table() {
   const dispatch = useDispatch();
@@ -194,10 +195,10 @@ export function Table() {
                           );
                         }
 
-                        case 'tags':
+                        case TAGS:
                           return (
                             <td
-                              data-title={fromCamelCaseToWords('tags')}
+                              data-title={fromCamelCaseToWords(TAGS)}
                               data-qa="tags"
                               key={column}
                             >

@@ -8,6 +8,7 @@ import {
   WEBSITES_DATA_LOADED,
 } from './table.constants';
 import { getQueryParamValue, getUniqueTags } from '../../misc/functions';
+import { SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
 
 const tableInitialState = {
   filters: {},
@@ -38,7 +39,7 @@ export function tableReducer(state = tableInitialState, action) {
         .filter((column) => columns[column]['renderFilter'])
         .filter((column) => !state.filters[column])
         .forEach((column) => {
-          if (column === 'tags') filters[column] = [];
+          if (column === TAGS) filters[column] = [];
           else filters[column] = '';
         });
 
@@ -66,26 +67,26 @@ export function tableReducer(state = tableInitialState, action) {
 
       // get showColumns from URL
       if (!state.websitesDataLoaded) {
-        updatedState['showColumns'] = defaultShowColumns;
+        updatedState[SHOW_COLUMNS] = defaultShowColumns;
         getShowColumnsFromUrl();
       }
 
       function getShowColumnsFromUrl() {
-        const showColumns = getQueryParamValue('showColumns');
+        const showColumns = getQueryParamValue(SHOW_COLUMNS);
         // if URL doesn't contain parameter
         if (!showColumns) return;
 
         // if showColumns equal to alias 'all'
         // show all renderable columns
         if (showColumns === 'all') {
-          updatedState['showColumns'] = renderableColumns;
+          updatedState[SHOW_COLUMNS] = renderableColumns;
           return;
         }
 
         // if shownColumns equal to alias 'none'
         // hide all columns
         if (showColumns === 'none') {
-          updatedState['showColumns'] = [];
+          updatedState[SHOW_COLUMNS] = [];
           return;
         }
 
@@ -93,7 +94,7 @@ export function tableReducer(state = tableInitialState, action) {
           .split(',')
           .filter((column) => renderableColumns.includes(column));
         if (filteredColumns.length > 0) {
-          updatedState['showColumns'] = filteredColumns;
+          updatedState[SHOW_COLUMNS] = filteredColumns;
         }
       }
 
@@ -123,7 +124,7 @@ export function tableReducer(state = tableInitialState, action) {
     case CLEAR_FILTERS: {
       const filters = {};
       for (const k in state.filters) {
-        if (k === 'tags') filters[k] = [];
+        if (k === TAGS) filters[k] = [];
         else filters[k] = '';
       }
       return {

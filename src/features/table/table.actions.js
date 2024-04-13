@@ -13,6 +13,7 @@ import {
 } from '../app/app.constants';
 import { filterTableData, sortTableData } from '../../misc/functions';
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
+import { TAGS } from '../../misc/url.constants';
 
 export function getWebsitesData() {
   return async function (dispatch) {
@@ -79,7 +80,7 @@ export function getURLParams() {
             newSort[key] = value;
             break;
 
-          case 'tags':
+          case TAGS:
             newFilters[key] = value.split(',');
             break;
 

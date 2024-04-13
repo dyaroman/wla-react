@@ -1,4 +1,5 @@
 import { NO_DATA } from './misc.constants';
+import { TAGS } from './url.constants';
 
 export function search(where, what) {
   where = String(where).toLowerCase();
@@ -20,12 +21,12 @@ export function filterTableData(websites, filters) {
         continue;
       }
       switch (filter) {
-        case 'tags':
+        case TAGS:
           if (
             ![...filters[filter]].every((filterTag) =>
-              website['tags']
-                .map((tag) => tag.toLowerCase())
-                .includes(filterTag.toLowerCase()),
+              website[TAGS].map((tag) => tag.toLowerCase()).includes(
+                filterTag.toLowerCase(),
+              ),
             )
           ) {
             return false;

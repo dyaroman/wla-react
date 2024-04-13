@@ -12,6 +12,7 @@ import {
   COPY_WEBSITES_BTN,
   SHORTCUT,
 } from '../misc/gtm.constants';
+import { FILTERS_OPEN, TAGS } from '../misc/url.constants';
 
 export function Filters() {
   const dispatch = useDispatch();
@@ -119,8 +120,7 @@ export function Filters() {
       <summary onClick={onSummaryClick}>Filters:</summary>
       <div className="filters__content">
         {Object.keys(columns).map((column) => {
-          if (column === 'tags' || !columns[column]['renderFilter'])
-            return null;
+          if (column === TAGS || !columns[column]['renderFilter']) return null;
           return (
             <FilterField
               key={column}
@@ -129,7 +129,7 @@ export function Filters() {
             />
           );
         })}
-        {Object.keys(columns).includes('tags') && <TagsFilterField />}
+        {Object.keys(columns).includes(TAGS) && <TagsFilterField />}
       </div>
       <div className="btn-group">
         <button

@@ -1,0 +1,3 @@
+export const FILTERS_OPEN = 'filtersOpen';
+export const SHOW_COLUMNS = 'showColumns';
+export const TAGS = 'tags';
