@@ -70,11 +70,11 @@ export function TableControls() {
   return (
     <section className="table-controls">
       <details>
-        <summary>Showed columns:</summary>
-        <ul className="showed-columns">
+        <summary>Customize columns:</summary>
+        <ul className="customize-columns">
           {renderableColumns.map((column) => {
             return (
-              <li key={column} className="showed-columns__item">
+              <li key={column}>
                 <Checkbox
                   label={fromCamelCaseToWords(column)}
                   checked={showColumns.includes(column)}
