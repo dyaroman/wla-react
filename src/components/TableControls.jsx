@@ -1,26 +1,43 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import { Checkbox } from './Checkbox';
 import { SHOWED_COLUMNS_UPDATED } from '../features/table/table.constants';
-import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
+import {
+  fromCamelCaseToWords,
+  getQueryParamValue,
+  triggerGtmEvent,
+} from '../misc/functions';
 import {
   HIDE_ALL_COLUMNS_BTN,
   RESTORE_DEFAULT_COLUMNS_BTN,
   SHOW_ALL_COLUMNS_BTN,
   SHOWED_COLUMN_CHANGE,
 } from '../misc/gtm.constants';
+import { TOGGLE_CUSTOMIZE_COLUMNS_OPEN } from '../features/app/app.constants';
+import { CUSTOMIZE_COLUMNS_OPEN } from '../misc/url.constants';
 
 export function TableControls() {
   const dispatch = useDispatch();
   const showColumns = useSelector((state) => state['table'].showColumns);
+  const customizeColumnsOpen = useSelector(
+    (state) => state['app'].customizeColumnsOpen,
+  );
   const renderableColumns = useSelector(
     (state) => state['table'].renderableColumns,
   );
   const defaultShowColumns = useSelector(
     (state) => state['table'].defaultShowColumns,
   );
-  const websitesData = useSelector((state) => state['table'].websitesData);
-  const { columns } = websitesData;
+
+  useEffect(() => {
+    if (getQueryParamValue(CUSTOMIZE_COLUMNS_OPEN) === '') {
+      dispatch({
+        type: TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
+        payload: true,
+      });
+    }
+  }, []);
 
   function onChange(column) {
     let updatedShowColumns = [...showColumns];
@@ -67,10 +84,18 @@ export function TableControls() {
     triggerGtmEvent(RESTORE_DEFAULT_COLUMNS_BTN);
   }
 
+  function onSummaryClick(event) {
+    event.preventDefault();
+    dispatch({
+      type: TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
+      payload: !customizeColumnsOpen,
+    });
+  }
+
   return (
     <section className="table-controls">
-      <details>
-        <summary>Customize columns:</summary>
+      <details open={customizeColumnsOpen}>
+        <summary onClick={onSummaryClick}>Customize columns:</summary>
         <ul className="customize-columns">
           {renderableColumns.map((column) => {
             return (

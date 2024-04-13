@@ -1,5 +1,6 @@
 import {
   REQUEST_ERROR,
+  TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
   TOGGLE_FILTERS_OPEN,
   TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL,
@@ -11,10 +12,11 @@ import {
   deleteQueryParamValue,
   setQueryParamValue,
 } from '../../misc/functions';
-import { FILTERS_OPEN } from '../../misc/url.constants';
+import { CUSTOMIZE_COLUMNS_OPEN, FILTERS_OPEN } from '../../misc/url.constants';
 
 const appInitialState = {
   filtersOpen: false,
+  customizeColumnsOpen: false,
   infoModalOpen: false,
   imgPreviewUrl: null,
   theme: 'light',
@@ -34,6 +36,16 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         filtersOpen: action.payload,
+      };
+    case TOGGLE_CUSTOMIZE_COLUMNS_OPEN:
+      if (action.payload) {
+        setQueryParamValue(CUSTOMIZE_COLUMNS_OPEN, '');
+      } else {
+        deleteQueryParamValue(CUSTOMIZE_COLUMNS_OPEN);
+      }
+      return {
+        ...state,
+        customizeColumnsOpen: action.payload,
       };
     case TOGGLE_INFO_MODAL:
       return {
