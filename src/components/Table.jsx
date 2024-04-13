@@ -18,13 +18,13 @@ import {
 } from '../misc/functions';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
-import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
+import { TOGGLE_FILTERS_OPEN } from '../features/app/app.constants';
 import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
 import { TAGS } from '../misc/url.constants';
 
 export function Table() {
   const dispatch = useDispatch();
-  const filtersCollapse = useSelector((state) => state['app'].filtersCollapse);
+  const filtersOpen = useSelector((state) => state['app'].filtersOpen);
   const sort = useSelector((state) => state['table'].sort);
   const filters = useSelector((state) => state['table'].filters);
   const preparedData = useSelector((state) => state['table'].preparedData);
@@ -62,10 +62,10 @@ export function Table() {
         `.filters input[data-qa='${fieldName}']`,
       );
       if (!field) return;
-      if (filtersCollapse) {
+      if (!filtersOpen) {
         dispatch({
-          type: TOGGLE_FILTERS_COLLAPSE,
-          payload: false,
+          type: TOGGLE_FILTERS_OPEN,
+          payload: true,
         });
       }
       const fieldValue = cell.innerText.trim();

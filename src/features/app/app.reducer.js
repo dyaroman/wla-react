@@ -1,6 +1,6 @@
 import {
   REQUEST_ERROR,
-  TOGGLE_FILTERS_COLLAPSE,
+  TOGGLE_FILTERS_OPEN,
   TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL,
   TOGGLE_THEME,
@@ -14,7 +14,7 @@ import {
 import { FILTERS_OPEN } from '../../misc/url.constants';
 
 const appInitialState = {
-  filtersCollapse: true,
+  filtersOpen: false,
   infoModalOpen: false,
   imgPreviewUrl: null,
   theme: 'light',
@@ -25,15 +25,15 @@ const appInitialState = {
 
 export function appReducer(state = appInitialState, action) {
   switch (action.type) {
-    case TOGGLE_FILTERS_COLLAPSE:
+    case TOGGLE_FILTERS_OPEN:
       if (action.payload) {
-        deleteQueryParamValue(FILTERS_OPEN);
-      } else {
         setQueryParamValue(FILTERS_OPEN, '');
+      } else {
+        deleteQueryParamValue(FILTERS_OPEN);
       }
       return {
         ...state,
-        filtersCollapse: action.payload,
+        filtersOpen: action.payload,
       };
     case TOGGLE_INFO_MODAL:
       return {

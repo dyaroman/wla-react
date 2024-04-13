@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FilterField } from './FilterField';
 import { TagsFilterField } from './TagsFilterField';
 import { CLEAR_FILTERS } from '../features/table/table.constants';
-import { TOGGLE_FILTERS_COLLAPSE } from '../features/app/app.constants';
+import { TOGGLE_FILTERS_OPEN } from '../features/app/app.constants';
 import {
   fromCamelCaseToWords,
   getQueryParamValue,
@@ -20,7 +20,7 @@ import { FILTERS_OPEN, TAGS } from '../misc/url.constants';
 
 export function Filters() {
   const dispatch = useDispatch();
-  const filtersCollapse = useSelector((state) => state['app'].filtersCollapse);
+  const filtersOpen = useSelector((state) => state['app'].filtersOpen);
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const { columns } = websitesData;
@@ -30,8 +30,8 @@ export function Filters() {
     const filtersOpen = getQueryParamValue(FILTERS_OPEN);
     if (filtersOpen === '') {
       dispatch({
-        type: TOGGLE_FILTERS_COLLAPSE,
-        payload: false,
+        type: TOGGLE_FILTERS_OPEN,
+        payload: true,
       });
     }
   }, []);
@@ -75,10 +75,10 @@ export function Filters() {
   }
 
   function onSearchShortcut() {
-    if (filtersCollapse) {
+    if (!filtersOpen) {
       dispatch({
-        type: TOGGLE_FILTERS_COLLAPSE,
-        payload: false,
+        type: TOGGLE_FILTERS_OPEN,
+        payload: true,
       });
     }
     setTimeout(() => {
@@ -124,13 +124,13 @@ export function Filters() {
   function onSummaryClick(event) {
     event.preventDefault();
     dispatch({
-      type: TOGGLE_FILTERS_COLLAPSE,
-      payload: !filtersCollapse,
+      type: TOGGLE_FILTERS_OPEN,
+      payload: !filtersOpen,
     });
   }
 
   return (
-    <details open={!filtersCollapse} className="filters">
+    <details open={filtersOpen} className="filters">
       <summary onClick={onSummaryClick}>Filters:</summary>
       <div className="filters__content">
         {Object.keys(columns).map((column) => {
