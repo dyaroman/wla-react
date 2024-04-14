@@ -2,10 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FieldTitle } from './FieldTitle';
 import { triggerGtmEvent } from '../misc/functions';
-import {
-  FILTERS_UPDATED,
-  SHOW_COLUMNS_UPDATED,
-} from '../features/table/table.constants';
+import { updateShowColumns } from '../features/table/table.actions';
+import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { FILTER_CHANGE } from '../misc/gtm.constants';
 
 export function FilterField({ name, placeholder }) {
@@ -15,10 +13,7 @@ export function FilterField({ name, placeholder }) {
 
   function onChange(event) {
     if (!showColumns.includes(name)) {
-      dispatch({
-        type: SHOW_COLUMNS_UPDATED,
-        payload: [...showColumns, name],
-      });
+      dispatch(updateShowColumns([...showColumns, name]));
     }
 
     dispatch({

@@ -171,16 +171,15 @@ export function getURLParams() {
         type: FILTERS_UPDATED,
         payload: newFilters,
       });
-      dispatch({
-        type: SHOW_COLUMNS_UPDATED,
-        payload: [
+      dispatch(
+        updateShowColumns([
           ...new Set([
             ...showColumns,
             ...sortedColumns,
             ...Object.keys(newFilters),
           ]),
-        ],
-      });
+        ]),
+      );
     }
     dispatch({
       type: URL_PARAMS_READ,
@@ -233,6 +232,23 @@ export function clearFilters() {
         filters,
         sort,
       },
+    });
+  };
+}
+
+export function updateShowColumns(showColumns) {
+  return function (dispatch, getState) {
+    const { columns } = getState().table.websitesData;
+
+    // todo: check filter function, need to filter renderable columns
+    dispatch({
+      type: SHOW_COLUMNS_UPDATED,
+      payload: showColumns
+        .filter((column) => Object.keys(columns).includes(column))
+        .sort(
+          (a, b) =>
+            Object.keys(columns).indexOf(a) - Object.keys(columns).indexOf(b),
+        ),
     });
   };
 }
