@@ -9,8 +9,8 @@ import {
   triggerGtmEvent,
 } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
+import { toggleFiltersOpen } from '../features/app/app.actions';
 import { CLEAR_FILTERS } from '../features/table/table.constants';
-import { TOGGLE_FILTERS_OPEN } from '../features/app/app.constants';
 import {
   CLEAR_FILTERS_BTN,
   COPY_WEBSITES_BTN,
@@ -28,10 +28,7 @@ export function Filters() {
 
   useEffect(() => {
     if (getQueryParamValue(FILTERS_OPEN) === '') {
-      dispatch({
-        type: TOGGLE_FILTERS_OPEN,
-        payload: true,
-      });
+      dispatch(toggleFiltersOpen(true));
     }
   }, []);
 
@@ -75,10 +72,7 @@ export function Filters() {
 
   function onSearchShortcut() {
     if (!filtersOpen) {
-      dispatch({
-        type: TOGGLE_FILTERS_OPEN,
-        payload: true,
-      });
+      dispatch(toggleFiltersOpen(true));
     }
     setTimeout(() => {
       document.querySelector('input').select();
@@ -122,10 +116,7 @@ export function Filters() {
 
   function onSummaryClick(event) {
     event.preventDefault();
-    dispatch({
-      type: TOGGLE_FILTERS_OPEN,
-      payload: !filtersOpen,
-    });
+    dispatch(toggleFiltersOpen(!filtersOpen));
   }
 
   return (

@@ -8,7 +8,7 @@ import {
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from './app.constants';
-import { CUSTOMIZE_COLUMNS_OPEN, FILTERS_OPEN } from '../../misc/url.constants';
+import { CUSTOMIZE_COLUMNS_OPEN } from '../../misc/url.constants';
 import {
   deleteQueryParamValue,
   setQueryParamValue,
@@ -28,11 +28,6 @@ const appInitialState = {
 export function appReducer(state = appInitialState, action) {
   switch (action.type) {
     case TOGGLE_FILTERS_OPEN:
-      if (action.payload) {
-        setQueryParamValue(FILTERS_OPEN, '');
-      } else {
-        deleteQueryParamValue(FILTERS_OPEN);
-      }
       return {
         ...state,
         filtersOpen: action.payload,

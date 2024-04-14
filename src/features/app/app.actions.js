@@ -1,4 +1,9 @@
-import { SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
+import { FILTERS_OPEN, SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
+import { TOGGLE_FILTERS_OPEN } from './app.constants';
+import {
+  deleteQueryParamValue,
+  setQueryParamValue,
+} from '../../misc/functions';
 
 export function updateURL(newState) {
   return function (dispatch, getState) {
@@ -66,5 +71,19 @@ export function updateURL(newState) {
     } else {
       window.history.replaceState({}, '', `?${params}`);
     }
+  };
+}
+
+export function toggleFiltersOpen(open) {
+  if (open) {
+    setQueryParamValue(FILTERS_OPEN, '');
+  } else {
+    deleteQueryParamValue(FILTERS_OPEN);
+  }
+  return function (dispatch) {
+    dispatch({
+      type: TOGGLE_FILTERS_OPEN,
+      payload: open,
+    });
   };
 }

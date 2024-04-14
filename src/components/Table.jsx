@@ -9,7 +9,7 @@ import { ColorCell } from './ColorCell';
 import { TableControls } from './TableControls';
 import { ImgCell } from './ImgCell';
 import { updateTableData } from '../features/table/table.actions';
-import { updateURL } from '../features/app/app.actions';
+import { toggleFiltersOpen, updateURL } from '../features/app/app.actions';
 import {
   convertUrlToEnv,
   fromCamelCaseToWords,
@@ -18,7 +18,6 @@ import {
 } from '../misc/functions';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
-import { TOGGLE_FILTERS_OPEN } from '../features/app/app.constants';
 import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
 import { TAGS } from '../misc/url.constants';
 
@@ -63,10 +62,7 @@ export function Table() {
       );
       if (!field) return;
       if (!filtersOpen) {
-        dispatch({
-          type: TOGGLE_FILTERS_OPEN,
-          payload: true,
-        });
+        dispatch(toggleFiltersOpen(true));
       }
       const fieldValue = cell.innerText.trim();
       dispatch({
