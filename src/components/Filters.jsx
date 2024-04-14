@@ -23,7 +23,7 @@ export function Filters() {
   const filtersOpen = useSelector((state) => state['app'].filtersOpen);
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
-  const { columns } = websitesData;
+  const columns = websitesData['columns'];
   const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
 
   useEffect(() => {

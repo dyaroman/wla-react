@@ -29,7 +29,9 @@ export function Table() {
   const preparedData = useSelector((state) => state['table'].preparedData);
   const showColumns = useSelector((state) => state['table'].showColumns);
   const websitesData = useSelector((state) => state['table'].websitesData);
-  const { env, project, columns } = websitesData;
+  const env = websitesData['env'];
+  const project = websitesData['project'];
+  const columns = websitesData['columns'];
   const convertLinksTo =
     getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
   const convertLinks = convertLinksTo && convertLinksTo !== env;

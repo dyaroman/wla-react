@@ -29,7 +29,8 @@ export function getWebsitesData() {
       switch (response.status) {
         case 200:
           const websitesData = await response.json();
-          const { columns, websites } = websitesData;
+          const columns = websitesData['columns'];
+          const websites = websitesData['websites'];
 
           // collect all filters
           const filters = {
@@ -132,17 +133,14 @@ export function getURLParams() {
     if (!getState().table.websitesDataLoaded) return;
     const newSort = {};
     const newFilters = {};
-    const { sort, websitesData, showColumns } = getState().table;
+    const sort = getState().table.sort;
+    const showColumns = getState().table.showColumns;
+    const renderableColumns = getState().table.renderableColumns;
     const params = new URLSearchParams(window.location.search);
     if (params['size']) {
       const sortedColumns = [];
       for (const [key, value] of params) {
-        if (
-          ![
-            ...Object.keys(websitesData.columns),
-            ...Object.keys(sort),
-          ].includes(key)
-        ) {
+        if (![...renderableColumns, ...Object.keys(sort)].includes(key)) {
           continue;
         }
         switch (key) {
@@ -190,7 +188,9 @@ export function getURLParams() {
 
 export function updateTableData() {
   return function (dispatch, getState) {
-    const { websitesData, filters, sort } = getState().table;
+    const websitesData = getState().table.websitesData;
+    const filters = getState().table.filters;
+    const sort = getState().table.sort;
     const filteredData = filterTableData(
       [...websitesData['websites']],
       filters,
@@ -238,13 +238,13 @@ export function clearFilters() {
 
 export function updateShowColumns(showColumns) {
   return function (dispatch, getState) {
-    const { columns } = getState().table.websitesData;
+    const columns = getState().table.websitesData.columns;
+    const renderableColumns = getState().table.renderableColumns;
 
-    // todo: check filter function, need to filter renderable columns
     dispatch({
       type: SHOW_COLUMNS_UPDATED,
       payload: showColumns
-        .filter((column) => Object.keys(columns).includes(column))
+        .filter((column) => renderableColumns.includes(column))
         .sort(
           (a, b) =>
             Object.keys(columns).indexOf(a) - Object.keys(columns).indexOf(b),

@@ -13,7 +13,8 @@ export function FilterTitle({ column, text }) {
   }
 
   function onClick(event) {
-    const { sortColumn, sortDirection } = event.target.dataset;
+    const sortColumn = event.target.dataset.sortColumn;
+    const sortDirection = event.target.dataset.sortDirection;
     const newSort = {};
     const eventInfo = {
       label: sortColumn,
