@@ -7,8 +7,8 @@ import {
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
-import { SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
-import { getQueryParamValue, getUniqueTags } from '../../misc/functions';
+import { TAGS } from '../../misc/url.constants';
+import { getUniqueTags } from '../../misc/functions';
 
 const tableInitialState = {
   filters: {},
@@ -28,78 +28,11 @@ const tableInitialState = {
 
 export function tableReducer(state = tableInitialState, action) {
   switch (action.type) {
-    case SET_WEBSITES_DATA: {
-      const { columns, websites } = action.payload;
-
-      // collect all filters
-      const filters = {
-        ...state.filters,
-      };
-      Object.keys(columns)
-        .filter((column) => columns[column]['renderFilter'])
-        .filter((column) => !state.filters[column])
-        .forEach((column) => {
-          if (column === TAGS) filters[column] = [];
-          else filters[column] = '';
-        });
-
-      // collect all unique tags
-      const allTags = getUniqueTags(websites);
-      const updatedState = {
+    case SET_WEBSITES_DATA:
+      return {
         ...state,
-        filters,
-        allTags,
-        availableTags: allTags,
-        websitesData: action.payload,
+        ...action.payload,
       };
-
-      // get default show columns
-      const defaultShowColumns = Object.keys(columns).filter(
-        (column) => columns[column]['showColumn'],
-      );
-      updatedState['defaultShowColumns'] = defaultShowColumns;
-
-      // get renderable columns
-      const renderableColumns = Object.keys(columns).filter(
-        (column) => columns[column]['renderColumn'],
-      );
-      updatedState['renderableColumns'] = renderableColumns;
-
-      // get showColumns from URL
-      if (!state.websitesDataLoaded) {
-        updatedState[SHOW_COLUMNS] = defaultShowColumns;
-        getShowColumnsFromUrl();
-      }
-
-      function getShowColumnsFromUrl() {
-        const showColumns = getQueryParamValue(SHOW_COLUMNS);
-        // if URL doesn't contain parameter
-        if (!showColumns) return;
-
-        // if showColumns equal to alias 'all'
-        // show all renderable columns
-        if (showColumns === 'all') {
-          updatedState[SHOW_COLUMNS] = renderableColumns;
-          return;
-        }
-
-        // if shownColumns equal to alias 'none'
-        // hide all columns
-        if (showColumns === 'none') {
-          updatedState[SHOW_COLUMNS] = [];
-          return;
-        }
-
-        const filteredColumns = showColumns
-          .split(',')
-          .filter((column) => renderableColumns.includes(column));
-        if (filteredColumns.length > 0) {
-          updatedState[SHOW_COLUMNS] = filteredColumns;
-        }
-      }
-
-      return updatedState;
-    }
     case WEBSITES_DATA_LOADED:
       return {
         ...state,

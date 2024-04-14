@@ -12,20 +12,93 @@ import {
   URL_PARAMS_READ,
 } from '../app/app.constants';
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
-import { TAGS } from '../../misc/url.constants';
-import { filterTableData, sortTableData } from '../../misc/functions';
+import { SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
+import {
+  filterTableData,
+  getQueryParamValue,
+  getUniqueTags,
+  sortTableData,
+} from '../../misc/functions';
 
 export function getWebsitesData() {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     const dataFileURL = `${process.env.REACT_APP_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
     try {
       const response = await fetch(dataFileURL);
       switch (response.status) {
         case 200:
           const websitesData = await response.json();
+          const { columns, websites } = websitesData;
+
+          // collect all filters
+          const filters = {
+            ...getState().table.filters,
+          };
+          Object.keys(columns)
+            .filter((column) => columns[column]['renderFilter'])
+            .filter((column) => !getState().table.filters[column])
+            .forEach((column) => {
+              if (column === TAGS) filters[column] = [];
+              else filters[column] = '';
+            });
+
+          // collect all unique tags
+          const allTags = getUniqueTags(websites);
+          const newState = {
+            ...getState().table,
+            filters,
+            allTags,
+            availableTags: allTags,
+            websitesData,
+          };
+
+          // get default show columns
+          const defaultShowColumns = Object.keys(columns).filter(
+            (column) => columns[column]['showColumn'],
+          );
+          newState['defaultShowColumns'] = defaultShowColumns;
+
+          // get renderable columns
+          const renderableColumns = Object.keys(columns).filter(
+            (column) => columns[column]['renderColumn'],
+          );
+          newState['renderableColumns'] = renderableColumns;
+
+          // get showColumns from URL
+          if (!getState().table.websitesDataLoaded) {
+            newState[SHOW_COLUMNS] = defaultShowColumns;
+            getShowColumnsFromUrl();
+          }
+
+          function getShowColumnsFromUrl() {
+            const showColumns = getQueryParamValue(SHOW_COLUMNS);
+            // if URL doesn't contain parameter
+            if (!showColumns) return;
+
+            // if showColumns equal to alias 'all'
+            // show all renderable columns
+            if (showColumns === 'all') {
+              newState[SHOW_COLUMNS] = renderableColumns;
+              return;
+            }
+
+            // if shownColumns equal to alias 'none'
+            // hide all columns
+            if (showColumns === 'none') {
+              newState[SHOW_COLUMNS] = [];
+              return;
+            }
+
+            const filteredColumns = showColumns
+              .split(',')
+              .filter((column) => renderableColumns.includes(column));
+            if (filteredColumns.length > 0) {
+              newState[SHOW_COLUMNS] = filteredColumns;
+            }
+          }
           dispatch({
             type: SET_WEBSITES_DATA,
-            payload: websitesData,
+            payload: newState,
           });
           break;
         case 401:
