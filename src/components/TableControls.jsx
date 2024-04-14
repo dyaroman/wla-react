@@ -8,7 +8,7 @@ import {
   triggerGtmEvent,
 } from '../misc/functions';
 import { toggleCustomizeColumnsOpen } from '../features/app/app.actions';
-import { SHOWED_COLUMNS_UPDATED } from '../features/table/table.constants';
+import { SHOW_COLUMNS_UPDATED } from '../features/table/table.constants';
 import {
   HIDE_ALL_COLUMNS_BTN,
   RESTORE_DEFAULT_COLUMNS_BTN,
@@ -49,7 +49,7 @@ export function TableControls() {
       eventInfo.method = 'on';
     }
     dispatch({
-      type: SHOWED_COLUMNS_UPDATED,
+      type: SHOW_COLUMNS_UPDATED,
       payload: updatedShowColumns,
     });
     triggerGtmEvent(SHOWED_COLUMN_CHANGE, {
@@ -59,7 +59,7 @@ export function TableControls() {
 
   function onClickHideAllColumns() {
     dispatch({
-      type: SHOWED_COLUMNS_UPDATED,
+      type: SHOW_COLUMNS_UPDATED,
       payload: [],
     });
     triggerGtmEvent(HIDE_ALL_COLUMNS_BTN);
@@ -67,7 +67,7 @@ export function TableControls() {
 
   function onClickShowAllColumns() {
     dispatch({
-      type: SHOWED_COLUMNS_UPDATED,
+      type: SHOW_COLUMNS_UPDATED,
       payload: renderableColumns,
     });
     triggerGtmEvent(SHOW_ALL_COLUMNS_BTN);
@@ -75,7 +75,7 @@ export function TableControls() {
 
   function onClickRestoreDefaultColumns() {
     dispatch({
-      type: SHOWED_COLUMNS_UPDATED,
+      type: SHOW_COLUMNS_UPDATED,
       payload: defaultShowColumns,
     });
     triggerGtmEvent(RESTORE_DEFAULT_COLUMNS_BTN);

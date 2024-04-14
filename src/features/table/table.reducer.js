@@ -3,7 +3,7 @@ import {
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
   SET_WEBSITES_DATA,
-  SHOWED_COLUMNS_UPDATED,
+  SHOW_COLUMNS_UPDATED,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
@@ -62,7 +62,7 @@ export function tableReducer(state = tableInitialState, action) {
         ...state,
         ...action.payload,
       };
-    case SHOWED_COLUMNS_UPDATED: {
+    case SHOW_COLUMNS_UPDATED: {
       const { columns } = state.websitesData;
       return {
         ...state,

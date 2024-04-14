@@ -4,4 +4,4 @@ export const FILTERS_UPDATED = 'table/filtersUpdated';
 export const SORT_UPDATED = 'table/sortUpdated';
 export const CLEAR_FILTERS = 'table/clearFilters';
 export const PREPARED_DATA_UPDATED = 'table/preparedDataUpdated';
-export const SHOWED_COLUMNS_UPDATED = 'table/showColumnsUpdated';
+export const SHOW_COLUMNS_UPDATED = 'table/showColumnsUpdated';

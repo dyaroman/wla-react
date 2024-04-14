@@ -3,7 +3,7 @@ import {
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
   SET_WEBSITES_DATA,
-  SHOWED_COLUMNS_UPDATED,
+  SHOW_COLUMNS_UPDATED,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
@@ -172,7 +172,7 @@ export function getURLParams() {
         payload: newFilters,
       });
       dispatch({
-        type: SHOWED_COLUMNS_UPDATED,
+        type: SHOW_COLUMNS_UPDATED,
         payload: [
           ...new Set([
             ...showColumns,
