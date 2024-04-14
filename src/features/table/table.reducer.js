@@ -7,7 +7,6 @@ import {
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
-import { getUniqueTags } from '../../misc/functions';
 
 const tableInitialState = {
   filters: {},
@@ -61,8 +60,7 @@ export function tableReducer(state = tableInitialState, action) {
     case PREPARED_DATA_UPDATED:
       return {
         ...state,
-        preparedData: action.payload,
-        availableTags: getUniqueTags(action.payload),
+        ...action.payload,
       };
     case SHOWED_COLUMNS_UPDATED: {
       const { columns } = state.websitesData;

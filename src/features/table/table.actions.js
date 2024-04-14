@@ -208,7 +208,10 @@ export function updateTableData() {
 
     dispatch({
       type: PREPARED_DATA_UPDATED,
-      payload: updatedData,
+      payload: {
+        preparedData: updatedData,
+        availableTags: getUniqueTags(updatedData),
+      },
     });
   };
 }
