@@ -1,4 +1,5 @@
 import {
+  CLEAR_FILTERS,
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
   SET_WEBSITES_DATA,
@@ -208,6 +209,27 @@ export function updateTableData() {
     dispatch({
       type: PREPARED_DATA_UPDATED,
       payload: updatedData,
+    });
+  };
+}
+
+export function clearFilters() {
+  return function (dispatch, getState) {
+    const filters = {};
+    for (const filter in getState().table.filters) {
+      if (filter === TAGS) filters[filter] = [];
+      else filters[filter] = '';
+    }
+    const sort = {
+      column: '',
+      direction: '',
+    };
+    dispatch({
+      type: CLEAR_FILTERS,
+      payload: {
+        filters,
+        sort,
+      },
     });
   };
 }

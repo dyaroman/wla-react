@@ -7,7 +7,6 @@ import {
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
 } from './table.constants';
-import { TAGS } from '../../misc/url.constants';
 import { getUniqueTags } from '../../misc/functions';
 
 const tableInitialState = {
@@ -54,21 +53,11 @@ export function tableReducer(state = tableInitialState, action) {
           ...action.payload,
         },
       };
-    case CLEAR_FILTERS: {
-      const filters = {};
-      for (const k in state.filters) {
-        if (k === TAGS) filters[k] = [];
-        else filters[k] = '';
-      }
+    case CLEAR_FILTERS:
       return {
         ...state,
-        filters,
-        sort: {
-          column: '',
-          direction: '',
-        },
+        ...action.payload,
       };
-    }
     case PREPARED_DATA_UPDATED:
       return {
         ...state,

@@ -10,7 +10,7 @@ import {
 } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
 import { toggleFiltersOpen } from '../features/app/app.actions';
-import { CLEAR_FILTERS } from '../features/table/table.constants';
+import { clearFilters } from '../features/table/table.actions';
 import {
   CLEAR_FILTERS_BTN,
   COPY_WEBSITES_BTN,
@@ -107,9 +107,7 @@ export function Filters() {
   }
 
   function onClearClick() {
-    dispatch({
-      type: CLEAR_FILTERS,
-    });
+    dispatch(clearFilters());
 
     triggerGtmEvent(CLEAR_FILTERS_BTN);
   }
