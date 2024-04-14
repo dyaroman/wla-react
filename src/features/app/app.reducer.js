@@ -8,11 +8,6 @@ import {
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from './app.constants';
-import { CUSTOMIZE_COLUMNS_OPEN } from '../../misc/url.constants';
-import {
-  deleteQueryParamValue,
-  setQueryParamValue,
-} from '../../misc/functions';
 
 const appInitialState = {
   filtersOpen: false,
@@ -33,11 +28,6 @@ export function appReducer(state = appInitialState, action) {
         filtersOpen: action.payload,
       };
     case TOGGLE_CUSTOMIZE_COLUMNS_OPEN:
-      if (action.payload) {
-        setQueryParamValue(CUSTOMIZE_COLUMNS_OPEN, '');
-      } else {
-        deleteQueryParamValue(CUSTOMIZE_COLUMNS_OPEN);
-      }
       return {
         ...state,
         customizeColumnsOpen: action.payload,

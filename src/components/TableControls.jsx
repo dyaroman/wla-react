@@ -7,6 +7,7 @@ import {
   getQueryParamValue,
   triggerGtmEvent,
 } from '../misc/functions';
+import { toggleCustomizeColumnsOpen } from '../features/app/app.actions';
 import { SHOWED_COLUMNS_UPDATED } from '../features/table/table.constants';
 import {
   HIDE_ALL_COLUMNS_BTN,
@@ -14,7 +15,6 @@ import {
   SHOW_ALL_COLUMNS_BTN,
   SHOWED_COLUMN_CHANGE,
 } from '../misc/gtm.constants';
-import { TOGGLE_CUSTOMIZE_COLUMNS_OPEN } from '../features/app/app.constants';
 import { CUSTOMIZE_COLUMNS_OPEN } from '../misc/url.constants';
 
 export function TableControls() {
@@ -32,10 +32,7 @@ export function TableControls() {
 
   useEffect(() => {
     if (getQueryParamValue(CUSTOMIZE_COLUMNS_OPEN) === '') {
-      dispatch({
-        type: TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
-        payload: true,
-      });
+      dispatch(toggleCustomizeColumnsOpen(true));
     }
   }, []);
 
@@ -86,10 +83,7 @@ export function TableControls() {
 
   function onSummaryClick(event) {
     event.preventDefault();
-    dispatch({
-      type: TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
-      payload: !customizeColumnsOpen,
-    });
+    dispatch(toggleCustomizeColumnsOpen(!customizeColumnsOpen));
   }
 
   return (

@@ -1,5 +1,13 @@
-import { FILTERS_OPEN, SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
-import { TOGGLE_FILTERS_OPEN } from './app.constants';
+import {
+  CUSTOMIZE_COLUMNS_OPEN,
+  FILTERS_OPEN,
+  SHOW_COLUMNS,
+  TAGS,
+} from '../../misc/url.constants';
+import {
+  TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
+  TOGGLE_FILTERS_OPEN,
+} from './app.constants';
 import {
   deleteQueryParamValue,
   setQueryParamValue,
@@ -83,6 +91,20 @@ export function toggleFiltersOpen(open) {
   return function (dispatch) {
     dispatch({
       type: TOGGLE_FILTERS_OPEN,
+      payload: open,
+    });
+  };
+}
+
+export function toggleCustomizeColumnsOpen(open) {
+  if (open) {
+    setQueryParamValue(CUSTOMIZE_COLUMNS_OPEN, '');
+  } else {
+    deleteQueryParamValue(CUSTOMIZE_COLUMNS_OPEN);
+  }
+  return function (dispatch) {
+    dispatch({
+      type: TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
       payload: open,
     });
   };
