@@ -107,7 +107,7 @@ export function setQueryParam(key, value) {
   );
 }
 
-export function deleteQueryParamValue(key) {
+export function deleteQueryParam(key) {
   const searchParams = new URLSearchParams(window.location.search);
   searchParams.delete(key);
   const newUrl = searchParams.toString()

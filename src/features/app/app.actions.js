@@ -8,7 +8,7 @@ import {
   TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
   TOGGLE_FILTERS_OPEN,
 } from './app.constants';
-import { deleteQueryParamValue, setQueryParam } from '../../misc/functions';
+import { deleteQueryParam, setQueryParam } from '../../misc/functions';
 
 export function updateURL(newState) {
   return function (dispatch, getState) {
@@ -83,7 +83,7 @@ export function toggleFiltersOpen(open) {
   if (open) {
     setQueryParam(FILTERS_OPEN, '');
   } else {
-    deleteQueryParamValue(FILTERS_OPEN);
+    deleteQueryParam(FILTERS_OPEN);
   }
   return function (dispatch) {
     dispatch({
@@ -97,7 +97,7 @@ export function toggleCustomizeColumnsOpen(open) {
   if (open) {
     setQueryParam(CUSTOMIZE_COLUMNS_OPEN, '');
   } else {
-    deleteQueryParamValue(CUSTOMIZE_COLUMNS_OPEN);
+    deleteQueryParam(CUSTOMIZE_COLUMNS_OPEN);
   }
   return function (dispatch) {
     dispatch({
