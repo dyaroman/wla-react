@@ -110,11 +110,10 @@ export function setQueryParamValue(key, value) {
 export function deleteQueryParamValue(key) {
   const searchParams = new URLSearchParams(window.location.search);
   searchParams.delete(key);
-  window.history.replaceState(
-    {},
-    '',
-    `${window.location.pathname}?${searchParams}`,
-  );
+  const newUrl = searchParams.toString()
+    ? `${window.location.pathname}?${searchParams}`
+    : window.location.pathname;
+  window.history.replaceState({}, '', newUrl);
 }
 
 export function fromCamelCaseToWords(str) {
