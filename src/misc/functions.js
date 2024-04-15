@@ -17,6 +17,7 @@ export function search(where, what) {
 export function filterTableData(websites, filters) {
   return websites.filter((website) => {
     for (const filter in filters) {
+      // skip filters that are in the process of typing
       if (['', '=', '==', '!', '!='].includes(filters[filter])) {
         continue;
       }
@@ -28,6 +29,24 @@ export function filterTableData(websites, filters) {
                 filterTag.toLowerCase(),
               ),
             )
+          ) {
+            return false;
+          }
+          break;
+
+        case 'pages':
+          if (
+            filters[filter].startsWith('==') &&
+            website[filter].every((page) => search(page, filters[filter]))
+          ) {
+            return false;
+          } else if (
+            filters[filter].startsWith('!=') &&
+            !website[filter].every((page) => search(page, filters[filter]))
+          ) {
+            return false;
+          } else if (
+            !website[filter].some((page) => search(page, filters[filter]))
           ) {
             return false;
           }

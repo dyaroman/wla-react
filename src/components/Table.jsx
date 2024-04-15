@@ -193,6 +193,30 @@ export function Table() {
                           );
                         }
 
+                        case 'pages':
+                          return (
+                            <td
+                              data-title={fromCamelCaseToWords(column)}
+                              data-qa={column}
+                              key={column}
+                            >
+                              {websiteData['pages'].length ? (
+                                <ul>
+                                  {websiteData['pages'].map((page) => (
+                                    <li key={page}>
+                                      <Highlight
+                                        text={page}
+                                        highlight={filters[column]}
+                                      />
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                NO_DATA
+                              )}
+                            </td>
+                          );
+
                         case TAGS:
                           return (
                             <td
