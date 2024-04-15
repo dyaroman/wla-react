@@ -97,7 +97,7 @@ export function getQueryParamValue(key) {
   return new URLSearchParams(window.location.search).get(key);
 }
 
-export function setQueryParamValue(key, value) {
+export function setQueryParam(key, value) {
   const searchParams = new URLSearchParams(window.location.search);
   searchParams.set(key, value);
   window.history.replaceState(
