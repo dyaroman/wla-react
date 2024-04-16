@@ -67,6 +67,10 @@ code {
   border-radius: 0;
   border: $border-width solid var(--border-color);
   background-color: var(--body-bg);
+
+  &--filled {
+    border-color: var(--body-color);
+  }
 }
 
 ::placeholder {

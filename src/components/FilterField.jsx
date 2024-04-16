@@ -37,7 +37,7 @@ export function FilterField({ name, placeholder }) {
         type="text"
         name={name}
         data-qa={name}
-        className="input"
+        className={'input' + (filters[name].length ? ' input--filled' : '')}
         onChange={onChange}
         onBlur={onBlur}
         placeholder={placeholder}
