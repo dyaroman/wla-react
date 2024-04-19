@@ -10,7 +10,7 @@ export const FILTER_CHANGE = 'filter_change';
 
 export const SHOWED_COLUMN_CHANGE = 'showed_column_change';
 
-export const SHORTCUT = 'shortcut';
+export const SHORTCUT_GTM_EVENT = 'shortcut';
 export const BTN_GTM_EVENT = 'btn';
 
 export const TABLE_CELL_SEARCH = 'table_cell_search';

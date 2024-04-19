@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useKeyPress } from '../hooks/useKeyPress';
 import { triggerGtmEvent } from '../misc/functions';
 import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
-import { OPEN_INFO_MODAL, SHORTCUT } from '../misc/gtm.constants';
+import { OPEN_INFO_MODAL, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
 
 export function InfoModalBtn() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export function InfoModalBtn() {
   useKeyPress('shift+?', (event) => {
     event.preventDefault();
     onOpenModalClick();
-    triggerGtmEvent(SHORTCUT, {
+    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'open-info-modal',
     });
   });

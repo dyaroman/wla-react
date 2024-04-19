@@ -11,7 +11,7 @@ import {
 import { useKeyPress } from '../hooks/useKeyPress';
 import { toggleFiltersOpen } from '../features/app/app.actions';
 import { clearFilters } from '../features/table/table.actions';
-import { BTN_GTM_EVENT, SHORTCUT } from '../misc/gtm.constants';
+import { BTN_GTM_EVENT, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
 import { FILTERS_OPEN, TAGS } from '../misc/url.constants';
 
 export function Filters() {
@@ -30,7 +30,7 @@ export function Filters() {
   useKeyPress('meta+shift+f', (event) => {
     event.preventDefault();
     onSearchShortcut();
-    triggerGtmEvent(SHORTCUT, {
+    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'search',
       label: 'macos',
     });
@@ -38,7 +38,7 @@ export function Filters() {
   useKeyPress('ctrl+shift+f', (event) => {
     event.preventDefault();
     onSearchShortcut();
-    triggerGtmEvent(SHORTCUT, {
+    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'search',
       label: 'windows',
     });
@@ -47,7 +47,7 @@ export function Filters() {
   useKeyPress('meta+shift+c', (event) => {
     event.preventDefault();
     onCopyShortcut();
-    triggerGtmEvent(SHORTCUT, {
+    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'copy-websites',
       label: 'macos',
     });
@@ -55,7 +55,7 @@ export function Filters() {
   useKeyPress('ctrl+shift+c', (event) => {
     event.preventDefault();
     onCopyShortcut();
-    triggerGtmEvent(SHORTCUT, {
+    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'copy-websites',
       label: 'windows',
     });
