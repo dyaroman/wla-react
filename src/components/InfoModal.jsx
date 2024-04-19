@@ -65,14 +65,14 @@ export function InfoModal() {
         <h3>Shortcuts:</h3>
         <ul>
           <li>
-            <code>SHIFT+?</code> to show this modal
+            <code>Shift+?</code> to show this modal
           </li>
           <li>
-            <code>CMD+SHIFT+F</code> or <code>CTRL+SHIFT+F</code> to move cursor
+            <code>Cmd+Shift+F</code> or <code>Ctrl+Shift+F</code> to move cursor
             to the first input field
           </li>
           <li>
-            <code>CMD+SHIFT+C</code> or <code>CTRL+SHIFT+C</code> to copy value
+            <code>Cmd+Shift+C</code> or <code>Ctrl+Shift+C</code> to copy value
             from "website" column in comma separated list, like:
             "website1.com,website2.com" you can use this for manual build in
             pipeline as "websites" parameter value
@@ -95,7 +95,7 @@ export function InfoModal() {
 
         <h3>Quick search:</h3>
         <p>
-          Hold <code>OPTION</code> or <code>ALT</code> key and click on some
+          Hold <code>Option</code> or <code>Alt</code> key and click on some
           table cell to insert text from cell in appropriate search field and
           move focus on it.
         </p>
