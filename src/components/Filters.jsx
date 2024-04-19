@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterField } from './FilterField';
@@ -14,6 +14,7 @@ import { clearFilters } from '../features/table/table.actions';
 import {
   CLEAR_FILTERS_BTN,
   COPY_WEBSITES_BTN,
+  COPY_WEBSITES_URLS_BTN,
   SHORTCUT,
 } from '../misc/gtm.constants';
 import { FILTERS_OPEN, TAGS } from '../misc/url.constants';
@@ -24,7 +25,6 @@ export function Filters() {
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const columns = websitesData['columns'];
-  const [copyWebsitesBtnText, setCopyWebsitesBtnText] = useState('copy');
 
   useEffect(() => {
     if (getQueryParamValue(FILTERS_OPEN) === '') {
@@ -95,14 +95,20 @@ export function Filters() {
     triggerGtmEvent(COPY_WEBSITES_BTN);
   }
 
+  async function onCopyWebsitesUrlsClick() {
+    const websitesUrls = preparedData
+      .map((e) => `https://${e['host']}/`)
+      .join('\n');
+    await handleClipboardCopy(websitesUrls);
+
+    triggerGtmEvent(COPY_WEBSITES_URLS_BTN);
+  }
+
   async function handleClipboardCopy(data) {
     try {
       await navigator.clipboard.writeText(data);
-      setCopyWebsitesBtnText('copied');
     } catch (e) {
       console.log(`Error due to copy websites list to clipboard`, e);
-    } finally {
-      setTimeout(() => setCopyWebsitesBtnText('copy'), 1000);
     }
   }
 
@@ -142,13 +148,22 @@ export function Filters() {
           clear all
         </button>
         {preparedData.length !== 0 && (
-          <button
-            className="btn"
-            onClick={onCopyWebsitesClick}
-            data-qa="copyWebsites"
-          >
-            {copyWebsitesBtnText} websites
-          </button>
+          <>
+            <button
+              className="btn"
+              onClick={onCopyWebsitesClick}
+              data-qa="copyWebsites"
+            >
+              copy websites
+            </button>
+            <button
+              className="btn"
+              onClick={onCopyWebsitesUrlsClick}
+              data-qa="copyWebsitesUrls"
+            >
+              copy websites urls
+            </button>
+          </>
         )}
       </div>
     </details>
