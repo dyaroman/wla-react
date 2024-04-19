@@ -167,23 +167,23 @@ export function Table() {
                         case 'mainFormTheme':
                         case 'altFormTheme':
                         case 'mainFormEsTheme': {
-                          let color;
+                          let bgColor;
                           switch (column) {
                             case 'mainFormTheme':
-                              color = websiteData['mainFormPrimaryColor'];
+                              bgColor = websiteData['mainFormPrimaryColor'];
                               break;
                             case 'altFormTheme':
-                              color = websiteData['altFormPrimaryColor'];
+                              bgColor = websiteData['altFormPrimaryColor'];
                               break;
                             case 'mainFormEsTheme':
-                              color = websiteData['mainFormEsPrimaryColor'];
+                              bgColor = websiteData['mainFormEsPrimaryColor'];
                               break;
                           }
                           return (
                             <ColorCell
                               key={column}
                               column={column}
-                              color={color}
+                              bgColor={bgColor}
                             >
                               <Highlight
                                 text={websiteData[column]}
