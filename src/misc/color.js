@@ -14,6 +14,22 @@ function hex2rgb(hex) {
     : null;
 }
 
+export function rgb2hex(rgbString) {
+  // Extract RGB values from the string
+  const rgbValues = rgbString.match(/\d+/g);
+
+  // Convert each RGB value to hexadecimal
+  const hexValues = rgbValues.map((value) => {
+    const hex = parseInt(value, 10).toString(16); // Convert decimal to hexadecimal
+    return hex.length === 1 ? '0' + hex : hex; // Ensure two-digit format
+  });
+
+  // Concatenate the hexadecimal values to form the hex color code
+  const hexColor = '#' + hexValues.join('');
+
+  return hexColor.toLowerCase();
+}
+
 // Calculate the luminance for a color.
 // See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
 function luminance(color) {

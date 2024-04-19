@@ -99,6 +99,12 @@ export function InfoModal() {
           table cell to insert text from cell in appropriate search field and
           move focus on it.
         </p>
+
+        <h3>Quick copy:</h3>
+        <p>
+          Hold <code>Cmd</code> or <code>Windows</code> key and click on some
+          table cell to copy text value from it.
+        </p>
       </section>
 
       <button className="btn" onClick={onCloseModalClick}>

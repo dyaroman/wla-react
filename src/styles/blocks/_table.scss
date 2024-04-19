@@ -158,6 +158,8 @@ td {
   text-align: left;
   word-break: break-word;
 
+  transition: background-color 0.3s;
+
   &::before {
     content: attr(data-title);
 

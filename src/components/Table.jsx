@@ -16,6 +16,7 @@ import {
   getQueryParamValue,
   triggerGtmEvent,
 } from '../misc/functions';
+import { rgb2hex } from '../misc/color';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
@@ -50,12 +51,20 @@ export function Table() {
     );
   }, [filters, sort, showColumns]);
 
-  function onTableBodyClick(event) {
+  function onTableBodyClick() {
+    searchCell();
+    copyCellText();
+  }
+
+  function searchCell() {
     if (!event.altKey) return;
+
     const cell = event.target.closest('td,th');
     if (!cell) return;
+
     const fieldName = cell && cell.dataset.qa;
     if (!fieldName) return;
+
     for (const column in columns) {
       if (!columns[column]['renderFilter']) continue;
       if (fieldName !== column) continue;
@@ -78,6 +87,56 @@ export function Table() {
         filter_value: fieldValue,
       });
       setTimeout(() => field.select());
+    }
+  }
+
+  async function copyCellText() {
+    if (!event.metaKey) return;
+
+    const cell = event.target.closest('td,th');
+    if (!cell) return;
+    // skip list number, tags and ogImage columns
+    if (
+      ['#', 'tags', 'ogImage']
+        .map((e) => e.toLowerCase())
+        .includes(cell.dataset.qa.toLowerCase())
+    )
+      return;
+
+    const initColor = getComputedStyle(cell).color;
+    const initBgColor = getComputedStyle(cell).backgroundColor;
+
+    try {
+      cell.style.color = getComputedStyle(
+        document.querySelector('body'),
+      ).getPropertyValue('--body-color');
+      cell.style.backgroundColor = getComputedStyle(
+        document.querySelector('body'),
+      ).getPropertyValue('--body-bg');
+
+      let contentToCopy;
+      if (cell.dataset.qa.toLowerCase().includes('theme')) {
+        contentToCopy =
+          initBgColor === 'rgba(0, 0, 0, 0)' ? NO_DATA : rgb2hex(initBgColor);
+      } else {
+        contentToCopy = cell.innerText;
+      }
+      await navigator.clipboard.writeText(contentToCopy);
+    } catch (e) {
+      console.log(`Error due to copy cell text content`, e);
+    } finally {
+      setTimeout(() => {
+        if (
+          cell.dataset.qa.toLowerCase().includes('theme') &&
+          initBgColor !== 'rgba(0, 0, 0, 0)'
+        ) {
+          cell.style.color = initColor;
+          cell.style.backgroundColor = initBgColor;
+        } else {
+          cell.style.color = '';
+          cell.style.backgroundColor = '';
+        }
+      }, 300);
     }
   }
 
