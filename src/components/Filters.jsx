@@ -76,14 +76,14 @@ export function Filters() {
 
   async function onCopyShortcut() {
     const formattedWebsitesList = preparedData
-      .map((e) => e['website'])
+      .map((website) => website['website'])
       .join(',');
     await handleClipboardCopy(formattedWebsitesList);
   }
 
   async function onCopyWebsitesClick() {
     const formattedWebsitesList = preparedData
-      .map((e) => e['website'])
+      .map((website) => website['website'])
       .join('\n');
     await handleClipboardCopy(formattedWebsitesList);
 
@@ -94,7 +94,7 @@ export function Filters() {
 
   async function onCopyWebsitesUrlsClick() {
     const websitesUrls = preparedData
-      .map((e) => `https://${e['host']}/`)
+      .map((website) => `https://${website['host']}/`)
       .join('\n');
     await handleClipboardCopy(websitesUrls);
 

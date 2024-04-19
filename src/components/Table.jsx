@@ -98,7 +98,7 @@ export function Table() {
     // skip list number, tags and ogImage columns
     if (
       ['#', 'tags', 'ogImage']
-        .map((e) => e.toLowerCase())
+        .map((column) => column.toLowerCase())
         .includes(cell.dataset.qa.toLowerCase())
     )
       return;
