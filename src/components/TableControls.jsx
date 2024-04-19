@@ -9,12 +9,7 @@ import {
 } from '../misc/functions';
 import { toggleCustomizeColumnsOpen } from '../features/app/app.actions';
 import { updateShowColumns } from '../features/table/table.actions';
-import {
-  HIDE_ALL_COLUMNS_BTN,
-  RESTORE_DEFAULT_COLUMNS_BTN,
-  SHOW_ALL_COLUMNS_BTN,
-  SHOWED_COLUMN_CHANGE,
-} from '../misc/gtm.constants';
+import { BTN_GTM_EVENT, SHOWED_COLUMN_CHANGE } from '../misc/gtm.constants';
 import { CUSTOMIZE_COLUMNS_OPEN } from '../misc/url.constants';
 
 export function TableControls() {
@@ -56,17 +51,23 @@ export function TableControls() {
 
   function onClickHideAllColumns() {
     dispatch(updateShowColumns([]));
-    triggerGtmEvent(HIDE_ALL_COLUMNS_BTN);
+    triggerGtmEvent(BTN_GTM_EVENT, {
+      method: 'hide-all-columns',
+    });
   }
 
   function onClickShowAllColumns() {
     dispatch(updateShowColumns(renderableColumns));
-    triggerGtmEvent(SHOW_ALL_COLUMNS_BTN);
+    triggerGtmEvent(BTN_GTM_EVENT, {
+      method: 'show-all-columns',
+    });
   }
 
   function onClickRestoreDefaultColumns() {
     dispatch(updateShowColumns(defaultShowColumns));
-    triggerGtmEvent(RESTORE_DEFAULT_COLUMNS_BTN);
+    triggerGtmEvent(BTN_GTM_EVENT, {
+      method: 'restore-default-columns',
+    });
   }
 
   function onSummaryClick(event) {

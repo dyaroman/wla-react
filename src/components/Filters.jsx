@@ -11,12 +11,7 @@ import {
 import { useKeyPress } from '../hooks/useKeyPress';
 import { toggleFiltersOpen } from '../features/app/app.actions';
 import { clearFilters } from '../features/table/table.actions';
-import {
-  CLEAR_FILTERS_BTN,
-  COPY_WEBSITES_BTN,
-  COPY_WEBSITES_URLS_BTN,
-  SHORTCUT,
-} from '../misc/gtm.constants';
+import { BTN_GTM_EVENT, SHORTCUT } from '../misc/gtm.constants';
 import { FILTERS_OPEN, TAGS } from '../misc/url.constants';
 
 export function Filters() {
@@ -92,7 +87,9 @@ export function Filters() {
       .join('\n');
     await handleClipboardCopy(formattedWebsitesList);
 
-    triggerGtmEvent(COPY_WEBSITES_BTN);
+    triggerGtmEvent(BTN_GTM_EVENT, {
+      method: 'copy-websites',
+    });
   }
 
   async function onCopyWebsitesUrlsClick() {
@@ -101,7 +98,9 @@ export function Filters() {
       .join('\n');
     await handleClipboardCopy(websitesUrls);
 
-    triggerGtmEvent(COPY_WEBSITES_URLS_BTN);
+    triggerGtmEvent(BTN_GTM_EVENT, {
+      method: 'copy-websites-urls',
+    });
   }
 
   async function handleClipboardCopy(data) {
@@ -115,7 +114,9 @@ export function Filters() {
   function onClearClick() {
     dispatch(clearFilters());
 
-    triggerGtmEvent(CLEAR_FILTERS_BTN);
+    triggerGtmEvent(BTN_GTM_EVENT, {
+      method: 'clear-all',
+    });
   }
 
   function onSummaryClick(event) {
