@@ -13,7 +13,7 @@ import {
   URL_PARAMS_READ,
 } from '../app/app.constants';
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
-import { SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
+import { CHECKBOX, SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
 import {
   filterTableData,
   getQueryParamValue,
@@ -29,7 +29,15 @@ export function getWebsitesData() {
       switch (response.status) {
         case 200:
           const websitesData = await response.json();
-          const columns = websitesData['columns'];
+          const columns = {
+            // add checkbox column
+            [CHECKBOX]: {
+              renderFilter: false,
+              renderColumn: true,
+              showColumn: false,
+            },
+            ...websitesData['columns'],
+          };
           const websites = websitesData['websites'];
 
           // collect all filters

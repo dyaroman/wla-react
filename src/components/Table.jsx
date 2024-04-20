@@ -8,6 +8,7 @@ import { Cell } from './Cell';
 import { ColorCell } from './ColorCell';
 import { TableControls } from './TableControls';
 import { ImgCell } from './ImgCell';
+import { Checkbox } from './Checkbox';
 import { updateTableData } from '../features/table/table.actions';
 import { toggleFiltersOpen, updateURL } from '../features/app/app.actions';
 import {
@@ -20,7 +21,7 @@ import { rgb2hex } from '../misc/color';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
-import { TAGS } from '../misc/url.constants';
+import { CHECKBOX, TAGS } from '../misc/url.constants';
 
 export function Table() {
   const dispatch = useDispatch();
@@ -97,7 +98,7 @@ export function Table() {
     if (!cell) return;
     // skip list number, tags and ogImage columns
     if (
-      ['#', 'tags', 'ogImage']
+      ['#', CHECKBOX, TAGS, 'ogImage']
         .map((column) => column.toLowerCase())
         .includes(cell.dataset.qa.toLowerCase())
     )
@@ -157,13 +158,13 @@ export function Table() {
             <thead>
               <tr>
                 <th>#</th>
-                {showColumns.map((column) => (
-                  <FilterTitle
-                    key={column}
-                    text={fromCamelCaseToWords(column)}
-                    column={column}
-                  />
-                ))}
+                {showColumns.map((column) => {
+                  const title =
+                    column === CHECKBOX ? '' : fromCamelCaseToWords(column);
+                  return (
+                    <FilterTitle key={column} text={title} column={column} />
+                  );
+                })}
               </tr>
             </thead>
 
@@ -288,6 +289,17 @@ export function Table() {
                               ) : (
                                 NO_DATA
                               )}
+                            </td>
+                          );
+
+                        case CHECKBOX:
+                          return (
+                            <td
+                              data-qa={column}
+                              data-title={fromCamelCaseToWords(column)}
+                              key={column}
+                            >
+                              <Checkbox label={''} />
                             </td>
                           );
 
