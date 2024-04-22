@@ -1,4 +1,11 @@
+variables:
+  - name: HasVersion
+    value: ${{ startsWith(variables['build.sourceBranch'], 'refs/tags/v') }}
+
 trigger:
+  tags:
+    include:
+      - v*
   branches:
     include:
       - master
@@ -21,22 +28,22 @@ stages:
           - checkout: self
             displayName: 'Checkout'
 
-          - powershell: npm pkg delete scripts.prepare
+          - script: rm -f .env.production
+            displayName: 'Remove .env.production'
+            condition: |
+              and(
+                succeeded(),
+                eq(variables['HasVersion'], false)
+              )
+
+          - script: npm pkg delete scripts.prepare
             displayName: 'Remove prepare script'
 
-          - task: Npm@1
+          - script: npm ci --omit=dev
             displayName: 'Install dependencies'
-            inputs:
-              command: custom
-              verbose: false
-              customCommand: 'ci --omit=dev'
 
-          - task: Npm@1
+          - script: npm run build
             displayName: 'Build'
-            inputs:
-              command: custom
-              verbose: false
-              customCommand: 'run build'
 
           - task: ArchiveFiles@2
             displayName: 'Archive build'
@@ -53,8 +60,35 @@ stages:
   - stage: Deploy
     dependsOn: Build
     jobs:
+      - deployment: rc
+        displayName: 'Release to rc.example.com'
+        condition: |
+          and(
+            succeeded(),
+            eq(variables['HasVersion'], false)
+          )
+        environment: WebsitesApp-Dev.WebsitesApp-Dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  artifact: drop
+                  patterns: '$(Build.BuildId).zip'
+                  displayName: 'Download artifact wla'
+
+                - task: IISWebAppDeploymentOnMachineGroup@0
+                  inputs:
+                    webSiteName: 'rc.example.com'
+                    package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+
       - deployment: dev
         displayName: 'Release to dev.example.com'
+        condition: |
+          and(
+            succeeded(),
+            eq(variables['HasVersion'], true)
+          )
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
           runOnce:
@@ -72,6 +106,11 @@ stages:
 
       - deployment: prod
         displayName: 'Release to prod.example.com'
+        condition: |
+          and(
+            succeeded(),
+            eq(variables['HasVersion'], true)
+          )
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
           runOnce:
