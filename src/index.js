@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import './styles/index.scss';
 import { App } from './App';
 import { store } from './store/store';
+import packageJson from '../package.json';
 
 // http to https redirect
 if (process.env.NODE_ENV !== 'development' && location.protocol !== 'https:') {
@@ -23,4 +24,5 @@ root.render(
   </React.StrictMode>,
 );
 
+console.log(`app version: ${packageJson.version}`);
 console.log(`app commit: ${process.env.REACT_APP_VERSION.substring(0, 8)}`);
