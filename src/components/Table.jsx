@@ -228,7 +228,7 @@ export function Table() {
 
                         case COLUMNS.mainFormTheme:
                         case COLUMNS.altFormTheme:
-                        case 'mainFormEsTheme': {
+                        case COLUMNS.mainFormThemeEs: {
                           let bgColor;
                           switch (column) {
                             case COLUMNS.mainFormTheme:
@@ -237,7 +237,7 @@ export function Table() {
                             case COLUMNS.altFormTheme:
                               bgColor = websiteData['altFormPrimaryColor'];
                               break;
-                            case 'mainFormEsTheme':
+                            case COLUMNS.mainFormThemeEs:
                               bgColor = websiteData['mainFormEsPrimaryColor'];
                               break;
                           }

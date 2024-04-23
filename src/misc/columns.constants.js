@@ -3,6 +3,7 @@ export const COLUMNS = {
   campaignId: 'campaignId',
   checkbox: 'checkbox',
   mainFormTheme: 'mainFormTheme',
+  mainFormThemeEs: 'mainFormEsTheme',
   ogImage: 'ogImage',
   tags: 'tags',
   website: 'website',
