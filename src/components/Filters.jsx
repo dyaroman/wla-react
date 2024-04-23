@@ -12,7 +12,8 @@ import { useKeyPress } from '../hooks/useKeyPress';
 import { toggleFiltersOpen } from '../features/app/app.actions';
 import { clearFilters } from '../features/table/table.actions';
 import { BTN_GTM_EVENT, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
-import { FILTERS_OPEN, TAGS } from '../misc/url.constants';
+import { FILTERS_OPEN } from '../misc/url.constants';
+import { TAGS } from '../misc/columns.constants';
 
 export function Filters() {
   const dispatch = useDispatch();

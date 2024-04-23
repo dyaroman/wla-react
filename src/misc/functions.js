@@ -1,5 +1,5 @@
 import { NO_DATA } from './misc.constants';
-import { TAGS } from './url.constants';
+import { TAGS } from './columns.constants';
 
 export function search(where, what) {
   where = String(where).toLowerCase();

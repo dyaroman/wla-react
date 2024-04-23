@@ -21,7 +21,7 @@ import { rgb2hex } from '../misc/color';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
-import { CHECKBOX, TAGS } from '../misc/url.constants';
+import { CHECKBOX, TAGS } from '../misc/columns.constants';
 
 export function Table() {
   const dispatch = useDispatch();

@@ -13,7 +13,8 @@ import {
   URL_PARAMS_READ,
 } from '../app/app.constants';
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
-import { CHECKBOX, SHOW_COLUMNS, TAGS } from '../../misc/url.constants';
+import { SHOW_COLUMNS } from '../../misc/url.constants';
+import { CHECKBOX, TAGS } from '../../misc/columns.constants';
 import {
   filterTableData,
   getQueryParamValue,

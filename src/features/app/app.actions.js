@@ -2,8 +2,8 @@ import {
   CUSTOMIZE_COLUMNS_OPEN,
   FILTERS_OPEN,
   SHOW_COLUMNS,
-  TAGS,
 } from '../../misc/url.constants';
+import { TAGS } from '../../misc/columns.constants';
 import {
   TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
   TOGGLE_FILTERS_OPEN,
