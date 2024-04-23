@@ -179,7 +179,7 @@ export function Table() {
                       convertLinksTo,
                       project,
                     )) ||
-                  websiteData['host'];
+                  websiteData[COLUMNS.host];
                 return (
                   <tr key={websiteData[COLUMNS.website]}>
                     <td data-title="#" data-qa="#">

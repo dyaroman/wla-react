@@ -112,7 +112,7 @@ export function Filters() {
 
   async function onCopyWebsitesUrlsClick() {
     const websitesUrls = preparedData
-      .map((website) => `https://${website['host']}/`)
+      .map((website) => `https://${website[COLUMNS.host]}/`)
       .join('\n');
     await handleClipboardCopy(websitesUrls);
 
