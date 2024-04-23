@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { triggerGtmEvent } from '../misc/functions';
+import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
 import { CLOSE_INFO_MODAL } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
@@ -53,13 +53,16 @@ export function InfoModal() {
         <h3>Advanced search:</h3>
         <ul>
           <li>
-            <code>==</code> use for exact match, ex: "Campaign Id"{' '}
-            <code>==1</code> show all websites with campaign id strict equal to
-            1
+            <code>==</code> use for exact match, ex: "
+            {fromCamelCaseToWords(COLUMNS.campaignId)}" <code>==1</code> show
+            all websites with "{fromCamelCaseToWords(COLUMNS.campaignId)}"
+            strict equal to 1
           </li>
           <li>
-            <code>!=</code> use for strict not equal search, ex: "Campaign Id"{' '}
-            <code>!=1</code> show all websites with campaign not equal 1
+            <code>!=</code> use for strict not equal search, ex: "
+            {fromCamelCaseToWords(COLUMNS.campaignId)}" <code>!=1</code> show
+            all websites with "{fromCamelCaseToWords(COLUMNS.campaignId)}" not
+            equal 1
           </li>
         </ul>
 

@@ -79,7 +79,7 @@ export function sortTableData(array, column) {
     })
     .sort((a, b) => {
       switch (column) {
-        case 'campaignId':
+        case COLUMNS.campaignId:
           return Number(a[column]) > Number(b[column]) ? 1 : -1;
 
         default:
