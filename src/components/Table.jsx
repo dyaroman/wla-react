@@ -98,7 +98,7 @@ export function Table() {
     if (!cell) return;
     // skip list number, tags and ogImage columns
     if (
-      ['#', COLUMNS.checkbox, COLUMNS.tags, 'ogImage']
+      ['#', COLUMNS.checkbox, COLUMNS.tags, COLUMNS.ogImage]
         .map((column) => column.toLowerCase())
         .includes(cell.dataset.qa.toLowerCase())
     )
@@ -207,8 +207,8 @@ export function Table() {
                             </th>
                           );
 
-                        case 'ogImage': {
-                          const images = websiteData['ogImage'].map(
+                        case COLUMNS.ogImage: {
+                          const images = websiteData[column].map(
                             (path) => `https://${host}/${path}`,
                           );
                           return (
