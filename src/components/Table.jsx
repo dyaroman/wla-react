@@ -21,7 +21,7 @@ import { rgb2hex } from '../misc/color';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
-import { CHECKBOX, TAGS } from '../misc/columns.constants';
+import { CHECKBOX, TAGS_COLUMN } from '../misc/columns.constants';
 
 export function Table() {
   const dispatch = useDispatch();
@@ -98,7 +98,7 @@ export function Table() {
     if (!cell) return;
     // skip list number, tags and ogImage columns
     if (
-      ['#', CHECKBOX, TAGS, 'ogImage']
+      ['#', CHECKBOX, TAGS_COLUMN, 'ogImage']
         .map((column) => column.toLowerCase())
         .includes(cell.dataset.qa.toLowerCase())
     )
@@ -277,11 +277,11 @@ export function Table() {
                             </td>
                           );
 
-                        case TAGS:
+                        case TAGS_COLUMN:
                           return (
                             <td
-                              data-title={fromCamelCaseToWords(TAGS)}
-                              data-qa="tags"
+                              data-title={fromCamelCaseToWords(column)}
+                              data-qa={column}
                               key={column}
                             >
                               {websiteData.tags.length ? (
