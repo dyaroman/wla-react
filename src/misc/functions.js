@@ -1,5 +1,5 @@
 import { NO_DATA } from './misc.constants';
-import { TAGS_COLUMN } from './columns.constants';
+import { COLUMNS } from './columns.constants';
 
 export function search(where, what) {
   where = String(where).toLowerCase();
@@ -22,12 +22,12 @@ export function filterTableData(websites, filters) {
         continue;
       }
       switch (filter) {
-        case TAGS_COLUMN:
+        case COLUMNS.tags:
           if (
             ![...filters[filter]].every((filterTag) =>
-              website[TAGS_COLUMN].map((tag) => tag.toLowerCase()).includes(
-                filterTag.toLowerCase(),
-              ),
+              website[COLUMNS.tags]
+                .map((tag) => tag.toLowerCase())
+                .includes(filterTag.toLowerCase()),
             )
           ) {
             return false;

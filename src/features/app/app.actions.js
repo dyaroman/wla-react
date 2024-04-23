@@ -3,7 +3,7 @@ import {
   FILTERS_OPEN,
   SHOW_COLUMNS,
 } from '../../misc/url.constants';
-import { TAGS_COLUMN } from '../../misc/columns.constants';
+import { COLUMNS } from '../../misc/columns.constants';
 import {
   TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
   TOGGLE_FILTERS_OPEN,
@@ -20,7 +20,7 @@ export function updateURL(newState) {
     for (const key in newState) {
       switch (key) {
         case SHOW_COLUMNS:
-        case TAGS_COLUMN:
+        case COLUMNS.tags:
           if (newState[key].length === 0) {
             params.delete(key);
           } else {

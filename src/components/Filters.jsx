@@ -13,7 +13,7 @@ import { toggleFiltersOpen } from '../features/app/app.actions';
 import { clearFilters } from '../features/table/table.actions';
 import { BTN_GTM_EVENT, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
 import { FILTERS_OPEN } from '../misc/url.constants';
-import { TAGS_COLUMN } from '../misc/columns.constants';
+import { COLUMNS } from '../misc/columns.constants';
 
 export function Filters() {
   const dispatch = useDispatch();
@@ -147,7 +147,7 @@ export function Filters() {
       <summary onClick={onSummaryClick}>Filters:</summary>
       <div className="filters__content">
         {Object.keys(columns).map((column) => {
-          if (column === TAGS_COLUMN || !columns[column]['renderFilter'])
+          if (column === COLUMNS.tags || !columns[column]['renderFilter'])
             return null;
           return (
             <FilterField
@@ -157,7 +157,7 @@ export function Filters() {
             />
           );
         })}
-        {Object.keys(columns).includes(TAGS_COLUMN) && <TagsFilterField />}
+        {Object.keys(columns).includes(COLUMNS.tags) && <TagsFilterField />}
       </div>
       <div className="btn-group">
         <button

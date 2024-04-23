@@ -14,7 +14,7 @@ import {
 } from '../app/app.constants';
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
 import { SHOW_COLUMNS } from '../../misc/url.constants';
-import { CHECKBOX, TAGS_COLUMN } from '../../misc/columns.constants';
+import { COLUMNS } from '../../misc/columns.constants';
 import {
   filterTableData,
   getQueryParamValue,
@@ -32,7 +32,7 @@ export function getWebsitesData() {
           const websitesData = await response.json();
           const columns = {
             // add checkbox column
-            [CHECKBOX]: {
+            [COLUMNS.checkbox]: {
               renderFilter: false,
               renderColumn: true,
               showColumn: false,
@@ -49,7 +49,7 @@ export function getWebsitesData() {
             .filter((column) => columns[column]['renderFilter'])
             .filter((column) => !getState().table.filters[column])
             .forEach((column) => {
-              if (column === TAGS_COLUMN) filters[column] = [];
+              if (column === COLUMNS.tags) filters[column] = [];
               else filters[column] = '';
             });
 
@@ -161,7 +161,7 @@ export function getURLParams() {
             newSort[key] = value;
             break;
 
-          case TAGS_COLUMN:
+          case COLUMNS.tags:
             newFilters[key] = value.split(',');
             break;
 
@@ -228,7 +228,7 @@ export function clearFilters() {
   return function (dispatch, getState) {
     const filters = {};
     for (const filter in getState().table.filters) {
-      if (filter === TAGS_COLUMN) filters[filter] = [];
+      if (filter === COLUMNS.tags) filters[filter] = [];
       else filters[filter] = '';
     }
     const sort = {

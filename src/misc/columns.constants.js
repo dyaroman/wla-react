@@ -1,2 +1,4 @@
-export const TAGS_COLUMN = 'tags';
-export const CHECKBOX = 'checkbox';
+export const COLUMNS = {
+  tags: 'tags',
+  checkbox: 'checkbox',
+};

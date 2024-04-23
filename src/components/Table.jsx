@@ -21,7 +21,7 @@ import { rgb2hex } from '../misc/color';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
-import { CHECKBOX, TAGS_COLUMN } from '../misc/columns.constants';
+import { COLUMNS } from '../misc/columns.constants';
 
 export function Table() {
   const dispatch = useDispatch();
@@ -98,7 +98,7 @@ export function Table() {
     if (!cell) return;
     // skip list number, tags and ogImage columns
     if (
-      ['#', CHECKBOX, TAGS_COLUMN, 'ogImage']
+      ['#', COLUMNS.checkbox, COLUMNS.tags, 'ogImage']
         .map((column) => column.toLowerCase())
         .includes(cell.dataset.qa.toLowerCase())
     )
@@ -160,7 +160,9 @@ export function Table() {
                 <th>#</th>
                 {showColumns.map((column) => {
                   const title =
-                    column === CHECKBOX ? '' : fromCamelCaseToWords(column);
+                    column === COLUMNS.checkbox
+                      ? ''
+                      : fromCamelCaseToWords(column);
                   return (
                     <FilterTitle key={column} text={title} column={column} />
                   );
@@ -277,7 +279,7 @@ export function Table() {
                             </td>
                           );
 
-                        case TAGS_COLUMN:
+                        case COLUMNS.tags:
                           return (
                             <td
                               data-title={fromCamelCaseToWords(column)}
@@ -292,7 +294,7 @@ export function Table() {
                             </td>
                           );
 
-                        case CHECKBOX:
+                        case COLUMNS.checkbox:
                           return (
                             <td
                               data-qa={column}
