@@ -61,6 +61,23 @@ export function Filters() {
     });
   });
 
+  useKeyPress('meta+shift+r', (event) => {
+    event.preventDefault();
+    onClearClick();
+    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
+      method: 'clear-all',
+      label: 'macos',
+    });
+  });
+  useKeyPress('ctrl+shift+r', (event) => {
+    event.preventDefault();
+    onClearClick();
+    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
+      method: 'clear-all',
+      label: 'windows',
+    });
+  });
+
   if (websitesData['websites'].length === 0) {
     return null;
   }

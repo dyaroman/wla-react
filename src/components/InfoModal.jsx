@@ -77,6 +77,10 @@ export function InfoModal() {
             "website1.com,website2.com" you can use this for manual build in
             pipeline as "websites" parameter value
           </li>
+          <li>
+            <code>Cmd+Shift+R</code> or <code>Ctrl+Shift+R</code> to reset all
+            filters and sort
+          </li>
         </ul>
 
         <h3>Convert links to env:</h3>
