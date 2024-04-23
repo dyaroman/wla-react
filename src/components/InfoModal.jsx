@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { triggerGtmEvent } from '../misc/functions';
 import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
 import { CLOSE_INFO_MODAL } from '../misc/gtm.constants';
+import { COLUMNS } from '../misc/columns.constants';
 
 export function InfoModal() {
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ export function InfoModal() {
           </li>
           <li>
             <code>Cmd+Shift+C</code> or <code>Ctrl+Shift+C</code> to copy value
-            from "website" column in comma separated list, like:
+            from "{COLUMNS.website}" column in comma separated list, like:
             "website1.com,website2.com" you can use this for manual build in
             pipeline as "websites" parameter value
           </li>

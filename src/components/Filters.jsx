@@ -94,14 +94,14 @@ export function Filters() {
 
   async function onCopyShortcut() {
     const formattedWebsitesList = preparedData
-      .map((website) => website['website'])
+      .map((website) => website[COLUMNS.website])
       .join(',');
     await handleClipboardCopy(formattedWebsitesList);
   }
 
   async function onCopyWebsitesClick() {
     const formattedWebsitesList = preparedData
-      .map((website) => website['website'])
+      .map((website) => website[COLUMNS.website])
       .join('\n');
     await handleClipboardCopy(formattedWebsitesList);
 

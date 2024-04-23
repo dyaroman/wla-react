@@ -175,23 +175,23 @@ export function Table() {
                 const host =
                   (convertLinks &&
                     convertUrlToEnv(
-                      websiteData['website'],
+                      websiteData[COLUMNS.website],
                       convertLinksTo,
                       project,
                     )) ||
                   websiteData['host'];
                 return (
-                  <tr key={websiteData['website']}>
+                  <tr key={websiteData[COLUMNS.website]}>
                     <td data-title="#" data-qa="#">
                       {++index}
                     </td>
                     {showColumns.map((column) => {
                       switch (column) {
-                        case 'website':
+                        case COLUMNS.website:
                           return (
                             <th
-                              data-title={fromCamelCaseToWords('website')}
-                              data-qa="website"
+                              data-title={fromCamelCaseToWords(column)}
+                              data-qa={column}
                               key={column}
                             >
                               <a
@@ -200,8 +200,8 @@ export function Table() {
                                 rel="noreferrer"
                               >
                                 <Highlight
-                                  text={websiteData['website']}
-                                  highlight={filters['website']}
+                                  text={websiteData[COLUMNS.website]}
+                                  highlight={filters[COLUMNS.website]}
                                 />
                               </a>
                             </th>
