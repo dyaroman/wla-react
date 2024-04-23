@@ -226,12 +226,12 @@ export function Table() {
                           );
                         }
 
-                        case 'mainFormTheme':
+                        case COLUMNS.mainFormTheme:
                         case 'altFormTheme':
                         case 'mainFormEsTheme': {
                           let bgColor;
                           switch (column) {
-                            case 'mainFormTheme':
+                            case COLUMNS.mainFormTheme:
                               bgColor = websiteData['mainFormPrimaryColor'];
                               break;
                             case 'altFormTheme':
