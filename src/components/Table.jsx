@@ -228,17 +228,20 @@ export function Table() {
 
                         case COLUMNS.mainFormTheme:
                         case COLUMNS.altFormTheme:
-                        case COLUMNS.mainFormThemeEs: {
+                        case COLUMNS.mainFormEsTheme: {
                           let bgColor;
                           switch (column) {
                             case COLUMNS.mainFormTheme:
-                              bgColor = websiteData['mainFormPrimaryColor'];
+                              bgColor =
+                                websiteData[COLUMNS.mainFormPrimaryColor];
                               break;
                             case COLUMNS.altFormTheme:
-                              bgColor = websiteData['altFormPrimaryColor'];
+                              bgColor =
+                                websiteData[COLUMNS.altFormPrimaryColor];
                               break;
-                            case COLUMNS.mainFormThemeEs:
-                              bgColor = websiteData['mainFormEsPrimaryColor'];
+                            case COLUMNS.mainFormEsTheme:
+                              bgColor =
+                                websiteData[COLUMNS.mainFormEsPrimaryColor];
                               break;
                           }
                           return (
