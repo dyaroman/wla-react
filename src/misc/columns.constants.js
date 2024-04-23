@@ -5,6 +5,7 @@ export const COLUMNS = {
   mainFormTheme: 'mainFormTheme',
   mainFormThemeEs: 'mainFormEsTheme',
   ogImage: 'ogImage',
+  pages: 'pages',
   tags: 'tags',
   website: 'website',
 };

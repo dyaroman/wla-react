@@ -34,7 +34,7 @@ export function filterTableData(websites, filters) {
           }
           break;
 
-        case 'pages':
+        case COLUMNS.pages:
           if (
             filters[filter].startsWith('==') &&
             website[filter].every((page) => search(page, filters[filter]))

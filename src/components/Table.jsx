@@ -255,16 +255,16 @@ export function Table() {
                           );
                         }
 
-                        case 'pages':
+                        case COLUMNS.pages:
                           return (
                             <td
                               data-title={fromCamelCaseToWords(column)}
                               data-qa={column}
                               key={column}
                             >
-                              {websiteData['pages'].length ? (
+                              {websiteData[column].length ? (
                                 <ul>
-                                  {websiteData['pages'].map((page) => (
+                                  {websiteData[column].map((page) => (
                                     <li key={page}>
                                       <Highlight
                                         text={page}
