@@ -227,14 +227,14 @@ export function Table() {
                         }
 
                         case COLUMNS.mainFormTheme:
-                        case 'altFormTheme':
+                        case COLUMNS.altFormTheme:
                         case 'mainFormEsTheme': {
                           let bgColor;
                           switch (column) {
                             case COLUMNS.mainFormTheme:
                               bgColor = websiteData['mainFormPrimaryColor'];
                               break;
-                            case 'altFormTheme':
+                            case COLUMNS.altFormTheme:
                               bgColor = websiteData['altFormPrimaryColor'];
                               break;
                             case 'mainFormEsTheme':
