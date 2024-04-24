@@ -111,6 +111,10 @@ export function getWebsitesData() {
             type: SET_WEBSITES_DATA,
             payload: newState,
           });
+          dispatch({
+            type: WEBSITES_DATA_LOADED,
+            payload: true,
+          });
           break;
         case 401:
           dispatch({
@@ -127,11 +131,6 @@ export function getWebsitesData() {
       }
     } catch (e) {
       console.error(e);
-    } finally {
-      dispatch({
-        type: WEBSITES_DATA_LOADED,
-        payload: true,
-      });
     }
   };
 }
