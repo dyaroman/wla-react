@@ -46,6 +46,7 @@ export function Tags({ items }) {
     return (
       <li key={tag}>
         <Checkbox
+          name={tag}
           label={tag}
           checked={tagChecked}
           disabled={!tagAvailable}

@@ -184,11 +184,7 @@ export function Table() {
 
                   default:
                     return (
-                      <FilterTitle
-                        key={column}
-                        text={fromCamelCaseToWords(column)}
-                        column={column}
-                      />
+                      <FilterTitle key={column} text={column} column={column} />
                     );
                 }
               })}
@@ -331,7 +327,7 @@ export function Table() {
                             data-title={fromCamelCaseToWords(column)}
                             key={column}
                           >
-                            <Checkbox label={''} />
+                            <Checkbox name={''} label={''} />
                           </td>
                         );
 

@@ -84,6 +84,7 @@ export function TableControls() {
             return (
               <li key={column}>
                 <Checkbox
+                  name={column}
                   label={fromCamelCaseToWords(column)}
                   checked={showColumns.includes(column)}
                   onChange={onChange.bind(this, column)}

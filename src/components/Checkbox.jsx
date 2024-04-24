@@ -1,4 +1,4 @@
-export function Checkbox({ label, checked, disabled, onChange }) {
+export function Checkbox({ label, name, checked, disabled, onChange }) {
   return (
     <label
       className={'checkbox' + (disabled ? ' disabled' : '')}
@@ -7,7 +7,7 @@ export function Checkbox({ label, checked, disabled, onChange }) {
       <input
         type="checkbox"
         className="checkbox__input"
-        name={label}
+        name={name}
         checked={checked}
         onChange={onChange}
         tabIndex={disabled ? '-1' : undefined}
