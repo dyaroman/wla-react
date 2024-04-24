@@ -13,18 +13,18 @@ export function InfoModal() {
 
   useEffect(() => {
     document.addEventListener('click', globalClickHandler);
-    dialog.current.addEventListener('keydown', keyDownHandler);
+    dialog.current?.addEventListener('keydown', keyDownHandler);
     return () => {
       document.removeEventListener('click', globalClickHandler);
-      dialog.current.removeEventListener('keydown', keyDownHandler);
+      dialog.current?.removeEventListener('keydown', keyDownHandler);
     };
   }, []);
 
   useEffect(() => {
     if (isOpen === true) {
-      dialog.current.showModal();
+      dialog.current?.showModal();
     } else {
-      dialog.current.close();
+      dialog.current?.close();
     }
   }, [isOpen]);
 
@@ -46,6 +46,8 @@ export function InfoModal() {
     });
     triggerGtmEvent(CLOSE_INFO_MODAL);
   }
+
+  if (!isOpen) return null;
 
   return (
     <dialog className="info-modal" ref={dialog}>

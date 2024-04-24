@@ -10,18 +10,18 @@ export function ImgPreviewModal() {
 
   useEffect(() => {
     document.addEventListener('click', globalClickHandler);
-    dialog.current.addEventListener('keydown', keyDownHandler);
+    dialog.current?.addEventListener('keydown', keyDownHandler);
     return () => {
       document.removeEventListener('click', globalClickHandler);
-      dialog.current.removeEventListener('keydown', keyDownHandler);
+      dialog.current?.removeEventListener('keydown', keyDownHandler);
     };
   }, []);
 
   useEffect(() => {
     if (imgUrl) {
-      dialog.current.showModal();
+      dialog.current?.showModal();
     } else {
-      dialog.current.close();
+      dialog.current?.close();
     }
   }, [imgUrl]);
 
@@ -41,6 +41,8 @@ export function ImgPreviewModal() {
       payload: null,
     });
   }
+
+  if (!imgUrl) return null;
 
   return (
     <dialog className="img-preview-modal" ref={dialog}>
