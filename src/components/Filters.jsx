@@ -62,7 +62,7 @@ export function Filters() {
     });
   });
 
-  useKeyPress('meta+shift+r', (event) => {
+  useKeyPress('meta+shift+e', (event) => {
     event.preventDefault();
     onClearClick();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
@@ -70,7 +70,7 @@ export function Filters() {
       label: 'macos',
     });
   });
-  useKeyPress('ctrl+shift+r', (event) => {
+  useKeyPress('ctrl+shift+e', (event) => {
     event.preventDefault();
     onClearClick();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {

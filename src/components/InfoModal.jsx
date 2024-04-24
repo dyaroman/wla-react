@@ -82,7 +82,7 @@ export function InfoModal() {
             pipeline as "websites" parameter value
           </li>
           <li>
-            <code>Cmd+Shift+R</code> or <code>Ctrl+Shift+R</code> to reset all
+            <code>Cmd+Shift+E</code> or <code>Ctrl+Shift+E</code> to reset all
             filters and sort
           </li>
         </ul>
