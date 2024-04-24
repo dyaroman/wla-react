@@ -20,6 +20,10 @@ body {
   box-sizing: border-box;
 }
 
+main {
+  padding: 0 0.5rem;
+}
+
 a {
   color: var(--link-color);
 
@@ -40,11 +44,6 @@ code {
 
   border-radius: $border-width;
   background-color: var(--body-color);
-}
-
-.container {
-  padding: 0 0.5rem;
-  min-height: 100vh;
 }
 
 .field-title {
