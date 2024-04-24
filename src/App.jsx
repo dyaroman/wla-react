@@ -31,28 +31,32 @@ export function App() {
 
   if (requestError) {
     return (
-      <>
+      <main data-qa="load-error">
         <h1>Error due to load websites data</h1>
         <p>Status code: {requestError}</p>
-      </>
+      </main>
     );
   }
 
   if (unauthorized === true) {
     return (
-      <>
+      <main data-qa="unauthorized">
         <h1>Unauthorized</h1>
         <p>Please check your connection</p>
-      </>
+      </main>
     );
   }
 
   if (websitesDataLoaded === false) {
-    return <Loader fixed={true} />;
+    return (
+      <main data-qa="loader">
+        <Loader fixed={true} />
+      </main>
+    );
   }
 
   return (
-    <>
+    <main data-qa="app">
       <AppControls />
       <TableInfo />
       <Filters />
@@ -60,6 +64,6 @@ export function App() {
       <Table />
       <InfoModal />
       <ImgPreviewModal />
-    </>
+    </main>
   );
 }
