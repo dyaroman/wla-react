@@ -207,7 +207,11 @@ export function Table() {
                     switch (column) {
                       case COLUMNS.index:
                         return (
-                          <td data-title="#" data-qa="#" key={column}>
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
                             {++index}
                           </td>
                         );
@@ -323,8 +327,8 @@ export function Table() {
                       case COLUMNS.checkbox:
                         return (
                           <td
-                            data-qa={column}
                             data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
                             key={column}
                           >
                             <Checkbox name={''} label={''} />
