@@ -29,6 +29,17 @@ export function App() {
     }
   }, [websitesDataLoaded]);
 
+  if (window.location.host.includes('websites')) {
+    return (
+      <main data-qa="websites">
+        <h1>We temporarily stop supporting Websites</h1>
+        <p>
+          If you need more detail about it, please contact me in slack: @dyaroman
+        </p>
+      </main>
+    );
+  }
+
   if (requestError) {
     return (
       <main data-qa="load-error">
