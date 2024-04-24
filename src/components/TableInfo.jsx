@@ -31,13 +31,12 @@ export function TableInfo() {
     <section className="info">
       {env && <h4 data-qa="env">Environment: {env}</h4>}
       {repoPath && commit && (
-        <h4>
+        <h4 data-qa="commit">
           Commit:{' '}
           <a
             href={`https://dev.azure.com/myorg/${repoPath}/commit/${commit}`}
             target="_blank"
             rel="noreferrer"
-            data-qa="commit"
           >
             {commit.substring(0, 8)}
           </a>
