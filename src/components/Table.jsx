@@ -156,15 +156,35 @@ export function Table() {
         <table>
           <thead>
             <tr>
-              <th>#</th>
               {showColumns.map((column) => {
-                const title =
-                  column === COLUMNS.checkbox
-                    ? ''
-                    : fromCamelCaseToWords(column);
-                return (
-                  <FilterTitle key={column} text={title} column={column} />
-                );
+                switch (column) {
+                  case COLUMNS.index:
+                    return (
+                      <FilterTitle
+                        key={column}
+                        column={column}
+                        className="shrink"
+                        text={'#'}
+                      />
+                    );
+                  case COLUMNS.checkbox:
+                    return (
+                      <FilterTitle
+                        key={column}
+                        column={column}
+                        className="shrink"
+                      />
+                    );
+
+                  default:
+                    return (
+                      <FilterTitle
+                        key={column}
+                        text={fromCamelCaseToWords(column)}
+                        column={column}
+                      />
+                    );
+                }
               })}
             </tr>
           </thead>
@@ -181,11 +201,15 @@ export function Table() {
                 websiteData[COLUMNS.host];
               return (
                 <tr key={websiteData[COLUMNS.website]}>
-                  <td data-title="#" data-qa="#">
-                    {++index}
-                  </td>
                   {showColumns.map((column) => {
                     switch (column) {
+                      case COLUMNS.index:
+                        return (
+                          <td data-title="#" data-qa="#" key={column}>
+                            {++index}
+                          </td>
+                        );
+
                       case COLUMNS.website:
                         return (
                           <th

@@ -4,7 +4,7 @@ import { triggerGtmEvent } from '../misc/functions';
 import { SORT_UPDATED } from '../features/table/table.constants';
 import { TABLE_SORT } from '../misc/gtm.constants';
 
-export function FilterTitle({ column, text }) {
+export function FilterTitle({ column, text, className }) {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state['table'].sort);
   let direction = null;
@@ -44,6 +44,7 @@ export function FilterTitle({ column, text }) {
       data-sort-direction={direction}
       data-qa={column}
       onClick={onClick}
+      className={className}
     >
       {text}
     </th>
