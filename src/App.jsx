@@ -9,6 +9,7 @@ import { Table } from './components/Table';
 import { InfoModal } from './components/InfoModal';
 import { ImgPreviewModal } from './components/ImgPreviewModal';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
+import { TableControls } from './components/TableControls';
 
 export function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ export function App() {
       <AppControls />
       <TableInfo />
       <Filters />
+      <TableControls />
       <Table />
       <InfoModal />
       <ImgPreviewModal />
