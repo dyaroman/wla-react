@@ -30,21 +30,7 @@ export function getWebsitesData() {
       switch (response.status) {
         case 200:
           const websitesData = await response.json();
-          const columns = {
-            // add index column
-            [COLUMNS.index]: {
-              renderFilter: false,
-              renderColumn: true,
-              showColumn: true,
-            },
-            // add checkbox column
-            [COLUMNS.checkbox]: {
-              renderFilter: false,
-              renderColumn: true,
-              showColumn: false,
-            },
-            ...websitesData['columns'],
-          };
+          const columns = websitesData['columns'];
           const websites = websitesData['websites'];
 
           // collect all filters
