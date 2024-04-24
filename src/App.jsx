@@ -28,8 +28,13 @@ export function App() {
     }
   }, [websitesDataLoaded]);
 
-  if (websitesDataLoaded === false) {
-    return <Loader fixed={true} />;
+  if (requestError) {
+    return (
+      <>
+        <h1>Error due to load websites data</h1>
+        <p>Status code: {requestError}</p>
+      </>
+    );
   }
 
   if (unauthorized === true) {
@@ -41,13 +46,8 @@ export function App() {
     );
   }
 
-  if (requestError) {
-    return (
-      <>
-        <h1>Error due to request.</h1>
-        <p>Status code: {requestError}</p>
-      </>
-    );
+  if (websitesDataLoaded === false) {
+    return <Loader fixed={true} />;
   }
 
   return (
