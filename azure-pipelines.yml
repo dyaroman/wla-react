@@ -1,14 +1,12 @@
 variables:
-  - name: HasVersion
-    value: ${{ startsWith(variables['build.sourceBranch'], 'refs/tags/v') }}
+  - name: IsRelease
+    value: ${{ startsWith(variables['build.sourceBranch'], 'refs/heads/master') }}
 
 trigger:
-  tags:
-    include:
-      - v*
   branches:
     include:
       - master
+      - development
       - feature/*
 
 pool:
@@ -33,7 +31,7 @@ stages:
             condition: |
               and(
                 succeeded(),
-                eq(variables['HasVersion'], false)
+                eq(variables['IsRelease'], false)
               )
 
           - script: npm pkg delete scripts.prepare
@@ -65,7 +63,7 @@ stages:
         condition: |
           and(
             succeeded(),
-            eq(variables['HasVersion'], false)
+            eq(variables['IsRelease'], false)
           )
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
@@ -87,7 +85,7 @@ stages:
         condition: |
           and(
             succeeded(),
-            eq(variables['HasVersion'], true)
+            eq(variables['IsRelease'], true)
           )
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
@@ -109,7 +107,7 @@ stages:
         condition: |
           and(
             succeeded(),
-            eq(variables['HasVersion'], true)
+            eq(variables['IsRelease'], true)
           )
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
