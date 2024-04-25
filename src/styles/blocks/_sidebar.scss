@@ -1,0 +1,38 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+
+  background-color: var(--body-bg);
+}
+
+.sidebar__top {
+  display: flex;
+  justify-content: space-between;
+  padding: $gap;
+
+  border-bottom: $border-width solid var(--body-color);
+}
+
+.sidebar__bottom {
+  height: 0;
+
+  transition:
+    height 0.3s,
+    opacity 0.3s;
+  overflow: auto;
+  opacity: 0;
+  visibility: hidden;
+
+  [data-sidebar='open'] & {
+    height: calc(100svh - $sidebar-height);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.sidebar__bottom-content {
+  padding: $gap;
+}

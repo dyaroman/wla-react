@@ -3,9 +3,9 @@ import { ThemeToggle } from './ThemeToggle';
 
 export function AppControls() {
   return (
-    <div className="controls">
-      <InfoModalBtn />
+    <div className="btn-group">
       <ThemeToggle />
+      <InfoModalBtn />
     </div>
   );
 }

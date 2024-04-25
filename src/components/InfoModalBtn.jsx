@@ -25,8 +25,8 @@ export function InfoModalBtn() {
   }
 
   return (
-    <button className="info-modal-btn" onClick={onOpenModalClick}>
-      i
+    <button className="btn btn--icon" onClick={onOpenModalClick}>
+      <span className="icon icon--info-modal">?</span> info modal
     </button>
   );
 }

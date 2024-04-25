@@ -1,0 +1,36 @@
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40px;
+  height: 40px;
+  padding: 5px 0;
+
+  background: none;
+  border: none;
+
+  @include hover() {
+    cursor: pointer;
+  }
+
+  span {
+    display: block;
+    width: 100%;
+    height: $border-width;
+
+    transition: 0.3s;
+    background-color: var(--body-color);
+  }
+
+  &--open span {
+    &:nth-child(1) {
+      transform: translateY(14px) rotate(45deg);
+    }
+    &:nth-child(2) {
+      opacity: 0;
+    }
+    &:nth-child(3) {
+      transform: translateY(-14px) rotate(-45deg);
+    }
+  }
+}

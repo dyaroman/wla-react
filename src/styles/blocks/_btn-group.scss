@@ -1,10 +1,11 @@
 .btn-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: $gap;
+  margin-top: $gap;
 
   @include media-breakpoint-up(sm) {
     flex-direction: row;
+    flex-wrap: wrap;
   }
 }

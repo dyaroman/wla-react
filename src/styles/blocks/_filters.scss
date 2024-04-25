@@ -1,16 +1,16 @@
 .filters {
-  margin: 0.5rem 0;
+  margin: $gap 0;
 
   .tags {
-    margin-top: 0.5rem;
+    margin-top: $gap;
   }
 }
 
 .filters__content {
   display: grid;
-  gap: 0.5rem;
+  gap: $gap;
 
-  margin-top: 0.5rem;
+  margin-top: $gap;
 
   @include media-breakpoint-up(sm) {
     grid-template-columns: repeat(2, 1fr);

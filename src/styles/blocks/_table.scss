@@ -1,9 +1,8 @@
 .table {
-  width: 100%;
-  margin: 0.5rem 0;
+  margin: $gap;
 
   @include media-breakpoint-up(lg) {
-    max-height: calc(100vh - 1em);
+    max-height: calc(100vh - $sidebar-height - 1rem);
 
     border: $border-width solid var(--border-color);
     overflow: auto;
@@ -60,8 +59,8 @@ thead th {
   @include media-breakpoint-up(lg) {
     position: sticky;
     top: 0;
-    left: 0;
-    z-index: 10;
+    left: -$border-width;
+    z-index: 2;
 
     color: var(--body-color);
 
@@ -72,7 +71,7 @@ thead th {
 
 tbody {
   display: grid;
-  gap: 0.5rem;
+  gap: $gap;
 
   @include media-breakpoint-up(sm) {
     grid-template-columns: repeat(2, 1fr);
@@ -83,9 +82,7 @@ tbody {
   }
 }
 
-tbody th {
-  font-weight: 400;
-
+tbody td[data-qa='website'] {
   @include media-breakpoint-up(lg) {
     position: sticky;
     left: -$border-width;
@@ -93,26 +90,18 @@ tbody th {
 
     background-color: inherit;
 
-    &::before,
     &::after {
       content: '';
 
       position: absolute;
       top: 0;
+      right: -$border-width;
       bottom: 0;
 
       display: block;
       width: $border-width;
 
       background-color: var(--border-color);
-    }
-
-    &::before {
-      left: 0;
-    }
-
-    &::after {
-      right: -$border-width;
     }
   }
 }
@@ -156,8 +145,8 @@ td {
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
+  gap: $gap;
+  padding: $gap;
 
   text-align: left;
   word-break: break-word;

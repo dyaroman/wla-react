@@ -1,3 +1,4 @@
+export const TOGGLE_SIDEBAR = 'app/toggleSidebarOpen';
 export const TOGGLE_FILTERS_OPEN = 'app/toggleFiltersOpen';
 export const TOGGLE_CUSTOMIZE_COLUMNS_OPEN = 'app/toggleCustomizeColumnsOpen';
 export const TOGGLE_INFO_MODAL = 'app/toggleInfoModal';

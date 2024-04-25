@@ -9,7 +9,10 @@ import {
   triggerGtmEvent,
 } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
-import { toggleFiltersOpen } from '../features/app/app.actions';
+import {
+  toggleFiltersOpen,
+  toggleSidebarOpen,
+} from '../features/app/app.actions';
 import { clearFilters } from '../features/table/table.actions';
 import { BTN_GTM_EVENT, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
 import { FILTERS_OPEN } from '../misc/url.constants';
@@ -18,6 +21,7 @@ import { COLUMNS } from '../misc/columns.constants';
 export function Filters() {
   const dispatch = useDispatch();
   const filtersOpen = useSelector((state) => state['app'].filtersOpen);
+  const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const columns = websitesData['columns'];
@@ -84,6 +88,9 @@ export function Filters() {
   }
 
   function onSearchShortcut() {
+    if (!sidebarOpen) {
+      dispatch(toggleSidebarOpen(true));
+    }
     if (!filtersOpen) {
       dispatch(toggleFiltersOpen(true));
     }

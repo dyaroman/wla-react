@@ -5,6 +5,11 @@
 @import 'misc/mixins';
 @import 'misc/common';
 
+@import 'blocks/app';
+@import 'blocks/sidebar';
+@import 'blocks/logo';
+@import 'blocks/counter';
+@import 'blocks/burger';
 @import 'blocks/loader';
 @import 'blocks/spinner';
 @import 'blocks/btn';
@@ -14,7 +19,7 @@
 @import 'blocks/tags';
 @import 'blocks/filters';
 @import 'blocks/info-modal';
-@import 'blocks/controls';
+@import 'blocks/icon';
 @import 'blocks/checkbox';
 @import 'blocks/customize-columns';
 @import 'blocks/images';

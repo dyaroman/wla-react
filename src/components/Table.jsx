@@ -9,7 +9,11 @@ import { ColorCell } from './ColorCell';
 import { ImgCell } from './ImgCell';
 import { Checkbox } from './Checkbox';
 import { updateTableData } from '../features/table/table.actions';
-import { toggleFiltersOpen, updateURL } from '../features/app/app.actions';
+import {
+  toggleFiltersOpen,
+  toggleSidebarOpen,
+  updateURL,
+} from '../features/app/app.actions';
 import {
   convertUrlToEnv,
   fromCamelCaseToWords,
@@ -24,6 +28,7 @@ import { COLUMNS } from '../misc/columns.constants';
 
 export function Table() {
   const dispatch = useDispatch();
+  const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
   const filtersOpen = useSelector((state) => state['app'].filtersOpen);
   const sort = useSelector((state) => state['table'].sort);
   const filters = useSelector((state) => state['table'].filters);
@@ -72,6 +77,9 @@ export function Table() {
         `.filters input[data-qa='${fieldName}']`,
       );
       if (!field) return;
+      if (!sidebarOpen) {
+        dispatch(toggleSidebarOpen(true));
+      }
       if (!filtersOpen) {
         dispatch(toggleFiltersOpen(true));
       }
@@ -142,19 +150,25 @@ export function Table() {
 
   if (websitesData['websites'].length === 0) {
     return (
-      <h4 data-qa="emptyDataFile">
-        No data to show. Please check "{WEBSITES_DATA_FILENAME}" file.
-      </h4>
+      <div className="container">
+        <h4 data-qa="emptyDataFile">
+          No data to show. Please check "{WEBSITES_DATA_FILENAME}" file.
+        </h4>
+      </div>
     );
   } else if (preparedData.length === 0) {
     return (
-      <h4 data-qa="noResults">No data to show, please check your filters.</h4>
+      <div className="container">
+        <h4 data-qa="noResults">No data to show, please check your filters.</h4>
+      </div>
     );
   } else if (showColumns.length === 0) {
     return (
-      <h4 data-qa="noColumns">
-        No columns to show, please check customize columns.
-      </h4>
+      <div className="container">
+        <h4 data-qa="noColumns">
+          No columns to show, please check customize columns.
+        </h4>
+      </div>
     );
   } else {
     return (
@@ -166,20 +180,13 @@ export function Table() {
                 switch (column) {
                   case COLUMNS.index:
                     return (
-                      <FilterTitle
-                        key={column}
-                        column={column}
-                        className="shrink"
-                        text={'#'}
-                      />
+                      <th key={column} data-qa={column} className="shrink">
+                        #
+                      </th>
                     );
                   case COLUMNS.checkbox:
                     return (
-                      <FilterTitle
-                        key={column}
-                        column={column}
-                        className="shrink"
-                      />
+                      <th key={column} data-qa={column} className="shrink"></th>
                     );
 
                   default:
@@ -218,7 +225,7 @@ export function Table() {
 
                       case COLUMNS.website:
                         return (
-                          <th
+                          <td
                             data-title={fromCamelCaseToWords(column)}
                             data-qa={column}
                             key={column}
@@ -233,7 +240,7 @@ export function Table() {
                                 highlight={filters[COLUMNS.website]}
                               />
                             </a>
-                          </th>
+                          </td>
                         );
 
                       case COLUMNS.ogImage: {

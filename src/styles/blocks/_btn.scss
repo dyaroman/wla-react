@@ -1,6 +1,10 @@
 .btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
   padding: px2rem(12) px2rem(22);
+  min-width: 220px;
 
   font-size: inherit;
   color: var(--btn-text-color);
@@ -26,5 +30,10 @@
 
     --btn-bg-color--hover: #bb2d3b;
     --btn-border-color--hover: #b02a37;
+  }
+
+  &--icon {
+    padding-top: px2rem(5);
+    padding-bottom: px2rem(5);
   }
 }

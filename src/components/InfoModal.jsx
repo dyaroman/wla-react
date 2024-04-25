@@ -52,6 +52,30 @@ export function InfoModal() {
   return (
     <dialog className="info-modal" ref={dialog}>
       <section className="info-modal__content">
+        <h3>Shortcuts:</h3>
+        <ul>
+          <li>
+            <code>Cmd+/</code> or <code>Ctrl+/</code> to toggle sidebar
+          </li>
+          <li>
+            <code>Shift+?</code> to show this modal
+          </li>
+          <li>
+            <code>Cmd+Shift+F</code> or <code>Ctrl+Shift+F</code> to move cursor
+            to the first input field
+          </li>
+          <li>
+            <code>Cmd+Shift+C</code> or <code>Ctrl+Shift+C</code> to copy value
+            from "{COLUMNS.website}" column as comma separated list, like:
+            "website1.com,website2.com" you can use this for manual build in
+            pipeline as "websites" parameter value
+          </li>
+          <li>
+            <code>Cmd+Shift+E</code> or <code>Ctrl+Shift+E</code> to reset all
+            filters and sort
+          </li>
+        </ul>
+
         <h3>Advanced search:</h3>
         <ul>
           <li>
@@ -68,25 +92,22 @@ export function InfoModal() {
           </li>
         </ul>
 
-        <h3>Shortcuts:</h3>
+        <h3>Quick search:</h3>
+        <p>
+          Hold <code>Option</code> or <code>Alt</code> key and click on some
+          table cell to insert text from cell in appropriate search field and
+          move focus on it.
+        </p>
+
+        <h3>Quick copy:</h3>
+        <p>
+          Hold <code>Cmd</code> or <code>Windows</code> key and click on some
+          table cell to copy text value from it.
+        </p>
+
+        <h3>Tips:</h3>
         <ul>
-          <li>
-            <code>Shift+?</code> to show this modal
-          </li>
-          <li>
-            <code>Cmd+Shift+F</code> or <code>Ctrl+Shift+F</code> to move cursor
-            to the first input field
-          </li>
-          <li>
-            <code>Cmd+Shift+C</code> or <code>Ctrl+Shift+C</code> to copy value
-            from "{COLUMNS.website}" column in comma separated list, like:
-            "website1.com,website2.com" you can use this for manual build in
-            pipeline as "websites" parameter value
-          </li>
-          <li>
-            <code>Cmd+Shift+E</code> or <code>Ctrl+Shift+E</code> to reset all
-            filters and sort
-          </li>
+          <li>Click on logo to scroll table to the top.</li>
         </ul>
 
         <h3>Convert links to env:</h3>
@@ -102,19 +123,6 @@ export function InfoModal() {
             <code>prod</code> to convert links to prod env
           </li>
         </ul>
-
-        <h3>Quick search:</h3>
-        <p>
-          Hold <code>Option</code> or <code>Alt</code> key and click on some
-          table cell to insert text from cell in appropriate search field and
-          move focus on it.
-        </p>
-
-        <h3>Quick copy:</h3>
-        <p>
-          Hold <code>Cmd</code> or <code>Windows</code> key and click on some
-          table cell to copy text value from it.
-        </p>
       </section>
 
       <button className="btn" onClick={onCloseModalClick}>

@@ -1,5 +1,7 @@
 $row-bg--hover: #fff3cd;
 $border-width: 2px;
+$gap: 0.5rem;
+$sidebar-height: 58px;
 
 @mixin light-theme() {
   --body-bg: #fff;

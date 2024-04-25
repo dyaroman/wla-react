@@ -2,11 +2,13 @@ import {
   CUSTOMIZE_COLUMNS_OPEN,
   FILTERS_OPEN,
   SHOW_COLUMNS,
+  SIDEBAR_OPEN,
 } from '../../misc/url.constants';
 import { COLUMNS } from '../../misc/columns.constants';
 import {
   TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
   TOGGLE_FILTERS_OPEN,
+  TOGGLE_SIDEBAR,
 } from './app.constants';
 import { deleteQueryParam, setQueryParam } from '../../misc/functions';
 
@@ -88,6 +90,20 @@ export function toggleFiltersOpen(open) {
   return function (dispatch) {
     dispatch({
       type: TOGGLE_FILTERS_OPEN,
+      payload: open,
+    });
+  };
+}
+
+export function toggleSidebarOpen(open) {
+  if (open) {
+    setQueryParam(SIDEBAR_OPEN, '');
+  } else {
+    deleteQueryParam(SIDEBAR_OPEN);
+  }
+  return function (dispatch) {
+    dispatch({
+      type: TOGGLE_SIDEBAR,
       payload: open,
     });
   };

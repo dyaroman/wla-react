@@ -78,8 +78,9 @@ export function ThemeToggle() {
   }
 
   return (
-    <button className="theme-toggle" onClick={onThemeToggleClick}>
-      theme toggle
+    <button className="btn btn--icon" onClick={onThemeToggleClick}>
+      <span className="icon icon--toggle-theme"></span>
+      toggle theme
     </button>
   );
 }

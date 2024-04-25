@@ -1,7 +1,7 @@
 .images {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: $gap;
 
   @include media-breakpoint-up(md) {
     flex-direction: row;

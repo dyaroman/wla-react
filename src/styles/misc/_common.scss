@@ -20,10 +20,6 @@ body {
   box-sizing: border-box;
 }
 
-main {
-  padding: 0 0.5rem;
-}
-
 a {
   color: var(--link-color);
 
@@ -33,7 +29,7 @@ a {
 }
 
 h4 {
-  margin: 0.5rem 0;
+  margin: $gap 0;
 }
 
 code {
@@ -46,19 +42,24 @@ code {
   background-color: var(--body-color);
 }
 
+.container {
+  padding: 0 $gap;
+  min-height: 100vh;
+}
+
 .field-title {
   display: block;
 }
 
 .field-title__text {
   display: inline-block;
-  margin-bottom: 0.5rem;
+  margin-bottom: $gap;
 }
 
 .input {
   width: 100%;
   height: 40px;
-  padding: 0 0.5rem;
+  padding: 0 $gap;
 
   font-family: inherit;
   font-size: inherit;
@@ -78,7 +79,7 @@ code {
 }
 
 dialog {
-  padding: 0.5rem;
+  padding: $gap;
 }
 
 summary {
