@@ -9,33 +9,36 @@ import { COLUMNS } from '../misc/columns.constants';
 export function InfoModal() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state['app'].infoModalOpen);
-  const dialog = useRef(null);
+  const dialogRef = useRef(null);
+  const cssClass = 'info-modal';
 
   useEffect(() => {
     document.addEventListener('click', globalClickHandler);
-    dialog.current?.addEventListener('keydown', keyDownHandler);
     return () => {
       document.removeEventListener('click', globalClickHandler);
-      dialog.current?.removeEventListener('keydown', keyDownHandler);
     };
   }, []);
 
   useEffect(() => {
-    if (isOpen === true) {
-      dialog.current?.showModal();
+    if (isOpen) {
+      dialogRef.current?.showModal();
+      dialogRef.current?.addEventListener('keydown', keyDownHandler);
     } else {
-      dialog.current?.close();
+      dialogRef.current?.close();
+      dialogRef.current?.removeEventListener('keydown', keyDownHandler);
     }
   }, [isOpen]);
 
   function keyDownHandler(event) {
-    if (event.key === 'Escape') {
-      onCloseModalClick();
-    }
+    if (event.target.closest(`dialog.${cssClass}`) !== dialogRef.current)
+      return;
+    if (event.key !== 'Escape') return;
+    if (!isOpen) return;
+    onCloseModalClick();
   }
 
   function globalClickHandler(event) {
-    if (event.target !== dialog.current) return;
+    if (event.target !== dialogRef.current) return;
     onCloseModalClick();
   }
 
@@ -50,7 +53,7 @@ export function InfoModal() {
   if (!isOpen) return null;
 
   return (
-    <dialog className="info-modal" ref={dialog}>
+    <dialog className={cssClass} ref={dialogRef}>
       <section className="info-modal__content">
         <h3>Shortcuts:</h3>
         <ul>
