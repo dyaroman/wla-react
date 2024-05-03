@@ -29,7 +29,7 @@ export function App() {
 
   if (window.location.host.includes('websites')) {
     return (
-      <section data-qa="websites">
+      <section data-qa="smsPubsites">
         <div className="container">
           <h1>We temporarily stop supporting Websites</h1>
           <p>
@@ -43,7 +43,7 @@ export function App() {
 
   if (requestError) {
     return (
-      <section data-qa="load-error">
+      <section data-qa="loadError">
         <div className="container">
           <h1>Error due to load websites data</h1>
           <p>Status code: {requestError}</p>
