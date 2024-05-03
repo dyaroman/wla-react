@@ -1,16 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 
 import { Checkbox } from './Checkbox';
-import {
-  fromCamelCaseToWords,
-  getQueryParamValue,
-  triggerGtmEvent,
-} from '../misc/functions';
+import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { toggleCustomizeColumnsOpen } from '../features/app/app.actions';
 import { updateShowColumns } from '../features/table/table.actions';
 import { BTN_GTM_EVENT, SHOWED_COLUMN_CHANGE } from '../misc/gtm.constants';
-import { CUSTOMIZE_COLUMNS_OPEN } from '../misc/url.constants';
 
 export function TableControls() {
   const dispatch = useDispatch();
@@ -24,12 +18,6 @@ export function TableControls() {
   const defaultShowColumns = useSelector(
     (state) => state['table'].defaultShowColumns,
   );
-
-  useEffect(() => {
-    if (getQueryParamValue(CUSTOMIZE_COLUMNS_OPEN) === '') {
-      dispatch(toggleCustomizeColumnsOpen(true));
-    }
-  }, []);
 
   function onChange(column) {
     let updatedShowColumns = [...showColumns];

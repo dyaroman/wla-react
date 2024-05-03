@@ -1,8 +1,4 @@
-import {
-  CUSTOMIZE_COLUMNS_OPEN,
-  SHOW_COLUMNS,
-  SIDEBAR_OPEN,
-} from '../../misc/url.constants';
+import { SHOW_COLUMNS, SIDEBAR_OPEN } from '../../misc/url.constants';
 import { COLUMNS } from '../../misc/columns.constants';
 import {
   TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
@@ -104,11 +100,6 @@ export function toggleSidebarOpen(open) {
 }
 
 export function toggleCustomizeColumnsOpen(open) {
-  if (open) {
-    setQueryParam(CUSTOMIZE_COLUMNS_OPEN, '');
-  } else {
-    deleteQueryParam(CUSTOMIZE_COLUMNS_OPEN);
-  }
   return function (dispatch) {
     dispatch({
       type: TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
