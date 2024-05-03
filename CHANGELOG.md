@@ -1,3 +1,22 @@
+## 1.2.0
+
+- added logo
+- added header with:
+  - logo
+  - counter (show number of filtered websites)
+  - burger menu
+- added banner for sms websites
+- added `Cmd + /` or `Ctrl + /` to toggle burger menu
+- moved filters and other controls to burger menu
+- removed release production version by tag (issue with websites feature builds)
+- removed saving detail tags open state from url for:
+  - filters
+  - customize columns
+- reworked modal windows (do not render modal windows in DOM if they are not showed)
+- refreshed app controls buttons:
+  - toggle theme
+  - info modal
+
 ## 1.1.0
 
 - added CHANGELOG.md
