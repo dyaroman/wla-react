@@ -1,13 +1,8 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterField } from './FilterField';
 import { TagsFilterField } from './TagsFilterField';
-import {
-  fromCamelCaseToWords,
-  getQueryParamValue,
-  triggerGtmEvent,
-} from '../misc/functions';
+import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
 import {
   toggleFiltersOpen,
@@ -15,7 +10,6 @@ import {
 } from '../features/app/app.actions';
 import { clearFilters } from '../features/table/table.actions';
 import { BTN_GTM_EVENT, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
-import { FILTERS_OPEN } from '../misc/url.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
 export function Filters() {
@@ -25,12 +19,6 @@ export function Filters() {
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const columns = websitesData['columns'];
-
-  useEffect(() => {
-    if (getQueryParamValue(FILTERS_OPEN) === '') {
-      dispatch(toggleFiltersOpen(true));
-    }
-  }, []);
 
   useKeyPress('meta+shift+f', (event) => {
     event.preventDefault();

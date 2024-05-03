@@ -1,6 +1,5 @@
 import {
   CUSTOMIZE_COLUMNS_OPEN,
-  FILTERS_OPEN,
   SHOW_COLUMNS,
   SIDEBAR_OPEN,
 } from '../../misc/url.constants';
@@ -82,11 +81,6 @@ export function updateURL(newState) {
 }
 
 export function toggleFiltersOpen(open) {
-  if (open) {
-    setQueryParam(FILTERS_OPEN, '');
-  } else {
-    deleteQueryParam(FILTERS_OPEN);
-  }
   return function (dispatch) {
     dispatch({
       type: TOGGLE_FILTERS_OPEN,
