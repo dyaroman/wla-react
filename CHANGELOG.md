@@ -1,31 +1,41 @@
 ## 1.2.0
 
-- added logo
-- added header with:
+- added:
+  - header
   - logo
-  - counter (show number of filtered websites)
+  - counter:
+    - showed number of filtered websites
   - burger menu
-- added banner for sms websites
-- added `Cmd + /` or `Ctrl + /` to toggle burger menu
-- moved filters and other controls to burger menu
-- removed release production version by tag (issue with websites feature builds)
-- removed saving detail tags open state from url for:
-  - filters
-  - customize columns
-- reworked modal windows (do not render modal windows in DOM if they are not showed)
+    - filters and app controls moved in this menu
+  - changelog link
+  - shortcut `Cmd + /` or `Ctrl + /` to toggle burger menu
+  - banner for sms websites
+  - missing 'data-qa' attributes
+- removed saving detail tags open state from url
+  - for filters and customize columns
+  - now they are open by default inside burger menu
+- reworked modal windows
+  - do not render modal windows in DOM if they are not showed
 - refreshed app controls buttons:
   - toggle theme
   - info modal
+- fixes:
+  - removed double left border for sticky columns
+  - removed sorting for index and checkbox columns
+  - removed release production version by tag:
+    - we have issue with websites feature builds
 
 ## 1.1.0
 
-- added CHANGELOG.md
-- added "checkbox" column, it can be used as a check list
-- added `Cmd + Shift + E` or `Ctrl + Shift + E` shortcut to clear filters and sort
-- added missing 'data-qa' attributes
-- added app version in browser console
-- reworked "index" column, move it to config like "checkbox" column
-- reworked "showColumn=none", show "no columns to show" message instead of "index" column only
-- reworked release triggers, now release by version tag
+- added:
+  - CHANGELOG.md
+  - new column "checkbox", it can be used as a check list
+  - shortcut `Cmd + Shift + E` or `Ctrl + Shift + E` to clear filters and sort
+  - missing 'data-qa' attributes
+  - app version in browser console
+- reworked:
+  - "index" column, move it to config like "checkbox" column
+  - "showColumn=none", show "no columns to show" message instead of "index" column only
+  - release triggers, now release by version tag
 - rewrote error message for fail to download websites data
 - fixed code snippets render inside info modal
