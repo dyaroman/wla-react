@@ -1,6 +1,8 @@
 const fs = require('fs');
 
-fs.copyFile('web.config', 'build/web.config', (err) => {
-  if (err) throw err;
-  console.log('web.config was copied to build/web.config');
+['web.config', 'CHANGELOG.md'].forEach((file) => {
+  fs.copyFile(file, `build/${file}`, (err) => {
+    if (err) throw err;
+    console.log(`${file} was copied to build/${file}`);
+  });
 });

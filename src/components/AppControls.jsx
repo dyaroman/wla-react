@@ -6,6 +6,9 @@ export function AppControls() {
     <div className="btn-group">
       <ThemeToggle />
       <InfoModalBtn />
+      <a href="./CHANGELOG.md" target="_blank" className="link">
+        changelog
+      </a>
     </div>
   );
 }
