@@ -1,5 +1,5 @@
 variables:
-  - name: IsRelease
+  - name: IsMasterBranch
     value: ${{ startsWith(variables['build.sourceBranch'], 'refs/heads/master') }}
 
 trigger:
@@ -31,7 +31,7 @@ stages:
             condition: |
               and(
                 succeeded(),
-                eq(variables['IsRelease'], false)
+                eq(variables['IsMasterBranch'], false)
               )
 
           - script: npm pkg delete scripts.prepare
@@ -63,7 +63,7 @@ stages:
         condition: |
           and(
             succeeded(),
-            eq(variables['IsRelease'], false)
+            eq(variables['IsMasterBranch'], false)
           )
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
@@ -85,7 +85,7 @@ stages:
         condition: |
           and(
             succeeded(),
-            eq(variables['IsRelease'], true)
+            eq(variables['IsMasterBranch'], true)
           )
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
@@ -107,7 +107,7 @@ stages:
         condition: |
           and(
             succeeded(),
-            eq(variables['IsRelease'], true)
+            eq(variables['IsMasterBranch'], true)
           )
         environment: WebsitesApp-Dev.WebsitesApp-Dev
         strategy:
