@@ -1,3 +1,7 @@
+## 1.2.1
+
+- fixed logo text color for mobile chrome
+
 ## 1.2.0
 
 - added:
