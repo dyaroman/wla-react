@@ -81,7 +81,7 @@ export function TableControls() {
             );
           })}
         </ul>
-        <div className="btn-group">
+        <div className="btn-group  mt">
           <button
             className="btn"
             onClick={onClickShowAllColumns}

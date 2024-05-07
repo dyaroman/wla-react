@@ -154,7 +154,7 @@ export function Filters() {
         })}
         {Object.keys(columns).includes(COLUMNS.tags) && <TagsFilterField />}
       </div>
-      <div className="btn-group">
+      <div className="btn-group  mt">
         <button
           className="btn btn--danger"
           onClick={onClearClick}

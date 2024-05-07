@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: $gap;
-  margin-top: $gap;
 
   @include media-breakpoint-up(sm) {
     flex-direction: row;

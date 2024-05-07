@@ -57,10 +57,10 @@ export function Sidebar() {
       </div>
       <div className="sidebar__bottom">
         <div className="sidebar__bottom-content">
+          <AppControls />
           <TableInfo />
           <Filters />
           <TableControls />
-          <AppControls />
         </div>
       </div>
     </aside>
