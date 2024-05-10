@@ -13,14 +13,17 @@ import {
   URL_PARAMS_READ,
 } from '../app/app.constants';
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
-import { SHOW_COLUMNS } from '../../misc/url.constants';
+import { URL_PARAMETERS } from '../../misc/url.constants';
 import { COLUMNS } from '../../misc/columns.constants';
 import {
+  deleteQueryParam,
   filterTableData,
+  findArrayElementCaseInsensitive,
   getQueryParamValue,
   getUniqueTags,
   sortTableData,
 } from '../../misc/functions';
+import { toggleSidebarOpen } from '../app/app.actions';
 
 export function getWebsitesData() {
   return async function (dispatch, getState) {
@@ -28,7 +31,7 @@ export function getWebsitesData() {
     try {
       const response = await fetch(dataFileURL);
       switch (response.status) {
-        case 200:
+        case 200: {
           const websitesData = await response.json();
           const columns = websitesData['columns'];
           const websites = websitesData['websites'];
@@ -38,8 +41,11 @@ export function getWebsitesData() {
             ...getState().table.filters,
           };
           Object.keys(columns)
-            .filter((column) => columns[column]['renderFilter'])
-            .filter((column) => !getState().table.filters[column])
+            .filter(
+              (column) =>
+                columns[column]['renderFilter'] &&
+                !getState().table.filters[column],
+            )
             .forEach((column) => {
               if (column === COLUMNS.tags) filters[column] = [];
               else filters[column] = '';
@@ -69,36 +75,42 @@ export function getWebsitesData() {
 
           // get showColumns from URL
           if (!getState().table.websitesDataLoaded) {
-            newState[SHOW_COLUMNS] = defaultShowColumns;
+            newState[URL_PARAMETERS.showColumns] = defaultShowColumns;
             getShowColumnsFromUrl();
           }
 
           function getShowColumnsFromUrl() {
-            const showColumns = getQueryParamValue(SHOW_COLUMNS);
+            let showColumns = getQueryParamValue(URL_PARAMETERS.showColumns);
             // if URL doesn't contain parameter
             if (!showColumns) return;
+
+            showColumns = showColumns.toLowerCase();
 
             // if showColumns equal to alias 'all'
             // show all renderable columns
             if (showColumns === 'all') {
-              newState[SHOW_COLUMNS] = renderableColumns;
+              newState[URL_PARAMETERS.showColumns] = renderableColumns;
               return;
             }
 
             // if shownColumns equal to alias 'none'
             // hide all columns
             if (showColumns === 'none') {
-              newState[SHOW_COLUMNS] = [];
+              newState[URL_PARAMETERS.showColumns] = [];
               return;
             }
 
             const filteredColumns = showColumns
               .split(',')
+              .map((column) =>
+                findArrayElementCaseInsensitive(column, renderableColumns),
+              )
               .filter((column) => renderableColumns.includes(column));
             if (filteredColumns.length > 0) {
-              newState[SHOW_COLUMNS] = filteredColumns;
+              newState[URL_PARAMETERS.showColumns] = filteredColumns;
             }
           }
+
           dispatch({
             type: SET_WEBSITES_DATA,
             payload: newState,
@@ -108,18 +120,23 @@ export function getWebsitesData() {
             payload: true,
           });
           break;
-        case 401:
+        }
+
+        case 401: {
           dispatch({
             type: UNAUTHORIZED,
             payload: true,
           });
           break;
-        default:
+        }
+
+        default: {
           dispatch({
             type: REQUEST_ERROR,
             payload: response.status,
           });
           break;
+        }
       }
     } catch (e) {
       console.error(e);
@@ -140,24 +157,36 @@ export function getURLParams() {
     if (params['size']) {
       const sortedColumns = [];
       for (const [key, value] of params) {
-        if (![...renderableColumns, ...Object.keys(sort)].includes(key)) {
-          continue;
+        const validatedKey = [
+          ...renderableColumns,
+          ...Object.keys(sort),
+          URL_PARAMETERS.sidebarOpen,
+        ].find((el) => el.toLowerCase() === key.toLowerCase());
+        if (!validatedKey) continue;
+        // remove search parameter in wrong case if we find correct one
+        if (key !== validatedKey) {
+          deleteQueryParam(key);
         }
-        switch (key) {
+        switch (validatedKey) {
+          // sort keys
           case 'column':
-            newSort[key] = value;
+            newSort[validatedKey] = value;
             sortedColumns.push(value);
             break;
           case 'direction':
-            newSort[key] = value;
+            newSort[validatedKey] = value;
             break;
 
           case COLUMNS.tags:
-            newFilters[key] = value.split(',');
+            newFilters[validatedKey] = value.split(',');
+            break;
+
+          case URL_PARAMETERS.sidebarOpen:
+            dispatch(toggleSidebarOpen(value === ''));
             break;
 
           default:
-            newFilters[key] = value;
+            newFilters[validatedKey] = value;
             break;
         }
       }

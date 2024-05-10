@@ -1,2 +1,4 @@
-export const SIDEBAR_OPEN = 'sidebarOpen';
-export const SHOW_COLUMNS = 'showColumns';
+export const URL_PARAMETERS = {
+  sidebarOpen: 'sidebarOpen',
+  showColumns: 'showColumns',
+};

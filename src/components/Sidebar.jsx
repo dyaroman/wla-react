@@ -8,21 +8,14 @@ import { Filters } from './Filters';
 import { TableControls } from './TableControls';
 import { Logo } from './Logo';
 import { Counter } from './Counter';
-import { getQueryParamValue, triggerGtmEvent } from '../misc/functions';
+import { triggerGtmEvent } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
 import { toggleSidebarOpen } from '../features/app/app.actions';
-import { SIDEBAR_OPEN } from '../misc/url.constants';
 import { SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
 
 export function Sidebar() {
   const dispatch = useDispatch();
   const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
-
-  useEffect(() => {
-    if (getQueryParamValue(SIDEBAR_OPEN) === '') {
-      dispatch(toggleSidebarOpen(true));
-    }
-  }, []);
 
   useEffect(() => {
     if (sidebarOpen) {

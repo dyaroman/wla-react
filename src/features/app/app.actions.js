@@ -1,4 +1,4 @@
-import { SHOW_COLUMNS, SIDEBAR_OPEN } from '../../misc/url.constants';
+import { URL_PARAMETERS } from '../../misc/url.constants';
 import { COLUMNS } from '../../misc/columns.constants';
 import {
   TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
@@ -15,8 +15,15 @@ export function updateURL(newState) {
     }
     const params = new URLSearchParams(window.location.search);
     for (const key in newState) {
+      // remove duplicated url keys in wrong case
+      for (const [urlKey] of params) {
+        if (urlKey.toLowerCase() === key.toLowerCase() && urlKey !== key) {
+          params.delete(urlKey);
+          break;
+        }
+      }
       switch (key) {
-        case SHOW_COLUMNS:
+        case URL_PARAMETERS.showColumns:
         case COLUMNS.tags:
           if (newState[key].length === 0) {
             params.delete(key);
@@ -39,33 +46,35 @@ export function updateURL(newState) {
     // in this case we don't want to save it in URL
     const defaultShowColumns = getState()?.table?.defaultShowColumns;
     if (
-      newState[SHOW_COLUMNS].length === defaultShowColumns.length &&
-      newState[SHOW_COLUMNS].every((column) =>
+      newState[URL_PARAMETERS.showColumns].length ===
+        defaultShowColumns.length &&
+      newState[URL_PARAMETERS.showColumns].every((column) =>
         defaultShowColumns.includes(column),
       )
     ) {
-      params.delete(SHOW_COLUMNS);
+      params.delete(URL_PARAMETERS.showColumns);
     }
 
     // check if showColumns equal to renderableColumns
     // in this case we should use alias 'all'
     const renderableColumns = getState()?.table?.renderableColumns;
     if (
-      newState[SHOW_COLUMNS].length === renderableColumns.length &&
-      newState[SHOW_COLUMNS].every((column) =>
+      newState[URL_PARAMETERS.showColumns].length ===
+        renderableColumns.length &&
+      newState[URL_PARAMETERS.showColumns].every((column) =>
         renderableColumns.includes(column),
       )
     ) {
-      params.set(SHOW_COLUMNS, 'all');
+      params.set(URL_PARAMETERS.showColumns, 'all');
     }
 
     // check if showColumns is an empty array
     // in this case we should use alias 'none'
     if (
-      params.get(SHOW_COLUMNS) === null &&
-      newState[SHOW_COLUMNS].length === 0
+      params.get(URL_PARAMETERS.showColumns) === null &&
+      newState[URL_PARAMETERS.showColumns].length === 0
     ) {
-      params.set(SHOW_COLUMNS, 'none');
+      params.set(URL_PARAMETERS.showColumns, 'none');
     }
 
     if (params.toString() === '') {
@@ -87,9 +96,9 @@ export function toggleFiltersOpen(open) {
 
 export function toggleSidebarOpen(open) {
   if (open) {
-    setQueryParam(SIDEBAR_OPEN, '');
+    setQueryParam(URL_PARAMETERS.sidebarOpen, '');
   } else {
-    deleteQueryParam(SIDEBAR_OPEN);
+    deleteQueryParam(URL_PARAMETERS.sidebarOpen);
   }
   return function (dispatch) {
     dispatch({

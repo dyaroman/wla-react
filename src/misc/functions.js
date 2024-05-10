@@ -22,7 +22,7 @@ export function filterTableData(websites, filters) {
         continue;
       }
       switch (filter) {
-        case COLUMNS.tags:
+        case COLUMNS.tags: {
           if (
             ![...filters[filter]].every((filterTag) =>
               website[COLUMNS.tags]
@@ -33,30 +33,34 @@ export function filterTableData(websites, filters) {
             return false;
           }
           break;
+        }
 
-        case COLUMNS.pages:
+        case COLUMNS.pages: {
           if (
-            filters[filter].startsWith('==') &&
-            website[filter].every((page) => search(page, filters[filter]))
-          ) {
-            return false;
-          } else if (
-            filters[filter].startsWith('!=') &&
-            !website[filter].every((page) => search(page, filters[filter]))
-          ) {
-            return false;
-          } else if (
-            !website[filter].some((page) => search(page, filters[filter]))
+            // strict equal
+            (filters[filter].startsWith('==') &&
+              !website[filter].some((page) => search(page, filters[filter]))) ||
+            // strict not equal
+            (filters[filter].startsWith('!=') &&
+              !website[filter].every((page) =>
+                search(page, filters[filter]),
+              )) ||
+            // includes
+            (!filters[filter].startsWith('==') &&
+              !filters[filter].startsWith('!=') &&
+              !website[filter].some((page) => search(page, filters[filter])))
           ) {
             return false;
           }
           break;
+        }
 
-        default:
+        default: {
           if (!(website[filter] && search(website[filter], filters[filter]))) {
             return false;
           }
           break;
+        }
       }
     }
     return true;
@@ -93,8 +97,14 @@ export function sortTableData(array, column) {
   return [...sortedArray, ...noDataItems];
 }
 
-export function getQueryParamValue(key) {
-  return new URLSearchParams(window.location.search).get(key);
+export function getQueryParamValue(targetKey) {
+  const params = new URLSearchParams(window.location.search);
+  for (const [key, value] of params) {
+    if (key.toLowerCase() === targetKey.toLowerCase()) {
+      return value;
+    }
+  }
+  return undefined;
 }
 
 export function setQueryParam(key, value) {
@@ -162,4 +172,19 @@ export function getUniqueTags(websites) {
     return acc;
   }, new Set());
   return [...uniqueTags];
+}
+
+export function findObjectKeyCaseInsensitive(key, obj) {
+  for (const objKey in obj) {
+    if (
+      obj.hasOwnProperty(objKey) &&
+      objKey.toLowerCase() === key.toLowerCase()
+    ) {
+      return objKey;
+    }
+  }
+}
+
+export function findArrayElementCaseInsensitive(key, arr) {
+  return arr.find((el) => el.toLowerCase() === key.toLowerCase());
 }
