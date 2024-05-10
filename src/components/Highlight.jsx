@@ -2,16 +2,16 @@ export function Highlight({ text = '', highlight = '' }) {
   text = String(text);
   highlight = String(highlight);
 
-  if (highlight.startsWith('==')) {
-    highlight = highlight.slice(2);
-  }
-
   if (text === '') {
     return null;
   }
 
   if (highlight === '') {
     return <span>{text}</span>;
+  }
+
+  if (highlight.startsWith('==')) {
+    highlight = highlight.slice(2);
   }
 
   function escapeRegex(string) {

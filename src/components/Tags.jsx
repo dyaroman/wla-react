@@ -7,11 +7,11 @@ import { ADD_TAG, REMOVE_TAG } from '../misc/gtm.constants';
 
 export function Tags({ items }) {
   const dispatch = useDispatch();
-  const filters = useSelector((state) => state['table'].filters);
+  const tags = useSelector((state) => state['table'].filters.tags);
   const availableTags = useSelector((state) => state['table'].availableTags);
 
   function onChange(tag) {
-    let updatedTags = [...filters.tags];
+    let updatedTags = [...tags];
     if (updatedTags.includes(tag)) {
       triggerGtmEvent(REMOVE_TAG, {
         label: tag,
@@ -36,7 +36,7 @@ export function Tags({ items }) {
   }
 
   const list = items.sort().map((tag) => {
-    const tagChecked = filters?.tags
+    const tagChecked = tags
       .map((tag) => tag.toLowerCase())
       .includes(tag.toLowerCase());
     const tagAvailable = availableTags
