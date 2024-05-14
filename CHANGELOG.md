@@ -1,3 +1,8 @@
+## 1.3.0
+
+- made url search parameters case insensitive
+- reorganized sidebar
+
 ## 1.2.1
 
 - fixed logo text color for mobile chrome
