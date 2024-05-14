@@ -156,7 +156,7 @@ export function getURLParams() {
     const params = new URLSearchParams(window.location.search);
     if (params['size']) {
       const sortedColumns = [];
-      for (const [key, value] of params) {
+      for (let [key, value] of params) {
         const validatedKey = [
           ...renderableColumns,
           ...Object.keys(sort),
@@ -170,10 +170,12 @@ export function getURLParams() {
         switch (validatedKey) {
           // sort keys
           case 'column':
+            value = findArrayElementCaseInsensitive(value, renderableColumns);
             newSort[validatedKey] = value;
             sortedColumns.push(value);
             break;
           case 'direction':
+            value = findArrayElementCaseInsensitive(value, ['asc', 'desc']);
             newSort[validatedKey] = value;
             break;
 
