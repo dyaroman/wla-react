@@ -130,9 +130,9 @@ tr {
   }
 
   @include hover() {
-    color: contrast-color($row-bg--hover);
+    color: var(--body-color);
 
-    background-color: $row-bg--hover;
+    background-color: var(--row-bg--hover);
   }
 }
 

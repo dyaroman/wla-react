@@ -1,4 +1,3 @@
-$row-bg--hover: #fff3cd;
 $border-width: 2px;
 $gap: 0.5rem;
 $sidebar-height: 58px;
@@ -10,6 +9,7 @@ $sidebar-height: 58px;
   --secondary-color: rgba(33, 37, 41, 0.75);
   --border-color: #dee2e6;
   --table-striped-bg: #f2f2f2;
+  --row-bg--hover: #fff3cd;
 
   --btn-text-color: var(--body-color);
   --btn-border-color: var(--body-color);
@@ -27,6 +27,7 @@ $sidebar-height: 58px;
   --secondary-color: rgba(173, 181, 189, 0.75);
   --border-color: #495057;
   --table-striped-bg: #2c3034;
+  --row-bg--hover: #000032;
 
   --btn-text-color: var(--body-color);
   --btn-border-color: var(--body-color);
