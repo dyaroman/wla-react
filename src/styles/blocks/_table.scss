@@ -94,6 +94,7 @@ tbody td[data-qa='website'] {
     left: -$border-width;
     z-index: 1;
 
+    transition: none;
     background-color: inherit;
 
     &::after {
