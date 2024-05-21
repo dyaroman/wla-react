@@ -1,6 +1,7 @@
 ## 1.4.0
 
 - added favicon column support
+- removed 'convertLinksTo' functionality
 
 ## 1.3.0
 
