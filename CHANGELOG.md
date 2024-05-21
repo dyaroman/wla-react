@@ -1,3 +1,7 @@
+## 1.4.0
+
+- added favicon column support
+
 ## 1.3.0
 
 - made url search parameters case insensitive
