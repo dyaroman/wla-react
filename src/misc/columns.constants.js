@@ -3,6 +3,7 @@ export const COLUMNS = {
   altFormTheme: 'altFormTheme',
   campaignId: 'campaignId',
   checkbox: 'checkbox',
+  favicon: 'favicon',
   host: 'host',
   index: 'index',
   mainFormEsPrimaryColor: 'mainFormEsPrimaryColor',

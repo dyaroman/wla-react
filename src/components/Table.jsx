@@ -262,6 +262,23 @@ export function Table() {
                         );
                       }
 
+                      case COLUMNS.favicon: {
+                        const image = `https://${host}/${websiteData[column]}`;
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            {websiteData[column] === NO_DATA ? (
+                              NO_DATA
+                            ) : (
+                              <ImgCell sources={[image]} />
+                            )}
+                          </td>
+                        );
+                      }
+
                       case COLUMNS.mainFormTheme:
                       case COLUMNS.altFormTheme:
                       case COLUMNS.mainFormEsTheme: {
