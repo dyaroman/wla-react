@@ -2,6 +2,10 @@ $border-width: 2px;
 $gap: 0.5rem;
 $sidebar-height: 58px;
 
+//colors
+$danger: #dc3545;
+$success: #198754;
+
 @mixin light-theme() {
   --body-bg: #fff;
   --body-color: #212529;

@@ -23,13 +23,21 @@ export function filterTableData(websites, filters) {
       }
       switch (filter) {
         case COLUMNS.tags: {
-          if (
-            ![...filters[filter]].every((filterTag) =>
-              website[COLUMNS.tags]
-                .map((tag) => tag.toLowerCase())
-                .includes(filterTag.toLowerCase()),
-            )
-          ) {
+          const websiteTags = website[filter].map((tag) => tag.toLowerCase());
+
+          const includesAllFilterTags = filters[filter]
+            .filter((tag) => !tag.startsWith('!'))
+            .every((filterTag) =>
+              websiteTags.includes(filterTag.toLowerCase()),
+            );
+
+          const includesExcludedTags = filters[filter]
+            .filter((tag) => tag.startsWith('!'))
+            .some((filterTag) =>
+              websiteTags.includes(filterTag.substring(1).toLowerCase()),
+            );
+
+          if (!includesAllFilterTags || includesExcludedTags) {
             return false;
           }
           break;

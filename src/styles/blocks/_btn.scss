@@ -26,8 +26,8 @@
   }
 
   &--danger {
-    --btn-text-color: #dc3545;
-    --btn-border-color: #dc3545;
+    --btn-text-color: #{$danger};
+    --btn-border-color: #{$danger};
 
     --btn-bg-color--hover: #bb2d3b;
     --btn-border-color--hover: #b02a37;

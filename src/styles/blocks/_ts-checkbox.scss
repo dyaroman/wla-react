@@ -1,0 +1,108 @@
+@use 'sass:math';
+
+.ts-checkbox {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  gap: px2rem(3);
+
+  transition: 0.3s;
+
+  @include hover() {
+    cursor: pointer;
+  }
+
+  &.disabled {
+    opacity: 0.2;
+    user-select: none;
+    pointer-events: none;
+  }
+}
+
+.ts-checkbox.ts-checkbox--include {
+  &,
+  .ts-checkbox__icon {
+    border-color: $success;
+  }
+  .ts-checkbox__icon::before,
+  .ts-checkbox__icon::after {
+    background-color: $success;
+    opacity: 1;
+  }
+  .ts-checkbox__label {
+    color: $success;
+  }
+}
+
+.ts-checkbox.ts-checkbox--exclude {
+  &,
+  .ts-checkbox__icon {
+    border-color: $danger;
+  }
+  .ts-checkbox__icon::after {
+    background-color: $danger;
+    opacity: 1;
+  }
+  .ts-checkbox__label {
+    color: $danger;
+  }
+}
+
+.ts-checkbox__input {
+  @include visually-hidden();
+
+  &:focus ~ .ts-checkbox__icon {
+    @include focus-styles();
+  }
+
+  &:focus:not(:focus-visible) ~ .ts-checkbox__icon {
+    @include focus-styles($revert: true);
+  }
+
+  &:focus-visible ~ .ts-checkbox__icon {
+    @include focus-styles();
+  }
+}
+
+.ts-checkbox__icon {
+  position: relative;
+
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+
+  border: $border-width solid var(--body-color);
+  background-color: var(--body-bg);
+
+  &::before,
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    opacity: 0;
+    background-color: var(--body-color);
+    transition: opacity 0.15s;
+    transform: translate(-50%, -50%);
+  }
+
+  &::before {
+    width: $border-width;
+    height: 70%;
+  }
+
+  &::after {
+    width: 70%;
+    height: $border-width;
+  }
+}
+
+.ts-checkbox__label {
+  font-size: px2rem(16);
+}

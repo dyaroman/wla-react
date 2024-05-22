@@ -1,28 +1,53 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Checkbox } from './Checkbox';
+import { ThreeStateCheckbox } from './ThreeStateCheckbox';
 import { triggerGtmEvent } from '../misc/functions';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { ADD_TAG, REMOVE_TAG } from '../misc/gtm.constants';
+import { CHECKBOX_STATES } from '../misc/misc.constants';
 
 export function Tags({ items }) {
   const dispatch = useDispatch();
   const tags = useSelector((state) => state['table'].filters.tags);
   const availableTags = useSelector((state) => state['table'].availableTags);
 
-  function onChange(tag) {
+  function onChange(tag, newState) {
     let updatedTags = [...tags];
-    if (updatedTags.includes(tag)) {
-      triggerGtmEvent(REMOVE_TAG, {
-        label: tag,
-      });
-      updatedTags = updatedTags.filter((item) => item !== tag);
-    } else {
-      triggerGtmEvent(ADD_TAG, {
-        label: tag,
-      });
-      updatedTags.push(tag);
+    const tagIndex = updatedTags.findIndex((item) => item.includes(tag));
+
+    function updateTag(tagToAdd) {
+      if (tagIndex > -1) {
+        updatedTags[tagIndex] = tagToAdd;
+      } else {
+        updatedTags.push(tagToAdd);
+      }
     }
+
+    switch (newState) {
+      case CHECKBOX_STATES.ignore:
+        triggerGtmEvent(REMOVE_TAG, {
+          label: tag,
+        });
+        updatedTags = updatedTags.filter((item) => !item.includes(tag));
+        break;
+
+      case CHECKBOX_STATES.include:
+        triggerGtmEvent(ADD_TAG, {
+          label: tag,
+          method: newState,
+        });
+        updateTag(tag);
+        break;
+
+      case CHECKBOX_STATES.exclude:
+        triggerGtmEvent(ADD_TAG, {
+          label: tag,
+          method: newState,
+        });
+        updateTag(`!${tag}`);
+        break;
+    }
+
     dispatch({
       type: FILTERS_UPDATED,
       payload: {
@@ -36,21 +61,32 @@ export function Tags({ items }) {
   }
 
   const list = items.sort().map((tag) => {
-    const tagChecked = tags
-      .map((tag) => tag.toLowerCase())
-      .includes(tag.toLowerCase());
-    const tagAvailable = availableTags
-      .map((tag) => tag.toLowerCase())
-      .includes(tag.toLowerCase());
+    const lowerTag = tag.toLowerCase();
+    const tagAvailable = availableTags.some((availableTag) =>
+      availableTag.toLowerCase().includes(lowerTag),
+    );
+    const tagIncludes = tags.some((t) => t.toLowerCase() === lowerTag);
+    const tagExcludes = tags.some((t) => t.toLowerCase() === `!${lowerTag}`);
+
+    let currentState;
+    if (tagIncludes) {
+      currentState = CHECKBOX_STATES.include;
+    } else if (tagExcludes) {
+      currentState = CHECKBOX_STATES.exclude;
+    } else {
+      currentState = CHECKBOX_STATES.ignore;
+    }
+
+    const isTagInteractable = tagAvailable || tagIncludes || tagExcludes;
 
     return (
       <li key={tag}>
-        <Checkbox
+        <ThreeStateCheckbox
           name={tag}
           label={tag}
-          checked={tagChecked}
-          disabled={!tagAvailable}
-          onChange={tagAvailable ? onChange.bind(null, tag) : undefined}
+          currentState={currentState}
+          disabled={!isTagInteractable}
+          onChange={isTagInteractable ? onChange : undefined}
         />
       </li>
     );

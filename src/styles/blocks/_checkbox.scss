@@ -10,9 +10,6 @@
   transition: 0.3s;
 
   @include hover() {
-    color: var(--body-bg);
-
-    background-color: var(--body-color);
     cursor: pointer;
   }
 
