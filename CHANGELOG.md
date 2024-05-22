@@ -1,55 +1,59 @@
-## 1.4.0
+## v1.4.0 ()
 
-- added favicon column support
-- removed 'convertLinksTo' functionality
+- add favicon column support
+- rework tags, now they have three states:
+  - ignore (default)
+  - include
+  - exclude
+- remove unused 'convertLinksTo' functionality
 
-## 1.3.0
+## v1.3.0 (14.05.2024)
 
-- made url search parameters case insensitive
-- reorganized sidebar
+- make URL search parameters case insensitive
+- reorganize sidebar
 
-## 1.2.1
+## v1.2.1 (06.05.2024)
 
-- fixed logo text color for mobile chrome
+- fix logo text color for mobile Chrome
 
-## 1.2.0
+## v1.2.0 (04.05.2024)
 
-- added:
+- add:
   - header
   - logo
   - counter:
-    - showed number of filtered websites
+    - show number of filtered websites
   - burger menu
-    - filters and app controls moved in this menu
+    - move filters and app controls to this menu
   - changelog link
   - shortcut `Cmd + /` or `Ctrl + /` to toggle burger menu
-  - banner for sms websites
+  - banner for SMS websites
   - missing 'data-qa' attributes
-- removed saving detail tags open state from url
+- remove saving detail tags open state from URL
   - for filters and customize columns
-  - now they are open by default inside burger menu
-- reworked modal windows
-  - do not render modal windows in DOM if they are not showed
-- refreshed app controls buttons:
+  - now they are open by default inside the burger menu
+- rework modal windows
+  - do not render modal windows in DOM if they are not shown
+- refresh app control buttons:
   - toggle theme
   - info modal
-- fixes:
-  - removed double left border for sticky columns
-  - removed sorting for index and checkbox columns
-  - removed release production version by tag:
-    - we have issue with websites feature builds
+- fix:
+  - remove double left border for sticky columns
+  - remove sorting for index and checkbox columns
+  - remove release production version by tag:
+    - we have issues with websites feature builds
 
-## 1.1.0
+## v1.1.0 (24.04.2024)
 
-- added:
+- add:
   - CHANGELOG.md
   - new column "checkbox", it can be used as a check list
   - shortcut `Cmd + Shift + E` or `Ctrl + Shift + E` to clear filters and sort
   - missing 'data-qa' attributes
   - app version in browser console
-- reworked:
+- rework:
   - "index" column, move it to config like "checkbox" column
   - "showColumn=none", show "no columns to show" message instead of "index" column only
   - release triggers, now release by version tag
-- rewrote error message for fail to download websites data
-- fixed code snippets render inside info modal
+- rewrite error message for failure to download websites data
+- fix code snippets render inside info modal
