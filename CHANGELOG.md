@@ -1,4 +1,4 @@
-## v1.4.0 ()
+## v1.4.0 (27.05.2024)
 
 - add favicon column support
 - rework tags, now they have three states:
