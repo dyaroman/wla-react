@@ -301,10 +301,16 @@ export function Table() {
                             <ul>
                               {websiteData[column].map((page) => (
                                 <li key={page}>
-                                  <Highlight
-                                    text={page}
-                                    highlight={filters[column]}
-                                  />
+                                  <a
+                                    href={`https://${websiteData[COLUMNS.host]}/${page}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    <Highlight
+                                      text={page}
+                                      highlight={filters[column]}
+                                    />
+                                  </a>
                                 </li>
                               ))}
                             </ul>
