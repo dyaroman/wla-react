@@ -14,7 +14,12 @@ import {
   toggleSidebarOpen,
   updateURL,
 } from '../features/app/app.actions';
-import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
+import {
+  convertUrlToEnv,
+  fromCamelCaseToWords,
+  getQueryParamValue,
+  triggerGtmEvent,
+} from '../misc/functions';
 import { rgb2hex } from '../misc/color';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
@@ -30,7 +35,12 @@ export function Table() {
   const preparedData = useSelector((state) => state['table'].preparedData);
   const showColumns = useSelector((state) => state['table'].showColumns);
   const websitesData = useSelector((state) => state['table'].websitesData);
+  const env = websitesData['env'];
+  const project = websitesData['project'];
   const columns = websitesData['columns'];
+  const convertLinksTo =
+    getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
+  const convertLinks = convertLinksTo && convertLinksTo !== env;
 
   useEffect(() => {
     dispatch(updateTableData());
@@ -189,176 +199,186 @@ export function Table() {
           </thead>
 
           <tbody onClick={onTableBodyClick}>
-            {preparedData.map((websiteData, index) => (
-              <tr key={websiteData[COLUMNS.website]}>
-                {showColumns.map((column) => {
-                  switch (column) {
-                    case COLUMNS.index:
-                      return (
-                        <td
-                          data-title={fromCamelCaseToWords(column)}
-                          data-qa={column}
-                          key={column}
-                        >
-                          {++index}
-                        </td>
-                      );
+            {preparedData.map((websiteData, index) => {
+              const host =
+                (convertLinks &&
+                  convertUrlToEnv(
+                    websiteData[COLUMNS.website],
+                    convertLinksTo,
+                    project,
+                  )) ||
+                websiteData[COLUMNS.host];
+              return (
+                <tr key={websiteData[COLUMNS.website]}>
+                  {showColumns.map((column) => {
+                    switch (column) {
+                      case COLUMNS.index:
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            {++index}
+                          </td>
+                        );
 
-                    case COLUMNS.website:
-                      return (
-                        <td
-                          data-title={fromCamelCaseToWords(column)}
-                          data-qa={column}
-                          key={column}
-                        >
-                          <a
-                            href={`https://${websiteData[COLUMNS.host]}`}
-                            target="_blank"
-                            rel="noreferrer"
+                      case COLUMNS.website:
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            <a
+                              href={`https://${host}`}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <Highlight
+                                text={websiteData[COLUMNS.website]}
+                                highlight={filters[COLUMNS.website]}
+                              />
+                            </a>
+                          </td>
+                        );
+
+                      case COLUMNS.ogImage: {
+                        const images = websiteData[column].map(
+                          (path) => `https://${host}/${path}`,
+                        );
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            {images.length ? (
+                              <ImgCell sources={images} />
+                            ) : (
+                              NO_DATA
+                            )}
+                          </td>
+                        );
+                      }
+
+                      case COLUMNS.favicon: {
+                        const image = `https://${host}/${websiteData[column]}`;
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            {websiteData[column] === NO_DATA ? (
+                              NO_DATA
+                            ) : (
+                              <ImgCell sources={[image]} />
+                            )}
+                          </td>
+                        );
+                      }
+
+                      case COLUMNS.mainFormTheme:
+                      case COLUMNS.altFormTheme:
+                      case COLUMNS.mainFormEsTheme: {
+                        let bgColor;
+                        switch (column) {
+                          case COLUMNS.mainFormTheme:
+                            bgColor = websiteData[COLUMNS.mainFormPrimaryColor];
+                            break;
+                          case COLUMNS.altFormTheme:
+                            bgColor = websiteData[COLUMNS.altFormPrimaryColor];
+                            break;
+                          case COLUMNS.mainFormEsTheme:
+                            bgColor =
+                              websiteData[COLUMNS.mainFormEsPrimaryColor];
+                            break;
+                        }
+                        return (
+                          <ColorCell
+                            key={column}
+                            column={column}
+                            bgColor={bgColor}
                           >
                             <Highlight
-                              text={websiteData[COLUMNS.website]}
-                              highlight={filters[COLUMNS.website]}
+                              text={websiteData[column]}
+                              highlight={filters[column]}
                             />
-                          </a>
-                        </td>
-                      );
-
-                    case COLUMNS.ogImage: {
-                      const images = websiteData[column].map(
-                        (path) =>
-                          `https://${websiteData[COLUMNS.host]}/${path}`,
-                      );
-                      return (
-                        <td
-                          data-title={fromCamelCaseToWords(column)}
-                          data-qa={column}
-                          key={column}
-                        >
-                          {images.length ? (
-                            <ImgCell sources={images} />
-                          ) : (
-                            NO_DATA
-                          )}
-                        </td>
-                      );
-                    }
-
-                    case COLUMNS.favicon: {
-                      const image = `https://${websiteData[COLUMNS.host]}/${websiteData[column]}`;
-                      return (
-                        <td
-                          data-title={fromCamelCaseToWords(column)}
-                          data-qa={column}
-                          key={column}
-                        >
-                          {websiteData[column] === NO_DATA ? (
-                            NO_DATA
-                          ) : (
-                            <ImgCell sources={[image]} />
-                          )}
-                        </td>
-                      );
-                    }
-
-                    case COLUMNS.mainFormTheme:
-                    case COLUMNS.altFormTheme:
-                    case COLUMNS.mainFormEsTheme: {
-                      let bgColor;
-                      switch (column) {
-                        case COLUMNS.mainFormTheme:
-                          bgColor = websiteData[COLUMNS.mainFormPrimaryColor];
-                          break;
-                        case COLUMNS.altFormTheme:
-                          bgColor = websiteData[COLUMNS.altFormPrimaryColor];
-                          break;
-                        case COLUMNS.mainFormEsTheme:
-                          bgColor = websiteData[COLUMNS.mainFormEsPrimaryColor];
-                          break;
+                          </ColorCell>
+                        );
                       }
-                      return (
-                        <ColorCell
-                          key={column}
-                          column={column}
-                          bgColor={bgColor}
-                        >
-                          <Highlight
-                            text={websiteData[column]}
-                            highlight={filters[column]}
-                          />
-                        </ColorCell>
-                      );
+
+                      case COLUMNS.pages:
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            {websiteData[column].length ? (
+                              <ul>
+                                {websiteData[column].map((page) => (
+                                  <li key={page}>
+                                    <a
+                                      href={`https://${host}/${page}`}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      <Highlight
+                                        text={page}
+                                        highlight={filters[column]}
+                                      />
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              NO_DATA
+                            )}
+                          </td>
+                        );
+
+                      case COLUMNS.tags:
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            {websiteData.tags.length ? (
+                              <Tags items={websiteData.tags} />
+                            ) : (
+                              NO_DATA
+                            )}
+                          </td>
+                        );
+
+                      case COLUMNS.checkbox:
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            <Checkbox name={''} label={''} />
+                          </td>
+                        );
+
+                      default:
+                        return (
+                          <Cell key={column} column={column}>
+                            <Highlight
+                              text={websiteData[column]}
+                              highlight={filters[column]}
+                            />
+                          </Cell>
+                        );
                     }
-
-                    case COLUMNS.pages:
-                      return (
-                        <td
-                          data-title={fromCamelCaseToWords(column)}
-                          data-qa={column}
-                          key={column}
-                        >
-                          {websiteData[column].length ? (
-                            <ul>
-                              {websiteData[column].map((page) => (
-                                <li key={page}>
-                                  <a
-                                    href={`https://${websiteData[COLUMNS.host]}/${page}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                  >
-                                    <Highlight
-                                      text={page}
-                                      highlight={filters[column]}
-                                    />
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          ) : (
-                            NO_DATA
-                          )}
-                        </td>
-                      );
-
-                    case COLUMNS.tags:
-                      return (
-                        <td
-                          data-title={fromCamelCaseToWords(column)}
-                          data-qa={column}
-                          key={column}
-                        >
-                          {websiteData.tags.length ? (
-                            <Tags items={websiteData.tags} />
-                          ) : (
-                            NO_DATA
-                          )}
-                        </td>
-                      );
-
-                    case COLUMNS.checkbox:
-                      return (
-                        <td
-                          data-title={fromCamelCaseToWords(column)}
-                          data-qa={column}
-                          key={column}
-                        >
-                          <Checkbox name={''} label={''} />
-                        </td>
-                      );
-
-                    default:
-                      return (
-                        <Cell key={column} column={column}>
-                          <Highlight
-                            text={websiteData[column]}
-                            highlight={filters[column]}
-                          />
-                        </Cell>
-                      );
-                  }
-                })}
-              </tr>
-            ))}
+                  })}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </section>

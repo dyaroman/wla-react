@@ -2,7 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterField } from './FilterField';
 import { TagsFilterField } from './TagsFilterField';
-import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
+import {
+  convertUrlToEnv,
+  fromCamelCaseToWords,
+  getQueryParamValue,
+  triggerGtmEvent,
+} from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
 import {
   toggleFiltersOpen,
@@ -19,6 +24,11 @@ export function Filters() {
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const columns = websitesData['columns'];
+  const env = websitesData['env'];
+  const project = websitesData['project'];
+  const convertLinksTo =
+    getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
+  const convertLinks = convertLinksTo && convertLinksTo !== env;
 
   useKeyPress('meta+shift+f', (event) => {
     event.preventDefault();
@@ -107,7 +117,18 @@ export function Filters() {
 
   async function onCopyWebsitesUrlsClick() {
     const websitesUrls = preparedData
-      .map((website) => `https://${website[COLUMNS.host]}/`)
+      .map((website) => {
+        const host =
+          (convertLinks &&
+            convertUrlToEnv(
+              website[COLUMNS.website],
+              convertLinksTo,
+              project,
+            )) ||
+          website[COLUMNS.host];
+
+        return `https://${host}/`;
+      })
       .join('\n');
     await handleClipboardCopy(websitesUrls);
 
