@@ -1,3 +1,9 @@
+## v1.5.0 (04.06.2024)
+
+- make pages column as links
+- rework 'convertLinksTo' functionality
+  - now you can convert websites links from feature to dev and copy them with 'copy websites urls'
+
 ## v1.4.0 (27.05.2024)
 
 - add favicon column support
