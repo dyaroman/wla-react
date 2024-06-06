@@ -108,11 +108,6 @@ export function InfoModal() {
           table cell to copy text value from it.
         </p>
 
-        <h3>Tips:</h3>
-        <ul>
-          <li>Click on logo to scroll table to the top.</li>
-        </ul>
-
         <h3>Convert links to env:</h3>
         <p>
           To convert links to specific env, add search parameter{' '}
@@ -125,6 +120,11 @@ export function InfoModal() {
           <li>
             <code>prod</code> to convert links to prod env
           </li>
+        </ul>
+
+        <h3>Tips:</h3>
+        <ul>
+          <li>Click on logo to scroll table to the top.</li>
         </ul>
       </section>
 
