@@ -30,54 +30,41 @@ export function Filters() {
     getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
   const convertLinks = convertLinksTo && convertLinksTo !== env;
 
-  useKeyPress('meta+shift+f', (event) => {
+  // search
+  useKeyPress(['CommandOrControl', 'Shift', 'F'], (event) => {
     event.preventDefault();
     onSearchShortcut();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'search',
-      label: 'macos',
-    });
-  });
-  useKeyPress('ctrl+shift+f', (event) => {
-    event.preventDefault();
-    onSearchShortcut();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
-      method: 'search',
-      label: 'windows',
+      label: event.ctrlKey ? 'windows' : 'macos',
     });
   });
 
-  useKeyPress('meta+shift+c', (event) => {
+  // copy websites as comma separated list
+  useKeyPress(['CommandOrControl', 'Shift', 'C'], (event) => {
     event.preventDefault();
     onCopyShortcut();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'copy-websites',
-      label: 'macos',
-    });
-  });
-  useKeyPress('ctrl+shift+c', (event) => {
-    event.preventDefault();
-    onCopyShortcut();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
-      method: 'copy-websites',
-      label: 'windows',
     });
   });
 
-  useKeyPress('meta+shift+e', (event) => {
+  // copy websites urls
+  useKeyPress(['Shift', 'Alt', 'C'], (event) => {
     event.preventDefault();
-    onClearClick();
+    onCopyWebsitesUrlsClick();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
-      method: 'clear-all',
-      label: 'macos',
+      method: 'copy-websites-url',
     });
   });
-  useKeyPress('ctrl+shift+e', (event) => {
+
+  // clear filters and sort
+  useKeyPress(['CommandOrControl', 'Shift', 'E'], (event) => {
     event.preventDefault();
     onClearClick();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'clear-all',
-      label: 'windows',
+      label: event.ctrlKey ? 'windows' : 'macos',
     });
   });
 

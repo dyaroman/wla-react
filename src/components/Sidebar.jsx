@@ -25,19 +25,12 @@ export function Sidebar() {
     }
   }, [sidebarOpen]);
 
-  useKeyPress('meta+/', () => {
+  // toggle sidebar
+  useKeyPress(['CommandOrControl', '/'], (event) => {
     dispatch(toggleSidebarOpen(!sidebarOpen));
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'sidebar-' + (sidebarOpen ? 'close' : 'open'),
-      label: 'macos',
-    });
-  });
-
-  useKeyPress('ctrl+/', () => {
-    dispatch(toggleSidebarOpen(!sidebarOpen));
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
-      method: 'sidebar-' + (sidebarOpen ? 'close' : 'open'),
-      label: 'windows',
+      label: event.ctrlKey ? 'windows' : 'macos',
     });
   });
 

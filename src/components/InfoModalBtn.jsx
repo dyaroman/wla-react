@@ -9,7 +9,8 @@ export function InfoModalBtn() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state['app'].infoModalOpen);
 
-  useKeyPress('shift+?', (event) => {
+  // open info modal
+  useKeyPress(['Shift', '/'], (event) => {
     if (isOpen) return;
     event.preventDefault();
     onOpenModalClick();

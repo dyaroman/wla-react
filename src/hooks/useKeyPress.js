@@ -1,13 +1,24 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
-export const useKeyPress = (hotkey = '', callback, node = null) => {
-  hotkey = hotkey.replace(/ /g, '').toLowerCase();
-
-  if (hotkey.match(/[^+a-z0-9?/]/g)) {
-    throw new Error(`hotkey could contain only '+a-z0-9?/'`);
+export const useKeyPress = (hotkey, callback, node = null) => {
+  if (!Array.isArray(hotkey)) {
+    throw new Error('"hotkey" must be an array of strings');
   }
 
-  const keys = hotkey.split('+');
+  if (
+    hotkey.some((key) => {
+      if (key.length === 1) {
+        return key.match(/[^A-Z0-9/]/g);
+      } else {
+        return !key.match(/^(CommandOrControl|Shift|Alt)$/);
+      }
+    })
+  ) {
+    throw new Error(
+      `"hotkey" could contain only: 'CommandOrControl', 'Shift', 'Alt' and 'A-Z0-9/', but got ${JSON.stringify(hotkey)}`,
+    );
+  }
+
   // implement the callback ref pattern
   const callbackRef = useRef(callback);
   useLayoutEffect(() => {
@@ -17,19 +28,22 @@ export const useKeyPress = (hotkey = '', callback, node = null) => {
   // handle what happens on key press
   const handleKeyPress = useCallback(
     (event) => {
-      const check = keys.every((key) => {
+      const check = hotkey.every((key) => {
         switch (key) {
-          case 'meta':
-            return event.metaKey;
-          case 'ctrl':
-            return event.ctrlKey;
-          case 'shift':
+          case 'CommandOrControl':
+            return event.metaKey || event.ctrlKey;
+          case 'Shift':
             return event.shiftKey;
-          case 'option':
-          case 'alt':
+          case 'Alt':
             return event.altKey;
           default:
-            return event.key.toLowerCase() === key;
+            if (key.match(/[A-Z]/)) {
+              return event.code === `Key${key}`;
+            } else if (key.match(/[0-9]/)) {
+              return event.code === `Digit${key}`;
+            } else if (key === '/') {
+              return event.code === 'Slash';
+            }
         }
       });
       if (check) {
