@@ -68,6 +68,9 @@ export function InfoModal() {
             to the first input field
           </li>
           <li>
+            <code>Shift+Alt+C</code> to copy websites urls
+          </li>
+          <li>
             <code>Cmd+Shift+C</code> or <code>Ctrl+Shift+C</code> to copy value
             from "{COLUMNS.website}" column as comma separated list, like:
             "website1.com,website2.com" you can use this for manual build in
