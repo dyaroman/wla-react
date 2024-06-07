@@ -1,3 +1,8 @@
+## v1.6.0 ()
+
+- rework shortcuts
+- add `Shift + Option + C` or `Shift + Alt + C` to copy websites urls
+
 ## v1.5.0 (04.06.2024)
 
 - make pages column as links
