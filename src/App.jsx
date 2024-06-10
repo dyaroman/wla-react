@@ -6,6 +6,7 @@ import { Table } from './components/Table';
 import { InfoModal } from './components/InfoModal';
 import { ImgPreviewModal } from './components/ImgPreviewModal';
 import { Sidebar } from './components/Sidebar';
+import { Toast } from './components/Toast';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
@@ -81,6 +82,7 @@ export function App() {
       <Table />
       <InfoModal />
       <ImgPreviewModal />
+      <Toast />
     </section>
   );
 }

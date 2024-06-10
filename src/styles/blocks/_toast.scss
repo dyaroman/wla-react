@@ -1,0 +1,28 @@
+.toast {
+  position: fixed;
+  top: calc($sidebar-height + 2 * $gap + 34px); // 34px table row height
+  right: $gap;
+  z-index: 11;
+
+  padding: $gap;
+  max-width: 16rem;
+  min-height: 36px;
+
+  color: var(--body-color);
+
+  border: $border-width solid var(--body-color);
+  background-color: var(--body-bg);
+  box-shadow: 2 * $border-width 2 * $border-width var(--body-color);
+  opacity: 1;
+  transform: translateX(100%);
+  transition: 0.3s ease;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+.toast.hide {
+  transform: translateX(100%);
+  opacity: 0;
+}

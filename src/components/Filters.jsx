@@ -14,6 +14,7 @@ import {
   toggleSidebarOpen,
 } from '../features/app/app.actions';
 import { clearFilters } from '../features/table/table.actions';
+import { showToast } from '../features/toast/toast.actions';
 import { BTN_GTM_EVENT, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
@@ -47,6 +48,7 @@ export function Filters() {
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'copy-websites',
     });
+    dispatch(showToast('websites list copied'));
   });
 
   // copy websites urls
@@ -56,6 +58,7 @@ export function Filters() {
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'copy-websites-url',
     });
+    dispatch(showToast('websites urls copied'));
   });
 
   // clear filters and sort
@@ -66,6 +69,7 @@ export function Filters() {
       method: 'clear-all',
       label: event.ctrlKey ? 'windows' : 'macos',
     });
+    dispatch(showToast('filters and sort cleared'));
   });
 
   if (websitesData['websites'].length === 0) {
