@@ -1,3 +1,7 @@
+## v1.6.1 (11.06.2024)
+
+- fix for sidebar layout for larger screens
+
 ## v1.6.0 (11.06.2024)
 
 - rework sidebar layout for larger screens
