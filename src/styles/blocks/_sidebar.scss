@@ -36,3 +36,18 @@
 .sidebar__bottom-content {
   padding: $gap;
 }
+
+.sidebar__panels {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+
+  @include media-breakpoint-up(lg) {
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+  }
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: 4fr 2fr;
+  }
+}

@@ -1,7 +1,8 @@
 ## v1.6.0 ()
 
+- rework sidebar layout for larger screens
 - rework shortcuts
-- add `Shift + Option + C` or `Shift + Alt + C` to copy websites urls
+- add shortcut `Shift + Option + C` or `Shift + Alt + C` to copy websites urls
 
 ## v1.5.0 (04.06.2024)
 

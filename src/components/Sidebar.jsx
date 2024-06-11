@@ -45,8 +45,10 @@ export function Sidebar() {
         <div className="sidebar__bottom-content">
           <AppControls />
           <TableInfo />
-          <Filters />
-          <TableControls />
+          <div className="sidebar__panels">
+            <Filters />
+            <TableControls />
+          </div>
         </div>
       </div>
     </aside>
