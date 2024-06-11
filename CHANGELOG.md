@@ -1,8 +1,9 @@
-## v1.6.0 ()
+## v1.6.0 (11.06.2024)
 
 - rework sidebar layout for larger screens
 - rework shortcuts
 - add shortcut `Shift + Option + C` or `Shift + Alt + C` to copy websites urls
+- add toast notification for shortcuts
 
 ## v1.5.0 (04.06.2024)
 
