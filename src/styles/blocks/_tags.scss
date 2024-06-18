@@ -1,7 +1,9 @@
+@use 'sass:math';
+
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: $gap;
+  gap: math.div($gap, 2) $gap;
   margin: 0;
   padding: 0;
 
@@ -14,7 +16,7 @@ td .tags {
   }
 }
 
-.tags .ts-checkbox {
+.table .tags .ts-checkbox {
   padding: px2rem(3);
 
   border: $border-width solid var(--body-color);

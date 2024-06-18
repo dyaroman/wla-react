@@ -1,4 +1,9 @@
+@use 'sass:math';
+
 .customize-columns {
+  display: flex;
+  flex-direction: column;
+  gap: math.div($gap, 2);
   padding: 0;
   margin-top: $gap;
   margin-bottom: $gap;

@@ -1,5 +1,21 @@
 .filters .tags {
   margin-top: $gap;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: flex-start;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-up(xxl) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .filters__content {
