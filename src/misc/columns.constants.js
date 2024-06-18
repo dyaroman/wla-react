@@ -4,6 +4,7 @@ export const COLUMNS = {
   campaignId: 'campaignId',
   checkbox: 'checkbox',
   favicon: 'favicon',
+  forms: 'forms',
   host: 'host',
   index: 'index',
   mainFormEsPrimaryColor: 'mainFormEsPrimaryColor',

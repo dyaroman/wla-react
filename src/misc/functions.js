@@ -63,6 +63,30 @@ export function filterTableData(websites, filters) {
           break;
         }
 
+        case COLUMNS.forms: {
+          if (
+            // strict equal
+            (filters[filter].startsWith('==') &&
+              !Object.keys(website[filter]).some((page) =>
+                search(page, filters[filter]),
+              )) ||
+            // strict not equal
+            (filters[filter].startsWith('!=') &&
+              !Object.keys(website[filter]).every((page) =>
+                search(page, filters[filter]),
+              )) ||
+            // includes
+            (!filters[filter].startsWith('==') &&
+              !filters[filter].startsWith('!=') &&
+              !Object.keys(website[filter]).some((page) =>
+                search(page, filters[filter]),
+              ))
+          ) {
+            return false;
+          }
+          break;
+        }
+
         default: {
           if (!(website[filter] && search(website[filter], filters[filter]))) {
             return false;

@@ -1,3 +1,7 @@
+## v1.7.0
+
+- add forms column support
+
 ## v1.6.1 (11.06.2024)
 
 - fix for sidebar layout for larger screens

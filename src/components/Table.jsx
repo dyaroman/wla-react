@@ -339,6 +339,45 @@ export function Table() {
                           </td>
                         );
 
+                      case COLUMNS.forms: {
+                        const forms = Object.keys(websiteData[column]);
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            {forms.length ? (
+                              <ul>
+                                {forms.map((form) => (
+                                  <li key={form}>
+                                    <Highlight
+                                      text={form}
+                                      highlight={filters[column]}
+                                    />
+                                    <ul>
+                                      {websiteData[column][form].map((page) => (
+                                        <li key={page}>
+                                          <a
+                                            href={`https://${host}/${page}`}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                          >
+                                            {page}
+                                          </a>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              NO_DATA
+                            )}
+                          </td>
+                        );
+                      }
+
                       case COLUMNS.tags:
                         return (
                           <td
