@@ -1,6 +1,8 @@
 ## v1.7.0
 
 - add forms column support
+- fix quick search
+  - don't insert value from "pages" and "forms" columns inside search input
 
 ## v1.6.1 (11.06.2024)
 

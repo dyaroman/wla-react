@@ -72,18 +72,26 @@ export function Table() {
 
     for (const column in columns) {
       if (!columns[column]['renderFilter']) continue;
+
       if (fieldName !== column) continue;
+
       const field = document.querySelector(
         `.filters input[data-qa='${fieldName}']`,
       );
       if (!field) return;
+
       if (!sidebarOpen) {
         dispatch(toggleSidebarOpen(true));
       }
       if (!filtersOpen) {
         dispatch(toggleFiltersOpen(true));
       }
-      const fieldValue = cell.innerText.trim();
+
+      let fieldValue = '';
+      if (![COLUMNS.pages, COLUMNS.forms].includes(fieldName)) {
+        fieldValue = cell.innerText.trim();
+      }
+
       dispatch({
         type: FILTERS_UPDATED,
         payload: {
