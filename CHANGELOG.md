@@ -1,4 +1,4 @@
-## v1.7.0
+## v1.7.0 (19.06.2024)
 
 - add forms column support
 - fix quick search
