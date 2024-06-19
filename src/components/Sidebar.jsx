@@ -6,6 +6,7 @@ import { AppControls } from './AppControls';
 import { TableInfo } from './TableInfo';
 import { Filters } from './Filters';
 import { Tags } from './Tags';
+import { ResultsControls } from './ResultsControls';
 import { TableControls } from './TableControls';
 import { Logo } from './Logo';
 import { Counter } from './Counter';
@@ -50,6 +51,7 @@ export function Sidebar() {
               <TableInfo />
               <Filters />
               <Tags />
+              <ResultsControls />
             </div>
             <TableControls />
           </div>

@@ -1,34 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterField } from './FilterField';
-import {
-  convertUrlToEnv,
-  fromCamelCaseToWords,
-  getQueryParamValue,
-  triggerGtmEvent,
-} from '../misc/functions';
+import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
 import {
   toggleFiltersOpen,
   toggleSidebarOpen,
 } from '../features/app/app.actions';
-import { clearFilters } from '../features/table/table.actions';
-import { showToast } from '../features/toast/toast.actions';
-import { BTN_GTM_EVENT, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
+import { SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
 export function Filters() {
   const dispatch = useDispatch();
   const filtersOpen = useSelector((state) => state['app'].filtersOpen);
   const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
-  const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const columns = websitesData['columns'];
-  const env = websitesData['env'];
-  const project = websitesData['project'];
-  const convertLinksTo =
-    getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
-  const convertLinks = convertLinksTo && convertLinksTo !== env;
 
   // search
   useKeyPress(['CommandOrControl', 'Shift', 'F'], (event) => {
@@ -38,37 +25,6 @@ export function Filters() {
       method: 'search',
       label: event.ctrlKey ? 'windows' : 'macos',
     });
-  });
-
-  // copy websites as comma separated list
-  useKeyPress(['CommandOrControl', 'Shift', 'C'], (event) => {
-    event.preventDefault();
-    onCopyShortcut();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
-      method: 'copy-websites',
-    });
-    dispatch(showToast('websites list copied'));
-  });
-
-  // copy websites urls
-  useKeyPress(['Shift', 'Alt', 'C'], (event) => {
-    event.preventDefault();
-    onCopyWebsitesUrlsClick();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
-      method: 'copy-websites-url',
-    });
-    dispatch(showToast('websites urls copied'));
-  });
-
-  // clear filters and sort
-  useKeyPress(['CommandOrControl', 'Shift', 'E'], (event) => {
-    event.preventDefault();
-    onClearClick();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
-      method: 'clear-all',
-      label: event.ctrlKey ? 'windows' : 'macos',
-    });
-    dispatch(showToast('filters and sort cleared'));
   });
 
   if (websitesData['websites'].length === 0) {
@@ -87,112 +43,27 @@ export function Filters() {
     });
   }
 
-  async function onCopyShortcut() {
-    const formattedWebsitesList = preparedData
-      .map((website) => website[COLUMNS.website])
-      .join(',');
-    await handleClipboardCopy(formattedWebsitesList);
-  }
-
-  async function onCopyWebsitesClick() {
-    const formattedWebsitesList = preparedData
-      .map((website) => website[COLUMNS.website])
-      .join('\n');
-    await handleClipboardCopy(formattedWebsitesList);
-
-    triggerGtmEvent(BTN_GTM_EVENT, {
-      method: 'copy-websites',
-    });
-  }
-
-  async function onCopyWebsitesUrlsClick() {
-    const websitesUrls = preparedData
-      .map((website) => {
-        const host =
-          (convertLinks &&
-            convertUrlToEnv(
-              website[COLUMNS.website],
-              convertLinksTo,
-              project,
-            )) ||
-          website[COLUMNS.host];
-
-        return `https://${host}/`;
-      })
-      .join('\n');
-    await handleClipboardCopy(websitesUrls);
-
-    triggerGtmEvent(BTN_GTM_EVENT, {
-      method: 'copy-websites-urls',
-    });
-  }
-
-  async function handleClipboardCopy(data) {
-    try {
-      await navigator.clipboard.writeText(data);
-    } catch (e) {
-      console.log(`Error due to copy websites list to clipboard`, e);
-    }
-  }
-
-  function onClearClick() {
-    dispatch(clearFilters());
-
-    triggerGtmEvent(BTN_GTM_EVENT, {
-      method: 'clear-all',
-    });
-  }
-
   function onSummaryClick(event) {
     event.preventDefault();
     dispatch(toggleFiltersOpen(!filtersOpen));
   }
 
   return (
-    <>
-      <details open={filtersOpen} className="filters">
-        <summary onClick={onSummaryClick}>Filters:</summary>
-        <div className="filters__content">
-          {Object.keys(columns).map((column) => {
-            if (column === COLUMNS.tags || !columns[column]['renderFilter'])
-              return null;
-            return (
-              <FilterField
-                key={column}
-                name={column}
-                placeholder={fromCamelCaseToWords(column)}
-              />
-            );
-          })}
-        </div>
-      </details>
-      <div className="btn-group  mt">
-        <button
-          className="btn btn--danger"
-          onClick={onClearClick}
-          data-qa="clearAll"
-        >
-          clear all
-        </button>
-        {preparedData.length !== 0 && (
-          <>
-            <button
-              className="btn"
-              onClick={onCopyWebsitesClick}
-              data-qa="copyWebsites"
-            >
-              copy websites
-            </button>
-            <button
-              className="btn"
-              onClick={onCopyWebsitesUrlsClick}
-              data-qa="copyWebsitesUrls"
-            >
-              copy websites urls
-            </button>
-          </>
-        )}
+    <details open={filtersOpen} className="filters">
+      <summary onClick={onSummaryClick}>Filters:</summary>
+      <div className="filters__content">
+        {Object.keys(columns).map((column) => {
+          if (column === COLUMNS.tags || !columns[column]['renderFilter'])
+            return null;
+          return (
+            <FilterField
+              key={column}
+              name={column}
+              placeholder={fromCamelCaseToWords(column)}
+            />
+          );
+        })}
       </div>
-    </>
+    </details>
   );
 }
