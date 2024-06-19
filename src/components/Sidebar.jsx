@@ -5,6 +5,7 @@ import { Burger } from './Burger';
 import { AppControls } from './AppControls';
 import { TableInfo } from './TableInfo';
 import { Filters } from './Filters';
+import { Tags } from './Tags';
 import { TableControls } from './TableControls';
 import { Logo } from './Logo';
 import { Counter } from './Counter';
@@ -48,6 +49,7 @@ export function Sidebar() {
               <AppControls />
               <TableInfo />
               <Filters />
+              <Tags />
             </div>
             <TableControls />
           </div>

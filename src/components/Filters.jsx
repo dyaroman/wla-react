@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterField } from './FilterField';
-import { Tags } from './Tags';
 import {
   convertUrlToEnv,
   fromCamelCaseToWords,
@@ -167,7 +166,6 @@ export function Filters() {
           })}
         </div>
       </details>
-      {Object.keys(columns).includes(COLUMNS.tags) && <Tags />}
       <div className="btn-group  mt">
         <button
           className="btn btn--danger"
