@@ -49,7 +49,7 @@ export function Filters() {
   }
 
   return (
-    <details open={filtersOpen} className="filters">
+    <details open={filtersOpen} className="filters  mt">
       <summary onClick={onSummaryClick}>Filters:</summary>
       <div className="filters__content">
         {Object.keys(columns).map((column) => {

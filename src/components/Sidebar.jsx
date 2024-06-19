@@ -47,13 +47,15 @@ export function Sidebar() {
         <div className="sidebar__bottom-content">
           <div className="sidebar__panels">
             <div>
-              <AppControls />
               <TableInfo />
               <Filters />
               <Tags />
               <ResultsControls />
             </div>
-            <TableControls />
+            <div>
+              <TableControls />
+              <AppControls />
+            </div>
           </div>
         </div>
       </div>

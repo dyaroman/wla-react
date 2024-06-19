@@ -3,12 +3,15 @@ import { ThemeToggle } from './ThemeToggle';
 
 export function AppControls() {
   return (
-    <div className="btn-group">
-      <ThemeToggle />
-      <InfoModalBtn />
-      <a href="./CHANGELOG.md" target="_blank" className="link">
-        changelog
-      </a>
-    </div>
+    <details className="mt" open>
+      <summary>Useful:</summary>
+      <div className="btn-group  mt">
+        <ThemeToggle />
+        <InfoModalBtn />
+        <a href="./CHANGELOG.md" target="_blank" className="btn">
+          changelog
+        </a>
+      </div>
+    </details>
   );
 }
