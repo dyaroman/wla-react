@@ -6,7 +6,7 @@ import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { ADD_TAG, REMOVE_TAG } from '../misc/gtm.constants';
 import { CHECKBOX_STATES } from '../misc/misc.constants';
 
-export function Tags({ items }) {
+export function TagsList({ items }) {
   const dispatch = useDispatch();
   const tags = useSelector((state) => state['table'].filters.tags);
   const availableTags = useSelector((state) => state['table'].availableTags);

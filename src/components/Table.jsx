@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FilterTitle } from './FilterTitle';
-import { Tags } from './Tags';
+import { TagsList } from './TagsList';
 import { Highlight } from './Highlight';
 import { Cell } from './Cell';
 import { ColorCell } from './ColorCell';
@@ -394,7 +394,7 @@ export function Table() {
                             key={column}
                           >
                             {websiteData.tags.length ? (
-                              <Tags items={websiteData.tags} />
+                              <TagsList items={websiteData.tags} />
                             ) : (
                               NO_DATA
                             )}

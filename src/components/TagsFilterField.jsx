@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { Tags } from './Tags';
+import { TagsList } from './TagsList';
 
 export function TagsFilterField() {
   const tags = useSelector((state) => state['table'].allTags);
@@ -12,7 +12,7 @@ export function TagsFilterField() {
   return (
     <details className="tags" open>
       <summary>Tags:</summary>
-      <Tags items={tags} />
+      <TagsList items={tags} />
     </details>
   );
 }
