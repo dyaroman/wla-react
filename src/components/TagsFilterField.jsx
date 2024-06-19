@@ -10,11 +10,9 @@ export function TagsFilterField() {
   }
 
   return (
-    <div style={{ gridColumn: '1 / -1' }}>
-      <details open>
-        <summary>Tags:</summary>
-        <Tags items={tags} />
-      </details>
-    </div>
+    <details className="tags" open>
+      <summary>Tags:</summary>
+      <Tags items={tags} />
+    </details>
   );
 }

@@ -107,3 +107,9 @@
 .ts-checkbox__label {
   font-size: px2rem(16);
 }
+
+.table .tags-list .ts-checkbox {
+  padding: px2rem(3);
+
+  border: $border-width solid var(--body-color);
+}

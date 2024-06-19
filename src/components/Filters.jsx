@@ -150,22 +150,24 @@ export function Filters() {
   }
 
   return (
-    <details open={filtersOpen} className="filters">
-      <summary onClick={onSummaryClick}>Filters:</summary>
-      <div className="filters__content">
-        {Object.keys(columns).map((column) => {
-          if (column === COLUMNS.tags || !columns[column]['renderFilter'])
-            return null;
-          return (
-            <FilterField
-              key={column}
-              name={column}
-              placeholder={fromCamelCaseToWords(column)}
-            />
-          );
-        })}
-        {Object.keys(columns).includes(COLUMNS.tags) && <TagsFilterField />}
-      </div>
+    <>
+      <details open={filtersOpen} className="filters">
+        <summary onClick={onSummaryClick}>Filters:</summary>
+        <div className="filters__content">
+          {Object.keys(columns).map((column) => {
+            if (column === COLUMNS.tags || !columns[column]['renderFilter'])
+              return null;
+            return (
+              <FilterField
+                key={column}
+                name={column}
+                placeholder={fromCamelCaseToWords(column)}
+              />
+            );
+          })}
+        </div>
+      </details>
+      {Object.keys(columns).includes(COLUMNS.tags) && <TagsFilterField />}
       <div className="btn-group  mt">
         <button
           className="btn btn--danger"
@@ -193,6 +195,6 @@ export function Filters() {
           </>
         )}
       </div>
-    </details>
+    </>
   );
 }

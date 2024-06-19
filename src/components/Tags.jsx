@@ -92,5 +92,5 @@ export function Tags({ items }) {
     );
   });
 
-  return <ul className="tags">{list}</ul>;
+  return <ul className="tags-list">{list}</ul>;
 }
