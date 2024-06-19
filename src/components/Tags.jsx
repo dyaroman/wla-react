@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { TagsList } from './TagsList';
 
-export function TagsFilterField() {
+export function Tags() {
   const tags = useSelector((state) => state['table'].allTags);
 
   if (tags.length === 0) {
