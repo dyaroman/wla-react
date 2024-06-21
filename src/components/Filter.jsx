@@ -6,7 +6,7 @@ import { updateShowColumns } from '../features/table/table.actions';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { FILTER_CHANGE } from '../misc/gtm.constants';
 
-export function FilterField({ name, placeholder }) {
+export function Filter({ name, placeholder }) {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state['table'].filters);
   const showColumns = useSelector((state) => state['table'].showColumns);

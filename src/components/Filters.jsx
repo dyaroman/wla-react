@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FilterField } from './FilterField';
+import { Filter } from './Filter';
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { useKeyPress } from '../hooks/useKeyPress';
 import {
@@ -56,7 +56,7 @@ export function Filters() {
           if (column === COLUMNS.tags || !columns[column]['renderFilter'])
             return null;
           return (
-            <FilterField
+            <Filter
               key={column}
               name={column}
               placeholder={fromCamelCaseToWords(column)}
