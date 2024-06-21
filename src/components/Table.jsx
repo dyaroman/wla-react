@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ColumnTitle } from './ColumnTitle';
 import { TagsList } from './TagsList';
 import { Highlight } from './Highlight';
-import { Cell } from './Cell';
 import { ColorCell } from './ColorCell';
 import { ImgCell } from './ImgCell';
 import { Checkbox } from './Checkbox';
@@ -414,12 +413,16 @@ export function Table() {
 
                       default:
                         return (
-                          <Cell key={column} column={column}>
+                          <td
+                            key={column}
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                          >
                             <Highlight
                               text={websiteData[column]}
                               highlight={filters[column]}
                             />
-                          </Cell>
+                          </td>
                         );
                     }
                   })}
