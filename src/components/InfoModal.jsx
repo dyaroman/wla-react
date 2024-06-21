@@ -65,7 +65,7 @@ export function InfoModal() {
           </li>
           <li>
             <code>Cmd+Shift+F</code> or <code>Ctrl+Shift+F</code> to move cursor
-            to the first input field
+            to the first filter
           </li>
           <li>
             <code>Shift+Alt+C</code> to copy websites urls
@@ -101,7 +101,7 @@ export function InfoModal() {
         <h3>Quick search:</h3>
         <p>
           Hold <code>Option</code> or <code>Alt</code> key and click on some
-          table cell to insert text from cell in appropriate search field and
+          table cell to insert text from cell in appropriate search filter and
           move focus on it.
         </p>
 

@@ -67,18 +67,18 @@ export function Table() {
     const cell = event.target.closest('td,th');
     if (!cell) return;
 
-    const fieldName = cell && cell.dataset.qa;
-    if (!fieldName) return;
+    const filterName = cell && cell.dataset.qa;
+    if (!filterName) return;
 
     for (const column in columns) {
       if (!columns[column]['renderFilter']) continue;
 
-      if (fieldName !== column) continue;
+      if (filterName !== column) continue;
 
-      const field = document.querySelector(
-        `.filters input[data-qa='${fieldName}']`,
+      const filter = document.querySelector(
+        `.filters input[data-qa='${filterName}']`,
       );
-      if (!field) return;
+      if (!filter) return;
 
       if (!sidebarOpen) {
         dispatch(toggleSidebarOpen(true));
@@ -87,22 +87,22 @@ export function Table() {
         dispatch(toggleFiltersOpen(true));
       }
 
-      let fieldValue = '';
-      if (![COLUMNS.pages, COLUMNS.forms].includes(fieldName)) {
-        fieldValue = cell.innerText.trim();
+      let filterValue = '';
+      if (![COLUMNS.pages, COLUMNS.forms].includes(filterName)) {
+        filterValue = cell.innerText.trim();
       }
 
       dispatch({
         type: FILTERS_UPDATED,
         payload: {
-          [fieldName]: fieldValue,
+          [filterName]: filterValue,
         },
       });
       triggerGtmEvent(TABLE_CELL_SEARCH, {
-        filter_name: fieldName,
-        filter_value: fieldValue,
+        filter_name: filterName,
+        filter_value: filterValue,
       });
-      setTimeout(() => field.select());
+      setTimeout(() => filter.select());
     }
   }
 
