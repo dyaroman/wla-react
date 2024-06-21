@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FieldTitle } from './FieldTitle';
 import { triggerGtmEvent } from '../misc/functions';
 import { updateShowColumns } from '../features/table/table.actions';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
@@ -32,7 +31,8 @@ export function Filter({ name, placeholder }) {
   }
 
   return (
-    <FieldTitle text={placeholder}>
+    <label className="field-title">
+      <span className="field-title__text">{placeholder}</span>
       <input
         type="text"
         name={name}
@@ -43,6 +43,6 @@ export function Filter({ name, placeholder }) {
         placeholder={placeholder}
         value={filters[name]}
       />
-    </FieldTitle>
+    </label>
   );
 }
