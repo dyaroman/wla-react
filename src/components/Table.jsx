@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FilterTitle } from './FilterTitle';
+import { ColumnTitle } from './ColumnTitle';
 import { TagsList } from './TagsList';
 import { Highlight } from './Highlight';
 import { Cell } from './Cell';
@@ -199,7 +199,7 @@ export function Table() {
 
                   default:
                     return (
-                      <FilterTitle key={column} text={column} column={column} />
+                      <ColumnTitle key={column} text={column} column={column} />
                     );
                 }
               })}

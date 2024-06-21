@@ -4,7 +4,7 @@ import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { SORT_UPDATED } from '../features/table/table.constants';
 import { TABLE_SORT } from '../misc/gtm.constants';
 
-export function FilterTitle({ column, text = '', className }) {
+export function ColumnTitle({ column, text = '' }) {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state['table'].sort);
   let direction = null;
@@ -44,7 +44,6 @@ export function FilterTitle({ column, text = '', className }) {
       data-sort-direction={direction}
       data-qa={column}
       onClick={onClick}
-      className={className}
     >
       {fromCamelCaseToWords(text)}
     </th>
