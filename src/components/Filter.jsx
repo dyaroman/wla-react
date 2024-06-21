@@ -31,8 +31,8 @@ export function Filter({ name, placeholder }) {
   }
 
   return (
-    <label className="field-title">
-      <span className="field-title__text">{placeholder}</span>
+    <label className="filter-title">
+      <span className="filter-title__text">{placeholder}</span>
       <input
         type="text"
         name={name}
