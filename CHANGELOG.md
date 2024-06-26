@@ -1,3 +1,12 @@
+## v1.8.0 (26.06.2024)
+
+- rework app controls
+  - move them under columns control
+  - wrap in details
+  - now it's call "Useful"
+- rework some components
+- rename some components
+
 ## v1.7.0 (19.06.2024)
 
 - add forms column support
