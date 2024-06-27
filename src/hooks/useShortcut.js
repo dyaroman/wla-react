@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
-export const useShortcut = (hotkey, callback, node = null) => {
-  if (!Array.isArray(hotkey)) {
-    throw new Error('"hotkey" must be an array of strings');
+export const useShortcut = (shortcut, callback, node = null) => {
+  if (!Array.isArray(shortcut)) {
+    throw new Error('"shortcut" must be an array of strings');
   }
 
   if (
-    hotkey.some((key) => {
+    shortcut.some((key) => {
       if (key.length === 1) {
         return key.match(/[^A-Z0-9/]/g);
       } else {
@@ -15,7 +15,7 @@ export const useShortcut = (hotkey, callback, node = null) => {
     })
   ) {
     throw new Error(
-      `"hotkey" could contain only: 'CommandOrControl', 'Shift', 'Alt' and 'A-Z0-9/', but got ${JSON.stringify(hotkey)}`,
+      `"shortcut" could contain only: 'CommandOrControl', 'Shift', 'Alt' and 'A-Z0-9/', but got ${JSON.stringify(shortcut)}`,
     );
   }
 
@@ -28,7 +28,7 @@ export const useShortcut = (hotkey, callback, node = null) => {
   // handle what happens on key press
   const handleKeyPress = useCallback(
     (event) => {
-      const check = hotkey.every((key) => {
+      const check = shortcut.every((key) => {
         switch (key) {
           case 'CommandOrControl':
             return event.metaKey || event.ctrlKey;
@@ -50,7 +50,7 @@ export const useShortcut = (hotkey, callback, node = null) => {
         callbackRef.current(event);
       }
     },
-    [hotkey],
+    [shortcut],
   );
 
   useEffect(() => {
