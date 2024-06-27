@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useKeyPress } from '../hooks/useKeyPress';
+import { useShortcut } from '../hooks/useShortcut';
 import { triggerGtmEvent } from '../misc/functions';
 import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
 import { OPEN_INFO_MODAL, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
@@ -10,7 +10,7 @@ export function InfoModalBtn() {
   const isOpen = useSelector((state) => state['app'].infoModalOpen);
 
   // open info modal
-  useKeyPress(['Shift', '/'], (event) => {
+  useShortcut(['Shift', '/'], (event) => {
     if (isOpen) return;
     event.preventDefault();
     onOpenModalClick();

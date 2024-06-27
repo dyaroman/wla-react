@@ -11,7 +11,7 @@ import { TableControls } from './TableControls';
 import { Logo } from './Logo';
 import { Counter } from './Counter';
 import { triggerGtmEvent } from '../misc/functions';
-import { useKeyPress } from '../hooks/useKeyPress';
+import { useShortcut } from '../hooks/useShortcut';
 import { toggleSidebarOpen } from '../features/app/app.actions';
 import { SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
 
@@ -28,7 +28,7 @@ export function Sidebar() {
   }, [sidebarOpen]);
 
   // toggle sidebar
-  useKeyPress(['CommandOrControl', '/'], (event) => {
+  useShortcut(['CommandOrControl', '/'], (event) => {
     dispatch(toggleSidebarOpen(!sidebarOpen));
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
       method: 'sidebar-' + (sidebarOpen ? 'close' : 'open'),

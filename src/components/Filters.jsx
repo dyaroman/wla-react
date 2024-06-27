@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Filter } from './Filter';
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
-import { useKeyPress } from '../hooks/useKeyPress';
+import { useShortcut } from '../hooks/useShortcut';
 import {
   toggleFiltersOpen,
   toggleSidebarOpen,
@@ -18,7 +18,7 @@ export function Filters() {
   const columns = websitesData['columns'];
 
   // search
-  useKeyPress(['CommandOrControl', 'Shift', 'F'], (event) => {
+  useShortcut(['CommandOrControl', 'Shift', 'F'], (event) => {
     event.preventDefault();
     onSearchShortcut();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {

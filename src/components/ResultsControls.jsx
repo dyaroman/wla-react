@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useKeyPress } from '../hooks/useKeyPress';
+import { useShortcut } from '../hooks/useShortcut';
 import {
   convertUrlToEnv,
   getQueryParamValue,
@@ -22,7 +22,7 @@ export function ResultsControls() {
   const convertLinks = convertLinksTo && convertLinksTo !== env;
 
   // copy websites as comma separated list
-  useKeyPress(['CommandOrControl', 'Shift', 'C'], async (event) => {
+  useShortcut(['CommandOrControl', 'Shift', 'C'], async (event) => {
     event.preventDefault();
     await onCopyShortcut();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
@@ -32,7 +32,7 @@ export function ResultsControls() {
   });
 
   // copy websites urls
-  useKeyPress(['Shift', 'Alt', 'C'], async (event) => {
+  useShortcut(['Shift', 'Alt', 'C'], async (event) => {
     event.preventDefault();
     await onCopyWebsitesUrlsClick();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {
@@ -42,7 +42,7 @@ export function ResultsControls() {
   });
 
   // clear filters and sort
-  useKeyPress(['CommandOrControl', 'Shift', 'E'], (event) => {
+  useShortcut(['CommandOrControl', 'Shift', 'E'], (event) => {
     event.preventDefault();
     onClearClick();
     triggerGtmEvent(SHORTCUT_GTM_EVENT, {

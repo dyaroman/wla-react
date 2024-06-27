@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
-export const useKeyPress = (hotkey, callback, node = null) => {
+export const useShortcut = (hotkey, callback, node = null) => {
   if (!Array.isArray(hotkey)) {
     throw new Error('"hotkey" must be an array of strings');
   }
