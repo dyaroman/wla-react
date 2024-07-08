@@ -4,8 +4,7 @@
   - move them under columns control
   - wrap in details
   - now it's call "Useful"
-- rework some components
-- rename some components
+- under hood refactoring
 
 ## v1.7.0 (19.06.2024)
 
