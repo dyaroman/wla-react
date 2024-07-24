@@ -1,3 +1,8 @@
+## v1.9.0 (24.07.2024)
+
+- rework tags list inside sidebar
+  - make elements order vertically for better readability
+
 ## v1.8.0 (26.06.2024)
 
 - rework app controls

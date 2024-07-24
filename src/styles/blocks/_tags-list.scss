@@ -13,19 +13,26 @@
 .sidebar .tags-list {
   margin-top: $gap;
 
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: flex-start;
+  display: block;
 
   @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(2, 1fr);
+    column-count: 2;
   }
 
   @include media-breakpoint-up(xl) {
-    grid-template-columns: repeat(3, 1fr);
+    column-count: 3;
   }
 
   @include media-breakpoint-up(xxl) {
-    grid-template-columns: repeat(4, 1fr);
+    column-count: 4;
+  }
+}
+
+.sidebar .tags-list li {
+  margin-top: math.div($gap, 2);
+  margin-bottom: math.div($gap, 2);
+
+  &:first-child {
+    margin-top: 0;
   }
 }
