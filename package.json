@@ -1,7 +1,7 @@
 {
   "name": "websites-list-app",
   "private": true,
-  "version": "1.8.0",
+  "version": "1.9.0",
   "scripts": {
     "start": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start",
     "build": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build",
