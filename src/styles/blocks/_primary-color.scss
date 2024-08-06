@@ -1,0 +1,11 @@
+@use 'sass:math';
+
+.primary-color {
+  display: flex;
+}
+
+.primary-color__inner {
+  display: flex;
+  gap: math.div($gap, 2);
+  align-items: center;
+}

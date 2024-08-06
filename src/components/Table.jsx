@@ -356,27 +356,110 @@ export function Table() {
                           >
                             {forms.length ? (
                               <ul>
-                                {forms.map((form) => (
-                                  <li key={form}>
-                                    <Highlight
-                                      text={form}
-                                      highlight={filters[column]}
-                                    />
-                                    <ul>
-                                      {websiteData[column][form].map((page) => (
-                                        <li key={page}>
-                                          <a
-                                            href={`https://${host}/${page}`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                          >
-                                            {page}
-                                          </a>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </li>
-                                ))}
+                                {forms.map((form) => {
+                                  const pages = Object.keys(
+                                    websiteData[column][form],
+                                  );
+                                  return (
+                                    <li key={form}>
+                                      <Highlight
+                                        text={form}
+                                        highlight={filters[column]}
+                                      />
+                                      {pages.length ? (
+                                        <ul>
+                                          {pages.map((page) => {
+                                            const config =
+                                              websiteData[column][form][page];
+                                            return (
+                                              <li key={page}>
+                                                <a
+                                                  href={`https://${host}/${page}`}
+                                                  target="_blank"
+                                                  rel="noreferrer"
+                                                >
+                                                  {page}
+                                                </a>
+                                                {Object.keys(config).length ? (
+                                                  <ul>
+                                                    {Object.keys(config).map(
+                                                      (key) => {
+                                                        let content;
+                                                        if (
+                                                          Array.isArray(
+                                                            config[key],
+                                                          )
+                                                        ) {
+                                                          content = (
+                                                            <>
+                                                              {key}:{' '}
+                                                              <ul>
+                                                                {config[
+                                                                  key
+                                                                ].map(
+                                                                  (item) => (
+                                                                    <li
+                                                                      key={item}
+                                                                    >
+                                                                      {JSON.stringify(
+                                                                        item,
+                                                                      )}
+                                                                    </li>
+                                                                  ),
+                                                                )}
+                                                              </ul>
+                                                            </>
+                                                          );
+                                                        } else if (
+                                                          key === 'primaryColor'
+                                                        ) {
+                                                          content = (
+                                                            <div className="primary-color">
+                                                              {key}:{' '}
+                                                              <span className="primary-color__inner">
+                                                                <span
+                                                                  className="color-preview"
+                                                                  style={{
+                                                                    backgroundColor:
+                                                                      config[
+                                                                        key
+                                                                      ],
+                                                                  }}
+                                                                ></span>
+                                                                {config[key]}
+                                                              </span>
+                                                            </div>
+                                                          );
+                                                        } else {
+                                                          content = (
+                                                            <>
+                                                              {key}:{' '}
+                                                              {config[key]}
+                                                            </>
+                                                          );
+                                                        }
+
+                                                        return (
+                                                          <li key={key}>
+                                                            {content}
+                                                          </li>
+                                                        );
+                                                      },
+                                                    )}
+                                                  </ul>
+                                                ) : (
+                                                  NO_DATA
+                                                )}
+                                              </li>
+                                            );
+                                          })}
+                                        </ul>
+                                      ) : (
+                                        NO_DATA
+                                      )}
+                                    </li>
+                                  );
+                                })}
                               </ul>
                             ) : (
                               NO_DATA

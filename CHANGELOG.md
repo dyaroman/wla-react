@@ -1,3 +1,8 @@
+## v1.10.0 (06.08.2024)
+
+- update "forms" column
+  - now it also show options that use on page with form, like (campaignId, leadTypeId, loanAmounts, etc.)
+
 ## v1.9.0 (24.07.2024)
 
 - rework tags list inside sidebar

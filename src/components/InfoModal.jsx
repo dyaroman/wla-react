@@ -86,15 +86,14 @@ export function InfoModal() {
         <ul>
           <li>
             <code>==</code> use for exact match, ex: "
-            {fromCamelCaseToWords(COLUMNS.campaignId)}" <code>==1</code> show
-            all websites with "{fromCamelCaseToWords(COLUMNS.campaignId)}"
-            strict equal to 1
+            {fromCamelCaseToWords(COLUMNS.pages)}" <code>==sc</code> show all
+            websites that has "sc" page, without semimatch like "credit-
+            <b>sc</b>ore"
           </li>
           <li>
             <code>!=</code> use for strict not equal search, ex: "
-            {fromCamelCaseToWords(COLUMNS.campaignId)}" <code>!=1</code> show
-            all websites with "{fromCamelCaseToWords(COLUMNS.campaignId)}" not
-            equal 1
+            {fromCamelCaseToWords(COLUMNS.pages)}" <code>!=sc</code> show all
+            websites that hasn't "sc" page
           </li>
         </ul>
 
