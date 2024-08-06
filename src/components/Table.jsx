@@ -434,7 +434,9 @@ export function Table() {
                                                           content = (
                                                             <>
                                                               {key}:{' '}
-                                                              {config[key]}
+                                                              {JSON.stringify(
+                                                                config[key],
+                                                              )}
                                                             </>
                                                           );
                                                         }

@@ -1,3 +1,7 @@
+## v1.10.1 (06.08.2024)
+
+- fix showing boolean values inside "forms" column
+
 ## v1.10.0 (06.08.2024)
 
 - update "forms" column
