@@ -187,13 +187,13 @@ export function Table() {
                 switch (column) {
                   case COLUMNS.index:
                     return (
-                      <th key={column} data-qa={column} className="shrink">
+                      <th key={column} data-qa={column} className="narrow">
                         #
                       </th>
                     );
                   case COLUMNS.checkbox:
                     return (
-                      <th key={column} data-qa={column} className="shrink" />
+                      <th key={column} data-qa={column} className="narrow" />
                     );
 
                   default:
