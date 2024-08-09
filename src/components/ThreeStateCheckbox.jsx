@@ -39,7 +39,7 @@ export function ThreeStateCheckbox({
         onChange={onChangeHandler}
         tabIndex={disabled ? '-1' : undefined}
       />
-      <span className="ts-checkbox__icon"></span>
+      <span className="ts-checkbox__icon" />
       {label && <span className="ts-checkbox__label">{label}</span>}
     </label>
   );

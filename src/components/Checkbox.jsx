@@ -12,7 +12,7 @@ export function Checkbox({ label, name, checked, disabled, onChange }) {
         onChange={onChange}
         tabIndex={disabled ? '-1' : undefined}
       />
-      <span className="checkbox__icon"></span>
+      <span className="checkbox__icon" />
       {label && <span className="checkbox__label">{label}</span>}
     </label>
   );

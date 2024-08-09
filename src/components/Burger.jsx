@@ -15,9 +15,9 @@ export function Burger() {
       className={'burger' + (sidebarOpen ? ' burger--open' : '')}
       onClick={onClick}
     >
-      <span></span>
-      <span></span>
-      <span></span>
+      <span />
+      <span />
+      <span />
     </button>
   );
 }

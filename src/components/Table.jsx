@@ -193,7 +193,7 @@ export function Table() {
                     );
                   case COLUMNS.checkbox:
                     return (
-                      <th key={column} data-qa={column} className="shrink"></th>
+                      <th key={column} data-qa={column} className="shrink" />
                     );
 
                   default:
@@ -366,99 +366,83 @@ export function Table() {
                                         text={form}
                                         highlight={filters[column]}
                                       />
-                                      {pages.length ? (
-                                        <ul>
-                                          {pages.map((page) => {
-                                            const config =
-                                              websiteData[column][form][page];
-                                            return (
-                                              <li key={page}>
-                                                <a
-                                                  href={`https://${host}/${page}`}
-                                                  target="_blank"
-                                                  rel="noreferrer"
-                                                >
-                                                  {page}
-                                                </a>
-                                                {Object.keys(config).length ? (
-                                                  <ul>
-                                                    {Object.keys(config).map(
-                                                      (key) => {
-                                                        let content;
-                                                        if (
-                                                          Array.isArray(
+                                      <ul>
+                                        {pages.map((page) => {
+                                          const config =
+                                            websiteData[column][form][page];
+                                          return (
+                                            <li key={page}>
+                                              <a
+                                                href={`https://${host}/${page}`}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                              >
+                                                {page}
+                                              </a>
+                                              <ul>
+                                                {Object.keys(config).map(
+                                                  (key) => {
+                                                    let content;
+                                                    if (
+                                                      Array.isArray(config[key])
+                                                    ) {
+                                                      content = (
+                                                        <>
+                                                          {key}:{' '}
+                                                          <ul>
+                                                            {config[key].map(
+                                                              (item) => (
+                                                                <li key={item}>
+                                                                  {JSON.stringify(
+                                                                    item,
+                                                                  )}
+                                                                </li>
+                                                              ),
+                                                            )}
+                                                          </ul>
+                                                        </>
+                                                      );
+                                                    } else if (
+                                                      key === 'primaryColor'
+                                                    ) {
+                                                      content = (
+                                                        <div className="primary-color">
+                                                          {key}:{' '}
+                                                          <span className="primary-color__inner">
+                                                            <span
+                                                              className="color-preview"
+                                                              style={{
+                                                                backgroundColor:
+                                                                  config[key],
+                                                              }}
+                                                            />
+                                                            {config[key]}
+                                                          </span>
+                                                        </div>
+                                                      );
+                                                    } else {
+                                                      content = (
+                                                        <>
+                                                          {key}:{' '}
+                                                          {JSON.stringify(
                                                             config[key],
-                                                          )
-                                                        ) {
-                                                          content = (
-                                                            <>
-                                                              {key}:{' '}
-                                                              <ul>
-                                                                {config[
-                                                                  key
-                                                                ].map(
-                                                                  (item) => (
-                                                                    <li
-                                                                      key={item}
-                                                                    >
-                                                                      {JSON.stringify(
-                                                                        item,
-                                                                      )}
-                                                                    </li>
-                                                                  ),
-                                                                )}
-                                                              </ul>
-                                                            </>
-                                                          );
-                                                        } else if (
-                                                          key === 'primaryColor'
-                                                        ) {
-                                                          content = (
-                                                            <div className="primary-color">
-                                                              {key}:{' '}
-                                                              <span className="primary-color__inner">
-                                                                <span
-                                                                  className="color-preview"
-                                                                  style={{
-                                                                    backgroundColor:
-                                                                      config[
-                                                                        key
-                                                                      ],
-                                                                  }}
-                                                                ></span>
-                                                                {config[key]}
-                                                              </span>
-                                                            </div>
-                                                          );
-                                                        } else {
-                                                          content = (
-                                                            <>
-                                                              {key}:{' '}
-                                                              {JSON.stringify(
-                                                                config[key],
-                                                              )}
-                                                            </>
-                                                          );
-                                                        }
+                                                          )}
+                                                        </>
+                                                      );
+                                                    }
 
-                                                        return (
-                                                          <li key={key}>
-                                                            {content}
-                                                          </li>
-                                                        );
-                                                      },
-                                                    )}
-                                                  </ul>
-                                                ) : (
-                                                  NO_DATA
+                                                    return (
+                                                      <li key={key}>
+                                                        {content}
+                                                      </li>
+                                                    );
+                                                  },
                                                 )}
-                                              </li>
-                                            );
-                                          })}
-                                        </ul>
-                                      ) : (
-                                        NO_DATA
-                                      )}
+                                              </ul>
+                                            </li>
+                                          );
+                                        })}
+                                      </ul>
                                     </li>
                                   );
                                 })}

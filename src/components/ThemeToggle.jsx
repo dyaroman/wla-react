@@ -83,7 +83,7 @@ export function ThemeToggle() {
       data-qa="toggleTheme"
       onClick={onThemeToggleClick}
     >
-      <span className="icon icon--toggle-theme"></span>
+      <span className="icon icon--toggle-theme" />
       toggle theme
     </button>
   );
