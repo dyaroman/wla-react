@@ -6,7 +6,7 @@
     "start": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts start",
     "build": "export REACT_APP_VERSION=$(git rev-parse HEAD) && react-scripts build",
     "postbuild": "node postBuild.js",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "nano-staged": {
     "**/*": "prettier --write --ignore-unknown"
@@ -34,7 +34,7 @@
     "sass": "^1.77.8"
   },
   "devDependencies": {
-    "husky": "^8.0.0",
+    "husky": "^9.1.5",
     "nano-staged": "^0.8.0",
     "prettier": "^3.3.3"
   }
