@@ -18,9 +18,9 @@ stages:
       - job: Build
         steps:
           - task: NodeTool@0
-            displayName: 'Use node 18.16.x'
+            displayName: 'Use node 20.17.x'
             inputs:
-              versionSpec: 18.16.x
+              versionSpec: 20.17.x
               checkLatest: true
 
           - checkout: self
