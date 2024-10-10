@@ -15,3 +15,6 @@ export const BTN_GTM_EVENT = 'btn';
 
 export const TABLE_CELL_SEARCH = 'table_cell_search';
 export const TABLE_SORT = 'table_sort';
+
+export const CHECK_FRESH_DATA = 'check_fresh_data';
+export const FRESH_DATA_AVAILABLE = 'fresh_data_available';

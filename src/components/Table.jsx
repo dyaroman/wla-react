@@ -7,7 +7,10 @@ import { Highlight } from './Highlight';
 import { ColorCell } from './ColorCell';
 import { ImgCell } from './ImgCell';
 import { Checkbox } from './Checkbox';
-import { updateTableData } from '../features/table/table.actions';
+import {
+  checkForUpdates,
+  updateTableData,
+} from '../features/table/table.actions';
 import {
   toggleFiltersOpen,
   toggleSidebarOpen,
@@ -22,7 +25,7 @@ import {
 import { rgb2hex } from '../misc/color';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
-import { TABLE_CELL_SEARCH } from '../misc/gtm.constants';
+import { CHECK_FRESH_DATA, TABLE_CELL_SEARCH } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
 export function Table() {
@@ -40,6 +43,41 @@ export function Table() {
   const convertLinksTo =
     getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
   const convertLinks = convertLinksTo && convertLinksTo !== env;
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      dispatch(checkForUpdates());
+      triggerGtmEvent(CHECK_FRESH_DATA, {
+        method: 'setInterval',
+      });
+    }, 10 * 60_000);
+
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+
+    const minTimeBeforeRequest = 10 * 60_000;
+    let inactivityTime = 0;
+    function visibilityChangeHandler() {
+      if (document.hidden) {
+        inactivityTime = Date.now();
+      } else {
+        const currentTime = Date.now();
+        const timeSinceLastVisit = currentTime - inactivityTime;
+
+        if (timeSinceLastVisit >= minTimeBeforeRequest) {
+          inactivityTime = currentTime;
+          dispatch(checkForUpdates());
+          triggerGtmEvent(CHECK_FRESH_DATA, {
+            method: 'visibilityChange',
+          });
+        }
+      }
+    }
+
+    return () => {
+      clearInterval(intervalId);
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+    };
+  }, []);
 
   useEffect(() => {
     dispatch(updateTableData());

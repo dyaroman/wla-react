@@ -15,6 +15,7 @@ import {
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
 import { URL_PARAMETERS } from '../../misc/url.constants';
 import { COLUMNS } from '../../misc/columns.constants';
+import { FRESH_DATA_AVAILABLE } from '../../misc/gtm.constants';
 import {
   deleteQueryParam,
   filterTableData,
@@ -22,8 +23,10 @@ import {
   getQueryParamValue,
   getUniqueTags,
   sortTableData,
+  triggerGtmEvent,
 } from '../../misc/functions';
 import { toggleSidebarOpen } from '../app/app.actions';
+import { showToast } from '../toast/toast.actions';
 
 export function getWebsitesData() {
   return async function (dispatch, getState) {
@@ -32,6 +35,7 @@ export function getWebsitesData() {
       const response = await fetch(dataFileURL);
       switch (response.status) {
         case 200: {
+          const ETag = response.headers.get('ETag');
           const websitesData = await response.json();
           const columns = websitesData['columns'];
           const websites = websitesData['websites'];
@@ -59,6 +63,7 @@ export function getWebsitesData() {
             allTags,
             availableTags: allTags,
             websitesData,
+            websitesDataETag: ETag,
           };
 
           // get default show columns
@@ -137,6 +142,32 @@ export function getWebsitesData() {
           });
           break;
         }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+}
+
+export function checkForUpdates() {
+  return async function (dispatch, getState) {
+    const currentETag = getState().table.websitesDataETag;
+    const dataFileURL = `${process.env.REACT_APP_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
+    try {
+      const response = await fetch(dataFileURL, {
+        method: 'HEAD',
+      });
+      const newETag = response.headers.get('ETag');
+      if (currentETag && newETag && currentETag !== newETag) {
+        dispatch(
+          showToast(
+            'New data is available. The page will be reloaded in 5 seconds.',
+          ),
+        );
+        triggerGtmEvent(FRESH_DATA_AVAILABLE);
+        setTimeout(() => {
+          window.location.reload();
+        }, 5_000);
       }
     } catch (e) {
       console.error(e);

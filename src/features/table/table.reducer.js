@@ -15,6 +15,7 @@ const tableInitialState = {
     direction: '',
   },
   websitesData: null,
+  websitesDataETag: null,
   websitesDataLoaded: false,
   preparedData: [],
   showColumns: [],
