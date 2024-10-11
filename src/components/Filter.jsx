@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { triggerGtmEvent } from '../misc/functions';
 import { updateShowColumns } from '../features/table/table.actions';
+import { gtmEvents } from '../misc/gtm.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
-import { FILTER_CHANGE } from '../misc/gtm.constants';
 
 export function Filter({ name, placeholder }) {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export function Filter({ name, placeholder }) {
   }
 
   function onBlur(event) {
-    triggerGtmEvent(FILTER_CHANGE, {
+    triggerGtmEvent(gtmEvents.filterChange, {
       filter_name: name,
       filter_value: event.target.value,
     });

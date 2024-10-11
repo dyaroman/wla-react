@@ -7,7 +7,7 @@ import {
   toggleFiltersOpen,
   toggleSidebarOpen,
 } from '../features/app/app.actions';
-import { SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
+import { gtmEvents } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
 export function Filters() {
@@ -21,7 +21,7 @@ export function Filters() {
   useShortcut(['CommandOrControl', 'Shift', 'F'], (event) => {
     event.preventDefault();
     onSearchShortcut();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.shortcut, {
       method: 'search',
       label: event.ctrlKey ? 'windows' : 'macos',
     });

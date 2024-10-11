@@ -4,7 +4,7 @@ import { Checkbox } from './Checkbox';
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { toggleCustomizeColumnsOpen } from '../features/app/app.actions';
 import { updateShowColumns } from '../features/table/table.actions';
-import { BTN_GTM_EVENT, SHOWED_COLUMN_CHANGE } from '../misc/gtm.constants';
+import { gtmEvents } from '../misc/gtm.constants';
 
 export function TableControls() {
   const dispatch = useDispatch();
@@ -32,28 +32,28 @@ export function TableControls() {
       eventInfo.method = 'on';
     }
     dispatch(updateShowColumns(updatedShowColumns));
-    triggerGtmEvent(SHOWED_COLUMN_CHANGE, {
+    triggerGtmEvent(gtmEvents.showedColumnChange, {
       ...eventInfo,
     });
   }
 
   function onClickHideAllColumns() {
     dispatch(updateShowColumns([]));
-    triggerGtmEvent(BTN_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.btn, {
       method: 'hide-all-columns',
     });
   }
 
   function onClickShowAllColumns() {
     dispatch(updateShowColumns(renderableColumns));
-    triggerGtmEvent(BTN_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.btn, {
       method: 'show-all-columns',
     });
   }
 
   function onClickRestoreDefaultColumns() {
     dispatch(updateShowColumns(defaultShowColumns));
-    triggerGtmEvent(BTN_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.btn, {
       method: 'restore-default-columns',
     });
   }

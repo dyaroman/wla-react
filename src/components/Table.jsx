@@ -23,9 +23,9 @@ import {
   triggerGtmEvent,
 } from '../misc/functions';
 import { rgb2hex } from '../misc/color';
+import { gtmEvents } from '../misc/gtm.constants';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
-import { CHECK_FRESH_DATA, TABLE_CELL_SEARCH } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
 export function Table() {
@@ -47,7 +47,7 @@ export function Table() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       dispatch(checkForUpdates());
-      triggerGtmEvent(CHECK_FRESH_DATA, {
+      triggerGtmEvent(gtmEvents.checkFreshData, {
         method: 'setInterval',
       });
     }, 10 * 60_000);
@@ -66,7 +66,7 @@ export function Table() {
         if (timeSinceLastVisit >= minTimeBeforeRequest) {
           inactivityTime = currentTime;
           dispatch(checkForUpdates());
-          triggerGtmEvent(CHECK_FRESH_DATA, {
+          triggerGtmEvent(gtmEvents.checkFreshData, {
             method: 'visibilityChange',
           });
         }
@@ -135,7 +135,7 @@ export function Table() {
           [filterName]: filterValue,
         },
       });
-      triggerGtmEvent(TABLE_CELL_SEARCH, {
+      triggerGtmEvent(gtmEvents.tableCellSearch, {
         filter_name: filterName,
         filter_value: filterValue,
       });

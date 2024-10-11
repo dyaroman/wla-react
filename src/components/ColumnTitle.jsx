@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
+import { gtmEvents } from '../misc/gtm.constants';
 import { SORT_UPDATED } from '../features/table/table.constants';
-import { TABLE_SORT } from '../misc/gtm.constants';
 
 export function ColumnTitle({ column, text = '' }) {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export function ColumnTitle({ column, text = '' }) {
       type: SORT_UPDATED,
       payload: newSort,
     });
-    triggerGtmEvent(TABLE_SORT, {
+    triggerGtmEvent(gtmEvents.tableSort, {
       ...eventInfo,
     });
   }

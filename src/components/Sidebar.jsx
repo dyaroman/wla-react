@@ -13,7 +13,7 @@ import { Counter } from './Counter';
 import { triggerGtmEvent } from '../misc/functions';
 import { useShortcut } from '../hooks/useShortcut';
 import { toggleSidebarOpen } from '../features/app/app.actions';
-import { SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
+import { gtmEvents } from '../misc/gtm.constants';
 
 export function Sidebar() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ export function Sidebar() {
   // toggle sidebar
   useShortcut(['CommandOrControl', '/'], (event) => {
     dispatch(toggleSidebarOpen(!sidebarOpen));
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.shortcut, {
       method: 'sidebar-' + (sidebarOpen ? 'close' : 'open'),
       label: event.ctrlKey ? 'windows' : 'macos',
     });

@@ -15,7 +15,7 @@ import {
 import { WEBSITES_DATA_FILENAME } from '../../misc/misc.constants';
 import { URL_PARAMETERS } from '../../misc/url.constants';
 import { COLUMNS } from '../../misc/columns.constants';
-import { FRESH_DATA_AVAILABLE } from '../../misc/gtm.constants';
+import { gtmEvents } from '../../misc/gtm.constants';
 import {
   deleteQueryParam,
   filterTableData,
@@ -164,7 +164,7 @@ export function checkForUpdates() {
             'New data is available. The page will be reloaded in 5 seconds.',
           ),
         );
-        triggerGtmEvent(FRESH_DATA_AVAILABLE);
+        triggerGtmEvent(gtmEvents.freshDataAvailable);
         setTimeout(() => {
           window.location.reload();
         }, 5_000);

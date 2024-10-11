@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { triggerGtmEvent } from '../misc/functions';
+import { gtmEvents } from '../misc/gtm.constants';
 import { TOGGLE_THEME } from '../features/app/app.constants';
-import { TOGGLE_THEME_GTM_EVENT } from '../misc/gtm.constants';
 
 export function ThemeToggle() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export function ThemeToggle() {
         payload: 'dark',
       });
 
-      triggerGtmEvent(TOGGLE_THEME_GTM_EVENT, {
+      triggerGtmEvent(gtmEvents.toggleTheme, {
         label: 'dark',
         method: 'init',
       });
@@ -29,7 +29,7 @@ export function ThemeToggle() {
         payload: 'light',
       });
 
-      triggerGtmEvent(TOGGLE_THEME_GTM_EVENT, {
+      triggerGtmEvent(gtmEvents.toggleTheme, {
         label: 'light',
         method: 'init',
       });
@@ -58,7 +58,7 @@ export function ThemeToggle() {
       payload: newTheme,
     });
 
-    triggerGtmEvent(TOGGLE_THEME_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.toggleTheme, {
       label: newTheme,
       method: 'media-query',
     });
@@ -71,7 +71,7 @@ export function ThemeToggle() {
       payload: newTheme,
     });
 
-    triggerGtmEvent(TOGGLE_THEME_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.toggleTheme, {
       label: newTheme,
       method: 'toggle',
     });

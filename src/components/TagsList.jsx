@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ThreeStateCheckbox } from './ThreeStateCheckbox';
 import { triggerGtmEvent } from '../misc/functions';
+import { gtmEvents } from '../misc/gtm.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
-import { ADD_TAG, REMOVE_TAG } from '../misc/gtm.constants';
 import { CHECKBOX_STATES } from '../misc/misc.constants';
 
 export function TagsList({ items }) {
@@ -25,14 +25,14 @@ export function TagsList({ items }) {
 
     switch (newState) {
       case CHECKBOX_STATES.ignore:
-        triggerGtmEvent(REMOVE_TAG, {
+        triggerGtmEvent(gtmEvents.removeTag, {
           label: tag,
         });
         updatedTags = updatedTags.filter((item) => !item.includes(tag));
         break;
 
       case CHECKBOX_STATES.include:
-        triggerGtmEvent(ADD_TAG, {
+        triggerGtmEvent(gtmEvents.addTag, {
           label: tag,
           method: newState,
         });
@@ -40,7 +40,7 @@ export function TagsList({ items }) {
         break;
 
       case CHECKBOX_STATES.exclude:
-        triggerGtmEvent(ADD_TAG, {
+        triggerGtmEvent(gtmEvents.addTag, {
           label: tag,
           method: newState,
         });

@@ -8,7 +8,7 @@ import {
 } from '../misc/functions';
 import { clearFilters } from '../features/table/table.actions';
 import { showToast } from '../features/toast/toast.actions';
-import { BTN_GTM_EVENT, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
+import { gtmEvents } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
 export function ResultsControls() {
@@ -25,7 +25,7 @@ export function ResultsControls() {
   useShortcut(['CommandOrControl', 'Shift', 'C'], async (event) => {
     event.preventDefault();
     await onCopyShortcut();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.shortcut, {
       method: 'copy-websites',
     });
     dispatch(showToast('websites list copied'));
@@ -35,7 +35,7 @@ export function ResultsControls() {
   useShortcut(['Shift', 'Alt', 'C'], async (event) => {
     event.preventDefault();
     await onCopyWebsitesUrlsClick();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.shortcut, {
       method: 'copy-websites-url',
     });
     dispatch(showToast('websites urls copied'));
@@ -45,7 +45,7 @@ export function ResultsControls() {
   useShortcut(['CommandOrControl', 'Shift', 'E'], (event) => {
     event.preventDefault();
     onClearClick();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.shortcut, {
       method: 'clear-all',
       label: event.ctrlKey ? 'windows' : 'macos',
     });
@@ -76,7 +76,7 @@ export function ResultsControls() {
       .join('\n');
     await handleClipboardCopy(websitesUrls);
 
-    triggerGtmEvent(BTN_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.btn, {
       method: 'copy-websites-urls',
     });
   }
@@ -84,7 +84,7 @@ export function ResultsControls() {
   function onClearClick() {
     dispatch(clearFilters());
 
-    triggerGtmEvent(BTN_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.btn, {
       method: 'clear-all',
     });
   }
@@ -95,7 +95,7 @@ export function ResultsControls() {
       .join('\n');
     await handleClipboardCopy(formattedWebsitesList);
 
-    triggerGtmEvent(BTN_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.btn, {
       method: 'copy-websites',
     });
   }

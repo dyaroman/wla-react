@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useShortcut } from '../hooks/useShortcut';
 import { triggerGtmEvent } from '../misc/functions';
+import { gtmEvents } from '../misc/gtm.constants';
 import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
-import { OPEN_INFO_MODAL, SHORTCUT_GTM_EVENT } from '../misc/gtm.constants';
 
 export function InfoModalBtn() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export function InfoModalBtn() {
     if (isOpen) return;
     event.preventDefault();
     onOpenModalClick();
-    triggerGtmEvent(SHORTCUT_GTM_EVENT, {
+    triggerGtmEvent(gtmEvents.shortcut, {
       method: 'open-info-modal',
     });
   });
@@ -24,7 +24,7 @@ export function InfoModalBtn() {
       type: TOGGLE_INFO_MODAL,
       payload: true,
     });
-    triggerGtmEvent(OPEN_INFO_MODAL);
+    triggerGtmEvent(gtmEvents.openInfoModal);
   }
 
   return (

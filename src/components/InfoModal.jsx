@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
+import { gtmEvents } from '../misc/gtm.constants';
 import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
-import { CLOSE_INFO_MODAL } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
 export function InfoModal() {
@@ -47,7 +47,7 @@ export function InfoModal() {
       type: TOGGLE_INFO_MODAL,
       payload: false,
     });
-    triggerGtmEvent(CLOSE_INFO_MODAL);
+    triggerGtmEvent(gtmEvents.closeInfoModal);
   }
 
   if (!isOpen) return null;
