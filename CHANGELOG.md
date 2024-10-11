@@ -1,3 +1,8 @@
+## v1.12.0 (11.10.2024)
+
+- check for fresh websites data
+  - if it available then show notification and refresh page
+
 ## v1.11.0 (20.08.2024)
 
 - update dependencies
