@@ -67,19 +67,19 @@ export function filterTableData(websites, filters) {
           if (
             // strict equal
             (filters[filter].startsWith('==') &&
-              !Object.keys(website[filter]).some((page) =>
-                search(page, filters[filter]),
+              !Object.keys(website[filter]).some((form) =>
+                search(form, filters[filter]),
               )) ||
             // strict not equal
             (filters[filter].startsWith('!=') &&
-              !Object.keys(website[filter]).every((page) =>
-                search(page, filters[filter]),
+              !Object.keys(website[filter]).every((form) =>
+                search(form, filters[filter]),
               )) ||
             // includes
             (!filters[filter].startsWith('==') &&
               !filters[filter].startsWith('!=') &&
-              !Object.keys(website[filter]).some((page) =>
-                search(page, filters[filter]),
+              !Object.keys(website[filter]).some((form) =>
+                search(form, filters[filter]),
               ))
           ) {
             return false;
@@ -88,13 +88,14 @@ export function filterTableData(websites, filters) {
         }
 
         default: {
-          if (!(website[filter] && search(website[filter], filters[filter]))) {
+          if (!website[filter] || !search(website[filter], filters[filter])) {
             return false;
           }
           break;
         }
       }
     }
+
     return true;
   });
 }
