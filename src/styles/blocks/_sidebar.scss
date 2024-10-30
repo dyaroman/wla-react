@@ -30,7 +30,7 @@
   visibility: hidden;
 
   [data-sidebar='open'] & {
-    height: calc(100svh - variables.$sidebar-height);
+    height: calc(100svh - #{variables.$sidebar-height});
     opacity: 1;
     visibility: visible;
   }

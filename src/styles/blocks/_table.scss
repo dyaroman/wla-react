@@ -6,7 +6,7 @@
   margin: variables.$gap;
 
   @include breakpoints.media-breakpoint-up(lg) {
-    max-height: calc(100vh - variables.$sidebar-height - 1rem);
+    max-height: calc(100vh - #{variables.$sidebar-height} - 1rem);
 
     border: variables.$border-width solid var(--border-color);
     overflow: auto;
