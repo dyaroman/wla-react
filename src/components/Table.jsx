@@ -45,13 +45,6 @@ export function Table() {
   const convertLinks = convertLinksTo && convertLinksTo !== env;
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      dispatch(checkForUpdates());
-      triggerGtmEvent(gtmEvents.checkFreshData, {
-        method: 'setInterval',
-      });
-    }, 10 * 60_000);
-
     document.addEventListener('visibilitychange', visibilityChangeHandler);
 
     const minTimeBeforeRequest = 10 * 60_000;
@@ -74,7 +67,6 @@ export function Table() {
     }
 
     return () => {
-      clearInterval(intervalId);
       document.removeEventListener('visibilitychange', visibilityChangeHandler);
     };
   }, []);
