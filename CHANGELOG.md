@@ -1,3 +1,10 @@
+## v1.13.0 (30.10.2024)
+
+- actualize screenshots
+- update dependencies
+  - migrate to sass@1.80.5
+- remove checking fresh websites data by interval
+
 ## v1.12.0 (11.10.2024)
 
 - check for fresh websites data
