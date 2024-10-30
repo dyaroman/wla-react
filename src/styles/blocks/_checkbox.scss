@@ -1,8 +1,8 @@
+@use 'sass:math';
+
 @use '../misc/functions';
 @use '../misc/mixins';
 @use '../misc/variables';
-
-@use 'sass:math';
 
 .checkbox {
   position: relative;

@@ -1,7 +1,7 @@
+@use 'sass:math';
+
 @use '../misc/breakpoints';
 @use '../misc/variables';
-
-@use 'sass:math';
 
 .tags-list {
   display: flex;
