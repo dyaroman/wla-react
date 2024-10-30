@@ -1,8 +1,11 @@
+@use '../misc/mixins';
+@use '../misc/variables';
+
 .img-preview-modal__content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $gap;
+  gap: variables.$gap;
 }
 
 .img-preview-modal__image {
@@ -10,5 +13,5 @@
   max-height: 100%;
   vertical-align: middle;
 
-  @include focus();
+  @include mixins.focus();
 }

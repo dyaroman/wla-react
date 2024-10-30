@@ -1,5 +1,7 @@
+@use '../misc/variables';
+
 .app {
   display: flex;
   flex-direction: column;
-  padding-top: $sidebar-height;
+  padding-top: variables.$sidebar-height;
 }

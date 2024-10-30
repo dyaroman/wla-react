@@ -1,4 +1,5 @@
-@import './contrast-color';
+@use 'contrast-color';
+@use 'variables';
 
 @mixin hover() {
   @media (hover: hover) {
@@ -15,8 +16,8 @@
     box-shadow: none;
   } @else {
     box-shadow:
-      0 0 0 $border-width var(--focus-inner-color),
-      0 0 0 2 * $border-width var(--focus-outer-color);
+      0 0 0 variables.$border-width var(--focus-inner-color),
+      0 0 0 2 * variables.$border-width var(--focus-outer-color);
   }
 }
 

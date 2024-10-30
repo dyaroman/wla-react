@@ -1,3 +1,7 @@
+@use '../misc/functions';
+@use '../misc/mixins';
+@use '../misc/variables';
+
 @use 'sass:math';
 
 .checkbox {
@@ -5,12 +9,12 @@
 
   display: inline-flex;
   align-items: center;
-  gap: px2rem(3);
+  gap: functions.px2rem(3);
   vertical-align: middle;
 
   transition: 0.3s;
 
-  @include hover() {
+  @include mixins.hover() {
     cursor: pointer;
   }
 
@@ -22,22 +26,22 @@
 }
 
 .checkbox__input {
-  @include visually-hidden();
+  @include mixins.visually-hidden();
 
   &:checked ~ .checkbox__icon::before {
     opacity: 1;
   }
 
   &:focus ~ .checkbox__icon {
-    @include focus-styles();
+    @include mixins.focus-styles();
   }
 
   &:focus:not(:focus-visible) ~ .checkbox__icon {
-    @include focus-styles($revert: true);
+    @include mixins.focus-styles($revert: true);
   }
 
   &:focus-visible ~ .checkbox__icon {
-    @include focus-styles();
+    @include mixins.focus-styles();
   }
 }
 
@@ -49,7 +53,7 @@
   height: 20px;
   flex-shrink: 0;
 
-  border: $border-width solid var(--body-color);
+  border: variables.$border-width solid var(--body-color);
   background-color: var(--body-bg);
 
   &::before {
@@ -71,5 +75,5 @@
 }
 
 .checkbox__label {
-  font-size: px2rem(16);
+  font-size: functions.px2rem(16);
 }

@@ -1,3 +1,6 @@
+@use '../misc/breakpoints';
+@use '../misc/variables';
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -11,9 +14,9 @@
 .sidebar__top {
   display: flex;
   justify-content: space-between;
-  padding: $gap;
+  padding: variables.$gap;
 
-  border-bottom: $border-width solid var(--body-color);
+  border-bottom: variables.$border-width solid var(--body-color);
 }
 
 .sidebar__bottom {
@@ -27,22 +30,22 @@
   visibility: hidden;
 
   [data-sidebar='open'] & {
-    height: calc(100svh - $sidebar-height);
+    height: calc(100svh - variables.$sidebar-height);
     opacity: 1;
     visibility: visible;
   }
 }
 
 .sidebar__bottom-content {
-  padding: 0 $gap $gap;
+  padding: 0 variables.$gap variables.$gap;
 }
 
 .sidebar__panels {
   display: flex;
   flex-direction: column;
-  gap: $gap;
+  gap: variables.$gap;
 
-  @include media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(lg) {
     display: grid;
     grid-template-columns: 1fr 290px;
   }

@@ -1,3 +1,5 @@
+@use '../misc/variables';
+
 .tags {
-  margin-top: $gap;
+  margin-top: variables.$gap;
 }

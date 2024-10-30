@@ -1,9 +1,13 @@
+@use '../misc/breakpoints';
+@use '../misc/mixins';
+@use '../misc/variables';
+
 .images {
   display: flex;
   flex-direction: column;
-  gap: $gap;
+  gap: variables.$gap;
 
-  @include media-breakpoint-up(md) {
+  @include breakpoints.media-breakpoint-up(md) {
     flex-direction: row;
   }
 }
@@ -12,7 +16,7 @@
   height: 100px;
   object-fit: contain;
 
-  @include hover() {
+  @include mixins.hover() {
     cursor: pointer;
   }
 }

@@ -1,9 +1,12 @@
+@use '../misc/breakpoints';
+@use '../misc/variables';
+
 @use 'sass:math';
 
 .tags-list {
   display: flex;
   flex-wrap: wrap;
-  gap: math.div($gap, 2) $gap;
+  gap: math.div(variables.$gap, 2) variables.$gap;
   margin: 0;
   padding: 0;
 
@@ -11,26 +14,26 @@
 }
 
 .sidebar .tags-list {
-  margin-top: $gap;
+  margin-top: variables.$gap;
 
   display: block;
 
-  @include media-breakpoint-up(md) {
+  @include breakpoints.media-breakpoint-up(md) {
     column-count: 2;
   }
 
-  @include media-breakpoint-up(xl) {
+  @include breakpoints.media-breakpoint-up(xl) {
     column-count: 3;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include breakpoints.media-breakpoint-up(xxl) {
     column-count: 4;
   }
 }
 
 .sidebar .tags-list li {
-  margin-top: math.div($gap, 2);
-  margin-bottom: math.div($gap, 2);
+  margin-top: math.div(variables.$gap, 2);
+  margin-bottom: math.div(variables.$gap, 2);
 
   &:first-child {
     margin-top: 0;

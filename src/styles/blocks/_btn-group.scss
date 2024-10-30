@@ -1,9 +1,12 @@
+@use '../misc/breakpoints';
+@use '../misc/variables';
+
 .btn-group {
   display: flex;
   flex-direction: column;
-  gap: $gap;
+  gap: variables.$gap;
 
-  @include media-breakpoint-up(sm) {
+  @include breakpoints.media-breakpoint-up(sm) {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;

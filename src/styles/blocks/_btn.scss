@@ -1,9 +1,13 @@
+@use '../misc/functions';
+@use '../misc/mixins';
+@use '../misc/variables';
+
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: $gap;
-  padding: px2rem(12) px2rem(22);
+  gap: variables.$gap;
+  padding: functions.px2rem(12) functions.px2rem(22);
   min-width: 220px;
 
   font-size: inherit;
@@ -17,7 +21,7 @@
     background-color 0.15s,
     border-color 0.15s;
 
-  @include hover() {
+  @include mixins.hover() {
     color: var(--btn-text-color--hover);
 
     background-color: var(--btn-bg-color--hover);
@@ -26,15 +30,15 @@
   }
 
   &--danger {
-    --btn-text-color: #{$danger};
-    --btn-border-color: #{$danger};
+    --btn-text-color: #{variables.$danger};
+    --btn-border-color: #{variables.$danger};
 
     --btn-bg-color--hover: #bb2d3b;
     --btn-border-color--hover: #b02a37;
   }
 
   &--icon {
-    padding-top: px2rem(5);
-    padding-bottom: px2rem(5);
+    padding-top: functions.px2rem(5);
+    padding-bottom: functions.px2rem(5);
   }
 }

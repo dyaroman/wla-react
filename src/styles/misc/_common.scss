@@ -1,4 +1,7 @@
-@include focus();
+@use 'mixins';
+@use 'variables';
+
+@include mixins.focus();
 
 body {
   margin: 0;
@@ -23,13 +26,13 @@ body {
 a {
   color: var(--link-color);
 
-  @include hover() {
+  @include mixins.hover() {
     text-decoration: none;
   }
 }
 
 h4 {
-  margin: $gap 0;
+  margin: variables.$gap 0;
 }
 
 code {
@@ -38,12 +41,12 @@ code {
   color: var(--body-bg);
   white-space: nowrap;
 
-  border-radius: $border-width;
+  border-radius: variables.$border-width;
   background-color: var(--body-color);
 }
 
 .container {
-  padding: 0 $gap;
+  padding: 0 variables.$gap;
   min-height: 100vh;
 }
 
@@ -53,20 +56,20 @@ code {
 
 .filter-title__text {
   display: inline-block;
-  margin-bottom: $gap;
+  margin-bottom: variables.$gap;
 }
 
 .input {
   width: 100%;
   height: 40px;
-  padding: 0 $gap;
+  padding: 0 variables.$gap;
 
   font-family: inherit;
   font-size: inherit;
   color: inherit;
 
   border-radius: 0;
-  border: $border-width solid var(--border-color);
+  border: variables.$border-width solid var(--border-color);
   background-color: var(--body-bg);
 
   &--filled {
@@ -79,15 +82,15 @@ code {
 }
 
 dialog {
-  padding: $gap;
+  padding: variables.$gap;
 }
 
 summary {
-  @include hover() {
+  @include mixins.hover() {
     cursor: pointer;
   }
 }
 
 .mt {
-  margin-top: $gap;
+  margin-top: variables.$gap;
 }

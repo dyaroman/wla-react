@@ -1,3 +1,7 @@
+@use '../misc/functions';
+@use '../misc/mixins';
+@use '../misc/variables';
+
 @use 'sass:math';
 
 .ts-checkbox {
@@ -5,12 +9,12 @@
 
   display: inline-flex;
   align-items: center;
-  gap: px2rem(3);
+  gap: functions.px2rem(3);
   vertical-align: middle;
 
   transition: 0.3s;
 
-  @include hover() {
+  @include mixins.hover() {
     cursor: pointer;
   }
 
@@ -24,45 +28,45 @@
 .ts-checkbox.ts-checkbox--include {
   &,
   .ts-checkbox__icon {
-    border-color: $success;
+    border-color: variables.$success;
   }
   .ts-checkbox__icon::before,
   .ts-checkbox__icon::after {
-    background-color: $success;
+    background-color: variables.$success;
     opacity: 1;
   }
   .ts-checkbox__label {
-    color: $success;
+    color: variables.$success;
   }
 }
 
 .ts-checkbox.ts-checkbox--exclude {
   &,
   .ts-checkbox__icon {
-    border-color: $danger;
+    border-color: variables.$danger;
   }
   .ts-checkbox__icon::after {
-    background-color: $danger;
+    background-color: variables.$danger;
     opacity: 1;
   }
   .ts-checkbox__label {
-    color: $danger;
+    color: variables.$danger;
   }
 }
 
 .ts-checkbox__input {
-  @include visually-hidden();
+  @include mixins.visually-hidden();
 
   &:focus ~ .ts-checkbox__icon {
-    @include focus-styles();
+    @include mixins.focus-styles();
   }
 
   &:focus:not(:focus-visible) ~ .ts-checkbox__icon {
-    @include focus-styles($revert: true);
+    @include mixins.focus-styles($revert: true);
   }
 
   &:focus-visible ~ .ts-checkbox__icon {
-    @include focus-styles();
+    @include mixins.focus-styles();
   }
 }
 
@@ -74,7 +78,7 @@
   height: 20px;
   flex-shrink: 0;
 
-  border: $border-width solid var(--body-color);
+  border: variables.$border-width solid var(--body-color);
   background-color: var(--body-bg);
 
   &::before,
@@ -94,22 +98,22 @@
   }
 
   &::before {
-    width: $border-width;
+    width: variables.$border-width;
     height: 70%;
   }
 
   &::after {
     width: 70%;
-    height: $border-width;
+    height: variables.$border-width;
   }
 }
 
 .ts-checkbox__label {
-  font-size: px2rem(16);
+  font-size: functions.px2rem(16);
 }
 
 .table .tags-list .ts-checkbox {
-  padding: px2rem(3);
+  padding: functions.px2rem(3);
 
-  border: $border-width solid var(--body-color);
+  border: variables.$border-width solid var(--body-color);
 }

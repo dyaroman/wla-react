@@ -1,18 +1,21 @@
+@use '../misc/breakpoints';
+@use '../misc/variables';
+
 .filters__content {
   display: grid;
-  gap: $gap;
+  gap: variables.$gap;
 
-  margin-top: $gap;
+  margin-top: variables.$gap;
 
-  @include media-breakpoint-up(sm) {
+  @include breakpoints.media-breakpoint-up(sm) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(lg) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include breakpoints.media-breakpoint-up(xxl) {
     grid-template-columns: repeat(5, 1fr);
   }
 }

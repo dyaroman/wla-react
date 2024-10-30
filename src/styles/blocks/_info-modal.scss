@@ -1,7 +1,9 @@
+@use '../misc/variables';
+
 .info-modal {
   color: var(--body-color);
 
-  border: $border-width solid var(--border-color);
+  border: variables.$border-width solid var(--border-color);
   background-color: var(--body-bg);
 
   &[open] {
@@ -14,7 +16,7 @@
   }
 
   li + li {
-    margin-top: $gap;
+    margin-top: variables.$gap;
   }
 }
 

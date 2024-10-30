@@ -1,3 +1,6 @@
+@use '../misc/mixins';
+@use '../misc/variables';
+
 .burger {
   display: flex;
   flex-direction: column;
@@ -9,14 +12,14 @@
   background: none;
   border: none;
 
-  @include hover() {
+  @include mixins.hover() {
     cursor: pointer;
   }
 
   span {
     display: block;
     width: 100%;
-    height: $border-width;
+    height: variables.$border-width;
 
     transition: 0.3s;
     background-color: var(--body-color);

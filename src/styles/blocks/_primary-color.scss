@@ -1,3 +1,5 @@
+@use '../misc/variables';
+
 @use 'sass:math';
 
 .primary-color {
@@ -6,6 +8,6 @@
 
 .primary-color__inner {
   display: flex;
-  gap: math.div($gap, 2);
+  gap: math.div(variables.$gap, 2);
   align-items: center;
 }

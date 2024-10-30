@@ -1,18 +1,23 @@
+@use '../misc/variables';
+
 .toast {
   position: fixed;
-  top: calc($sidebar-height + 2 * $gap + 34px); // 34px table row height
-  right: $gap;
+  top: calc(
+    variables.$sidebar-height + 2 * variables.$gap + 34px
+  ); // 34px table row height
+  right: variables.$gap;
   z-index: 11;
 
-  padding: $gap;
+  padding: variables.$gap;
   max-width: 16rem;
   min-height: 36px;
 
   color: var(--body-color);
 
-  border: $border-width solid var(--body-color);
+  border: variables.$border-width solid var(--body-color);
   background-color: var(--body-bg);
-  box-shadow: 2 * $border-width 2 * $border-width var(--body-color);
+  box-shadow: 2 * variables.$border-width 2 * variables.$border-width
+    var(--body-color);
   opacity: 1;
   transform: translateX(100%);
   transition: 0.3s ease;

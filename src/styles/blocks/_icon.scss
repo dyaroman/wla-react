@@ -1,3 +1,6 @@
+@use '../misc/mixins';
+@use '../misc/variables';
+
 .icon {
   display: flex;
   align-items: center;
@@ -7,14 +10,14 @@
   font-size: 1rem;
   color: var(--body-color);
 
-  border: $border-width solid var(--body-color);
+  border: variables.$border-width solid var(--body-color);
   border-radius: 50%;
   background-color: var(--body-bg);
   transition:
     background-color 0.3s,
     color 0.3s;
 
-  @include hover() {
+  @include mixins.hover() {
     cursor: pointer;
   }
 
