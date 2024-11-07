@@ -221,6 +221,7 @@ export function Table() {
                         #
                       </th>
                     );
+
                   case COLUMNS.checkbox:
                     return (
                       <th key={column} data-qa={column} className="narrow" />
@@ -257,6 +258,17 @@ export function Table() {
                             key={column}
                           >
                             {++index}
+                          </td>
+                        );
+
+                      case COLUMNS.checkbox:
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            <Checkbox name={''} label={''} />
                           </td>
                         );
 
@@ -496,17 +508,6 @@ export function Table() {
                             ) : (
                               NO_DATA
                             )}
-                          </td>
-                        );
-
-                      case COLUMNS.checkbox:
-                        return (
-                          <td
-                            data-title={fromCamelCaseToWords(column)}
-                            data-qa={column}
-                            key={column}
-                          >
-                            <Checkbox name={''} label={''} />
                           </td>
                         );
 
