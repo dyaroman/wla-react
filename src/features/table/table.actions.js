@@ -30,15 +30,24 @@ import { showToast } from '../toast/toast.actions';
 
 export function getWebsitesData() {
   return async function (dispatch, getState) {
+    const useDB = getQueryParamValue('ds') === 'db';
+    const wlaBackendUrl = `${process.env.REACT_APP_WLA_BACKEND_URL}/full?env=${process.env.REACT_APP_ENV}`;
     const dataFileURL = `${process.env.REACT_APP_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
+    const url = useDB ? wlaBackendUrl : dataFileURL;
     try {
-      const response = await fetch(dataFileURL);
+      const response = await fetch(url);
       switch (response.status) {
         case 200: {
           const ETag = response.headers.get('ETag');
           const websitesData = await response.json();
           const columns = websitesData['columns'];
           const websites = websitesData['websites'];
+
+          if (useDB) {
+            websitesData['env'] = process.env.REACT_APP_ENV;
+            websitesData['project'] = 'websites';
+            websitesData['repoPath'] = 'websites/_git/websites';
+          }
 
           // collect all filters
           const filters = {
@@ -151,10 +160,13 @@ export function getWebsitesData() {
 
 export function checkForUpdates() {
   return async function (dispatch, getState) {
-    const currentETag = getState().table.websitesDataETag;
+    const useDB = getQueryParamValue('ds') === 'db';
+    const wlaBackendUrl = `${process.env.REACT_APP_WLA_BACKEND_URL}/full?env=${process.env.REACT_APP_ENV}`;
     const dataFileURL = `${process.env.REACT_APP_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
+    const url = useDB ? wlaBackendUrl : dataFileURL;
+    const currentETag = getState().table.websitesDataETag;
     try {
-      const response = await fetch(dataFileURL, {
+      const response = await fetch(url, {
         method: 'HEAD',
       });
       const newETag = response.headers.get('ETag');

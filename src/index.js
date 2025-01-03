@@ -7,6 +7,7 @@ import { App } from './App';
 import { store } from './store/store';
 import packageJson from '../package.json';
 
+// todo move https redirect to web.config
 // http to https redirect
 if (process.env.NODE_ENV !== 'development' && location.protocol !== 'https:') {
   location.replace(

@@ -4,13 +4,7 @@ import { useEffect } from 'react';
 export function TableInfo() {
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
-  const {
-    commit = '',
-    env = '',
-    project = '',
-    repoPath = '',
-    timestamp = '',
-  } = websitesData;
+  const { commit, env, project, repoPath, timestamp } = websitesData;
 
   useEffect(() => {
     let title = '';
