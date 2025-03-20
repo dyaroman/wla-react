@@ -18,4 +18,4 @@ root.render(
 );
 
 console.log(`app version: ${packageJson.version}`);
-console.log(`app commit: ${process.env.REACT_APP_VERSION.substring(0, 8)}`);
+console.log(`app commit: ${import.meta.env.VITE_COMMIT_HASH.substring(0, 8)}`);

@@ -31,8 +31,8 @@ import { showToast } from '../toast/toast.actions';
 export function getWebsitesData() {
   return async function (dispatch, getState) {
     const useDB = getQueryParamValue('ds') === 'db';
-    const wlaBackendUrl = `${process.env.REACT_APP_WLA_BACKEND_URL}/full?env=${process.env.REACT_APP_ENV}`;
-    const dataFileURL = `${process.env.REACT_APP_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
+    const wlaBackendUrl = `${import.meta.env.VITE_WLA_BACKEND_URL}/full?env=${import.meta.env.VITE_ENV}`;
+    const dataFileURL = `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
     const url = useDB ? wlaBackendUrl : dataFileURL;
     try {
       const response = await fetch(url);
@@ -44,7 +44,7 @@ export function getWebsitesData() {
           const websites = websitesData['websites'];
 
           if (useDB) {
-            websitesData['env'] = process.env.REACT_APP_ENV;
+            websitesData['env'] = import.meta.env.VITE_ENV;
             websitesData['project'] = 'websites';
             websitesData['repoPath'] = 'websites/_git/websites';
           }
@@ -161,8 +161,8 @@ export function getWebsitesData() {
 export function checkForUpdates() {
   return async function (dispatch, getState) {
     const useDB = getQueryParamValue('ds') === 'db';
-    const wlaBackendUrl = `${process.env.REACT_APP_WLA_BACKEND_URL}/full?env=${process.env.REACT_APP_ENV}`;
-    const dataFileURL = `${process.env.REACT_APP_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
+    const wlaBackendUrl = `${import.meta.env.VITE_WLA_BACKEND_URL}/full?env=${import.meta.env.VITE_ENV}`;
+    const dataFileURL = `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
     const url = useDB ? wlaBackendUrl : dataFileURL;
     const currentETag = getState().table.websitesDataETag;
     try {

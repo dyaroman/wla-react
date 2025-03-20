@@ -17,7 +17,7 @@ export function TableInfo() {
     if (env) {
       title += `[${env}]`;
     }
-    title += `: ${process.env.REACT_APP_PAGE_TITLE}`;
+    title += `: ${import.meta.env.VITE_PAGE_TITLE}`;
     document.title = title;
   }, [project, env, preparedData]);
 
