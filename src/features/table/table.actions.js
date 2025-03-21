@@ -28,12 +28,23 @@ import {
 import { toggleSidebarOpen } from '../app/app.actions';
 import { showToast } from '../toast/toast.actions';
 
+function getEnvironmentConfig() {
+  const useDB = getQueryParamValue('ds') === 'db';
+  const hostEnv =
+    window.location.hostname.split('.')[0] === 'prod' ? 'prod' : 'dev';
+  const wlaBackendUrl = `${import.meta.env.VITE_WLA_BACKEND_URL}/full?env=${hostEnv}`;
+  const dataFileURL = `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
+
+  return {
+    useDB,
+    hostEnv,
+    url: useDB ? wlaBackendUrl : dataFileURL,
+  };
+}
+
 export function getWebsitesData() {
   return async function (dispatch, getState) {
-    const useDB = getQueryParamValue('ds') === 'db';
-    const wlaBackendUrl = `${import.meta.env.VITE_WLA_BACKEND_URL}/full?env=${import.meta.env.VITE_ENV}`;
-    const dataFileURL = `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
-    const url = useDB ? wlaBackendUrl : dataFileURL;
+    const { useDB, hostEnv, url } = getEnvironmentConfig();
     try {
       const response = await fetch(url);
       switch (response.status) {
@@ -44,7 +55,7 @@ export function getWebsitesData() {
           const websites = websitesData['websites'];
 
           if (useDB) {
-            websitesData['env'] = import.meta.env.VITE_ENV;
+            websitesData['env'] = hostEnv;
             websitesData['repoPath'] = 'websites/_git/websites';
           }
 
@@ -159,10 +170,7 @@ export function getWebsitesData() {
 
 export function checkForUpdates() {
   return async function (dispatch, getState) {
-    const useDB = getQueryParamValue('ds') === 'db';
-    const wlaBackendUrl = `${import.meta.env.VITE_WLA_BACKEND_URL}/full?env=${import.meta.env.VITE_ENV}`;
-    const dataFileURL = `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
-    const url = useDB ? wlaBackendUrl : dataFileURL;
+    const { url } = getEnvironmentConfig();
     const currentETag = getState().table.websitesDataETag;
     try {
       const response = await fetch(url, {
