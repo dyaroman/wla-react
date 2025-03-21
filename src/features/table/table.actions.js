@@ -29,17 +29,21 @@ import { toggleSidebarOpen } from '../app/app.actions';
 import { showToast } from '../toast/toast.actions';
 
 function getEnvironmentConfig() {
-  const useDB = getQueryParamValue('ds') === 'db';
-  const hostEnv =
-    window.location.hostname.split('.')[0] === 'prod' ? 'prod' : 'dev';
-  const wlaBackendUrl = `${import.meta.env.VITE_WLA_BACKEND_URL}/full?env=${hostEnv}`;
-  const dataFileURL = `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`;
-
-  return {
-    useDB,
-    hostEnv,
-    url: useDB ? wlaBackendUrl : dataFileURL,
+  // for feature env use file instead of db by default
+  const config = {
+    useDB: false,
+    url: `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`,
   };
+  const hostEnv = window.location.hostname.split('.')[0];
+  if (
+    ['localhost', 'rc', 'dev', 'prod'].includes(hostEnv) &&
+    getQueryParamValue('ds') !== 'file'
+  ) {
+    config.useDB = true;
+    config.hostEnv = hostEnv === 'prod' ? 'prod' : 'dev';
+    config.url = `${import.meta.env.VITE_WLA_BACKEND_URL}/full?env=${config.hostEnv}`;
+  }
+  return config;
 }
 
 export function getWebsitesData() {
