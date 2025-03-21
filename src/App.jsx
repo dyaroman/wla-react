@@ -28,20 +28,6 @@ export function App() {
     }
   }, [websitesDataLoaded]);
 
-  if (window.location.host.includes('websites')) {
-    return (
-      <section data-qa="smsPubsites">
-        <div className="container">
-          <h1>We temporarily stop supporting Websites</h1>
-          <p>
-            If you need more detail about it, please contact me in slack:
-            @dyaroman
-          </p>
-        </div>
-      </section>
-    );
-  }
-
   if (requestError) {
     return (
       <section data-qa="loadError">
