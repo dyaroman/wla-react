@@ -1,3 +1,7 @@
+## v1.14.1 (21.03.2025)
+
+- define env by host
+
 ## v1.14.0 (21.03.2025)
 
 - add opportunity to load websites data from backend
