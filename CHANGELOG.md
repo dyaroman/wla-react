@@ -1,3 +1,15 @@
+## v1.14.0 (21.03.2025)
+
+- add opportunity to load websites data from backend
+  - in separate mode for now
+- move http to https redirect from js to web.config
+- update pipeline's ubuntu image to v24.04
+- update pipeline's node to v22.14
+- update dependencies
+- replace deprecated react-scripts with vite
+- upgrade react to v19
+- remove support for sms websites
+
 ## v1.13.0 (30.10.2024)
 
 - actualize screenshots
