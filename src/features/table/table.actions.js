@@ -45,7 +45,6 @@ export function getWebsitesData() {
 
           if (useDB) {
             websitesData['env'] = import.meta.env.VITE_ENV;
-            websitesData['project'] = 'websites';
             websitesData['repoPath'] = 'websites/_git/websites';
           }
 

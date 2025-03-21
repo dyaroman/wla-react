@@ -4,22 +4,19 @@ import { useEffect } from 'react';
 export function TableInfo() {
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
-  const { commit, env, project, repoPath, timestamp } = websitesData;
+  const { commit, env, repoPath, timestamp } = websitesData;
 
   useEffect(() => {
     let title = '';
     if (preparedData) {
       title += `[${preparedData.length}]`;
     }
-    if (project) {
-      title += `[${project}]`;
-    }
     if (env) {
       title += `[${env}]`;
     }
     title += `: ${import.meta.env.VITE_PAGE_TITLE}`;
     document.title = title;
-  }, [project, env, preparedData]);
+  }, [env, preparedData]);
 
   return (
     <section className="info">

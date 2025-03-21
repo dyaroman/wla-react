@@ -167,26 +167,14 @@ export function fromCamelCaseToWords(str) {
     .replace(/([A-Z]+) /g, '$1');
 }
 
-export function convertUrlToEnv(website = '', env = '', project = '') {
+export function convertUrlToEnv(website = '', env = '') {
   const lowerWebsite = website.replaceAll('.', '_').toLowerCase();
 
-  switch (project) {
-    case 'websites':
-      switch (env) {
-        case 'dev':
-          return `${lowerWebsite}.example.com`;
-        case 'prod':
-          return website.toLowerCase();
-      }
-      break;
-    case 'websites':
-      switch (env) {
-        case 'demo':
-          return `${lowerWebsite}.dev.example.com`;
-        case 'prod':
-          return website.toLowerCase();
-      }
-      break;
+  switch (env) {
+    case 'dev':
+      return `${lowerWebsite}.example.com`;
+    case 'prod':
+      return website.toLowerCase();
   }
 
   return null;

@@ -16,7 +16,6 @@ export function ResultsControls() {
   const websitesData = useSelector((state) => state['table'].websitesData);
   const preparedData = useSelector((state) => state['table'].preparedData);
   const env = websitesData['env'];
-  const project = websitesData['project'];
   const convertLinksTo =
     getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
   const convertLinks = convertLinksTo && convertLinksTo !== env;
@@ -64,11 +63,7 @@ export function ResultsControls() {
       .map((website) => {
         const host =
           (convertLinks &&
-            convertUrlToEnv(
-              website[COLUMNS.website],
-              convertLinksTo,
-              project,
-            )) ||
+            convertUrlToEnv(website[COLUMNS.website], convertLinksTo)) ||
           website[COLUMNS.host];
 
         return `https://${host}/`;
