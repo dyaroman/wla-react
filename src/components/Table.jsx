@@ -48,6 +48,7 @@ export function Table() {
 
     const minTimeBeforeRequest = 10 * 60_000;
     let inactivityTime = 0;
+
     function visibilityChangeHandler() {
       if (document.hidden) {
         inactivityTime = Date.now();
@@ -283,8 +284,8 @@ export function Table() {
                               rel="noreferrer"
                             >
                               <Highlight
-                                text={websiteData[COLUMNS.website]}
-                                highlight={filters[COLUMNS.website]}
+                                text={websiteData[column]}
+                                highlight={filters[column]}
                               />
                             </a>
                           </td>
