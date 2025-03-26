@@ -291,6 +291,36 @@ export function Table() {
                           </td>
                         );
 
+                      case COLUMNS.ocsDefaultRedirect:
+                      case COLUMNS.rootRedirect:
+                        return (
+                          <td
+                            data-title={fromCamelCaseToWords(column)}
+                            data-qa={column}
+                            key={column}
+                          >
+                            {websiteData[column] === NO_DATA ? (
+                              <Highlight
+                                text={websiteData[column]}
+                                highlight={filters[column]}
+                              />
+                            ) : (
+                              <a
+                                href={websiteData[column]}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <Highlight
+                                  text={websiteData[column]
+                                    .replace('https://', '')
+                                    .replace('/', '')}
+                                  highlight={filters[column]}
+                                />
+                              </a>
+                            )}
+                          </td>
+                        );
+
                       case COLUMNS.ogImage: {
                         const images = websiteData[column].map(
                           (path) => `https://${host}/${path}`,

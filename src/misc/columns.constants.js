@@ -11,8 +11,10 @@ export const COLUMNS = {
   mainFormEsTheme: 'mainFormEsTheme',
   mainFormPrimaryColor: 'mainFormPrimaryColor',
   mainFormTheme: 'mainFormTheme',
+  ocsDefaultRedirect: 'ocsDefaultRedirect',
   ogImage: 'ogImage',
   pages: 'pages',
+  rootRedirect: 'rootRedirect',
   tags: 'tags',
   website: 'website',
 };
