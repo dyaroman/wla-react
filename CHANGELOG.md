@@ -1,3 +1,11 @@
+## v1.15.0 (27.03.2025)
+
+- load websites data from backend by default
+- disabled form column search
+- add columns:
+  - root redirect
+  - ocs default redirect
+
 ## v1.14.1 (21.03.2025)
 
 - define env by host
