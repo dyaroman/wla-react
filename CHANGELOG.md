@@ -1,3 +1,7 @@
+## v1.16.0 (30.03.2025)
+
+- update backend's endpoints
+
 ## v1.15.0 (27.03.2025)
 
 - load websites data from backend by default
