@@ -41,7 +41,7 @@ function getEnvironmentConfig() {
   ) {
     config.useDB = true;
     config.hostEnv = hostEnv === 'prod' ? 'prod' : 'dev';
-    config.url = `${import.meta.env.VITE_WLA_BACKEND_URL}/full?env=${config.hostEnv}`;
+    config.url = `${import.meta.env.VITE_WLA_BACKEND_URL}/combined?env=${config.hostEnv}`;
   }
   return config;
 }
