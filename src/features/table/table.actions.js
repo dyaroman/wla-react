@@ -29,28 +29,53 @@ import { toggleSidebarOpen } from '../app/app.actions';
 import { showToast } from '../toast/toast.actions';
 
 function getEnvironmentConfig() {
-  // for feature env use file instead of db by default
-  const config = {
-    useDB: false,
-    url: `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`,
-  };
-  const hostEnv = window.location.hostname.split('.')[0];
+  let hostEnv = null;
   if (
-    ['localhost', 'rc', 'dev', 'prod'].includes(hostEnv) &&
-    getQueryParamValue('ds') !== 'file'
+    ['localhost', 'rc', 'dev', 'prod'].includes(
+      window.location.hostname.split('.')[0],
+    )
   ) {
-    config.useDB = true;
-    config.hostEnv = hostEnv === 'prod' ? 'prod' : 'dev';
-    config.url = `${import.meta.env.VITE_WLA_BACKEND_URL}/combined?env=${config.hostEnv}`;
+    hostEnv = hostEnv === 'prod' ? 'prod' : 'dev';
   }
-  return config;
+  return { hostEnv };
+}
+
+async function fetchWebsitesData(method = 'GET') {
+  function _fetchFromFile() {
+    return fetch(
+      `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`,
+      { method },
+    );
+  }
+
+  function _fetchFromDB() {
+    return fetch(
+      `${import.meta.env.VITE_WLA_BACKEND_URL}/combined?env=${hostEnv}`,
+      { method },
+    );
+  }
+
+  const { hostEnv } = getEnvironmentConfig();
+  if (hostEnv && getQueryParamValue('ds') !== 'file') {
+    try {
+      return await _fetchFromDB();
+    } catch (error) {
+      console.log(
+        `Falling back to "${WEBSITES_DATA_FILENAME}", failed to load from DB:`,
+        error.message,
+      );
+      return await _fetchFromFile();
+    }
+  } else {
+    return await _fetchFromFile();
+  }
 }
 
 export function getWebsitesData() {
   return async function (dispatch, getState) {
-    const { useDB, hostEnv, url } = getEnvironmentConfig();
+    const { hostEnv } = getEnvironmentConfig();
     try {
-      const response = await fetch(url);
+      const response = await fetchWebsitesData();
       switch (response.status) {
         case 200: {
           const ETag = response.headers.get('ETag');
@@ -58,9 +83,8 @@ export function getWebsitesData() {
           const columns = websitesData['columns'];
           const websites = websitesData['websites'];
 
-          if (useDB) {
+          if (!websitesData['env']) {
             websitesData['env'] = hostEnv;
-            websitesData['repoPath'] = 'websites/_git/websites';
           }
 
           // collect all filters
@@ -174,12 +198,9 @@ export function getWebsitesData() {
 
 export function checkForUpdates() {
   return async function (dispatch, getState) {
-    const { url } = getEnvironmentConfig();
     const currentETag = getState().table.websitesDataETag;
     try {
-      const response = await fetch(url, {
-        method: 'HEAD',
-      });
+      const response = await fetchWebsitesData('HEAD');
       const newETag = response.headers.get('ETag');
       if (currentETag && newETag && currentETag !== newETag) {
         dispatch(
