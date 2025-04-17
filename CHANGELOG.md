@@ -1,3 +1,7 @@
+## v1.17.1 (17.04.2025)
+
+- improve error handling in websites data fetching
+
 ## v1.17.0 (17.04.2025)
 
 - refactor websites data fetch with fallback to file
