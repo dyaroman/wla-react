@@ -1,3 +1,9 @@
+## v1.17.0 (17.04.2025)
+
+- refactor websites data fetch with fallback to file
+- show loader while image loading
+- update dependencies
+
 ## v1.16.0 (30.03.2025)
 
 - update backend's endpoints
