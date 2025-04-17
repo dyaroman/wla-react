@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { triggerGtmEvent } from '../misc/functions';
+import {
+  fromCamelCaseToWords,
+  getUniqueValues,
+  triggerGtmEvent,
+} from '../misc/functions';
 import { updateShowColumns } from '../features/table/table.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
@@ -9,6 +13,12 @@ export function Filter({ name, placeholder }) {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state['table'].filters);
   const showColumns = useSelector((state) => state['table'].showColumns);
+  const preparedData = useSelector((state) => state['table'].preparedData);
+  const autocompleteList = getUniqueValues(preparedData, name).sort();
+  const autocompleteListName = `${fromCamelCaseToWords(name ?? '')
+    .split(' ')
+    .join('-')
+    .toLowerCase()}-autocomplete-list`;
 
   function onChange(event) {
     if (!showColumns.includes(name)) {
@@ -36,6 +46,7 @@ export function Filter({ name, placeholder }) {
       <input
         type="text"
         name={name}
+        list={autocompleteListName}
         data-qa={name}
         className={'input' + (filters[name].length ? ' input--filled' : '')}
         onChange={onChange}
@@ -43,6 +54,13 @@ export function Filter({ name, placeholder }) {
         placeholder={placeholder}
         value={filters[name]}
       />
+      {autocompleteList.length > 0 && (
+        <datalist id={autocompleteListName}>
+          {autocompleteList.map((item) => (
+            <option key={item} value={item} />
+          ))}
+        </datalist>
+      )}
     </label>
   );
 }

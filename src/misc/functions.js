@@ -171,6 +171,34 @@ export function getUniqueTags(websites) {
   return [...uniqueTags];
 }
 
+export function getUniqueValues(arr, propertyName) {
+  if (!Array.isArray(arr) || arr.length === 0) {
+    return [];
+  }
+
+  if (typeof propertyName !== 'string' || propertyName === '') {
+    console.error('Property name must be a non-empty string.');
+    return [];
+  }
+
+  const uniqueValues = new Set();
+
+  for (const obj of arr) {
+    if (obj && obj.hasOwnProperty(propertyName)) {
+      const propertyValue = obj[propertyName];
+      if (Array.isArray(propertyValue)) {
+        for (const value of propertyValue) {
+          uniqueValues.add(value);
+        }
+      } else {
+        uniqueValues.add(propertyValue);
+      }
+    }
+  }
+
+  return Array.from(uniqueValues);
+}
+
 export function findObjectKeyCaseInsensitive(key, obj) {
   for (const objKey in obj) {
     if (
