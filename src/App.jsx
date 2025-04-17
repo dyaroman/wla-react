@@ -32,8 +32,8 @@ export function App() {
     return (
       <section data-qa="loadError">
         <div className="container">
-          <h1>Error due to load websites data</h1>
-          <p>Status code: {requestError}</p>
+          <h1>Failed to load websites data</h1>
+          <p>{requestError}</p>
         </div>
       </section>
     );

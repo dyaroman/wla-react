@@ -185,13 +185,18 @@ export function getWebsitesData() {
         default: {
           dispatch({
             type: REQUEST_ERROR,
-            payload: response.status,
+            payload: `Status code: ${response.status}`,
           });
           break;
         }
       }
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
+
+      dispatch({
+        type: REQUEST_ERROR,
+        payload: error.message,
+      });
     }
   };
 }
