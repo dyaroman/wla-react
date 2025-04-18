@@ -10,8 +10,8 @@ export default defineConfig({
     sourcemap: true,
   },
   define: {
-    'import.meta.env.VITE_COMMIT_HASH': JSON.stringify(
-      execSync('git rev-parse HEAD').toString().trim(),
+    __APP_COMMIT__: JSON.stringify(
+      execSync('git rev-parse HEAD').toString().trim().slice(0, 8),
     ),
   },
   css: {

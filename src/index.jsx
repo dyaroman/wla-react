@@ -17,5 +17,5 @@ root.render(
   </React.StrictMode>,
 );
 
-console.log(`app version: ${packageJson.version}`);
-console.log(`app commit: ${import.meta.env.VITE_COMMIT_HASH.substring(0, 8)}`);
+console.log('app version:', packageJson.version);
+console.log('app commit:', __APP_COMMIT__);
