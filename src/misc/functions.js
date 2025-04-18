@@ -80,14 +80,11 @@ export function sortTableData(array, column) {
   const noDataItems = [];
   const sortedArray = [...array]
     .filter((item) => {
-      switch (column) {
-        default:
-          if (item[column] === NO_DATA) {
-            noDataItems.push(item);
-            return false;
-          } else {
-            return true;
-          }
+      if (item[column] === NO_DATA) {
+        noDataItems.push(item);
+        return false;
+      } else {
+        return true;
       }
     })
     .sort((a, b) => {
@@ -149,6 +146,7 @@ export function convertUrlToEnv(website = '', env = '') {
   switch (env) {
     case 'dev':
       return `${lowerWebsite}.example.com`;
+
     case 'prod':
       return website.toLowerCase();
   }

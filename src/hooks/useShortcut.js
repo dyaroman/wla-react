@@ -32,10 +32,13 @@ export const useShortcut = (shortcut, callback, node = null) => {
         switch (key) {
           case 'CommandOrControl':
             return event.metaKey || event.ctrlKey;
+
           case 'Shift':
             return event.shiftKey;
+
           case 'Alt':
             return event.altKey;
+
           default:
             if (key.match(/[A-Z]/)) {
               return event.code === `Key${key}`;

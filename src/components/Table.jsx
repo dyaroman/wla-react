@@ -365,9 +365,11 @@ export function Table() {
                           case COLUMNS.mainFormTheme:
                             bgColor = websiteData[COLUMNS.mainFormPrimaryColor];
                             break;
+
                           case COLUMNS.altFormTheme:
                             bgColor = websiteData[COLUMNS.altFormPrimaryColor];
                             break;
+
                           case COLUMNS.mainFormEsTheme:
                             bgColor =
                               websiteData[COLUMNS.mainFormEsPrimaryColor];

@@ -34,16 +34,19 @@ export function tableReducer(state = tableInitialState, action) {
         ...state,
         ...action.payload,
       };
+
     case WEBSITES_DATA_LOADED:
       return {
         ...state,
         websitesDataLoaded: action.payload,
       };
+
     case WEBSITES_DATA_SOURCE:
       return {
         ...state,
         websitesDataSource: action.payload,
       };
+
     case SORT_UPDATED:
       return {
         ...state,
@@ -52,6 +55,7 @@ export function tableReducer(state = tableInitialState, action) {
           ...action.payload,
         },
       };
+
     case FILTERS_UPDATED:
       return {
         ...state,
@@ -60,21 +64,25 @@ export function tableReducer(state = tableInitialState, action) {
           ...action.payload,
         },
       };
+
     case CLEAR_FILTERS:
       return {
         ...state,
         ...action.payload,
       };
+
     case PREPARED_DATA_UPDATED:
       return {
         ...state,
         ...action.payload,
       };
+
     case SHOW_COLUMNS_UPDATED:
       return {
         ...state,
         showColumns: action.payload,
       };
+
     default:
       return state;
   }

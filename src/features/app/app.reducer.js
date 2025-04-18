@@ -29,46 +29,55 @@ export function appReducer(state = appInitialState, action) {
         ...state,
         sidebarOpen: action.payload,
       };
+
     case TOGGLE_FILTERS_OPEN:
       return {
         ...state,
         filtersOpen: action.payload,
       };
+
     case TOGGLE_CUSTOMIZE_COLUMNS_OPEN:
       return {
         ...state,
         customizeColumnsOpen: action.payload,
       };
+
     case TOGGLE_INFO_MODAL:
       return {
         ...state,
         infoModalOpen: action.payload,
       };
+
     case TOGGLE_IMG_PREVIEW_MODAL:
       return {
         ...state,
         imgPreviewUrl: action.payload,
       };
+
     case TOGGLE_THEME:
       return {
         ...state,
         theme: action.payload === 'dark' ? 'dark' : 'light',
       };
+
     case UNAUTHORIZED:
       return {
         ...state,
         unauthorized: action.payload,
       };
+
     case REQUEST_ERROR:
       return {
         ...state,
         requestError: action.payload,
       };
+
     case URL_PARAMS_READ:
       return {
         ...state,
         urlParamsRead: action.payload,
       };
+
     default:
       return state;
   }
