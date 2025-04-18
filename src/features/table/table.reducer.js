@@ -6,6 +6,7 @@ import {
   SHOW_COLUMNS_UPDATED,
   SORT_UPDATED,
   WEBSITES_DATA_LOADED,
+  WEBSITES_DATA_SOURCE,
 } from './table.constants';
 
 const tableInitialState = {
@@ -17,6 +18,7 @@ const tableInitialState = {
   websitesData: null,
   websitesDataETag: null,
   websitesDataLoaded: false,
+  websitesDataSource: '',
   preparedData: [],
   showColumns: [],
   defaultShowColumns: [],
@@ -36,6 +38,11 @@ export function tableReducer(state = tableInitialState, action) {
       return {
         ...state,
         websitesDataLoaded: action.payload,
+      };
+    case WEBSITES_DATA_SOURCE:
+      return {
+        ...state,
+        websitesDataSource: action.payload,
       };
     case SORT_UPDATED:
       return {
