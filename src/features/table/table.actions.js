@@ -31,12 +31,9 @@ import { showToast } from '../toast/toast.actions';
 
 function getEnvironmentConfig() {
   let hostEnv = null;
-  if (
-    ['localhost', 'rc', 'dev', 'prod'].includes(
-      window.location.hostname.split('.')[0],
-    )
-  ) {
-    hostEnv = hostEnv === 'prod' ? 'prod' : 'dev';
+  const subdomain = window.location.hostname.split('.')[0];
+  if (['localhost', 'rc', 'dev', 'prod'].includes(subdomain)) {
+    hostEnv = subdomain === 'prod' ? 'prod' : 'dev';
   }
   return { hostEnv };
 }
