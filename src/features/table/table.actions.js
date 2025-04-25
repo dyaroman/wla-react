@@ -211,7 +211,7 @@ export function checkForUpdates() {
   return async function (dispatch, getState) {
     const currentETag = getState().table.websitesDataETag;
     try {
-      const response = await fetchWebsitesData({ method: 'HEAD' });
+      const response = await fetchWebsitesData({ method: 'HEAD', dispatch });
       const newETag = response.headers.get('ETag');
       if (currentETag && newETag && currentETag !== newETag) {
         dispatch(
