@@ -1,3 +1,7 @@
+## v1.18.1 (25.04.2025)
+
+- fix check for updates function
+
 ## v1.18.0 (25.04.2025)
 
 - add autocomplete to search fields
