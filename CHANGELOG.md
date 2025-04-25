@@ -1,3 +1,11 @@
+## v1.18.0 (25.04.2025)
+
+- add autocomplete to search fields
+- make logo half transparent when using fallback data
+- refactoring logging app's commit hash
+- fix getting env for 'prod.example.com'
+  - dev data was showing instead of prod
+
 ## v1.17.1 (17.04.2025)
 
 - improve error handling in websites data fetching
