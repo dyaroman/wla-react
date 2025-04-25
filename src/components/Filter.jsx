@@ -54,13 +54,16 @@ export function Filter({ name, placeholder }) {
         placeholder={placeholder}
         value={filters[name]}
       />
-      {autocompleteList.length > 0 && (
-        <datalist id={autocompleteListName}>
-          {autocompleteList.map((item) => (
-            <option key={item} value={item} />
-          ))}
-        </datalist>
-      )}
+      {autocompleteList.length > 0 &&
+        !autocompleteList.find(
+          (i) => filters[name].toLowerCase() === String(i).toLowerCase(),
+        ) && (
+          <datalist id={autocompleteListName}>
+            {autocompleteList.map((item) => (
+              <option key={item} value={item} />
+            ))}
+          </datalist>
+        )}
     </label>
   );
 }
