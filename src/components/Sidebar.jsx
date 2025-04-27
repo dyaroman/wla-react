@@ -15,6 +15,7 @@ import { useShortcut } from '../hooks/useShortcut';
 import { toggleSidebarOpen } from '../features/app/app.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 
+// todo: replace with Drawer position top
 export function Sidebar() {
   const dispatch = useDispatch();
   const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);

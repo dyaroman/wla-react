@@ -8,6 +8,7 @@ export function AppControls() {
       <div className="btn-group  mt">
         <ThemeToggle />
         <InfoModalBtn />
+        {/*todo: remove btn styles and add icon to show that it opens in new tab*/}
         <a href="./CHANGELOG.md" target="_blank" className="btn">
           changelog
         </a>

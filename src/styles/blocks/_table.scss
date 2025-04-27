@@ -84,6 +84,7 @@ tbody {
   display: grid;
   gap: variables.$gap;
 
+  // todo: instead of two columns cards show table
   @include breakpoints.media-breakpoint-up(sm) {
     grid-template-columns: repeat(2, 1fr);
   }

@@ -6,6 +6,7 @@ import { gtmEvents } from '../misc/gtm.constants';
 import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
+// todo: rework modal to one reusable component with createPortal to body
 export function InfoModal() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state['app'].infoModalOpen);

@@ -5,6 +5,7 @@ import { triggerGtmEvent } from '../misc/functions';
 import { gtmEvents } from '../misc/gtm.constants';
 import { TOGGLE_THEME } from '../features/app/app.constants';
 
+// todo: leave only auto theme switch, remove manual
 export function ThemeToggle() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state['app'].theme);

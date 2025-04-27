@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { TOGGLE_IMG_PREVIEW_MODAL } from '../features/app/app.constants';
 
+// todo: rework modal to one reusable component with createPortal to body
 export function ImgPreviewModal() {
   const dispatch = useDispatch();
   const imgUrl = useSelector((state) => state['app'].imgPreviewUrl);
