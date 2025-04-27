@@ -1,4 +1,4 @@
-export const TOGGLE_SIDEBAR = 'app/toggleSidebarOpen';
+export const TOGGLE_SIDEBAR_OPENED = 'app/toggleSidebarOpened';
 export const TOGGLE_FILTERS_EXPANDED = 'app/toggleFiltersExpanded';
 export const TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED =
   'app/toggleCustomizationColumnsExpanded';

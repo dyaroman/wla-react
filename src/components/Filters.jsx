@@ -5,7 +5,7 @@ import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { useShortcut } from '../hooks/useShortcut';
 import {
   toggleFiltersExpanded,
-  toggleSidebarOpen,
+  toggleSidebarOpened,
 } from '../features/app/app.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
@@ -13,7 +13,7 @@ import { COLUMNS } from '../misc/columns.constants';
 export function Filters() {
   const dispatch = useDispatch();
   const filtersExpanded = useSelector((state) => state['app'].filtersExpanded);
-  const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
+  const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const columns = websitesData['columns'];
 
@@ -32,8 +32,8 @@ export function Filters() {
   }
 
   function onSearchShortcut() {
-    if (!sidebarOpen) {
-      dispatch(toggleSidebarOpen(true));
+    if (!sidebarOpened) {
+      dispatch(toggleSidebarOpened(true));
     }
     if (!filtersExpanded) {
       dispatch(toggleFiltersExpanded(true));

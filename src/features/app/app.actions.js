@@ -3,7 +3,7 @@ import { COLUMNS } from '../../misc/columns.constants';
 import {
   TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED,
   TOGGLE_FILTERS_EXPANDED,
-  TOGGLE_SIDEBAR,
+  TOGGLE_SIDEBAR_OPENED,
 } from './app.constants';
 import { deleteQueryParam, setQueryParam } from '../../misc/functions';
 
@@ -94,15 +94,15 @@ export function toggleFiltersExpanded(open) {
   };
 }
 
-export function toggleSidebarOpen(open) {
+export function toggleSidebarOpened(open) {
   if (open) {
-    setQueryParam(URL_PARAMETERS.sidebarOpen, '');
+    setQueryParam(URL_PARAMETERS.sidebarOpened, '');
   } else {
-    deleteQueryParam(URL_PARAMETERS.sidebarOpen);
+    deleteQueryParam(URL_PARAMETERS.sidebarOpened);
   }
   return function (dispatch) {
     dispatch({
-      type: TOGGLE_SIDEBAR,
+      type: TOGGLE_SIDEBAR_OPENED,
       payload: open,
     });
   };

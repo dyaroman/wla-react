@@ -13,7 +13,7 @@ import {
 } from '../features/table/table.actions';
 import {
   toggleFiltersExpanded,
-  toggleSidebarOpen,
+  toggleSidebarOpened,
   updateURL,
 } from '../features/app/app.actions';
 import {
@@ -30,7 +30,7 @@ import { COLUMNS } from '../misc/columns.constants';
 
 export function Table() {
   const dispatch = useDispatch();
-  const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
+  const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
   const filtersExpanded = useSelector((state) => state['app'].filtersExpanded);
   const sort = useSelector((state) => state['table'].sort);
   const filters = useSelector((state) => state['table'].filters);
@@ -109,8 +109,8 @@ export function Table() {
       );
       if (!filter) return;
 
-      if (!sidebarOpen) {
-        dispatch(toggleSidebarOpen(true));
+      if (!sidebarOpened) {
+        dispatch(toggleSidebarOpened(true));
       }
       if (!filtersExpanded) {
         dispatch(toggleFiltersExpanded(true));

@@ -18,7 +18,7 @@ export function App() {
   const websitesDataLoaded = useSelector(
     (state) => state['table'].websitesDataLoaded,
   );
-  const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
+  const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
 
   useEffect(() => {
     dispatch(getWebsitesData());
@@ -63,7 +63,7 @@ export function App() {
   return (
     <section
       data-qa="app"
-      data-sidebar={sidebarOpen ? 'open' : null}
+      data-sidebar={sidebarOpened ? 'open' : null}
       className="app"
     >
       <Sidebar />

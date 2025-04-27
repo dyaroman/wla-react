@@ -11,27 +11,27 @@ import { Logo } from './Logo';
 import { Counter } from './Counter';
 import { triggerGtmEvent } from '../misc/functions';
 import { useShortcut } from '../hooks/useShortcut';
-import { toggleSidebarOpen } from '../features/app/app.actions';
+import { toggleSidebarOpened } from '../features/app/app.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 
 // todo: replace with Drawer position top
 export function Sidebar() {
   const dispatch = useDispatch();
-  const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
+  const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
 
   useEffect(() => {
-    if (sidebarOpen) {
+    if (sidebarOpened) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-  }, [sidebarOpen]);
+  }, [sidebarOpened]);
 
   // toggle sidebar
   useShortcut(['CommandOrControl', '/'], (event) => {
-    dispatch(toggleSidebarOpen(!sidebarOpen));
+    dispatch(toggleSidebarOpened(!sidebarOpened));
     triggerGtmEvent(gtmEvents.shortcut, {
-      method: 'sidebar-' + (sidebarOpen ? 'close' : 'open'),
+      method: 'sidebar-' + (sidebarOpened ? 'close' : 'open'),
       label: event.ctrlKey ? 'windows' : 'macos',
     });
   });

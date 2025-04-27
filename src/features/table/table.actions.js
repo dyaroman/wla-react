@@ -26,7 +26,7 @@ import {
   sortTableData,
   triggerGtmEvent,
 } from '../../misc/functions';
-import { toggleSidebarOpen } from '../app/app.actions';
+import { toggleSidebarOpened } from '../app/app.actions';
 import { showToast } from '../toast/toast.actions';
 
 function getEnvironmentConfig() {
@@ -246,7 +246,7 @@ export function getURLParams() {
         const validatedKey = [
           ...renderableColumns,
           ...Object.keys(sort),
-          URL_PARAMETERS.sidebarOpen,
+          URL_PARAMETERS.sidebarOpened,
         ].find((el) => el.toLowerCase() === key.toLowerCase());
         if (!validatedKey) continue;
         // remove search parameter in wrong case if we find correct one
@@ -269,8 +269,8 @@ export function getURLParams() {
             newFilters[validatedKey] = value.split(',');
             break;
 
-          case URL_PARAMETERS.sidebarOpen:
-            dispatch(toggleSidebarOpen(value === ''));
+          case URL_PARAMETERS.sidebarOpened:
+            dispatch(toggleSidebarOpened(value === ''));
             break;
 
           default:

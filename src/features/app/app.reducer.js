@@ -4,14 +4,14 @@ import {
   TOGGLE_FILTERS_EXPANDED,
   TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL,
-  TOGGLE_SIDEBAR,
+  TOGGLE_SIDEBAR_OPENED,
   TOGGLE_THEME,
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from './app.constants';
 
 const appInitialState = {
-  sidebarOpen: false,
+  sidebarOpened: false,
   filtersExpanded: true,
   customizeColumnsExpanded: true,
   infoModalOpen: false,
@@ -24,10 +24,10 @@ const appInitialState = {
 
 export function appReducer(state = appInitialState, action) {
   switch (action.type) {
-    case TOGGLE_SIDEBAR:
+    case TOGGLE_SIDEBAR_OPENED:
       return {
         ...state,
-        sidebarOpen: action.payload,
+        sidebarOpened: action.payload,
       };
 
     case TOGGLE_FILTERS_EXPANDED:

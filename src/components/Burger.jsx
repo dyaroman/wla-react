@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { toggleSidebarOpen } from '../features/app/app.actions';
+import { toggleSidebarOpened } from '../features/app/app.actions';
 
 export function Burger() {
   const dispatch = useDispatch();
-  const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
+  const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
 
   function onClick() {
-    dispatch(toggleSidebarOpen(!sidebarOpen));
+    dispatch(toggleSidebarOpened(!sidebarOpened));
   }
 
   return (
     <button
-      className={'burger' + (sidebarOpen ? ' burger--open' : '')}
+      className={'burger' + (sidebarOpened ? ' burger--open' : '')}
       onClick={onClick}
     >
       <span />
