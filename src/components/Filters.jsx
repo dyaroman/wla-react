@@ -4,7 +4,7 @@ import { Filter } from './Filter';
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { useShortcut } from '../hooks/useShortcut';
 import {
-  toggleFiltersOpen,
+  toggleFiltersExpanded,
   toggleSidebarOpen,
 } from '../features/app/app.actions';
 import { gtmEvents } from '../misc/gtm.constants';
@@ -12,7 +12,7 @@ import { COLUMNS } from '../misc/columns.constants';
 
 export function Filters() {
   const dispatch = useDispatch();
-  const filtersOpen = useSelector((state) => state['app'].filtersOpen);
+  const filtersExpanded = useSelector((state) => state['app'].filtersExpanded);
   const sidebarOpen = useSelector((state) => state['app'].sidebarOpen);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const columns = websitesData['columns'];
@@ -35,8 +35,8 @@ export function Filters() {
     if (!sidebarOpen) {
       dispatch(toggleSidebarOpen(true));
     }
-    if (!filtersOpen) {
-      dispatch(toggleFiltersOpen(true));
+    if (!filtersExpanded) {
+      dispatch(toggleFiltersExpanded(true));
     }
     setTimeout(() => {
       document.querySelector('input').select();
@@ -45,11 +45,11 @@ export function Filters() {
 
   function onSummaryClick(event) {
     event.preventDefault();
-    dispatch(toggleFiltersOpen(!filtersOpen));
+    dispatch(toggleFiltersExpanded(!filtersExpanded));
   }
 
   return (
-    <details open={filtersOpen} className="filters  mt">
+    <details open={filtersExpanded} className="filters  mt">
       <summary onClick={onSummaryClick}>Filters:</summary>
       <div className="filters__content">
         {Object.keys(columns).map((column) => {

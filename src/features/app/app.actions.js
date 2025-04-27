@@ -2,7 +2,7 @@ import { URL_PARAMETERS } from '../../misc/url.constants';
 import { COLUMNS } from '../../misc/columns.constants';
 import {
   TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
-  TOGGLE_FILTERS_OPEN,
+  TOGGLE_FILTERS_EXPANDED,
   TOGGLE_SIDEBAR,
 } from './app.constants';
 import { deleteQueryParam, setQueryParam } from '../../misc/functions';
@@ -85,10 +85,10 @@ export function updateURL(newState) {
   };
 }
 
-export function toggleFiltersOpen(open) {
+export function toggleFiltersExpanded(open) {
   return function (dispatch) {
     dispatch({
-      type: TOGGLE_FILTERS_OPEN,
+      type: TOGGLE_FILTERS_EXPANDED,
       payload: open,
     });
   };
