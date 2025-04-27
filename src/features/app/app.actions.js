@@ -1,7 +1,7 @@
 import { URL_PARAMETERS } from '../../misc/url.constants';
 import { COLUMNS } from '../../misc/columns.constants';
 import {
-  TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
+  TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED,
   TOGGLE_FILTERS_EXPANDED,
   TOGGLE_SIDEBAR,
 } from './app.constants';
@@ -108,10 +108,10 @@ export function toggleSidebarOpen(open) {
   };
 }
 
-export function toggleCustomizeColumnsOpen(open) {
+export function toggleCustomizationColumnsExpanded(open) {
   return function (dispatch) {
     dispatch({
-      type: TOGGLE_CUSTOMIZE_COLUMNS_OPEN,
+      type: TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED,
       payload: open,
     });
   };

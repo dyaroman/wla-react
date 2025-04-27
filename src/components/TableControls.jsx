@@ -2,15 +2,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Checkbox } from './Checkbox';
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
-import { toggleCustomizeColumnsOpen } from '../features/app/app.actions';
+import { toggleCustomizationColumnsExpanded } from '../features/app/app.actions';
 import { updateShowColumns } from '../features/table/table.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 
 export function TableControls() {
   const dispatch = useDispatch();
   const showColumns = useSelector((state) => state['table'].showColumns);
-  const customizeColumnsOpen = useSelector(
-    (state) => state['app'].customizeColumnsOpen,
+  const customizeColumnsExpanded = useSelector(
+    (state) => state['app'].customizeColumnsExpanded,
   );
   const renderableColumns = useSelector(
     (state) => state['table'].renderableColumns,
@@ -60,12 +60,12 @@ export function TableControls() {
 
   function onSummaryClick(event) {
     event.preventDefault();
-    dispatch(toggleCustomizeColumnsOpen(!customizeColumnsOpen));
+    dispatch(toggleCustomizationColumnsExpanded(!customizeColumnsExpanded));
   }
 
   return (
     <section className="table-controls">
-      <details open={customizeColumnsOpen}>
+      <details open={customizeColumnsExpanded}>
         <summary onClick={onSummaryClick}>Customize columns:</summary>
         <ul className="customize-columns">
           {renderableColumns.map((column) => {
