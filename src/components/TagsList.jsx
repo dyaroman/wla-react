@@ -86,7 +86,7 @@ export function TagsList({ items }) {
           label={tag}
           currentState={currentState}
           disabled={!isTagInteractable}
-          onChange={isTagInteractable ? onChange : undefined}
+          onChange={isTagInteractable ? onChange : null}
         />
       </li>
     );

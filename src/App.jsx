@@ -61,7 +61,7 @@ export function App() {
   return (
     <section
       data-qa="app"
-      data-sidebar={sidebarOpen ? 'open' : undefined}
+      data-sidebar={sidebarOpen ? 'open' : null}
       className="app"
     >
       <Sidebar />

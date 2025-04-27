@@ -110,7 +110,6 @@ export function getQueryParamValue(targetKey) {
       return value;
     }
   }
-  return undefined;
 }
 
 export function setQueryParam(key, value) {
