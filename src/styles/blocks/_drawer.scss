@@ -1,0 +1,226 @@
+@use '../misc/variables';
+@use '../misc/mixins';
+
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--drawer-backdrop);
+}
+
+.drawer-container {
+  position: fixed;
+  z-index: 1001;
+
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  width: 100%;
+  min-height: 300px;
+  height: 100%;
+
+  background-color: var(--body-bg);
+  box-shadow: var(--drawer-shadow);
+
+  @include mixins.focus;
+}
+
+.drawer-top {
+  top: 0;
+  left: 0;
+
+  border-bottom: variables.$border-width solid var(--border-color);
+}
+
+.drawer-right {
+  top: 0;
+  right: 0;
+
+  border-left: variables.$border-width solid var(--border-color);
+}
+
+.drawer-bottom {
+  bottom: 0;
+  left: 0;
+
+  border-top: variables.$border-width solid var(--border-color);
+}
+
+.drawer-left {
+  top: 0;
+  left: 0;
+
+  border-right: variables.$border-width solid var(--border-color);
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: variables.$gap 2 * variables.$gap;
+
+  border-bottom: variables.$border-width solid var(--border-color);
+}
+
+.drawer-title {
+  margin: 0;
+}
+
+.drawer-close {
+  padding: 4px 8px;
+
+  font-size: 22px;
+  color: inherit;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.drawer-content {
+  flex: 1;
+  padding: 2 * variables.$gap;
+
+  overflow-y: auto;
+
+  :first-child {
+    margin: 0;
+  }
+}
+
+.drawer-fade-in {
+  animation: drawerFadeIn 0.3s ease forwards;
+}
+
+.drawer-fade-out {
+  animation: drawerFadeOut 0.3s ease forwards;
+}
+
+.drawer-slide-right-in {
+  animation: drawerSlideRightIn 0.3s ease forwards;
+}
+
+.drawer-slide-right-out {
+  animation: drawerSlideRightOut 0.3s ease forwards;
+}
+
+.drawer-slide-left-in {
+  animation: drawerSlideLeftIn 0.3s ease forwards;
+}
+
+.drawer-slide-left-out {
+  animation: drawerSlideLeftOut 0.3s ease forwards;
+}
+
+.drawer-slide-top-in {
+  animation: drawerSlideTopIn 0.3s ease forwards;
+}
+
+.drawer-slide-top-out {
+  animation: drawerSlideTopOut 0.3s ease forwards;
+}
+
+.drawer-slide-bottom-in {
+  animation: drawerSlideBottomIn 0.3s ease forwards;
+}
+
+.drawer-slide-bottom-out {
+  animation: drawerSlideBottomOut 0.3s ease forwards;
+}
+
+// In animations
+@keyframes drawerFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drawerSlideRightIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawerSlideLeftIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawerSlideTopIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes drawerSlideBottomIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+// Out animations
+@keyframes drawerFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes drawerSlideRightOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes drawerSlideLeftOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes drawerSlideTopOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes drawerSlideBottomOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
