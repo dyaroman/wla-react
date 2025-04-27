@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useShortcut } from '../hooks/useShortcut';
 import { triggerGtmEvent } from '../misc/functions';
 import { gtmEvents } from '../misc/gtm.constants';
-import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
+import { TOGGLE_INFO_MODAL_OPENED } from '../features/app/app.constants';
 
 export function InfoModalBtn() {
   const dispatch = useDispatch();
-  const isOpen = useSelector((state) => state['app'].infoModalOpen);
+  const infoModalOpened = useSelector((state) => state['app'].infoModalOpened);
 
   // open info modal
   useShortcut(['Shift', '/'], (event) => {
-    if (isOpen) return;
+    if (infoModalOpened) return;
     event.preventDefault();
     onOpenModalClick();
     triggerGtmEvent(gtmEvents.shortcut, {
@@ -21,7 +21,7 @@ export function InfoModalBtn() {
 
   function onOpenModalClick() {
     dispatch({
-      type: TOGGLE_INFO_MODAL,
+      type: TOGGLE_INFO_MODAL_OPENED,
       payload: true,
     });
     triggerGtmEvent(gtmEvents.openInfoModal);

@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { gtmEvents } from '../misc/gtm.constants';
-import { TOGGLE_INFO_MODAL } from '../features/app/app.constants';
+import { TOGGLE_INFO_MODAL_OPENED } from '../features/app/app.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
 // todo: rework modal to one reusable component with createPortal to body
 export function InfoModal() {
   const dispatch = useDispatch();
-  const isOpen = useSelector((state) => state['app'].infoModalOpen);
+  const infoModalOpened = useSelector((state) => state['app'].infoModalOpened);
   const dialogRef = useRef(null);
   const cssClass = 'info-modal';
 
@@ -21,20 +21,20 @@ export function InfoModal() {
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
+    if (infoModalOpened) {
       dialogRef.current?.showModal();
       dialogRef.current?.addEventListener('keydown', keyDownHandler);
     } else {
       dialogRef.current?.close();
       dialogRef.current?.removeEventListener('keydown', keyDownHandler);
     }
-  }, [isOpen]);
+  }, [infoModalOpened]);
 
   function keyDownHandler(event) {
     if (event.target.closest(`dialog.${cssClass}`) !== dialogRef.current)
       return;
     if (event.key !== 'Escape') return;
-    if (!isOpen) return;
+    if (!infoModalOpened) return;
     onCloseModalClick();
   }
 
@@ -45,13 +45,13 @@ export function InfoModal() {
 
   function onCloseModalClick() {
     dispatch({
-      type: TOGGLE_INFO_MODAL,
+      type: TOGGLE_INFO_MODAL_OPENED,
       payload: false,
     });
     triggerGtmEvent(gtmEvents.closeInfoModal);
   }
 
-  if (!isOpen) return null;
+  if (!infoModalOpened) return null;
 
   return (
     <dialog className={cssClass} ref={dialogRef}>

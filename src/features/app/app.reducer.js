@@ -3,7 +3,7 @@ import {
   TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED,
   TOGGLE_FILTERS_EXPANDED,
   TOGGLE_IMG_PREVIEW_MODAL,
-  TOGGLE_INFO_MODAL,
+  TOGGLE_INFO_MODAL_OPENED,
   TOGGLE_SIDEBAR_OPENED,
   TOGGLE_THEME,
   UNAUTHORIZED,
@@ -14,7 +14,7 @@ const appInitialState = {
   sidebarOpened: false,
   filtersExpanded: true,
   customizeColumnsExpanded: true,
-  infoModalOpen: false,
+  infoModalOpened: false,
   imgPreviewUrl: null,
   theme: 'light',
   unauthorized: false,
@@ -42,10 +42,10 @@ export function appReducer(state = appInitialState, action) {
         customizeColumnsExpanded: action.payload,
       };
 
-    case TOGGLE_INFO_MODAL:
+    case TOGGLE_INFO_MODAL_OPENED:
       return {
         ...state,
-        infoModalOpen: action.payload,
+        infoModalOpened: action.payload,
       };
 
     case TOGGLE_IMG_PREVIEW_MODAL:
