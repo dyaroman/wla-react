@@ -7,6 +7,8 @@ import { InfoModal } from './components/InfoModal';
 import { ImgPreviewModal } from './components/ImgPreviewModal';
 import { Sidebar } from './components/Sidebar';
 import { Toast } from './components/Toast';
+import { Drawer } from './components/Drawer';
+import { TableControls } from './components/TableControls';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
@@ -65,6 +67,32 @@ export function App() {
       className="app"
     >
       <Sidebar />
+      <>
+        <div className="btn-group">
+          <button
+            // onClick={() => setShowColumnsCustomization(true)}
+            // data-qa="customizeColumnsButton"
+            className="btn"
+          >
+            Filters
+          </button>
+          <button
+            // onClick={() => setShowColumnsCustomization(true)}
+            data-qa="customizeColumnsButton"
+            className="btn"
+          >
+            Customize Columns
+          </button>
+        </div>
+        <Drawer
+          // isOpen={showColumnsCustomization}
+          // onClose={() => setShowColumnsCustomization(false)}
+          title="Customize Columns"
+          position="right"
+        >
+          <TableControls />
+        </Drawer>
+      </>
       <Table />
       <InfoModal />
       <ImgPreviewModal />
