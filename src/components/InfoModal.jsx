@@ -28,6 +28,10 @@ export function InfoModal() {
       dialogRef.current?.close();
       dialogRef.current?.removeEventListener('keydown', keyDownHandler);
     }
+
+    return () => {
+      dialogRef.current?.removeEventListener('keydown', keyDownHandler);
+    };
   }, [infoModalOpened]);
 
   function keyDownHandler(event) {

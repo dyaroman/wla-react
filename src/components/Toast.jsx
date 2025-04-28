@@ -10,16 +10,23 @@ export function Toast() {
   const current = useSelector((state) => state.toast.current);
 
   useEffect(() => {
+    let hideTimer, showTimer;
+
     if (!current && queue.length > 0) {
       const nextToast = queue[0];
-      setTimeout(() => {
+      hideTimer = setTimeout(() => {
         dispatch(hideToast());
       }, 5000);
 
-      setTimeout(() => {
+      showTimer = setTimeout(() => {
         dispatch(setCurrentToast(nextToast));
       }, 300);
     }
+
+    return () => {
+      clearTimeout(hideTimer);
+      clearTimeout(showTimer);
+    };
   }, [queue, current, dispatch]);
 
   return (

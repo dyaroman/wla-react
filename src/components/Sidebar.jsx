@@ -23,6 +23,10 @@ export function Sidebar() {
     } else {
       document.body.style.overflow = '';
     }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [sidebarOpened]);
 
   // toggle sidebar

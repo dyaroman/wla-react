@@ -25,6 +25,10 @@ export function ImgPreviewModal() {
       dialogRef.current?.close();
       dialogRef.current?.removeEventListener('keydown', keyDownHandler);
     }
+
+    return () => {
+      dialogRef.current?.removeEventListener('keydown', keyDownHandler);
+    };
   }, [imgUrl]);
 
   function globalClickHandler(event) {
