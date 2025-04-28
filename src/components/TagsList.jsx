@@ -60,7 +60,7 @@ export function TagsList({ items }) {
     return null;
   }
 
-  const list = items.sort().map((tag) => {
+  const list = items.map((tag) => {
     const lowerTag = tag.toLowerCase();
     const tagAvailable = availableTags.some((availableTag) =>
       availableTag.toLowerCase().includes(lowerTag),

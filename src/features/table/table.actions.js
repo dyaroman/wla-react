@@ -110,7 +110,7 @@ export function getWebsitesData() {
             });
 
           // collect all unique tags
-          const allTags = getUniqueTags(websites);
+          const allTags = getUniqueTags(websites).sort();
           const newState = {
             ...getState().table,
             filters,
