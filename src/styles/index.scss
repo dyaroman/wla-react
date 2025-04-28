@@ -30,6 +30,7 @@
 @use 'blocks/primary-color';
 @use 'blocks/color-preview';
 @use 'blocks/drawer';
+@use 'blocks/external-link';
 
 .foo {
   margin: variables.$gap;
