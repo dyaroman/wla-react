@@ -88,9 +88,10 @@
 
   overflow-y: auto;
 
-  :first-child {
-    margin: 0;
-  }
+  // broke filter's label margin
+  //:first-child {
+  //  margin: 0;
+  //}
 }
 
 .drawer-fade-in {

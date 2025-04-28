@@ -9,6 +9,7 @@ import {
 } from '../features/app/app.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
+import { resetFilters } from '../features/table/table.actions';
 
 export function Filters() {
   const dispatch = useDispatch();
@@ -43,18 +44,22 @@ export function Filters() {
     });
   }
 
-  function onSummaryClick(event) {
-    event.preventDefault();
-    dispatch(toggleFiltersExpanded(!filtersExpanded));
+  function onResetFilters() {
+    dispatch(resetFilters());
   }
 
   return (
-    <details open={filtersExpanded} className="filters  mt">
-      <summary onClick={onSummaryClick}>Filters:</summary>
+    <div className="filters">
       <div className="filters__content">
+        <button className="btn  btn--danger" onClick={onResetFilters}>
+          reset filters
+        </button>
+
         {Object.keys(columns).map((column) => {
-          if (column === COLUMNS.tags || !columns[column]['renderFilter'])
+          if (!columns[column]['renderFilter'] || column === COLUMNS.tags) {
             return null;
+          }
+
           return (
             <Filter
               key={column}
@@ -64,6 +69,6 @@ export function Filters() {
           );
         })}
       </div>
-    </details>
+    </div>
   );
 }

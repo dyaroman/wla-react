@@ -30,3 +30,19 @@
 @use 'blocks/primary-color';
 @use 'blocks/color-preview';
 @use 'blocks/drawer';
+
+.foo {
+  margin: variables.$gap;
+
+  display: flex;
+  flex-direction: column;
+  gap: variables.$gap;
+
+  @include breakpoints.media-breakpoint-up(md) {
+    flex-direction: row;
+
+    .btn {
+      flex-grow: 1;
+    }
+  }
+}

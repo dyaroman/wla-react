@@ -1,5 +1,5 @@
 import {
-  CLEAR_FILTERS,
+  COMPUTED_DATA_UPDATED,
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
   SET_WEBSITES_DATA,
@@ -23,6 +23,7 @@ import {
   findArrayElementCaseInsensitive,
   getQueryParamValue,
   getUniqueTags,
+  getUniqueValues,
   sortTableData,
   triggerGtmEvent,
 } from '../../misc/functions';
@@ -278,6 +279,7 @@ export function getURLParams() {
             break;
         }
       }
+      // todo: join those two dispatches to one
       dispatch({
         type: SORT_UPDATED,
         payload: newSort,
@@ -303,51 +305,90 @@ export function getURLParams() {
   };
 }
 
-export function updateTableData() {
+export function filterTable() {
   return function (dispatch, getState) {
+    const autocompleteLists = {};
     const websitesData = getState().table.websitesData;
     const filters = getState().table.filters;
-    const sort = getState().table.sort;
     const filteredData = filterTableData(
       [...websitesData['websites']],
       filters,
     );
-    let updatedData = filteredData;
+
+    Object.keys(filters).map(
+      (filter) =>
+        (autocompleteLists[filter] = getUniqueValues(
+          filteredData,
+          filter,
+        ).sort()),
+    );
+
+    dispatch({
+      type: COMPUTED_DATA_UPDATED,
+      payload: {
+        preparedData: filteredData,
+        availableTags: getUniqueTags(filteredData),
+        autocompleteLists,
+      },
+    });
+  };
+}
+
+export function sortTable() {
+  return function (dispatch, getState) {
+    const websites = getState().table.websitesData.websites;
+    const sort = getState().table.sort;
+
+    let sortedData = websites;
     if (sort.direction) {
-      const sortedData = sortTableData(filteredData, sort.column);
-      if (sort.direction === 'asc') {
-        updatedData = sortedData;
-      } else if (sort.direction === 'desc') {
-        updatedData = sortedData.reverse();
+      sortedData = sortTableData(websites, sort.column);
+      if (sort.direction === 'desc') {
+        sortedData = sortedData.reverse();
       }
     }
 
     dispatch({
       type: PREPARED_DATA_UPDATED,
       payload: {
-        preparedData: updatedData,
-        availableTags: getUniqueTags(updatedData),
+        preparedData: sortedData,
       },
     });
   };
 }
 
-export function clearFilters() {
+export function resetFilters() {
   return function (dispatch, getState) {
     const filters = {};
     for (const filter in getState().table.filters) {
-      if (filter === COLUMNS.tags) filters[filter] = [];
-      else filters[filter] = '';
+      if (filter === COLUMNS.tags) continue;
+
+      filters[filter] = '';
     }
-    const sort = {
-      column: '',
-      direction: '',
-    };
     dispatch({
-      type: CLEAR_FILTERS,
+      type: FILTERS_UPDATED,
+      payload: filters,
+    });
+  };
+}
+
+// todo: maybe i should move tags from filters to store top level?
+export function resetTags() {
+  return function (dispatch) {
+    dispatch({
+      type: FILTERS_UPDATED,
+      payload: { tags: [] },
+    });
+  };
+}
+
+// todo: resetSort function here
+export function resetSort() {
+  return function (dispatch) {
+    dispatch({
+      type: SORT_UPDATED,
       payload: {
-        filters,
-        sort,
+        column: '',
+        direction: '',
       },
     });
   };

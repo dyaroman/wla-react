@@ -1,39 +1,39 @@
 import {
   REQUEST_ERROR,
   TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED,
+  TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
   TOGGLE_FILTERS_EXPANDED,
+  TOGGLE_FILTERS_OPENED,
   TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL_OPENED,
   TOGGLE_SIDEBAR_OPENED,
+  TOGGLE_TAGS_OPENED,
   TOGGLE_THEME,
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from './app.constants';
 
 const appInitialState = {
-  sidebarOpened: false,
-  filtersExpanded: true,
+  customizationColumnsOpened: false,
   customizeColumnsExpanded: true,
-  infoModalOpened: false,
+  filtersExpanded: true,
+  filtersOpened: false,
   imgPreviewUrl: null,
+  infoModalOpened: false,
+  requestError: null,
+  sidebarOpened: false,
+  tagsOpened: false,
   theme: 'light',
   unauthorized: false,
-  requestError: null,
   urlParamsRead: false,
 };
 
 export function appReducer(state = appInitialState, action) {
   switch (action.type) {
-    case TOGGLE_SIDEBAR_OPENED:
+    case TOGGLE_CUSTOMIZATION_COLUMNS_OPENED:
       return {
         ...state,
-        sidebarOpened: action.payload,
-      };
-
-    case TOGGLE_FILTERS_EXPANDED:
-      return {
-        ...state,
-        filtersExpanded: action.payload,
+        customizationColumnsOpened: action.payload,
       };
 
     case TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED:
@@ -42,16 +42,46 @@ export function appReducer(state = appInitialState, action) {
         customizeColumnsExpanded: action.payload,
       };
 
-    case TOGGLE_INFO_MODAL_OPENED:
+    case TOGGLE_FILTERS_EXPANDED:
       return {
         ...state,
-        infoModalOpened: action.payload,
+        filtersExpanded: action.payload,
+      };
+
+    case TOGGLE_FILTERS_OPENED:
+      return {
+        ...state,
+        filtersOpened: action.payload,
       };
 
     case TOGGLE_IMG_PREVIEW_MODAL:
       return {
         ...state,
         imgPreviewUrl: action.payload,
+      };
+
+    case TOGGLE_INFO_MODAL_OPENED:
+      return {
+        ...state,
+        infoModalOpened: action.payload,
+      };
+
+    case REQUEST_ERROR:
+      return {
+        ...state,
+        requestError: action.payload,
+      };
+
+    case TOGGLE_SIDEBAR_OPENED:
+      return {
+        ...state,
+        sidebarOpened: action.payload,
+      };
+
+    case TOGGLE_TAGS_OPENED:
+      return {
+        ...state,
+        tagsOpened: action.payload,
       };
 
     case TOGGLE_THEME:
@@ -64,12 +94,6 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         unauthorized: action.payload,
-      };
-
-    case REQUEST_ERROR:
-      return {
-        ...state,
-        requestError: action.payload,
       };
 
     case URL_PARAMS_READ:

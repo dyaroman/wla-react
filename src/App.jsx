@@ -9,7 +9,14 @@ import { Sidebar } from './components/Sidebar';
 import { Toast } from './components/Toast';
 import { Drawer } from './components/Drawer';
 import { TableControls } from './components/TableControls';
+import { Filters } from './components/Filters';
+import { Tags } from './components/Tags';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
+import {
+  TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
+  TOGGLE_FILTERS_OPENED,
+  TOGGLE_TAGS_OPENED,
+} from './features/app/app.constants';
 
 export function App() {
   const dispatch = useDispatch();
@@ -19,6 +26,11 @@ export function App() {
     (state) => state['table'].websitesDataLoaded,
   );
   const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
+  const customizationColumnsOpened = useSelector(
+    (state) => state['app'].customizationColumnsOpened,
+  );
+  const filtersOpened = useSelector((state) => state['app'].filtersOpened);
+  const tagsOpened = useSelector((state) => state['app'].tagsOpened);
 
   useEffect(() => {
     dispatch(getWebsitesData());
@@ -66,33 +78,95 @@ export function App() {
       data-sidebar={sidebarOpened ? 'open' : null}
       className="app"
     >
+      {/*todo: rename to Header*/}
       <Sidebar />
+
+      {/*todo: how to name this component?*/}
       <>
-        <div className="btn-group">
+        <div className="foo">
           <button
-            // onClick={() => setShowColumnsCustomization(true)}
-            // data-qa="customizeColumnsButton"
+            onClick={() =>
+              dispatch({
+                type: TOGGLE_FILTERS_OPENED,
+                payload: true,
+              })
+            }
             className="btn"
           >
-            Filters
+            filters
           </button>
+
           <button
-            // onClick={() => setShowColumnsCustomization(true)}
-            data-qa="customizeColumnsButton"
+            onClick={() =>
+              dispatch({
+                type: TOGGLE_TAGS_OPENED,
+                payload: true,
+              })
+            }
             className="btn"
           >
-            Customize Columns
+            tags
+          </button>
+
+          <button
+            onClick={() =>
+              dispatch({
+                type: TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
+                payload: true,
+              })
+            }
+            className="btn"
+          >
+            customize columns
           </button>
         </div>
+
         <Drawer
-          // isOpen={showColumnsCustomization}
-          // onClose={() => setShowColumnsCustomization(false)}
-          title="Customize Columns"
+          isOpen={filtersOpened}
+          onClose={() =>
+            dispatch({
+              type: TOGGLE_FILTERS_OPENED,
+              payload: false,
+            })
+          }
+          title="Filters"
+          position="left"
+          maxSize="320px"
+        >
+          <Filters />
+        </Drawer>
+
+        <Drawer
+          isOpen={tagsOpened}
+          onClose={() =>
+            dispatch({
+              type: TOGGLE_TAGS_OPENED,
+              payload: false,
+            })
+          }
+          title="Tags"
           position="right"
+          maxSize="320px"
+        >
+          <Tags />
+        </Drawer>
+
+        <Drawer
+          isOpen={customizationColumnsOpened}
+          onClose={() =>
+            dispatch({
+              type: TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
+              payload: false,
+            })
+          }
+          title="Customize columns"
+          position="right"
+          maxSize="320px"
         >
           <TableControls />
         </Drawer>
       </>
+
       <Table />
       <InfoModal />
       <ImgPreviewModal />

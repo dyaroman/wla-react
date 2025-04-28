@@ -1,10 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  fromCamelCaseToWords,
-  getUniqueValues,
-  triggerGtmEvent,
-} from '../misc/functions';
+import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { updateShowColumns } from '../features/table/table.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
@@ -13,8 +9,9 @@ export function Filter({ name, placeholder }) {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state['table'].filters);
   const showColumns = useSelector((state) => state['table'].showColumns);
-  const preparedData = useSelector((state) => state['table'].preparedData);
-  const autocompleteList = getUniqueValues(preparedData, name).sort();
+  const autocompleteList = useSelector(
+    (state) => state['table'].autocompleteLists[name],
+  );
   const autocompleteListName = `${fromCamelCaseToWords(name ?? '')
     .split(' ')
     .join('-')

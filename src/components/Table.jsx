@@ -9,7 +9,8 @@ import { ImgCell } from './ImgCell';
 import { Checkbox } from './Checkbox';
 import {
   checkForUpdates,
-  updateTableData,
+  filterTable,
+  sortTable,
 } from '../features/table/table.actions';
 import {
   toggleFiltersExpanded,
@@ -71,9 +72,14 @@ export function Table() {
     };
   }, []);
 
+  // todo: i should split this to separate useEffect cause some calculation don't depends on sort change
   useEffect(() => {
-    dispatch(updateTableData());
-  }, [filters, sort]);
+    dispatch(filterTable());
+  }, [filters]);
+
+  useEffect(() => {
+    dispatch(sortTable());
+  }, [sort]);
 
   useEffect(() => {
     dispatch(

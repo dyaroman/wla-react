@@ -3,8 +3,7 @@ import { ThemeToggle } from './ThemeToggle';
 
 export function AppControls() {
   return (
-    <details className="mt" open>
-      <summary>Useful:</summary>
+    <div className="mt">
       <div className="btn-group  mt">
         <ThemeToggle />
         <InfoModalBtn />
@@ -13,6 +12,6 @@ export function AppControls() {
           changelog
         </a>
       </div>
-    </details>
+    </div>
   );
 }

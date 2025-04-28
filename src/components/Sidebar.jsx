@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Burger } from './Burger';
 import { AppControls } from './AppControls';
 import { TableInfo } from './TableInfo';
-import { Filters } from './Filters';
-import { Tags } from './Tags';
 import { ResultsControls } from './ResultsControls';
 import { Logo } from './Logo';
 import { Counter } from './Counter';
@@ -46,15 +44,9 @@ export function Sidebar() {
       <div className="sidebar__bottom">
         <div className="sidebar__bottom-content">
           <div className="sidebar__panels">
-            <div>
-              <TableInfo />
-              <Filters />
-              <Tags />
-              <ResultsControls />
-            </div>
-            <div>
-              <AppControls />
-            </div>
+            <TableInfo />
+            <ResultsControls />
+            <AppControls />
           </div>
         </div>
       </div>

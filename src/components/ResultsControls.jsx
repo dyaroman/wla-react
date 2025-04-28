@@ -6,7 +6,7 @@ import {
   getQueryParamValue,
   triggerGtmEvent,
 } from '../misc/functions';
-import { clearFilters } from '../features/table/table.actions';
+import { resetFilters } from '../features/table/table.actions';
 import { showToast } from '../features/toast/toast.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
@@ -77,7 +77,7 @@ export function ResultsControls() {
   }
 
   function onClearClick() {
-    dispatch(clearFilters());
+    dispatch(resetFilters());
 
     triggerGtmEvent(gtmEvents.btn, {
       method: 'clear-all',
@@ -103,33 +103,26 @@ export function ResultsControls() {
     }
   }
 
+  if (preparedData.length === 0) {
+    return null;
+  }
+
   return (
     <div className="btn-group  mt">
       <button
-        className="btn btn--danger"
-        onClick={onClearClick}
-        data-qa="clearAll"
+        className="btn"
+        onClick={onCopyWebsitesClick}
+        data-qa="copyWebsites"
       >
-        clear all
+        copy websites
       </button>
-      {preparedData.length !== 0 && (
-        <>
-          <button
-            className="btn"
-            onClick={onCopyWebsitesClick}
-            data-qa="copyWebsites"
-          >
-            copy websites
-          </button>
-          <button
-            className="btn"
-            onClick={onCopyWebsitesUrlsClick}
-            data-qa="copyWebsitesUrls"
-          >
-            copy websites urls
-          </button>
-        </>
-      )}
+      <button
+        className="btn"
+        onClick={onCopyWebsitesUrlsClick}
+        data-qa="copyWebsitesUrls"
+      >
+        copy websites urls
+      </button>
     </div>
   );
 }

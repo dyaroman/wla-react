@@ -1,5 +1,12 @@
 @use '../misc/variables';
 
 .tags {
-  margin-top: variables.$gap;
+  display: flex;
+  flex-direction: column;
+  gap: variables.$gap;
+
+  .tags-list {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 }

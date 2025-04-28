@@ -1,5 +1,5 @@
 import {
-  CLEAR_FILTERS,
+  COMPUTED_DATA_UPDATED,
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
   SET_WEBSITES_DATA,
@@ -25,6 +25,7 @@ const tableInitialState = {
   renderableColumns: [],
   allTags: [],
   availableTags: [],
+  autocompleteLists: [],
 };
 
 export function tableReducer(state = tableInitialState, action) {
@@ -65,16 +66,18 @@ export function tableReducer(state = tableInitialState, action) {
         },
       };
 
-    case CLEAR_FILTERS:
+    case COMPUTED_DATA_UPDATED:
       return {
         ...state,
-        ...action.payload,
+        availableTags: action.payload.availableTags,
+        autocompleteLists: action.payload.autocompleteLists,
+        preparedData: action.payload.preparedData,
       };
 
     case PREPARED_DATA_UPDATED:
       return {
         ...state,
-        ...action.payload,
+        preparedData: action.payload.preparedData,
       };
 
     case SHOW_COLUMNS_UPDATED:

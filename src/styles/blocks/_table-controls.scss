@@ -2,7 +2,11 @@
 @use '../misc/variables';
 
 .table-controls {
-  @include breakpoints.media-breakpoint-up(lg) {
-    margin-top: variables.$gap;
+  //@include breakpoints.media-breakpoint-up(lg) {
+  //  margin-top: variables.$gap;
+  //}
+
+  .btn {
+    width: 100%;
   }
 }

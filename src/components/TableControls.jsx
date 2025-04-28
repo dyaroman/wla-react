@@ -65,46 +65,43 @@ export function TableControls() {
 
   return (
     <section className="table-controls">
-      <details open={customizeColumnsExpanded}>
-        <summary onClick={onSummaryClick}>Customize columns:</summary>
-        <ul className="customize-columns">
-          {renderableColumns.map((column) => {
-            return (
-              <li key={column}>
-                <Checkbox
-                  name={column}
-                  label={fromCamelCaseToWords(column)}
-                  checked={showColumns.includes(column)}
-                  onChange={onChange.bind(this, column)}
-                />
-              </li>
-            );
-          })}
-        </ul>
-        <div className="btn-group  mt">
-          <button
-            className="btn"
-            onClick={onClickShowAllColumns}
-            data-qa="showAllColumns"
-          >
-            show all columns
-          </button>
-          <button
-            className="btn"
-            onClick={onClickHideAllColumns}
-            data-qa="hideAllColumns"
-          >
-            hide all columns
-          </button>
-          <button
-            className="btn"
-            onClick={onClickRestoreDefaultColumns}
-            data-qa="restoreDefaultColumns"
-          >
-            restore default columns
-          </button>
-        </div>
-      </details>
+      <div className="btn-group">
+        <button
+          className="btn"
+          onClick={onClickShowAllColumns}
+          data-qa="showAllColumns"
+        >
+          show all
+        </button>
+        <button
+          className="btn"
+          onClick={onClickHideAllColumns}
+          data-qa="hideAllColumns"
+        >
+          hide all
+        </button>
+        <button
+          className="btn"
+          onClick={onClickRestoreDefaultColumns}
+          data-qa="restoreDefaultColumns"
+        >
+          restore default
+        </button>
+      </div>
+      <ul className="customize-columns">
+        {renderableColumns.map((column) => {
+          return (
+            <li key={column}>
+              <Checkbox
+                name={column}
+                label={fromCamelCaseToWords(column)}
+                checked={showColumns.includes(column)}
+                onChange={onChange.bind(this, column)}
+              />
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }
