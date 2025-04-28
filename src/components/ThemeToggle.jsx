@@ -15,24 +15,28 @@ export function ThemeToggle() {
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches
     ) {
-      dispatch({
-        type: TOGGLE_THEME,
-        payload: 'dark',
-      });
-
       triggerGtmEvent(gtmEvents.toggleTheme, {
         label: 'dark',
         method: 'init',
       });
-    } else {
+
+      if (theme === 'dark') return;
+
       dispatch({
         type: TOGGLE_THEME,
-        payload: 'light',
+        payload: 'dark',
       });
-
+    } else {
       triggerGtmEvent(gtmEvents.toggleTheme, {
         label: 'light',
         method: 'init',
+      });
+
+      if (theme === 'light') return;
+
+      dispatch({
+        type: TOGGLE_THEME,
+        payload: 'light',
       });
     }
 
