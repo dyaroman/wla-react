@@ -336,12 +336,12 @@ export function filterTable() {
 
 export function sortTable() {
   return function (dispatch, getState) {
-    const websites = getState().table.websitesData.websites;
+    const preparedData = getState().table.preparedData;
     const sort = getState().table.sort;
 
-    let sortedData = websites;
+    let sortedData = preparedData;
     if (sort.direction) {
-      sortedData = sortTableData(websites, sort.column);
+      sortedData = sortTableData(sortedData, sort.column);
       if (sort.direction === 'desc') {
         sortedData = sortedData.reverse();
       }
