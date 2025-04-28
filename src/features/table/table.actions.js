@@ -39,12 +39,8 @@ function getEnvironmentConfig() {
   return { hostEnv };
 }
 
-async function fetchWebsitesData({ method = 'GET', dispatch }) {
+async function fetchWebsitesData({ method = 'GET' } = {}) {
   function _fetchFromFile() {
-    dispatch({
-      type: WEBSITES_DATA_SOURCE,
-      payload: 'file',
-    });
     return fetch(
       `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`,
       { method },
@@ -52,10 +48,6 @@ async function fetchWebsitesData({ method = 'GET', dispatch }) {
   }
 
   function _fetchFromDB() {
-    dispatch({
-      type: WEBSITES_DATA_SOURCE,
-      payload: 'db',
-    });
     return fetch(
       `${import.meta.env.VITE_WLA_BACKEND_URL}/combined?env=${hostEnv}`,
       { method },
@@ -82,11 +74,19 @@ export function getWebsitesData() {
   return async function (dispatch, getState) {
     const { hostEnv } = getEnvironmentConfig();
     try {
-      const response = await fetchWebsitesData({ dispatch });
+      const response = await fetchWebsitesData();
       switch (response.status) {
         case 200: {
           const ETag = response.headers.get('ETag');
           const websitesData = await response.json();
+
+          const dataSource = response.url.includes(WEBSITES_DATA_FILENAME)
+            ? 'file'
+            : 'db';
+          dispatch({
+            type: WEBSITES_DATA_SOURCE,
+            payload: dataSource,
+          });
           const columns = websitesData['columns'];
           const websites = websitesData['websites'];
 
@@ -212,7 +212,7 @@ export function checkForUpdates() {
   return async function (dispatch, getState) {
     const currentETag = getState().table.websitesDataETag;
     try {
-      const response = await fetchWebsitesData({ method: 'HEAD', dispatch });
+      const response = await fetchWebsitesData({ method: 'HEAD' });
       const newETag = response.headers.get('ETag');
       if (currentETag && newETag && currentETag !== newETag) {
         dispatch(
