@@ -9,8 +9,8 @@ import { Logo } from './Logo';
 import { Counter } from './Counter';
 import { triggerGtmEvent } from '../misc/functions';
 import { useShortcut } from '../hooks/useShortcut';
-import { toggleSidebarOpened } from '../features/app/app.actions';
 import { gtmEvents } from '../misc/gtm.constants';
+import { TOGGLE_SIDEBAR_OPENED } from '../features/app/app.constants';
 
 // todo: replace with Drawer position top
 export function Sidebar() {
@@ -31,7 +31,10 @@ export function Sidebar() {
 
   // toggle sidebar
   useShortcut(['CommandOrControl', '/'], (event) => {
-    dispatch(toggleSidebarOpened(!sidebarOpened));
+    dispatch({
+      type: TOGGLE_SIDEBAR_OPENED,
+      payload: !sidebarOpened,
+    });
     triggerGtmEvent(gtmEvents.shortcut, {
       method: 'sidebar-' + (sidebarOpened ? 'close' : 'open'),
       label: event.ctrlKey ? 'windows' : 'macos',

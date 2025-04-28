@@ -94,20 +94,6 @@ export function toggleFiltersExpanded(open) {
   };
 }
 
-export function toggleSidebarOpened(open) {
-  if (open) {
-    setQueryParam(URL_PARAMETERS.sidebarOpened, '');
-  } else {
-    deleteQueryParam(URL_PARAMETERS.sidebarOpened);
-  }
-  return function (dispatch) {
-    dispatch({
-      type: TOGGLE_SIDEBAR_OPENED,
-      payload: open,
-    });
-  };
-}
-
 export function toggleCustomizationColumnsExpanded(open) {
   return function (dispatch) {
     dispatch({

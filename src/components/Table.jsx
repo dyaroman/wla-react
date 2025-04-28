@@ -12,11 +12,7 @@ import {
   filterTable,
   sortTable,
 } from '../features/table/table.actions';
-import {
-  toggleFiltersExpanded,
-  toggleSidebarOpened,
-  updateURL,
-} from '../features/app/app.actions';
+import { toggleFiltersExpanded, updateURL } from '../features/app/app.actions';
 import {
   convertUrlToEnv,
   fromCamelCaseToWords,
@@ -28,6 +24,7 @@ import { gtmEvents } from '../misc/gtm.constants';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { COLUMNS } from '../misc/columns.constants';
+import { TOGGLE_SIDEBAR_OPENED } from '../features/app/app.constants';
 
 export function Table() {
   const dispatch = useDispatch();
@@ -116,7 +113,10 @@ export function Table() {
       if (!filter) return;
 
       if (!sidebarOpened) {
-        dispatch(toggleSidebarOpened(true));
+        dispatch({
+          type: TOGGLE_SIDEBAR_OPENED,
+          payload: true,
+        });
       }
       if (!filtersExpanded) {
         dispatch(toggleFiltersExpanded(true));

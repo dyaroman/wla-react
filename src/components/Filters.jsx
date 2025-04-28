@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Filter } from './Filter';
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { useShortcut } from '../hooks/useShortcut';
-import {
-  toggleFiltersExpanded,
-  toggleSidebarOpened,
-} from '../features/app/app.actions';
+import { toggleFiltersExpanded } from '../features/app/app.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
+import { TOGGLE_SIDEBAR_OPENED } from '../features/app/app.constants';
 import { resetFilters } from '../features/table/table.actions';
 
 export function Filters() {
@@ -34,7 +32,10 @@ export function Filters() {
 
   function onSearchShortcut() {
     if (!sidebarOpened) {
-      dispatch(toggleSidebarOpened(true));
+      dispatch({
+        type: TOGGLE_SIDEBAR_OPENED,
+        payload: true,
+      });
     }
     if (!filtersExpanded) {
       dispatch(toggleFiltersExpanded(true));
