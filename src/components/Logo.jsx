@@ -13,12 +13,13 @@ export function Logo() {
 
   return (
     <button
-      className="logo"
+      className={
+        'logo' + (websitesDataSource === 'file' ? ' logo--fallback' : '')
+      }
       aria-label="scroll table to the top"
       onClick={onClick}
-      style={{ opacity: websitesDataSource === 'file' ? 0.5 : null }}
     >
-      WLA
+      WL<span>A</span>
     </button>
   );
 }

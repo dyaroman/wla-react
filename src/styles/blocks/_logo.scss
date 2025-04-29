@@ -7,4 +7,10 @@
   cursor: pointer;
   border: none;
   background: none;
+
+  &--fallback span {
+    display: inline-block;
+
+    transform: rotate(180deg);
+  }
 }
