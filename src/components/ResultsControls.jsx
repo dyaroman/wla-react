@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { InfoModalBtn } from './InfoModalBtn';
 import { useShortcut } from '../hooks/useShortcut';
 import {
   convertUrlToEnv,
@@ -116,6 +117,7 @@ export function ResultsControls() {
       >
         copy websites
       </button>
+
       <button
         className="btn"
         onClick={onCopyWebsitesUrlsClick}
@@ -123,6 +125,8 @@ export function ResultsControls() {
       >
         copy websites urls
       </button>
+
+      <InfoModalBtn />
     </div>
   );
 }

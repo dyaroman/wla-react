@@ -10,6 +10,7 @@ import { Toast } from './components/Toast';
 import { Drawer } from './components/Drawer';
 import { TableControls } from './components/TableControls';
 import { Filters } from './components/Filters';
+import { ThemeToggle } from './components/ThemeToggle';
 import { Tags } from './components/Tags';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 import {
@@ -25,7 +26,6 @@ export function App() {
   const websitesDataLoaded = useSelector(
     (state) => state['table'].websitesDataLoaded,
   );
-  const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
   const customizationColumnsOpened = useSelector(
     (state) => state['app'].customizationColumnsOpened,
   );
@@ -73,13 +73,9 @@ export function App() {
   }
 
   return (
-    <section
-      data-qa="app"
-      data-sidebar={sidebarOpened ? 'open' : null}
-      className="app"
-    >
-      {/*todo: rename to Header*/}
+    <section data-qa="app" className="app">
       <Header />
+      <ThemeToggle />
 
       {/*todo: how to name this component?*/}
       <>

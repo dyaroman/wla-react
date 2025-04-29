@@ -3,9 +3,7 @@ import { COLUMNS } from '../../misc/columns.constants';
 import {
   TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED,
   TOGGLE_FILTERS_EXPANDED,
-  TOGGLE_SIDEBAR_OPENED,
 } from './app.constants';
-import { deleteQueryParam, setQueryParam } from '../../misc/functions';
 
 export function updateURL(newState) {
   return function (dispatch, getState) {
@@ -85,6 +83,7 @@ export function updateURL(newState) {
   };
 }
 
+// todo: replace with filter's drawer opened toggle
 export function toggleFiltersExpanded(open) {
   return function (dispatch) {
     dispatch({
@@ -94,6 +93,7 @@ export function toggleFiltersExpanded(open) {
   };
 }
 
+// todo: is it need?
 export function toggleCustomizationColumnsExpanded(open) {
   return function (dispatch) {
     dispatch({

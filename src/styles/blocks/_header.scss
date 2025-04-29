@@ -1,0 +1,21 @@
+@use '../misc/breakpoints';
+@use '../misc/variables';
+
+// todo: use sticky?
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+
+  background-color: var(--body-bg);
+}
+
+.header__content {
+  display: flex;
+  justify-content: space-between;
+  padding: variables.$gap;
+
+  border-bottom: variables.$border-width solid var(--body-color);
+}

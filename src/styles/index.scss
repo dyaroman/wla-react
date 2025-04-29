@@ -6,7 +6,7 @@
 @use 'misc/common';
 
 @use 'blocks/app';
-@use 'blocks/sidebar';
+@use 'blocks/header';
 @use 'blocks/logo';
 @use 'blocks/counter';
 @use 'blocks/burger';
@@ -31,6 +31,7 @@
 @use 'blocks/color-preview';
 @use 'blocks/drawer';
 @use 'blocks/external-link';
+@use 'blocks/table-info';
 
 .foo {
   margin: variables.$gap;

@@ -1,21 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TOGGLE_SIDEBAR_OPENED } from '../features/app/app.constants';
+import { TOGGLE_HEADER_DRAWER_OPENED } from '../features/app/app.constants';
 
 export function Burger() {
   const dispatch = useDispatch();
-  const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
+  const headerDrawerOpened = useSelector(
+    (state) => state['app'].headerDrawerOpened,
+  );
 
   function onClick() {
     dispatch({
-      type: TOGGLE_SIDEBAR_OPENED,
-      payload: !sidebarOpened,
+      type: TOGGLE_HEADER_DRAWER_OPENED,
+      payload: !headerDrawerOpened,
     });
   }
 
   return (
     <button
-      className={'burger' + (sidebarOpened ? ' burger--open' : '')}
+      className={'burger' + (headerDrawerOpened ? ' burger--open' : '')}
       onClick={onClick}
     >
       <span />

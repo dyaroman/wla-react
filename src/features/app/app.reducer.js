@@ -6,7 +6,7 @@ import {
   TOGGLE_FILTERS_OPENED,
   TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL_OPENED,
-  TOGGLE_SIDEBAR_OPENED,
+  TOGGLE_HEADER_DRAWER_OPENED,
   TOGGLE_TAGS_OPENED,
   UNAUTHORIZED,
   URL_PARAMS_READ,
@@ -20,7 +20,7 @@ const appInitialState = {
   imgPreviewUrl: null,
   infoModalOpened: false,
   requestError: null,
-  sidebarOpened: false,
+  headerDrawerOpened: false,
   tagsOpened: false,
   unauthorized: false,
   urlParamsRead: false,
@@ -70,10 +70,10 @@ export function appReducer(state = appInitialState, action) {
         requestError: action.payload,
       };
 
-    case TOGGLE_SIDEBAR_OPENED:
+    case TOGGLE_HEADER_DRAWER_OPENED:
       return {
         ...state,
-        sidebarOpened: action.payload,
+        headerDrawerOpened: action.payload,
       };
 
     case TOGGLE_TAGS_OPENED:

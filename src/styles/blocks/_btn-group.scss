@@ -1,14 +1,7 @@
-@use '../misc/breakpoints';
 @use '../misc/variables';
 
 .btn-group {
   display: flex;
   flex-direction: column;
   gap: variables.$gap;
-
-  @include breakpoints.media-breakpoint-up(sm) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-  }
 }

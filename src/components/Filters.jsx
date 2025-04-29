@@ -6,16 +6,15 @@ import { useShortcut } from '../hooks/useShortcut';
 import { toggleFiltersExpanded } from '../features/app/app.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
-import { TOGGLE_SIDEBAR_OPENED } from '../features/app/app.constants';
 import { resetFilters } from '../features/table/table.actions';
 
 export function Filters() {
   const dispatch = useDispatch();
   const filtersExpanded = useSelector((state) => state['app'].filtersExpanded);
-  const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const columns = websitesData['columns'];
 
+  // todo: check all useShortcut, should works
   // search
   useShortcut(['CommandOrControl', 'Shift', 'F'], (event) => {
     event.preventDefault();
@@ -31,12 +30,6 @@ export function Filters() {
   }
 
   function onSearchShortcut() {
-    if (!sidebarOpened) {
-      dispatch({
-        type: TOGGLE_SIDEBAR_OPENED,
-        payload: true,
-      });
-    }
     if (!filtersExpanded) {
       dispatch(toggleFiltersExpanded(true));
     }

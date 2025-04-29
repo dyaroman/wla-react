@@ -24,11 +24,9 @@ import { gtmEvents } from '../misc/gtm.constants';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { COLUMNS } from '../misc/columns.constants';
-import { TOGGLE_SIDEBAR_OPENED } from '../features/app/app.constants';
 
 export function Table() {
   const dispatch = useDispatch();
-  const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
   const filtersExpanded = useSelector((state) => state['app'].filtersExpanded);
   const sort = useSelector((state) => state['table'].sort);
   const filters = useSelector((state) => state['table'].filters);
@@ -111,12 +109,7 @@ export function Table() {
       );
       if (!filter) return;
 
-      if (!sidebarOpened) {
-        dispatch({
-          type: TOGGLE_SIDEBAR_OPENED,
-          payload: true,
-        });
-      }
+      // todo: open filter's drawer
       if (!filtersExpanded) {
         dispatch(toggleFiltersExpanded(true));
       }

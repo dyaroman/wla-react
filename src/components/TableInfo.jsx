@@ -19,7 +19,7 @@ export function TableInfo() {
   }, [env, preparedData]);
 
   return (
-    <section className="info">
+    <section className="table-info">
       {env && <h4 data-qa="env">Environment: {env}</h4>}
       {commit && (
         <h4 data-qa="commit">
