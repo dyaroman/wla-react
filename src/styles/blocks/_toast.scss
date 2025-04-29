@@ -2,8 +2,9 @@
 
 .toast {
   position: fixed;
+  // todo: need to check top value, new buttons under header were added
   top: calc(
-    #{variables.$sidebar-height} + 2 * #{variables.$gap} + 34px
+    #{variables.$header-height} + 2 * #{variables.$gap} + 34px
   ); // 34px table row height
   right: variables.$gap;
   z-index: 11;

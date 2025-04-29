@@ -6,8 +6,14 @@
   margin: variables.$gap;
 
   @include breakpoints.media-breakpoint-up(sm) {
+    // header
+    // gap
+    // buttons 44px
+    // gap
+    // table
+    // gap
     max-height: calc(
-      100vh - #{variables.$sidebar-height} - 1rem - 44px - #{variables.$gap}
+      100vh - #{variables.$header-height} - 44px - 3 * #{variables.$gap}
     );
 
     border: variables.$border-width solid var(--border-color);
