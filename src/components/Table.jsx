@@ -69,7 +69,6 @@ export function Table() {
     };
   }, []);
 
-  // todo: i should split this to separate useEffect cause some calculation don't depends on sort change
   useEffect(() => {
     dispatch(filterTable());
   }, [filters]);

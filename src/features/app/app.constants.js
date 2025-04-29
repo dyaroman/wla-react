@@ -9,6 +9,5 @@ export const TOGGLE_IMG_PREVIEW_MODAL = 'app/toggleImgPreviewModal';
 export const TOGGLE_INFO_MODAL_OPENED = 'app/toggleInfoModalOpened';
 export const TOGGLE_SIDEBAR_OPENED = 'app/toggleSidebarOpened';
 export const TOGGLE_TAGS_OPENED = 'app/toggleTagsOpened';
-export const TOGGLE_THEME = 'app/toggleTheme';
 export const UNAUTHORIZED = 'app/unauthorized';
 export const URL_PARAMS_READ = 'app/urlParamsRead';

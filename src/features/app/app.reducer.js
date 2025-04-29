@@ -8,7 +8,6 @@ import {
   TOGGLE_INFO_MODAL_OPENED,
   TOGGLE_SIDEBAR_OPENED,
   TOGGLE_TAGS_OPENED,
-  TOGGLE_THEME,
   UNAUTHORIZED,
   URL_PARAMS_READ,
 } from './app.constants';
@@ -23,7 +22,6 @@ const appInitialState = {
   requestError: null,
   sidebarOpened: false,
   tagsOpened: false,
-  theme: 'light',
   unauthorized: false,
   urlParamsRead: false,
 };
@@ -82,12 +80,6 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         tagsOpened: action.payload,
-      };
-
-    case TOGGLE_THEME:
-      return {
-        ...state,
-        theme: action.payload === 'dark' ? 'dark' : 'light',
       };
 
     case UNAUTHORIZED:
