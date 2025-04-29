@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@redux-devtools/extension": "^3.3.0",
-    "@vitejs/plugin-react": "^4.4.0",
+    "@vitejs/plugin-react": "^4.4.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
