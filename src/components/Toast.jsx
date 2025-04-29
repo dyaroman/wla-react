@@ -14,13 +14,15 @@ export function Toast() {
 
     if (!current && queue.length > 0) {
       const nextToast = queue[0];
-      hideTimer = setTimeout(() => {
-        dispatch(hideToast());
-      }, 5000);
-
       showTimer = setTimeout(() => {
         dispatch(setCurrentToast(nextToast));
       }, 300);
+    }
+
+    if (current) {
+      hideTimer = setTimeout(() => {
+        dispatch(hideToast());
+      }, 5000);
     }
 
     return () => {

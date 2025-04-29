@@ -46,7 +46,6 @@ export function Shortcuts() {
       method: 'copy-websites',
     });
 
-    // todo: check why don't hide after timer?
     dispatch(showToast('websites list copied'));
   });
 
