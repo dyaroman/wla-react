@@ -5,7 +5,7 @@ import { Loader } from './components/Loader';
 import { Table } from './components/Table';
 import { InfoModal } from './components/InfoModal';
 import { ImgPreviewModal } from './components/ImgPreviewModal';
-import { Header } from './components/Sidebar';
+import { Header } from './components/Header';
 import { Toast } from './components/Toast';
 import { Drawer } from './components/Drawer';
 import { TableControls } from './components/TableControls';
