@@ -5,7 +5,7 @@ import { Loader } from './components/Loader';
 import { Table } from './components/Table';
 import { InfoModal } from './components/InfoModal';
 import { ImgPreviewModal } from './components/ImgPreviewModal';
-import { Sidebar } from './components/Sidebar';
+import { Header } from './components/Sidebar';
 import { Toast } from './components/Toast';
 import { Drawer } from './components/Drawer';
 import { TableControls } from './components/TableControls';
@@ -79,7 +79,7 @@ export function App() {
       className="app"
     >
       {/*todo: rename to Header*/}
-      <Sidebar />
+      <Header />
 
       {/*todo: how to name this component?*/}
       <>

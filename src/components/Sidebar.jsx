@@ -13,7 +13,7 @@ import { gtmEvents } from '../misc/gtm.constants';
 import { TOGGLE_SIDEBAR_OPENED } from '../features/app/app.constants';
 
 // todo: replace with Drawer position top
-export function Sidebar() {
+export function Header() {
   const dispatch = useDispatch();
   const sidebarOpened = useSelector((state) => state['app'].sidebarOpened);
 
