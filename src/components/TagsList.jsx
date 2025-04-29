@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThreeStateCheckbox } from './ThreeStateCheckbox';
 import { triggerGtmEvent } from '../misc/functions';
 import { gtmEvents } from '../misc/gtm.constants';
-import { FILTERS_UPDATED } from '../features/table/table.constants';
-import { CHECKBOX_STATES } from '../misc/misc.constants';
+import { TAGS_UPDATED } from '../features/table/table.constants';
+import { CHECKBOX_STATES, EXCLUSION_PREFIX } from '../misc/misc.constants';
 
 export function TagsList({ items }) {
   const dispatch = useDispatch();
-  const tags = useSelector((state) => state['table'].filters.tags);
+  const tags = useSelector((state) => state['table'].tags);
   const availableTags = useSelector((state) => state['table'].availableTags);
 
   function onChange(tag, newState) {
@@ -44,15 +44,13 @@ export function TagsList({ items }) {
           label: tag,
           method: newState,
         });
-        updateTag(`!${tag}`);
+        updateTag(`${EXCLUSION_PREFIX}${tag}`);
         break;
     }
 
     dispatch({
-      type: FILTERS_UPDATED,
-      payload: {
-        tags: updatedTags,
-      },
+      type: TAGS_UPDATED,
+      payload: updatedTags,
     });
   }
 
@@ -66,7 +64,9 @@ export function TagsList({ items }) {
       availableTag.toLowerCase().includes(lowerTag),
     );
     const tagIncludes = tags.some((t) => t.toLowerCase() === lowerTag);
-    const tagExcludes = tags.some((t) => t.toLowerCase() === `!${lowerTag}`);
+    const tagExcludes = tags.some(
+      (t) => t.toLowerCase() === `${EXCLUSION_PREFIX}${lowerTag}`,
+    );
 
     let currentState;
     if (tagIncludes) {

@@ -5,3 +5,4 @@ export const CHECKBOX_STATES = {
   include: 'include',
   exclude: 'exclude',
 };
+export const EXCLUSION_PREFIX = '!';

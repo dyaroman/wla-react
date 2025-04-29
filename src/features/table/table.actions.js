@@ -5,6 +5,7 @@ import {
   SET_WEBSITES_DATA,
   SHOW_COLUMNS_UPDATED,
   SORT_UPDATED,
+  TAGS_UPDATED,
   WEBSITES_DATA_LOADED,
   WEBSITES_DATA_SOURCE,
 } from './table.constants';
@@ -94,19 +95,13 @@ export function getWebsitesData() {
           }
 
           // collect all filters
-          const filters = {
-            ...getState().table.filters,
-          };
-          Object.keys(columns)
-            .filter(
-              (column) =>
-                columns[column]['renderFilter'] &&
-                !getState().table.filters[column],
-            )
-            .forEach((column) => {
-              if (column === COLUMNS.tags) filters[column] = [];
-              else filters[column] = '';
-            });
+          const filters = {};
+          for (const column in columns) {
+            if (!columns[column]['renderFilter']) continue;
+            if (column === COLUMNS.tags) continue;
+
+            filters[column] = '';
+          }
 
           // collect all unique tags
           const allTags = getUniqueTags(websites).sort();
@@ -236,6 +231,7 @@ export function getURLParams() {
     if (!getState().table.websitesDataLoaded) return;
     const newSort = {};
     const newFilters = {};
+    let newTags;
     const sort = getState().table.sort;
     const showColumns = getState().table.showColumns;
     const renderableColumns = getState().table.renderableColumns;
@@ -263,8 +259,9 @@ export function getURLParams() {
             newSort[validatedKey] = value;
             break;
 
+          // tags
           case COLUMNS.tags:
-            newFilters[validatedKey] = value.split(',');
+            newTags = value.split(',');
             break;
 
           default:
@@ -280,6 +277,10 @@ export function getURLParams() {
       dispatch({
         type: FILTERS_UPDATED,
         payload: newFilters,
+      });
+      dispatch({
+        type: TAGS_UPDATED,
+        payload: newTags,
       });
       dispatch(
         updateShowColumns([
@@ -303,9 +304,11 @@ export function filterTable() {
     const autocompleteLists = {};
     const websitesData = getState().table.websitesData;
     const filters = getState().table.filters;
+    const tags = getState().table.tags;
     const filteredData = filterTableData(
       [...websitesData['websites']],
       filters,
+      tags,
     );
 
     Object.keys(filters).map(
@@ -353,8 +356,6 @@ export function resetFilters() {
   return function (dispatch, getState) {
     const filters = {};
     for (const filter in getState().table.filters) {
-      if (filter === COLUMNS.tags) continue;
-
       filters[filter] = '';
     }
     dispatch({
@@ -364,12 +365,11 @@ export function resetFilters() {
   };
 }
 
-// todo: maybe i should move tags from filters to store top level?
 export function resetTags() {
   return function (dispatch) {
     dispatch({
-      type: FILTERS_UPDATED,
-      payload: { tags: [] },
+      type: TAGS_UPDATED,
+      payload: [],
     });
   };
 }

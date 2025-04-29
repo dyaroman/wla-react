@@ -30,6 +30,7 @@ export function Table() {
   const filtersExpanded = useSelector((state) => state['app'].filtersExpanded);
   const sort = useSelector((state) => state['table'].sort);
   const filters = useSelector((state) => state['table'].filters);
+  const tags = useSelector((state) => state['table'].tags);
   const preparedData = useSelector((state) => state['table'].preparedData);
   const showColumns = useSelector((state) => state['table'].showColumns);
   const websitesData = useSelector((state) => state['table'].websitesData);
@@ -69,7 +70,7 @@ export function Table() {
 
   useEffect(() => {
     dispatch(filterTable());
-  }, [filters]);
+  }, [filters, tags]);
 
   useEffect(() => {
     dispatch(sortTable());
@@ -79,11 +80,12 @@ export function Table() {
     dispatch(
       updateURL({
         ...filters,
+        tags,
         ...sort,
         showColumns,
       }),
     );
-  }, [filters, sort, showColumns]);
+  }, [filters, tags, sort, showColumns]);
 
   function onTableBodyClick() {
     searchCell();

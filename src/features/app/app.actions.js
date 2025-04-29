@@ -8,9 +8,8 @@ import {
 export function updateURL(newState) {
   return function (dispatch, getState) {
     if (!getState().app.urlParamsRead) return;
-    if (Object.keys(newState).length === 0) {
-      return;
-    }
+    if (Object.keys(newState).length === 0) return;
+
     const params = new URLSearchParams(window.location.search);
     for (const key in newState) {
       // remove duplicated url keys in wrong case
@@ -20,6 +19,7 @@ export function updateURL(newState) {
           break;
         }
       }
+
       switch (key) {
         case URL_PARAMETERS.showColumns:
         case COLUMNS.tags:

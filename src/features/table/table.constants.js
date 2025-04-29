@@ -1,5 +1,6 @@
 export const COMPUTED_DATA_UPDATED = 'table/computedDataUpdated';
 export const FILTERS_UPDATED = 'table/filtersUpdated';
+export const TAGS_UPDATED = 'table/tagsUpdated';
 export const PREPARED_DATA_UPDATED = 'table/preparedDataUpdated';
 export const SET_WEBSITES_DATA = 'table/setWebsitesData';
 export const SHOW_COLUMNS_UPDATED = 'table/showColumnsUpdated';

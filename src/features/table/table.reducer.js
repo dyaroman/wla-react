@@ -5,12 +5,17 @@ import {
   SET_WEBSITES_DATA,
   SHOW_COLUMNS_UPDATED,
   SORT_UPDATED,
+  TAGS_UPDATED,
   WEBSITES_DATA_LOADED,
   WEBSITES_DATA_SOURCE,
 } from './table.constants';
 
 const tableInitialState = {
   filters: {},
+  // todo: should i use Set instead of Array for tags?
+  tags: [],
+  allTags: [],
+  availableTags: [],
   sort: {
     column: '',
     direction: '',
@@ -23,8 +28,6 @@ const tableInitialState = {
   showColumns: [],
   defaultShowColumns: [],
   renderableColumns: [],
-  allTags: [],
-  availableTags: [],
   autocompleteLists: [],
 };
 
@@ -64,6 +67,12 @@ export function tableReducer(state = tableInitialState, action) {
           ...state.filters,
           ...action.payload,
         },
+      };
+
+    case TAGS_UPDATED:
+      return {
+        ...state,
+        tags: action.payload,
       };
 
     case COMPUTED_DATA_UPDATED:

@@ -1,4 +1,4 @@
-import { NO_DATA } from './misc.constants';
+import { EXCLUSION_PREFIX, NO_DATA } from './misc.constants';
 import { COLUMNS } from './columns.constants';
 
 export function search(where, what) {
@@ -14,7 +14,7 @@ export function search(where, what) {
   }
 }
 
-export function filterTableData(websites, filters) {
+export function filterTableData(websites, filters, tags) {
   return websites.filter((website) => {
     for (const filter in filters) {
       // skip filters that are in the process of typing
@@ -22,27 +22,6 @@ export function filterTableData(websites, filters) {
         continue;
       }
       switch (filter) {
-        case COLUMNS.tags: {
-          const websiteTags = website[filter].map((tag) => tag.toLowerCase());
-
-          const includesAllFilterTags = filters[filter]
-            .filter((tag) => !tag.startsWith('!'))
-            .every((filterTag) =>
-              websiteTags.includes(filterTag.toLowerCase()),
-            );
-
-          const includesExcludedTags = filters[filter]
-            .filter((tag) => tag.startsWith('!'))
-            .some((filterTag) =>
-              websiteTags.includes(filterTag.substring(1).toLowerCase()),
-            );
-
-          if (!includesAllFilterTags || includesExcludedTags) {
-            return false;
-          }
-          break;
-        }
-
         case COLUMNS.pages: {
           if (
             // strict equal
@@ -72,7 +51,28 @@ export function filterTableData(websites, filters) {
       }
     }
 
-    return true;
+    // filter by tags
+    const normalizedWebsiteTags = website[COLUMNS.tags].map((tag) =>
+      tag.toLowerCase(),
+    );
+
+    const requiredTags = tags
+      .filter((tag) => !tag.startsWith(EXCLUSION_PREFIX))
+      .map((tag) => tag.toLowerCase());
+
+    const excludedTags = tags
+      .filter((tag) => tag.startsWith(EXCLUSION_PREFIX))
+      .map((tag) => tag.substring(1).toLowerCase());
+
+    const hasAllRequiredTags = requiredTags.every((tag) =>
+      normalizedWebsiteTags.includes(tag),
+    );
+
+    const hasNoExcludedTags = excludedTags.every(
+      (tag) => !normalizedWebsiteTags.includes(tag),
+    );
+
+    return hasAllRequiredTags && hasNoExcludedTags;
   });
 }
 
