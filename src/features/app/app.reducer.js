@@ -1,8 +1,6 @@
 import {
   REQUEST_ERROR,
-  TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED,
   TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
-  TOGGLE_FILTERS_EXPANDED,
   TOGGLE_FILTERS_OPENED,
   TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL_OPENED,
@@ -14,8 +12,6 @@ import {
 
 const appInitialState = {
   customizationColumnsOpened: false,
-  customizeColumnsExpanded: true,
-  filtersExpanded: true,
   filtersOpened: false,
   imgPreviewUrl: null,
   infoModalOpened: false,
@@ -32,18 +28,6 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         customizationColumnsOpened: action.payload,
-      };
-
-    case TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED:
-      return {
-        ...state,
-        customizeColumnsExpanded: action.payload,
-      };
-
-    case TOGGLE_FILTERS_EXPANDED:
-      return {
-        ...state,
-        filtersExpanded: action.payload,
       };
 
     case TOGGLE_FILTERS_OPENED:

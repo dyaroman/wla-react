@@ -212,3 +212,11 @@ export function findObjectKeyCaseInsensitive(key, obj) {
 export function findArrayElementCaseInsensitive(key, arr) {
   return arr.find((el) => el.toLowerCase() === key.toLowerCase());
 }
+
+export async function handleClipboardCopy(data) {
+  try {
+    await navigator.clipboard.writeText(data);
+  } catch (e) {
+    console.log(`Failed copy data to clipboard`, e.message);
+  }
+}

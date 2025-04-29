@@ -2,16 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Checkbox } from './Checkbox';
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
-import { toggleCustomizationColumnsExpanded } from '../features/app/app.actions';
 import { updateShowColumns } from '../features/table/table.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 
 export function TableControls() {
   const dispatch = useDispatch();
   const showColumns = useSelector((state) => state['table'].showColumns);
-  const customizeColumnsExpanded = useSelector(
-    (state) => state['app'].customizeColumnsExpanded,
-  );
   const renderableColumns = useSelector(
     (state) => state['table'].renderableColumns,
   );
@@ -56,11 +52,6 @@ export function TableControls() {
     triggerGtmEvent(gtmEvents.btn, {
       method: 'restore-default-columns',
     });
-  }
-
-  function onSummaryClick(event) {
-    event.preventDefault();
-    dispatch(toggleCustomizationColumnsExpanded(!customizeColumnsExpanded));
   }
 
   return (

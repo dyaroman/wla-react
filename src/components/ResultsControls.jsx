@@ -1,63 +1,22 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { InfoModalBtn } from './InfoModalBtn';
-import { useShortcut } from '../hooks/useShortcut';
 import {
   convertUrlToEnv,
   getQueryParamValue,
+  handleClipboardCopy,
   triggerGtmEvent,
 } from '../misc/functions';
-import { resetFilters } from '../features/table/table.actions';
-import { showToast } from '../features/toast/toast.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 import { COLUMNS } from '../misc/columns.constants';
 
 export function ResultsControls() {
-  const dispatch = useDispatch();
   const websitesData = useSelector((state) => state['table'].websitesData);
   const preparedData = useSelector((state) => state['table'].preparedData);
   const env = websitesData['env'];
   const convertLinksTo =
     getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
   const convertLinks = convertLinksTo && convertLinksTo !== env;
-
-  // copy websites as comma separated list
-  useShortcut(['CommandOrControl', 'Shift', 'C'], async (event) => {
-    event.preventDefault();
-    await onCopyShortcut();
-    triggerGtmEvent(gtmEvents.shortcut, {
-      method: 'copy-websites',
-    });
-    dispatch(showToast('websites list copied'));
-  });
-
-  // copy websites urls
-  useShortcut(['Shift', 'Alt', 'C'], async (event) => {
-    event.preventDefault();
-    await onCopyWebsitesUrlsClick();
-    triggerGtmEvent(gtmEvents.shortcut, {
-      method: 'copy-websites-url',
-    });
-    dispatch(showToast('websites urls copied'));
-  });
-
-  // clear filters and sort
-  useShortcut(['CommandOrControl', 'Shift', 'E'], (event) => {
-    event.preventDefault();
-    onClearClick();
-    triggerGtmEvent(gtmEvents.shortcut, {
-      method: 'clear-all',
-      label: event.ctrlKey ? 'windows' : 'macos',
-    });
-    dispatch(showToast('filters and sort cleared'));
-  });
-
-  async function onCopyShortcut() {
-    const formattedWebsitesList = preparedData
-      .map((website) => website[COLUMNS.website])
-      .join(',');
-    await handleClipboardCopy(formattedWebsitesList);
-  }
 
   async function onCopyWebsitesUrlsClick() {
     const websitesUrls = preparedData
@@ -70,18 +29,10 @@ export function ResultsControls() {
         return `https://${host}/`;
       })
       .join('\n');
-    await handleClipboardCopy(websitesUrls);
+    handleClipboardCopy(websitesUrls);
 
     triggerGtmEvent(gtmEvents.btn, {
       method: 'copy-websites-urls',
-    });
-  }
-
-  function onClearClick() {
-    dispatch(resetFilters());
-
-    triggerGtmEvent(gtmEvents.btn, {
-      method: 'clear-all',
     });
   }
 
@@ -89,19 +40,11 @@ export function ResultsControls() {
     const formattedWebsitesList = preparedData
       .map((website) => website[COLUMNS.website])
       .join('\n');
-    await handleClipboardCopy(formattedWebsitesList);
+    handleClipboardCopy(formattedWebsitesList);
 
     triggerGtmEvent(gtmEvents.btn, {
       method: 'copy-websites',
     });
-  }
-
-  async function handleClipboardCopy(data) {
-    try {
-      await navigator.clipboard.writeText(data);
-    } catch (e) {
-      console.log(`Error due to copy websites list to clipboard`, e);
-    }
   }
 
   if (preparedData.length === 0) {

@@ -12,6 +12,7 @@ import { TableControls } from './components/TableControls';
 import { Filters } from './components/Filters';
 import { ThemeToggle } from './components/ThemeToggle';
 import { Tags } from './components/Tags';
+import { Shortcuts } from './components/Shortcuts';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 import {
   TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
@@ -76,6 +77,7 @@ export function App() {
     <section data-qa="app" className="app">
       <Header />
       <ThemeToggle />
+      <Shortcuts />
 
       {/*todo: how to name this component?*/}
       <>

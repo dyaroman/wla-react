@@ -1,9 +1,5 @@
 import { URL_PARAMETERS } from '../../misc/url.constants';
 import { COLUMNS } from '../../misc/columns.constants';
-import {
-  TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED,
-  TOGGLE_FILTERS_EXPANDED,
-} from './app.constants';
 
 export function updateURL(newState) {
   return function (dispatch, getState) {
@@ -80,25 +76,5 @@ export function updateURL(newState) {
     } else {
       window.history.replaceState({}, '', `?${params}`);
     }
-  };
-}
-
-// todo: replace with filter's drawer opened toggle
-export function toggleFiltersExpanded(open) {
-  return function (dispatch) {
-    dispatch({
-      type: TOGGLE_FILTERS_EXPANDED,
-      payload: open,
-    });
-  };
-}
-
-// todo: is it need?
-export function toggleCustomizationColumnsExpanded(open) {
-  return function (dispatch) {
-    dispatch({
-      type: TOGGLE_CUSTOMIZATION_COLUMNS_EXPANDED,
-      payload: open,
-    });
   };
 }

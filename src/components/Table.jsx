@@ -12,7 +12,7 @@ import {
   filterTable,
   sortTable,
 } from '../features/table/table.actions';
-import { toggleFiltersExpanded, updateURL } from '../features/app/app.actions';
+import { updateURL } from '../features/app/app.actions';
 import {
   convertUrlToEnv,
   fromCamelCaseToWords,
@@ -24,10 +24,11 @@ import { gtmEvents } from '../misc/gtm.constants';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { COLUMNS } from '../misc/columns.constants';
+import { TOGGLE_FILTERS_OPENED } from '../features/app/app.constants';
 
 export function Table() {
   const dispatch = useDispatch();
-  const filtersExpanded = useSelector((state) => state['app'].filtersExpanded);
+  const filtersOpened = useSelector((state) => state['app'].filtersOpened);
   const sort = useSelector((state) => state['table'].sort);
   const filters = useSelector((state) => state['table'].filters);
   const tags = useSelector((state) => state['table'].tags);
@@ -106,32 +107,37 @@ export function Table() {
 
       if (filterName !== column) continue;
 
-      const filter = document.querySelector(
-        `.filters input[data-qa='${filterName}']`,
-      );
-      if (!filter) return;
-
-      // todo: open filter's drawer
-      if (!filtersExpanded) {
-        dispatch(toggleFiltersExpanded(true));
+      if (!filtersOpened) {
+        dispatch({
+          type: TOGGLE_FILTERS_OPENED,
+          payload: true,
+        });
       }
 
-      let filterValue = '';
-      if (![COLUMNS.pages, COLUMNS.forms].includes(filterName)) {
-        filterValue = cell.innerText.trim();
-      }
+      setTimeout(() => {
+        const filter = document.querySelector(
+          `.filters input[data-qa='${filterName}']`,
+        );
+        if (!filter) return;
 
-      dispatch({
-        type: FILTERS_UPDATED,
-        payload: {
-          [filterName]: filterValue,
-        },
-      });
-      triggerGtmEvent(gtmEvents.tableCellSearch, {
-        filter_name: filterName,
-        filter_value: filterValue,
-      });
-      setTimeout(() => filter.select());
+        let filterValue = '';
+        if (![COLUMNS.pages, COLUMNS.forms].includes(filterName)) {
+          filterValue = cell.innerText.trim();
+        }
+
+        dispatch({
+          type: FILTERS_UPDATED,
+          payload: {
+            [filterName]: filterValue,
+          },
+        });
+        triggerGtmEvent(gtmEvents.tableCellSearch, {
+          filter_name: filterName,
+          filter_value: filterValue,
+        });
+
+        filter.select();
+      }, 300);
     }
   }
 

@@ -6,9 +6,6 @@ import { ResultsControls } from './ResultsControls';
 import { Logo } from './Logo';
 import { Counter } from './Counter';
 import { Drawer } from './Drawer';
-import { triggerGtmEvent } from '../misc/functions';
-import { useShortcut } from '../hooks/useShortcut';
-import { gtmEvents } from '../misc/gtm.constants';
 import { TOGGLE_HEADER_DRAWER_OPENED } from '../features/app/app.constants';
 
 export function Header() {
@@ -16,18 +13,6 @@ export function Header() {
   const headerDrawerOpened = useSelector(
     (state) => state['app'].headerDrawerOpened,
   );
-
-  // toggle header's drawer
-  useShortcut(['CommandOrControl', '/'], (event) => {
-    dispatch({
-      type: TOGGLE_HEADER_DRAWER_OPENED,
-      payload: !headerDrawerOpened,
-    });
-    triggerGtmEvent(gtmEvents.shortcut, {
-      method: 'sidebar-' + (headerDrawerOpened ? 'close' : 'open'),
-      label: event.ctrlKey ? 'windows' : 'macos',
-    });
-  });
 
   function onClose() {
     dispatch({
