@@ -5,7 +5,7 @@
 .table {
   margin: variables.$gap;
 
-  @include breakpoints.media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(sm) {
     max-height: calc(
       100vh - #{variables.$sidebar-height} - 1rem - 44px - #{variables.$gap}
     );
@@ -24,7 +24,7 @@ table {
 
   border-spacing: 0;
 
-  @include breakpoints.media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(sm) {
     display: table;
     width: 100%;
   }
@@ -40,7 +40,7 @@ table ul {
 thead {
   display: none;
 
-  @include breakpoints.media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(sm) {
     display: table-header-group;
   }
 }
@@ -69,7 +69,7 @@ thead th {
     content: '▼';
   }
 
-  @include breakpoints.media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(sm) {
     position: sticky;
     top: 0;
     left: -(variables.$border-width);
@@ -86,18 +86,13 @@ tbody {
   display: grid;
   gap: variables.$gap;
 
-  // todo: instead of two columns cards show table
   @include breakpoints.media-breakpoint-up(sm) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include breakpoints.media-breakpoint-up(lg) {
     display: table-row-group;
   }
 }
 
 tbody td[data-qa='website'] {
-  @include breakpoints.media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(sm) {
     position: sticky;
     left: -(variables.$border-width);
     z-index: 1;
@@ -132,7 +127,7 @@ tr {
     background-color: var(--body-bg);
   }
 
-  @include breakpoints.media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(sm) {
     display: table-row;
 
     border: none;
@@ -148,7 +143,7 @@ tr {
 tr + tr {
   td,
   th {
-    @include breakpoints.media-breakpoint-up(lg) {
+    @include breakpoints.media-breakpoint-up(sm) {
       border-top: variables.$border-width solid var(--border-color);
     }
   }
@@ -174,7 +169,7 @@ td {
     font-weight: 700;
   }
 
-  @include breakpoints.media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(sm) {
     display: table-cell;
     gap: 0;
 
@@ -193,14 +188,14 @@ td + th,
 th + td {
   border-top: variables.$border-width solid var(--border-color);
 
-  @include breakpoints.media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(sm) {
     border-top: none;
   }
 }
 
 td + td,
 th + th {
-  @include breakpoints.media-breakpoint-up(lg) {
+  @include breakpoints.media-breakpoint-up(sm) {
     border-left: variables.$border-width solid var(--border-color);
   }
 }
