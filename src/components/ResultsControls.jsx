@@ -108,7 +108,7 @@ export function ResultsControls() {
   }
 
   return (
-    <div className="btn-group  mt">
+    <div className="btn-group">
       <button
         className="btn"
         onClick={onCopyWebsitesClick}

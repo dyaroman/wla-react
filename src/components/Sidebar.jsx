@@ -50,11 +50,9 @@ export function Sidebar() {
       </div>
       <div className="sidebar__bottom">
         <div className="sidebar__bottom-content">
-          <div className="sidebar__panels">
-            <TableInfo />
-            <ResultsControls />
-            <AppControls />
-          </div>
+          <TableInfo />
+          <ResultsControls />
+          <AppControls />
         </div>
       </div>
     </aside>

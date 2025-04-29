@@ -40,6 +40,11 @@ export function TableInfo() {
           {preparedData.length}
         </h4>
       )}
+      <h4>
+        <a href="./CHANGELOG.md" target="_blank" className="external-link">
+          changelog
+        </a>
+      </h4>
     </section>
   );
 }

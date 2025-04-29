@@ -39,14 +39,3 @@
 .sidebar__bottom-content {
   padding: 0 variables.$gap variables.$gap;
 }
-
-.sidebar__panels {
-  display: flex;
-  flex-direction: column;
-  gap: variables.$gap;
-
-  @include breakpoints.media-breakpoint-up(lg) {
-    display: grid;
-    grid-template-columns: 1fr 290px;
-  }
-}
