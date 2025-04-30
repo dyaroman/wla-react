@@ -32,7 +32,7 @@ export function Shortcuts() {
     getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
   const convertLinks = convertLinksTo && convertLinksTo !== env;
 
-  // copy websites as comma separated list
+  // copy websites as a comma-separated list
   useShortcut(['CommandOrControl', 'Shift', 'C'], async (event) => {
     event.preventDefault();
 
