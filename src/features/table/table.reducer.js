@@ -12,53 +12,30 @@ import {
 } from './table.constants';
 
 const tableInitialState = {
-  filters: {},
-  tags: [],
   allTags: [],
+  autocompleteLists: [],
   availableTags: [],
-  sort: {
-    column: '',
-    direction: '',
-  },
+  defaultShowColumns: [],
+  filters: {},
+  preparedData: [],
+  renderableColumns: [],
+  showColumns: [],
+  sort: { column: '', direction: '' },
+  tags: [],
   websitesData: null,
   websitesDataETag: null,
   websitesDataLoaded: false,
   websitesDataSource: '',
-  preparedData: [],
-  showColumns: [],
-  defaultShowColumns: [],
-  renderableColumns: [],
-  autocompleteLists: [],
 };
 
 export function tableReducer(state = tableInitialState, action) {
-  // todo: reorder in import order
   switch (action.type) {
-    case SET_WEBSITES_DATA:
+    case COMPUTED_DATA_UPDATED:
       return {
         ...state,
-        ...action.payload,
-      };
-
-    case WEBSITES_DATA_LOADED:
-      return {
-        ...state,
-        websitesDataLoaded: action.payload,
-      };
-
-    case WEBSITES_DATA_SOURCE:
-      return {
-        ...state,
-        websitesDataSource: action.payload,
-      };
-
-    case SORT_UPDATED:
-      return {
-        ...state,
-        sort: {
-          ...state.sort,
-          ...action.payload,
-        },
+        availableTags: action.payload.availableTags,
+        autocompleteLists: action.payload.autocompleteLists,
+        preparedData: action.payload.preparedData,
       };
 
     case FILTERS_UPDATED:
@@ -70,30 +47,37 @@ export function tableReducer(state = tableInitialState, action) {
         },
       };
 
-    case TAGS_UPDATED:
-      return {
-        ...state,
-        tags: action.payload,
-      };
-
-    case COMPUTED_DATA_UPDATED:
-      return {
-        ...state,
-        availableTags: action.payload.availableTags,
-        autocompleteLists: action.payload.autocompleteLists,
-        preparedData: action.payload.preparedData,
-      };
-
     case PREPARED_DATA_UPDATED:
       return {
         ...state,
         preparedData: action.payload.preparedData,
       };
 
+    case SET_WEBSITES_DATA:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
     case SHOW_COLUMNS_UPDATED:
       return {
         ...state,
         showColumns: action.payload,
+      };
+
+    case SORT_UPDATED:
+      return {
+        ...state,
+        sort: {
+          ...state.sort,
+          ...action.payload,
+        },
+      };
+
+    case TAGS_UPDATED:
+      return {
+        ...state,
+        tags: action.payload,
       };
 
     case URL_PARAMS_COMBINED_UPDATE:
@@ -109,6 +93,18 @@ export function tableReducer(state = tableInitialState, action) {
         },
         tags: action.payload.tags,
         showColumns: action.payload.showColumns,
+      };
+
+    case WEBSITES_DATA_LOADED:
+      return {
+        ...state,
+        websitesDataLoaded: action.payload,
+      };
+
+    case WEBSITES_DATA_SOURCE:
+      return {
+        ...state,
+        websitesDataSource: action.payload,
       };
 
     default:

@@ -2,9 +2,9 @@ import {
   REQUEST_ERROR,
   TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
   TOGGLE_FILTERS_OPENED,
+  TOGGLE_HEADER_DRAWER_OPENED,
   TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL_OPENED,
-  TOGGLE_HEADER_DRAWER_OPENED,
   TOGGLE_TAGS_OPENED,
   UNAUTHORIZED,
   URL_PARAMS_READ,
@@ -13,10 +13,10 @@ import {
 const appInitialState = {
   customizationColumnsOpened: false,
   filtersOpened: false,
+  headerDrawerOpened: false,
   imgPreviewUrl: null,
   infoModalOpened: false,
   requestError: null,
-  headerDrawerOpened: false,
   tagsOpened: false,
   unauthorized: false,
   urlParamsRead: false,
@@ -24,6 +24,12 @@ const appInitialState = {
 
 export function appReducer(state = appInitialState, action) {
   switch (action.type) {
+    case REQUEST_ERROR:
+      return {
+        ...state,
+        requestError: action.payload,
+      };
+
     case TOGGLE_CUSTOMIZATION_COLUMNS_OPENED:
       return {
         ...state,
@@ -36,6 +42,12 @@ export function appReducer(state = appInitialState, action) {
         filtersOpened: action.payload,
       };
 
+    case TOGGLE_HEADER_DRAWER_OPENED:
+      return {
+        ...state,
+        headerDrawerOpened: action.payload,
+      };
+
     case TOGGLE_IMG_PREVIEW_MODAL:
       return {
         ...state,
@@ -46,18 +58,6 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         infoModalOpened: action.payload,
-      };
-
-    case REQUEST_ERROR:
-      return {
-        ...state,
-        requestError: action.payload,
-      };
-
-    case TOGGLE_HEADER_DRAWER_OPENED:
-      return {
-        ...state,
-        headerDrawerOpened: action.payload,
       };
 
     case TOGGLE_TAGS_OPENED:

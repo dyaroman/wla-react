@@ -1,18 +1,12 @@
 import { HIDE_TOAST, SET_CURRENT_TOAST, SHOW_TOAST } from './toast.constants';
 
 const toastInitialState = {
-  queue: [],
   current: null,
+  queue: [],
 };
 
 export function toastReducer(state = toastInitialState, action) {
   switch (action.type) {
-    case SHOW_TOAST:
-      return {
-        ...state,
-        queue: [...state.queue, action.payload],
-      };
-
     case HIDE_TOAST:
       return {
         ...state,
@@ -24,6 +18,12 @@ export function toastReducer(state = toastInitialState, action) {
       return {
         ...state,
         current: action.payload,
+      };
+
+    case SHOW_TOAST:
+      return {
+        ...state,
+        queue: [...state.queue, action.payload],
       };
 
     default:
