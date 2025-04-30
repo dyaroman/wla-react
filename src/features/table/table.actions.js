@@ -6,6 +6,7 @@ import {
   SHOW_COLUMNS_UPDATED,
   SORT_UPDATED,
   TAGS_UPDATED,
+  URL_PARAMS_COMBINED_UPDATE,
   WEBSITES_DATA_LOADED,
   WEBSITES_DATA_SOURCE,
 } from './table.constants';
@@ -269,28 +270,27 @@ export function getURLParams() {
             break;
         }
       }
-      // todo: join those two dispatches to one
+      // Combined dispatch for all URL parameters
+      const combinedShowColumns = Array.from(
+        new Set([...showColumns, ...sortedColumns, ...Object.keys(newFilters)]),
+      )
+        .filter((column) => renderableColumns.includes(column))
+        // todo: move sort to reducer
+        .sort(
+          (a, b) =>
+            Object.keys(getState().table.websitesData.columns).indexOf(a) -
+            Object.keys(getState().table.websitesData.columns).indexOf(b),
+        );
+
       dispatch({
-        type: SORT_UPDATED,
-        payload: newSort,
+        type: URL_PARAMS_COMBINED_UPDATE,
+        payload: {
+          sort: newSort,
+          filters: newFilters,
+          tags: newTags,
+          showColumns: combinedShowColumns,
+        },
       });
-      dispatch({
-        type: FILTERS_UPDATED,
-        payload: newFilters,
-      });
-      dispatch({
-        type: TAGS_UPDATED,
-        payload: newTags,
-      });
-      dispatch(
-        updateShowColumns([
-          ...new Set([
-            ...showColumns,
-            ...sortedColumns,
-            ...Object.keys(newFilters),
-          ]),
-        ]),
-      );
     }
     dispatch({
       type: URL_PARAMS_READ,
