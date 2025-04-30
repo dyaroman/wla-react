@@ -1,21 +1,18 @@
-import { HIDE_TOAST, SET_CURRENT_TOAST, SHOW_TOAST } from './toast.constants';
+import { HIDE_TOAST, SHOW_TOAST } from './toast.constants';
 
-export function showToast(message) {
+export function showToast(message, type = 'default') {
   return {
     type: SHOW_TOAST,
-    payload: message,
+    payload: {
+      message,
+      type,
+      id: `${Date.now()}-${Math.random()}`,
+    },
   };
 }
 
 export function hideToast() {
   return {
     type: HIDE_TOAST,
-  };
-}
-
-export function setCurrentToast(toast) {
-  return {
-    type: SET_CURRENT_TOAST,
-    payload: toast,
   };
 }

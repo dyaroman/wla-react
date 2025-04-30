@@ -46,7 +46,7 @@ export function Shortcuts() {
       method: 'copy-websites',
     });
 
-    dispatch(showToast('websites list copied'));
+    dispatch(showToast('websites list copied', 'success'));
   });
 
   // copy websites urls
@@ -70,7 +70,7 @@ export function Shortcuts() {
       method: 'copy-websites-urls',
     });
 
-    dispatch(showToast('websites urls copied'));
+    dispatch(showToast('websites urls copied', 'success'));
   });
 
   // clear filters and sort
@@ -84,7 +84,7 @@ export function Shortcuts() {
       label: event.ctrlKey ? 'windows' : 'macos',
     });
 
-    dispatch(showToast('filters and sort cleared'));
+    dispatch(showToast('filters and sort cleared', 'success'));
   });
 
   // toggle header's drawer

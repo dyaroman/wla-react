@@ -1,20 +1,24 @@
 @use '../misc/variables';
 
-.toast {
+.toast-container {
   position: fixed;
-  top: calc(
-    #{variables.$header-height} + #{variables.$gap}
-  ); // 34px table row height
+  top: calc(#{variables.$header-height} + #{variables.$gap});
   right: variables.$gap;
   z-index: 11;
 
+  display: flex;
+  flex-direction: column;
+  gap: variables.$gap;
+}
+
+.toast {
   padding: variables.$gap;
   max-width: 16rem;
   min-height: 36px;
 
   color: var(--body-color);
 
-  border: variables.$border-width solid var(--body-color);
+  border: variables.$border-width solid var(--border-color);
   background-color: var(--body-bg);
   box-shadow: 2 * variables.$border-width 2 * variables.$border-width
     var(--body-color);
@@ -23,14 +27,21 @@
   transition:
     transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     opacity 0.3s ease;
-}
+  pointer-events: none;
 
-.toast.show {
-  transform: translateX(0);
-  opacity: 1;
-}
+  &--success {
+    color: variables.$success;
 
-.toast.hide {
-  transform: translateX(100%);
-  opacity: 0;
+    border-color: variables.$success;
+  }
+
+  &.show {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  &.hide {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }

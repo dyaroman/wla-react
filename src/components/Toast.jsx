@@ -2,56 +2,76 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { hideToast, setCurrentToast } from '../features/toast/toast.actions';
+import { hideToast } from '../features/toast/toast.actions';
 
 export function Toast() {
   const dispatch = useDispatch();
   const queue = useSelector((state) => state.toast.queue);
-  const current = useSelector((state) => state.toast.current);
-  const [visible, setVisible] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const activeToasts = useSelector((state) => state.toast.active);
+  const [visibleToasts, setVisibleToasts] = useState({});
 
   useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
+    // Process new toasts that have been added
+    activeToasts.forEach((toast) => {
+      // Only set up timers for toasts that don't already have a visibility state
+      if (visibleToasts[toast.id] === undefined) {
+        // Set toast to visible
+        setVisibleToasts((prev) => ({
+          ...prev,
+          [toast.id]: true,
+        }));
 
-  useEffect(() => {
-    let hideTimer, showTimer;
-
-    if (!current && queue.length > 0) {
-      const nextToast = queue[0];
-      showTimer = setTimeout(() => {
-        dispatch(setCurrentToast(nextToast));
-      }, 300);
-    }
-
-    if (current) {
-      setVisible(true);
-      hideTimer = setTimeout(() => {
-        setVisible(false);
+        // Set a timer to hide this specific toast
         setTimeout(() => {
-          dispatch(hideToast());
-        }, 300); // Wait for animation to complete before hiding
-      }, 5000);
-    }
+          setVisibleToasts((prev) => ({
+            ...prev,
+            [toast.id]: false,
+          }));
 
-    return () => {
-      clearTimeout(hideTimer);
-      clearTimeout(showTimer);
-    };
-  }, [queue, current, dispatch]);
+          // Wait for animation to complete before removing
+          setTimeout(() => {
+            dispatch(hideToast());
+          }, 300);
+        }, 5000);
+      }
+    });
 
-  // Don't render anything if there's no toast and no queue
-  if (!current && queue.length === 0) {
+    // Clean up the visibility state for toasts that are no longer active
+    setVisibleToasts((prev) => {
+      const newState = { ...prev };
+      Object.keys(newState).forEach((id) => {
+        if (!activeToasts.some((toast) => toast.id === id)) {
+          delete newState[id];
+        }
+      });
+      return newState;
+    });
+  }, [activeToasts, dispatch]);
+
+  // Don't render anything if there are no active toasts and no queue
+  if (activeToasts.length === 0 && queue.length === 0) {
     return null;
   }
 
   // Use createPortal to render to body
-  return mounted
-    ? createPortal(
-        <div className={`toast ${visible ? 'show' : 'hide'}`}>{current}</div>,
-        document.body,
-      )
-    : null;
+  return createPortal(
+    <div className="toast-container">
+      {activeToasts.map((toast) => {
+        const toastId = toast.id;
+        const isVisible = visibleToasts[toastId];
+        const toastType = toast.type || 'default';
+        const message = typeof toast === 'string' ? toast : toast.message;
+
+        return (
+          <div
+            key={toastId}
+            className={`toast ${toastType === 'default' ? '' : `toast--${toastType}`} ${isVisible ? 'show' : 'hide'}`}
+          >
+            {message}
+          </div>
+        );
+      })}
+    </div>,
+    document.body,
+  );
 }
