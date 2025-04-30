@@ -220,3 +220,13 @@ export async function handleClipboardCopy(data) {
     console.log(`Failed copy data to clipboard`, e.message);
   }
 }
+
+export function filterAndSortColumns(columns, state) {
+  return columns
+    .filter((column) => state.renderableColumns.includes(column))
+    .sort(
+      (a, b) =>
+        Object.keys(state.websitesData.columns).indexOf(a) -
+        Object.keys(state.websitesData.columns).indexOf(b),
+    );
+}

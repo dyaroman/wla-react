@@ -10,6 +10,7 @@ import {
   WEBSITES_DATA_LOADED,
   WEBSITES_DATA_SOURCE,
 } from './table.constants';
+import { filterAndSortColumns } from '../../misc/functions';
 
 const tableInitialState = {
   allTags: [],
@@ -62,13 +63,7 @@ export function tableReducer(state = tableInitialState, action) {
     case SHOW_COLUMNS_UPDATED:
       return {
         ...state,
-        showColumns: action.payload
-          .filter((column) => state.renderableColumns.includes(column))
-          .sort(
-            (a, b) =>
-              Object.keys(state.websitesData.columns).indexOf(a) -
-              Object.keys(state.websitesData.columns).indexOf(b),
-          ),
+        showColumns: filterAndSortColumns(action.payload, state),
       };
 
     case SORT_UPDATED:
@@ -98,13 +93,7 @@ export function tableReducer(state = tableInitialState, action) {
           ...action.payload.filters,
         },
         tags: action.payload.tags,
-        showColumns: action.payload.showColumns
-          .filter((column) => state.renderableColumns.includes(column))
-          .sort(
-            (a, b) =>
-              Object.keys(state.websitesData.columns).indexOf(a) -
-              Object.keys(state.websitesData.columns).indexOf(b),
-          ),
+        showColumns: filterAndSortColumns(action.payload.showColumns, state),
       };
 
     case WEBSITES_DATA_LOADED:
