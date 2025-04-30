@@ -270,17 +270,9 @@ export function getURLParams() {
             break;
         }
       }
-      // Combined dispatch for all URL parameters
       const combinedShowColumns = Array.from(
         new Set([...showColumns, ...sortedColumns, ...Object.keys(newFilters)]),
-      )
-        .filter((column) => renderableColumns.includes(column))
-        // todo: move sort to reducer
-        .sort(
-          (a, b) =>
-            Object.keys(getState().table.websitesData.columns).indexOf(a) -
-            Object.keys(getState().table.websitesData.columns).indexOf(b),
-        );
+      );
 
       dispatch({
         type: URL_PARAMS_COMBINED_UPDATE,
@@ -388,18 +380,10 @@ export function resetSort() {
 }
 
 export function updateShowColumns(showColumns) {
-  return function (dispatch, getState) {
-    const columns = getState().table.websitesData.columns;
-    const renderableColumns = getState().table.renderableColumns;
-
+  return function (dispatch) {
     dispatch({
       type: SHOW_COLUMNS_UPDATED,
-      payload: showColumns
-        .filter((column) => renderableColumns.includes(column))
-        .sort(
-          (a, b) =>
-            Object.keys(columns).indexOf(a) - Object.keys(columns).indexOf(b),
-        ),
+      payload: showColumns,
     });
   };
 }
