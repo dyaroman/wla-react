@@ -10,7 +10,7 @@
   width: 100%;
   height: 100%;
 
-  background-color: var(--drawer-backdrop);
+  background-color: var(--backdrop);
 }
 
 .drawer-container {
@@ -25,7 +25,7 @@
   height: 100%;
 
   background-color: var(--body-bg);
-  box-shadow: var(--drawer-shadow);
+  box-shadow: var(--shadow);
 
   @include mixins.focus;
 }
@@ -87,141 +87,4 @@
   padding: 2 * variables.$gap;
 
   overflow-y: auto;
-
-  // broke filter's label margin
-  //:first-child {
-  //  margin: 0;
-  //}
-}
-
-.drawer-fade-in {
-  animation: drawerFadeIn 0.3s ease forwards;
-}
-
-.drawer-fade-out {
-  animation: drawerFadeOut 0.3s ease forwards;
-}
-
-.drawer-slide-right-in {
-  animation: drawerSlideRightIn 0.3s ease forwards;
-}
-
-.drawer-slide-right-out {
-  animation: drawerSlideRightOut 0.3s ease forwards;
-}
-
-.drawer-slide-left-in {
-  animation: drawerSlideLeftIn 0.3s ease forwards;
-}
-
-.drawer-slide-left-out {
-  animation: drawerSlideLeftOut 0.3s ease forwards;
-}
-
-.drawer-slide-top-in {
-  animation: drawerSlideTopIn 0.3s ease forwards;
-}
-
-.drawer-slide-top-out {
-  animation: drawerSlideTopOut 0.3s ease forwards;
-}
-
-.drawer-slide-bottom-in {
-  animation: drawerSlideBottomIn 0.3s ease forwards;
-}
-
-.drawer-slide-bottom-out {
-  animation: drawerSlideBottomOut 0.3s ease forwards;
-}
-
-// In animations
-@keyframes drawerFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes drawerSlideRightIn {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes drawerSlideLeftIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes drawerSlideTopIn {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes drawerSlideBottomIn {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-// Out animations
-@keyframes drawerFadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes drawerSlideRightOut {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes drawerSlideLeftOut {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-@keyframes drawerSlideTopOut {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100%);
-  }
-}
-
-@keyframes drawerSlideBottomOut {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(100%);
-  }
 }

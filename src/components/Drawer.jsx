@@ -133,8 +133,8 @@ export function Drawer({
   if (!isVisible && !isOpen) return null;
 
   // Determine animation class
-  const backdropClass = `drawer-backdrop ${isOpen ? 'drawer-fade-in' : 'drawer-fade-out'}`;
-  const drawerClass = `drawer-container drawer-${position} ${isOpen ? `drawer-slide-${position}-in` : `drawer-slide-${position}-out`}`;
+  const backdropClass = `drawer-backdrop ${isOpen ? 'fade-in' : 'fade-out'}`;
+  const drawerClass = `drawer-container drawer-${position} ${isOpen ? `slide-${position}-in` : `slide-${position}-out`}`;
 
   // Drawer content
   const drawerContent = (

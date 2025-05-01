@@ -1,0 +1,70 @@
+@use '../misc/variables';
+@use '../misc/mixins';
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: variables.$header-height variables.$gap variables.$gap;
+
+  opacity: 0;
+  background-color: var(--backdrop);
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  width: auto;
+  max-width: 90%;
+  max-height: 90%;
+
+  line-height: 1.2;
+  word-break: break-word;
+
+  border: variables.$border-width solid var(--border-color);
+  background-color: var(--body-bg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+
+  @include mixins.focus;
+
+  li + li {
+    margin-top: variables.$gap;
+  }
+}
+
+.modal__content-inner {
+  padding: variables.$gap;
+  max-height: 70vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: variables.$gap;
+
+  border-bottom: variables.$border-width solid var(--border-color);
+}
+
+.modal__title {
+  margin: 0;
+}

@@ -92,7 +92,7 @@ export function InfoModal() {
           <li>
             <code>==</code> use for exact match, ex: "
             {fromCamelCaseToWords(COLUMNS.pages)}" <code>==sc</code> show all
-            websites that has "sc" page, without semimatch like "credit-
+            websites that has "sc" page, without semi match like "credit-
             <b>sc</b>ore"
           </li>
           <li>

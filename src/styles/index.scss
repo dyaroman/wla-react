@@ -4,6 +4,7 @@
 @use 'misc/breakpoints';
 @use 'misc/mixins';
 @use 'misc/common';
+@use 'misc/animations';
 
 @use 'blocks/header';
 @use 'blocks/logo';
@@ -29,6 +30,7 @@
 @use 'blocks/primary-color';
 @use 'blocks/color-preview';
 @use 'blocks/drawer';
+@use 'blocks/modal';
 @use 'blocks/external-link';
 @use 'blocks/table-info';
 
