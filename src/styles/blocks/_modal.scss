@@ -42,7 +42,7 @@
 }
 
 .modal__content-inner {
-  padding: variables.$gap;
+  padding: 2 * variables.$gap;
   max-height: 70vh;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -60,7 +60,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: variables.$gap;
+  min-height: variables.$header-height;
+  padding: 2 * variables.$gap;
 
   border-bottom: variables.$border-width solid var(--border-color);
 }

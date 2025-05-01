@@ -62,6 +62,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: variables.$header-height;
   padding: variables.$gap 2 * variables.$gap;
 
   border-bottom: variables.$border-width solid var(--border-color);

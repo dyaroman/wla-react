@@ -34,7 +34,7 @@ export function Header() {
         isOpen={headerDrawerOpened}
         onClose={onClose}
         maxSize="300px"
-        showHeader={false}
+        title="Sidebar"
       >
         <TableInfo />
         {/*todo: rename this component*/}

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Loader } from './components/Loader';
 import { Table } from './components/Table';
-import { InfoModal } from './components/InfoModal';
 import { ImgPreviewModal } from './components/ImgPreviewModal';
 import { Header } from './components/Header';
 import { Toast } from './components/Toast';
@@ -166,7 +165,6 @@ export function App() {
       </>
 
       <Table />
-      <InfoModal />
       <ImgPreviewModal />
       <Toast />
     </section>
