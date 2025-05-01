@@ -333,6 +333,8 @@ export function sortTable() {
       if (sort.direction === 'desc') {
         sortedData = sortedData.reverse();
       }
+    } else {
+      sortedData = sortTableData(sortedData, COLUMNS.website);
     }
 
     dispatch({
@@ -366,7 +368,6 @@ export function resetTags() {
   };
 }
 
-// todo: resetSort function here
 export function resetSort() {
   return function (dispatch) {
     dispatch({

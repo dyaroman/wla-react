@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Checkbox } from './Checkbox';
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
-import { updateShowColumns } from '../features/table/table.actions';
+import { resetSort, updateShowColumns } from '../features/table/table.actions';
 import { gtmEvents } from '../misc/gtm.constants';
 
 export function TableControls() {
@@ -54,6 +54,13 @@ export function TableControls() {
     });
   }
 
+  function onClickResetSort() {
+    dispatch(resetSort());
+    triggerGtmEvent(gtmEvents.btn, {
+      method: 'reset-sort',
+    });
+  }
+
   return (
     <section className="table-controls">
       <div className="btn-group">
@@ -72,11 +79,18 @@ export function TableControls() {
           hide all
         </button>
         <button
-          className="btn"
+          className="btn  btn--danger"
           onClick={onClickRestoreDefaultColumns}
           data-qa="restoreDefaultColumns"
         >
           restore default
+        </button>
+        <button
+          className="btn  btn--danger"
+          onClick={onClickResetSort}
+          data-qa="resetSort"
+        >
+          reset sort
         </button>
       </div>
       <ul className="customize-columns">
