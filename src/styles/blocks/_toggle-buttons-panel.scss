@@ -1,0 +1,18 @@
+@use '../misc/variables';
+@use '../misc/breakpoints';
+
+.toggle-buttons-panel {
+  margin: variables.$gap;
+
+  display: flex;
+  flex-direction: column;
+  gap: variables.$gap;
+
+  @include breakpoints.media-breakpoint-up(md) {
+    flex-direction: row;
+
+    .btn {
+      flex-grow: 1;
+    }
+  }
+}

@@ -5,18 +5,10 @@ import { Loader } from './components/Loader';
 import { Table } from './components/Table';
 import { Header } from './components/Header';
 import { Toast } from './components/Toast';
-import { Drawer } from './components/Drawer';
-import { TableControls } from './components/TableControls';
-import { Filters } from './components/Filters';
+import { ToggleButtonsPanel } from './components/ToggleButtonsPanel';
 import { ThemeToggle } from './components/ThemeToggle';
-import { Tags } from './components/Tags';
 import { Shortcuts } from './components/Shortcuts';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
-import {
-  TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
-  TOGGLE_FILTERS_OPENED,
-  TOGGLE_TAGS_OPENED,
-} from './features/app/app.constants';
 
 export function App() {
   const dispatch = useDispatch();
@@ -25,11 +17,6 @@ export function App() {
   const websitesDataLoaded = useSelector(
     (state) => state['table'].websitesDataLoaded,
   );
-  const customizationColumnsOpened = useSelector(
-    (state) => state['app'].customizationColumnsOpened,
-  );
-  const filtersOpened = useSelector((state) => state['app'].filtersOpened);
-  const tagsOpened = useSelector((state) => state['app'].tagsOpened);
 
   useEffect(() => {
     dispatch(getWebsitesData());
@@ -76,93 +63,7 @@ export function App() {
       <Header />
       <ThemeToggle />
       <Shortcuts />
-
-      {/*todo: how to name this component?*/}
-      <>
-        <div className="foo">
-          <button
-            onClick={() =>
-              dispatch({
-                type: TOGGLE_FILTERS_OPENED,
-                payload: true,
-              })
-            }
-            className="btn"
-          >
-            filters
-          </button>
-
-          <button
-            onClick={() =>
-              dispatch({
-                type: TOGGLE_TAGS_OPENED,
-                payload: true,
-              })
-            }
-            className="btn"
-          >
-            tags
-          </button>
-
-          <button
-            onClick={() =>
-              dispatch({
-                type: TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
-                payload: true,
-              })
-            }
-            className="btn"
-          >
-            customize columns
-          </button>
-        </div>
-
-        <Drawer
-          isOpen={filtersOpened}
-          onClose={() =>
-            dispatch({
-              type: TOGGLE_FILTERS_OPENED,
-              payload: false,
-            })
-          }
-          title="Filters"
-          position="left"
-          maxSize="320px"
-        >
-          <Filters />
-        </Drawer>
-
-        <Drawer
-          isOpen={tagsOpened}
-          onClose={() =>
-            dispatch({
-              type: TOGGLE_TAGS_OPENED,
-              payload: false,
-            })
-          }
-          title="Tags"
-          position="right"
-          maxSize="320px"
-        >
-          <Tags />
-        </Drawer>
-
-        <Drawer
-          isOpen={customizationColumnsOpened}
-          onClose={() =>
-            dispatch({
-              type: TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
-              payload: false,
-            })
-          }
-          title="Customize columns"
-          position="right"
-          maxSize="320px"
-        >
-          <TableControls />
-        </Drawer>
-      </>
-
+      <ToggleButtonsPanel />
       <Table />
       <Toast />
     </section>

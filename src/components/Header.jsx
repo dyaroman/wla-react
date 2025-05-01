@@ -37,7 +37,6 @@ export function Header() {
         title="Sidebar"
       >
         <TableInfo />
-        {/*todo: rename this component*/}
         <ResultsControls />
       </Drawer>
     </header>
