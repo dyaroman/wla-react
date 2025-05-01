@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { Loader } from './Loader';
-import { TOGGLE_IMG_PREVIEW_MODAL } from '../features/app/app.constants';
+import { Modal } from './Modal';
 
 export function ImgCell({ sources = [] }) {
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [previewLoading, setPreviewLoading] = useState(false);
+  const [previewSource, setPreviewSource] = useState(null);
 
   function onClickPreview(event) {
-    dispatch({
-      type: TOGGLE_IMG_PREVIEW_MODAL,
-      payload: event.target.src,
-    });
+    setPreviewLoading(true);
+    setPreviewSource(event.target.src);
+  }
+
+  function onModalClose() {
+    setPreviewLoading(false);
+    setPreviewSource(null);
   }
 
   function onKeypress(event) {
@@ -26,23 +29,43 @@ export function ImgCell({ sources = [] }) {
   }, []);
 
   return (
-    <div className="images">
-      {loading && <Loader />}
-      {sources.map((src) => (
-        <img
-          key={src}
-          src={src}
-          onClick={onClickPreview}
-          onKeyDown={onKeypress}
-          onLoad={() => setLoading(false)}
-          onError={() => setLoading(false)}
-          style={{ opacity: loading ? 0 : 1 }}
-          className="images__item"
-          loading="lazy"
-          alt=""
-          tabIndex="0"
-        />
-      ))}
-    </div>
+    <>
+      <div className="images">
+        {loading && <Loader />}
+        {sources.map((src) => (
+          <img
+            key={src}
+            src={src}
+            onClick={onClickPreview}
+            onKeyDown={onKeypress}
+            onLoad={() => setLoading(false)}
+            onError={() => setLoading(false)}
+            style={{ opacity: loading ? 0 : 1 }}
+            className="images__item"
+            loading="lazy"
+            alt=""
+            tabIndex="0"
+          />
+        ))}
+      </div>
+
+      <Modal
+        isOpen={!!previewSource}
+        onClose={onModalClose}
+        title={previewSource}
+      >
+        <div className="images">
+          {previewLoading && <Loader />}
+          <img
+            src={previewSource}
+            alt=""
+            onLoad={() => setPreviewLoading(false)}
+            onError={() => setPreviewLoading(false)}
+            style={{ opacity: previewLoading ? 0 : 1 }}
+            className={previewLoading ? 'images__item' : ''}
+          />
+        </div>
+      </Modal>
+    </>
   );
 }
