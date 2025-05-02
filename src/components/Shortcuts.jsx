@@ -73,7 +73,7 @@ export function Shortcuts() {
     dispatch(showToast('websites urls copied', 'success'));
   });
 
-  // clear filters and sort
+  // clear filters
   useShortcut(['CommandOrControl', 'Shift', 'E'], (event) => {
     event.preventDefault();
 
@@ -84,7 +84,7 @@ export function Shortcuts() {
       label: event.ctrlKey ? 'windows' : 'macos',
     });
 
-    dispatch(showToast('filters and sort cleared', 'success'));
+    dispatch(showToast('filters cleared', 'success'));
   });
 
   // toggle header's drawer
