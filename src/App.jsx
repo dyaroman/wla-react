@@ -8,6 +8,7 @@ import { Toast } from './components/Toast';
 import { ToggleButtonsPanel } from './components/ToggleButtonsPanel';
 import { ThemeToggle } from './components/ThemeToggle';
 import { Shortcuts } from './components/Shortcuts';
+import { InfoModal } from './components/InfoModal';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
@@ -66,6 +67,7 @@ export function App() {
       <ToggleButtonsPanel />
       <Table />
       <Toast />
+      <InfoModal />
     </section>
   );
 }

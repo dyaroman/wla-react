@@ -103,11 +103,9 @@ export function Shortcuts() {
   useShortcut(['Shift', '/'], (event) => {
     event.preventDefault();
 
-    if (infoModalOpened) return;
-
     dispatch({
       type: TOGGLE_INFO_MODAL_OPENED,
-      payload: true,
+      payload: !infoModalOpened,
     });
 
     triggerGtmEvent(gtmEvents.openInfoModal);
