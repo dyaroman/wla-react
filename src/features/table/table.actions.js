@@ -274,6 +274,10 @@ export function getURLParams() {
         new Set([...showColumns, ...sortedColumns, ...Object.keys(newFilters)]),
       );
 
+      if (newTags.length > 0) {
+        combinedShowColumns.push(COLUMNS.tags);
+      }
+
       dispatch({
         type: URL_PARAMS_COMBINED_UPDATE,
         payload: {
