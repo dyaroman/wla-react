@@ -21,7 +21,11 @@ export function Filters() {
   return (
     <div className="filters">
       <div className="filters__content">
-        <button className="btn  btn--danger" onClick={onResetFilters}>
+        <button
+          className="btn  btn--danger"
+          onClick={onResetFilters}
+          data-qa="resetFilters"
+        >
           reset filters
         </button>
 
