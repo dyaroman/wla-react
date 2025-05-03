@@ -13,7 +13,7 @@
   background-color: var(--backdrop);
 }
 
-.drawer-container {
+.drawer {
   position: fixed;
   z-index: 100;
 
@@ -28,37 +28,37 @@
   box-shadow: var(--shadow);
 
   @include mixins.focus;
+
+  &--top {
+    top: 0;
+    left: 0;
+
+    border-bottom: variables.$border-width solid var(--border-color);
+  }
+
+  &--right {
+    top: 0;
+    right: 0;
+
+    border-left: variables.$border-width solid var(--border-color);
+  }
+
+  &--bottom {
+    bottom: 0;
+    left: 0;
+
+    border-top: variables.$border-width solid var(--border-color);
+  }
+
+  &--left {
+    top: 0;
+    left: 0;
+
+    border-right: variables.$border-width solid var(--border-color);
+  }
 }
 
-.drawer-top {
-  top: 0;
-  left: 0;
-
-  border-bottom: variables.$border-width solid var(--border-color);
-}
-
-.drawer-right {
-  top: 0;
-  right: 0;
-
-  border-left: variables.$border-width solid var(--border-color);
-}
-
-.drawer-bottom {
-  bottom: 0;
-  left: 0;
-
-  border-top: variables.$border-width solid var(--border-color);
-}
-
-.drawer-left {
-  top: 0;
-  left: 0;
-
-  border-right: variables.$border-width solid var(--border-color);
-}
-
-.drawer-header {
+.drawer__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -68,11 +68,11 @@
   border-bottom: variables.$border-width solid var(--border-color);
 }
 
-.drawer-title {
+.drawer__title {
   margin: 0;
 }
 
-.drawer-close {
+.drawer__close {
   padding: 4px 8px;
 
   font-size: 22px;
@@ -83,7 +83,7 @@
   cursor: pointer;
 }
 
-.drawer-content {
+.drawer__content {
   flex: 1;
   padding: 2 * variables.$gap;
 

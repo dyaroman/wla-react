@@ -134,7 +134,7 @@ export function Drawer({
 
   // Determine animation class
   const backdropClass = `drawer-backdrop ${isOpen ? 'fade-in' : 'fade-out'}`;
-  const drawerClass = `drawer-container drawer-${position} ${isOpen ? `slide-${position}-in` : `slide-${position}-out`}`;
+  const drawerClass = `drawer drawer--${position} ${isOpen ? `slide-${position}-in` : `slide-${position}-out`}`;
 
   // Drawer content
   const drawerContent = (
@@ -161,12 +161,12 @@ export function Drawer({
         }}
       >
         {showHeader && (
-          <div className="drawer-header">
-            <h3 className="drawer-title" id="drawer-title">
+          <div className="drawer__header">
+            <h3 className="drawer__title" id="drawer-title">
               {title}
             </h3>
             <button
-              className="drawer-close"
+              className="drawer__close"
               onClick={onClose}
               aria-label="Close"
             >
@@ -174,7 +174,7 @@ export function Drawer({
             </button>
           </div>
         )}
-        <div className="drawer-content">{children}</div>
+        <div className="drawer__content">{children}</div>
       </div>
     </>
   );
