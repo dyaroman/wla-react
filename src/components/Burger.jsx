@@ -19,6 +19,7 @@ export function Burger() {
     <button
       className={'burger' + (headerDrawerOpened ? ' burger--open' : '')}
       onClick={onClick}
+      data-qa="burger"
     >
       <span />
       <span />

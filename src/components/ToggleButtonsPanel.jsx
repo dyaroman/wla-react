@@ -29,6 +29,7 @@ export function ToggleButtonsPanel() {
             })
           }
           className="btn"
+          data-qa="filters"
         >
           filters
         </button>
@@ -41,6 +42,7 @@ export function ToggleButtonsPanel() {
             })
           }
           className="btn"
+          data-qa="tags"
         >
           tags
         </button>
@@ -53,6 +55,7 @@ export function ToggleButtonsPanel() {
             })
           }
           className="btn"
+          data-qa="customizeColumns"
         >
           customize columns
         </button>
