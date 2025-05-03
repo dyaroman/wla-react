@@ -1,22 +1,9 @@
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
 
 export function TableInfo() {
   const preparedData = useSelector((state) => state['table'].preparedData);
   const websitesData = useSelector((state) => state['table'].websitesData);
   const { commit, env, timestamp } = websitesData;
-
-  useEffect(() => {
-    let title = '';
-    if (preparedData) {
-      title += `[${preparedData.length}]`;
-    }
-    if (env) {
-      title += `[${env}]`;
-    }
-    title += `: ${import.meta.env.VITE_PAGE_TITLE}`;
-    document.title = title;
-  }, [env, preparedData]);
 
   return (
     <section className="table-info">
