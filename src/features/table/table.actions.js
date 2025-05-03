@@ -232,7 +232,7 @@ export function getURLParams() {
     if (!getState().table.websitesDataLoaded) return;
     const newSort = {};
     const newFilters = {};
-    let newTags;
+    let newTags = [];
     const sort = getState().table.sort;
     const showColumns = getState().table.showColumns;
     const renderableColumns = getState().table.renderableColumns;
