@@ -51,6 +51,8 @@ export function filterTableData(websites, filters, tags) {
       }
     }
 
+    if (!tags || tags.length === 0) return true;
+
     // filter by tags
     const normalizedWebsiteTags = website[COLUMNS.tags].map((tag) =>
       tag.toLowerCase(),
