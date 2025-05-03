@@ -88,6 +88,7 @@ export function Shortcuts() {
   });
 
   // toggle header's drawer
+  // todo: close other drawers if opened
   useShortcut(['CommandOrControl', '/'], (event) => {
     dispatch({
       type: TOGGLE_HEADER_DRAWER_OPENED,
