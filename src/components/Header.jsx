@@ -10,14 +10,12 @@ import { TOGGLE_HEADER_DRAWER_OPENED } from '../features/app/app.constants';
 
 export function Header() {
   const dispatch = useDispatch();
-  const headerDrawerOpened = useSelector(
-    (state) => state['app'].headerDrawerOpened,
-  );
+  const headerOpened = useSelector((state) => state['app'].headerOpened);
 
   function onClose() {
     dispatch({
       type: TOGGLE_HEADER_DRAWER_OPENED,
-      payload: !headerDrawerOpened,
+      payload: !headerOpened,
     });
   }
 
@@ -31,7 +29,7 @@ export function Header() {
 
       <Drawer
         position="left"
-        isOpen={headerDrawerOpened}
+        isOpen={headerOpened}
         onClose={onClose}
         maxSize="300px"
         title="Sidebar"

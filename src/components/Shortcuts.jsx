@@ -21,9 +21,7 @@ export function Shortcuts() {
   const dispatch = useDispatch();
   const websitesData = useSelector((state) => state['table'].websitesData);
   const preparedData = useSelector((state) => state['table'].preparedData);
-  const headerDrawerOpened = useSelector(
-    (state) => state['app'].headerDrawerOpened,
-  );
+  const headerOpened = useSelector((state) => state['app'].headerOpened);
   const infoModalOpened = useSelector((state) => state['app'].infoModalOpened);
   const filtersOpened = useSelector((state) => state['app'].filtersOpened);
 
@@ -92,10 +90,10 @@ export function Shortcuts() {
   useShortcut(['CommandOrControl', '/'], (event) => {
     dispatch({
       type: TOGGLE_HEADER_DRAWER_OPENED,
-      payload: !headerDrawerOpened,
+      payload: !headerOpened,
     });
     triggerGtmEvent(gtmEvents.shortcut, {
-      method: 'header-drawer-' + (headerDrawerOpened ? 'close' : 'open'),
+      method: 'header-drawer-' + (headerOpened ? 'close' : 'open'),
       label: event.ctrlKey ? 'windows' : 'macos',
     });
   });

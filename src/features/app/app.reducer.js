@@ -13,7 +13,7 @@ import {
 const appInitialState = {
   customizationColumnsOpened: false,
   filtersOpened: false,
-  headerDrawerOpened: false,
+  headerOpened: false,
   imgPreviewUrl: null,
   infoModalOpened: false,
   requestError: null,
@@ -45,7 +45,7 @@ export function appReducer(state = appInitialState, action) {
     case TOGGLE_HEADER_DRAWER_OPENED:
       return {
         ...state,
-        headerDrawerOpened: action.payload,
+        headerOpened: action.payload,
       };
 
     case TOGGLE_IMG_PREVIEW_MODAL:
