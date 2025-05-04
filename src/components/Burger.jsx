@@ -1,21 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
-
-import { TOGGLE_HEADER_DRAWER_OPENED } from '../features/app/app.constants';
+import { openDrawer } from '../features/drawer/drawer.actions';
+import { SIDEBAR } from '../features/drawer/drawer.constants';
 
 export function Burger() {
   const dispatch = useDispatch();
-  const headerOpened = useSelector((state) => state['app'].headerOpened);
+  const openDrawerId = useSelector((state) => state['drawer'].openDrawerId);
 
   function onClick() {
-    dispatch({
-      type: TOGGLE_HEADER_DRAWER_OPENED,
-      payload: !headerOpened,
-    });
+    dispatch(openDrawer(SIDEBAR));
   }
 
   return (
     <button
-      className={'burger' + (headerOpened ? ' burger--open' : '')}
+      className={'burger' + (openDrawerId === SIDEBAR ? ' burger--open' : '')}
       onClick={onClick}
       data-qa="burger"
     >

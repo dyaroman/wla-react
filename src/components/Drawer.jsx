@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { closeDrawer } from '../features/drawer/drawer.actions';
 
 export function Drawer({
-  isOpen,
-  onClose,
+  drawerId,
   position = 'right',
   maxSize,
   title = '',
@@ -12,6 +14,9 @@ export function Drawer({
   closeOnEsc = true,
   children,
 }) {
+  const dispatch = useDispatch();
+  const openDrawerId = useSelector((state) => state['drawer'].openDrawerId);
+  const isOpen = drawerId === openDrawerId;
   const drawerRef = useRef(null);
   const previouslyFocusedElementRef = useRef(null);
   const scrollPositionRef = useRef(0);
@@ -128,6 +133,10 @@ export function Drawer({
       }
     };
   }, [isOpen]);
+
+  function onClose() {
+    dispatch(closeDrawer());
+  }
 
   // Only render if visible is true (either opening or closing with animation)
   if (!isVisible && !isOpen) return null;

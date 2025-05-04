@@ -1,24 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-
 import { Burger } from './Burger';
 import { TableInfo } from './TableInfo';
 import { ResultsControls } from './ResultsControls';
 import { Logo } from './Logo';
 import { Counter } from './Counter';
 import { Drawer } from './Drawer';
-import { TOGGLE_HEADER_DRAWER_OPENED } from '../features/app/app.constants';
+import { SIDEBAR } from '../features/drawer/drawer.constants';
 
 export function Header() {
-  const dispatch = useDispatch();
-  const headerOpened = useSelector((state) => state['app'].headerOpened);
-
-  function onClose() {
-    dispatch({
-      type: TOGGLE_HEADER_DRAWER_OPENED,
-      payload: !headerOpened,
-    });
-  }
-
   return (
     <header className="header">
       <div className="header__content">
@@ -28,9 +16,8 @@ export function Header() {
       </div>
 
       <Drawer
+        drawerId={SIDEBAR}
         position="left"
-        isOpen={headerOpened}
-        onClose={onClose}
         maxSize="300px"
         title="Sidebar"
       >

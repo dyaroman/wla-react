@@ -1,33 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Drawer } from './Drawer';
 import { Filters } from './Filters';
 import { Tags } from './Tags';
 import { TableControls } from './TableControls';
+import { openDrawer } from '../features/drawer/drawer.actions';
 import {
-  TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
-  TOGGLE_FILTERS_OPENED,
-  TOGGLE_TAGS_OPENED,
-} from '../features/app/app.constants';
+  CUSTOMIZE_COLUMNS,
+  FILTERS,
+  TAGS,
+} from '../features/drawer/drawer.constants';
 
+// todo: move this component header, show icons on mobile and text on desktop
 export function ToggleButtonsPanel() {
   const dispatch = useDispatch();
-  const customizationColumnsOpened = useSelector(
-    (state) => state['app'].customizationColumnsOpened,
-  );
-  const filtersOpened = useSelector((state) => state['app'].filtersOpened);
-  const tagsOpened = useSelector((state) => state['app'].tagsOpened);
 
   return (
     <>
       <div className="toggle-buttons-panel">
         <button
-          onClick={() =>
-            dispatch({
-              type: TOGGLE_FILTERS_OPENED,
-              payload: true,
-            })
-          }
+          onClick={() => dispatch(openDrawer(FILTERS))}
           className="btn"
           data-qa="filters"
         >
@@ -35,12 +27,7 @@ export function ToggleButtonsPanel() {
         </button>
 
         <button
-          onClick={() =>
-            dispatch({
-              type: TOGGLE_TAGS_OPENED,
-              payload: true,
-            })
-          }
+          onClick={() => dispatch(openDrawer(TAGS))}
           className="btn"
           data-qa="tags"
         >
@@ -48,12 +35,7 @@ export function ToggleButtonsPanel() {
         </button>
 
         <button
-          onClick={() =>
-            dispatch({
-              type: TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
-              payload: true,
-            })
-          }
+          onClick={() => dispatch(openDrawer(CUSTOMIZE_COLUMNS))}
           className="btn"
           data-qa="customizeColumns"
         >
@@ -62,13 +44,7 @@ export function ToggleButtonsPanel() {
       </div>
 
       <Drawer
-        isOpen={filtersOpened}
-        onClose={() =>
-          dispatch({
-            type: TOGGLE_FILTERS_OPENED,
-            payload: false,
-          })
-        }
+        drawerId={FILTERS}
         title="Filters"
         position="left"
         maxSize="320px"
@@ -76,29 +52,12 @@ export function ToggleButtonsPanel() {
         <Filters />
       </Drawer>
 
-      <Drawer
-        isOpen={tagsOpened}
-        onClose={() =>
-          dispatch({
-            type: TOGGLE_TAGS_OPENED,
-            payload: false,
-          })
-        }
-        title="Tags"
-        position="right"
-        maxSize="320px"
-      >
+      <Drawer drawerId={TAGS} title="Tags" position="right" maxSize="320px">
         <Tags />
       </Drawer>
 
       <Drawer
-        isOpen={customizationColumnsOpened}
-        onClose={() =>
-          dispatch({
-            type: TOGGLE_CUSTOMIZATION_COLUMNS_OPENED,
-            payload: false,
-          })
-        }
+        drawerId={CUSTOMIZE_COLUMNS}
         title="Customize columns"
         position="right"
         maxSize="320px"

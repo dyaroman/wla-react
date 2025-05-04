@@ -19,12 +19,13 @@ import {
   getQueryParamValue,
   triggerGtmEvent,
 } from '../misc/functions';
+import { openDrawer } from '../features/drawer/drawer.actions';
 import { rgb2hex } from '../misc/color';
 import { gtmEvents } from '../misc/gtm.constants';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
 import { FILTERS_UPDATED } from '../features/table/table.constants';
 import { COLUMNS } from '../misc/columns.constants';
-import { TOGGLE_FILTERS_OPENED } from '../features/app/app.constants';
+import { FILTERS } from '../features/drawer/drawer.constants';
 
 export function Table() {
   const dispatch = useDispatch();
@@ -108,10 +109,7 @@ export function Table() {
       if (filterName !== column) continue;
 
       if (!filtersOpened) {
-        dispatch({
-          type: TOGGLE_FILTERS_OPENED,
-          payload: true,
-        });
+        dispatch(openDrawer(FILTERS));
       }
 
       setTimeout(() => {
