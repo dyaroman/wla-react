@@ -20,7 +20,7 @@ export function Filters() {
 
   return (
     <div className="filters">
-      <div className="filters__content">
+      <div className="flex-column">
         <button
           className="btn  btn--danger"
           onClick={onResetFilters}
