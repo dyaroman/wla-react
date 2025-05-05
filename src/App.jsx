@@ -5,7 +5,6 @@ import { Loader } from './components/Loader';
 import { Table } from './components/Table';
 import { Header } from './components/Header';
 import { Toast } from './components/Toast';
-import { ToggleButtonsPanel } from './components/ToggleButtonsPanel';
 import { ThemeToggle } from './components/ThemeToggle';
 import { Shortcuts } from './components/Shortcuts';
 import { InfoModal } from './components/InfoModal';
@@ -64,7 +63,6 @@ export function App() {
       <Header />
       <ThemeToggle />
       <Shortcuts />
-      <ToggleButtonsPanel />
       <Table />
       <Toast />
       <InfoModal />

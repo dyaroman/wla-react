@@ -4,14 +4,18 @@ import { Drawer } from './Drawer';
 import { Filters } from './Filters';
 import { Tags } from './Tags';
 import { TableControls } from './TableControls';
+import { Icons } from './Icons';
+import { Burger } from './Burger';
+import { TableInfo } from './TableInfo';
+import { ResultsControls } from './ResultsControls';
 import { openDrawer } from '../features/drawer/drawer.actions';
 import {
   CUSTOMIZE_COLUMNS,
   FILTERS,
+  SIDEBAR,
   TAGS,
 } from '../features/drawer/drawer.constants';
 
-// todo: move this component header, show icons on mobile and text on desktop
 export function ToggleButtonsPanel() {
   const dispatch = useDispatch();
 
@@ -20,27 +24,32 @@ export function ToggleButtonsPanel() {
       <div className="toggle-buttons-panel">
         <button
           onClick={() => dispatch(openDrawer(FILTERS))}
-          className="btn"
+          className="toggle-buttons-panel__btn"
+          aria-label="filters"
           data-qa="filters"
         >
-          filters
+          <Icons name="filters" />
         </button>
 
         <button
           onClick={() => dispatch(openDrawer(TAGS))}
-          className="btn"
+          className="toggle-buttons-panel__btn"
+          aria-label="tags"
           data-qa="tags"
         >
-          tags
+          <Icons name="tags" />
         </button>
 
         <button
           onClick={() => dispatch(openDrawer(CUSTOMIZE_COLUMNS))}
-          className="btn"
+          className="toggle-buttons-panel__btn"
+          aria-label="customize columns"
           data-qa="customizeColumns"
         >
-          customize columns
+          <Icons name="columns" />
         </button>
+
+        <Burger />
       </div>
 
       <Drawer
@@ -63,6 +72,16 @@ export function ToggleButtonsPanel() {
         maxSize="320px"
       >
         <TableControls />
+      </Drawer>
+
+      <Drawer
+        drawerId={SIDEBAR}
+        position="left"
+        maxSize="300px"
+        title="Sidebar"
+      >
+        <TableInfo />
+        <ResultsControls />
       </Drawer>
     </>
   );

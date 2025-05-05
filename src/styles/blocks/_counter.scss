@@ -1,7 +1,7 @@
 @use '../misc/variables';
 
 .counter {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   min-width: 40px;
@@ -12,4 +12,8 @@
 
   border-radius: 50px;
   border: variables.$border-width solid var(--body-color);
+
+  @media (min-width: 350px) {
+    display: flex;
+  }
 }

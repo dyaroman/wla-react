@@ -2,17 +2,15 @@
 @use '../misc/breakpoints';
 
 .toggle-buttons-panel {
-  margin: variables.$gap;
-
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: variables.$gap;
+}
 
-  @include breakpoints.media-breakpoint-up(md) {
-    flex-direction: row;
+.toggle-buttons-panel__btn {
+  padding: 0;
 
-    .btn {
-      flex-grow: 1;
-    }
-  }
+  border: none;
+  background: none;
+  cursor: pointer;
 }
