@@ -1,7 +1,0 @@
-@use '../misc/variables';
-
-.btn-group {
-  display: flex;
-  flex-direction: column;
-  gap: variables.$gap;
-}

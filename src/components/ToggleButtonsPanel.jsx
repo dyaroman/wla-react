@@ -16,73 +16,84 @@ import {
   TAGS,
 } from '../features/drawer/drawer.constants';
 
-export function ToggleButtonsPanel() {
+export function ToggleButtonsPanel({ position }) {
   const dispatch = useDispatch();
+
+  if (!position) return null;
 
   return (
     <>
-      <div className="toggle-buttons-panel">
-        <button
-          onClick={() => dispatch(openDrawer(FILTERS))}
-          className="toggle-buttons-panel__btn"
-          aria-label="filters"
-          data-qa="filters"
-        >
-          <Icons name="filters" />
-        </button>
+      <div className="flex-row">
+        {position === 'left' && (
+          <>
+            <Burger />
+            <Drawer
+              drawerId={SIDEBAR}
+              position="left"
+              maxSize="320px"
+              title="Sidebar"
+            >
+              <TableInfo />
+              <ResultsControls />
+            </Drawer>
 
-        <button
-          onClick={() => dispatch(openDrawer(TAGS))}
-          className="toggle-buttons-panel__btn"
-          aria-label="tags"
-          data-qa="tags"
-        >
-          <Icons name="tags" />
-        </button>
+            <button
+              onClick={() => dispatch(openDrawer(FILTERS))}
+              className="btn-with-icon"
+              aria-label="filters"
+              data-qa="filters"
+            >
+              <Icons name="filters" />
+            </button>
+            <Drawer
+              drawerId={FILTERS}
+              title="Filters"
+              position="left"
+              maxSize="320px"
+            >
+              <Filters />
+            </Drawer>
+          </>
+        )}
 
-        <button
-          onClick={() => dispatch(openDrawer(CUSTOMIZE_COLUMNS))}
-          className="toggle-buttons-panel__btn"
-          aria-label="customize columns"
-          data-qa="customizeColumns"
-        >
-          <Icons name="columns" />
-        </button>
+        {position === 'right' && (
+          <>
+            <button
+              onClick={() => dispatch(openDrawer(TAGS))}
+              className="btn-with-icon"
+              aria-label="tags"
+              data-qa="tags"
+            >
+              <Icons name="tags" />
+            </button>
+            <Drawer
+              drawerId={TAGS}
+              title="Tags"
+              position="right"
+              maxSize="320px"
+            >
+              <Tags />
+            </Drawer>
 
-        <Burger />
+            <button
+              onClick={() => dispatch(openDrawer(CUSTOMIZE_COLUMNS))}
+              className="btn-with-icon"
+              aria-label="customize columns"
+              data-qa="customizeColumns"
+            >
+              <Icons name="columns" />
+            </button>
+            <Drawer
+              drawerId={CUSTOMIZE_COLUMNS}
+              title="Customize columns"
+              position="right"
+              maxSize="320px"
+            >
+              <TableControls />
+            </Drawer>
+          </>
+        )}
       </div>
-
-      <Drawer
-        drawerId={FILTERS}
-        title="Filters"
-        position="left"
-        maxSize="320px"
-      >
-        <Filters />
-      </Drawer>
-
-      <Drawer drawerId={TAGS} title="Tags" position="right" maxSize="320px">
-        <Tags />
-      </Drawer>
-
-      <Drawer
-        drawerId={CUSTOMIZE_COLUMNS}
-        title="Customize columns"
-        position="right"
-        maxSize="320px"
-      >
-        <TableControls />
-      </Drawer>
-
-      <Drawer
-        drawerId={SIDEBAR}
-        position="left"
-        maxSize="300px"
-        title="Sidebar"
-      >
-        <TableInfo />
-        <ResultsControls />
-      </Drawer>
     </>
   );
 }

@@ -45,6 +45,10 @@ code {
   background-color: var(--body-color);
 }
 
+svg {
+  vertical-align: top;
+}
+
 .container {
   padding: 0 variables.$gap;
   min-height: 100vh;
@@ -93,4 +97,16 @@ summary {
 
 .mt {
   margin-top: variables.$gap;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: variables.$gap;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: variables.$gap;
 }

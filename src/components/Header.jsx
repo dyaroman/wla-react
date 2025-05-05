@@ -6,9 +6,12 @@ export function Header() {
   return (
     <header className="header">
       <div className="header__content">
-        <Logo />
-        <Counter />
-        <ToggleButtonsPanel />
+        <ToggleButtonsPanel position="left" />
+        <div className="flex-row">
+          <Logo />
+          <Counter />
+        </div>
+        <ToggleButtonsPanel position="right" />
       </div>
     </header>
   );

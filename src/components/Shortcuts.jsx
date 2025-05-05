@@ -78,7 +78,7 @@ export function Shortcuts() {
       label: event.ctrlKey ? 'windows' : 'macos',
     });
 
-    dispatch(showToast('filters cleared', 'success'));
+    dispatch(showToast('filters reset', 'success'));
   });
 
   // toggle header's drawer

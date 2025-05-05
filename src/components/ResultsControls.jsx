@@ -52,7 +52,7 @@ export function ResultsControls() {
   }
 
   return (
-    <div className="btn-group">
+    <div className="flex-column">
       <button
         className="btn"
         onClick={onCopyWebsitesClick}

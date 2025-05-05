@@ -13,7 +13,7 @@
 @use 'blocks/loader';
 @use 'blocks/spinner';
 @use 'blocks/btn';
-@use 'blocks/btn-group';
+@use 'blocks/btn-with-icon';
 @use 'blocks/table';
 @use 'blocks/table-controls';
 @use 'blocks/tags';
@@ -31,4 +31,3 @@
 @use 'blocks/modal';
 @use 'blocks/external-link';
 @use 'blocks/table-info';
-@use 'blocks/toggle-buttons-panel';

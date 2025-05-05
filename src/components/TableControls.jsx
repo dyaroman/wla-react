@@ -63,7 +63,7 @@ export function TableControls() {
 
   return (
     <section className="table-controls">
-      <div className="btn-group">
+      <div className="flex-column">
         <button
           className="btn"
           onClick={onClickShowAllColumns}
