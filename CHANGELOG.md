@@ -1,3 +1,28 @@
+## v2.0.0 (05.05.2025)
+
+- add a Drawer component
+- move filters from the sidebar to their own Drawer
+- move tags from the sidebar to their own Drawer
+- move columns customization from the sidebar to their own Drawer
+- move all shortcuts to a separate component
+- split 'clear all' into 'reset filters' and 'reset tags' buttons
+- add 'reset sort' button
+- remove theme toggler, leave only auto theme switching
+- move 'tags' from 'filters'
+  - now it's on the same level as 'filters'
+- don't save sidebar open status in URL
+- don't trigger GTM events for local development
+- change visual notification when using websites fallback data
+- show counter component when there is enough space in the header
+- add style for external links
+  - like changelog link
+- rework modal component
+- rework toast notifications
+  - now shows up to 3 toasts at once
+- show table view earlier
+  - start from 576px instead of 992px
+- update dependencies
+
 ## v1.18.1 (25.04.2025)
 
 - fix check for updates function
@@ -58,7 +83,7 @@
 ## v1.12.0 (11.10.2024)
 
 - check for fresh websites data
-  - if it available then show notification and refresh page
+  - if it is available, then show a notification and refresh the page
 
 ## v1.11.0 (20.08.2024)
 
@@ -71,7 +96,7 @@
 ## v1.10.0 (06.08.2024)
 
 - update "forms" column
-  - now it also show options that use on page with form, like (campaignId, leadTypeId, loanAmounts, etc.)
+  - now it also shows options that use on page with form, like (campaignId, leadTypeId, loanAmounts, etc.)
 
 ## v1.9.0 (24.07.2024)
 
@@ -83,12 +108,12 @@
 - rework app controls
   - move them under columns control
   - wrap in details
-  - now it's call "Useful"
+  - now it's called "Useful"
 - under hood refactoring
 
 ## v1.7.0 (19.06.2024)
 
-- add forms column support
+- add "forms" column support
 - fix quick search
   - don't insert value from "pages" and "forms" columns inside search input
 - rework tags layout
