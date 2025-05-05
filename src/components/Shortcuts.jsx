@@ -74,7 +74,7 @@ export function Shortcuts() {
     dispatch(resetFilters());
 
     triggerGtmEvent(gtmEvents.shortcut, {
-      method: 'clear-all',
+      method: 'clear-filters',
       label: event.ctrlKey ? 'windows' : 'macos',
     });
 
@@ -85,7 +85,7 @@ export function Shortcuts() {
   useShortcut(['CommandOrControl', '/'], (event) => {
     dispatch(openDrawer(SIDEBAR));
     triggerGtmEvent(gtmEvents.shortcut, {
-      method: 'header-drawer-open',
+      method: 'sidebar-open',
       label: event.ctrlKey ? 'windows' : 'macos',
     });
   });

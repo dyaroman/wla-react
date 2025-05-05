@@ -58,9 +58,6 @@ export function Table() {
         if (timeSinceLastVisit >= minTimeBeforeRequest) {
           inactivityTime = currentTime;
           dispatch(checkForUpdates());
-          triggerGtmEvent(gtmEvents.checkFreshData, {
-            method: 'visibilityChange',
-          });
         }
       }
     }

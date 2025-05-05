@@ -157,7 +157,6 @@ export function convertUrlToEnv(website = '', env = '') {
 
 export function triggerGtmEvent(eventName, options = {}) {
   if (import.meta.env.DEV) return;
-  // todo: review all events after v2.0
   window.dataLayer?.push({
     event: eventName,
     ...options,
