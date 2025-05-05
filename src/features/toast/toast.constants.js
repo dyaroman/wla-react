@@ -1,2 +1,2 @@
-export const SHOW_TOAST = 'toast/show';
-export const HIDE_TOAST = 'toast/hide';
+export const SHOW_TOAST = 'TOAST/SHOW';
+export const HIDE_TOAST = 'TOAST/HIDE';

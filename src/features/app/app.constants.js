@@ -1,5 +1,5 @@
-export const REQUEST_ERROR = 'app/requestError';
-export const TOGGLE_IMG_PREVIEW_MODAL = 'app/toggleImgPreviewModal';
-export const TOGGLE_INFO_MODAL_OPENED = 'app/toggleInfoModalOpened';
-export const UNAUTHORIZED = 'app/unauthorized';
-export const URL_PARAMS_READ = 'app/urlParamsRead';
+export const REQUEST_ERROR = 'APP/REQUEST_ERROR';
+export const TOGGLE_IMG_PREVIEW_MODAL = 'APP/TOGGLE_IMG_PREVIEW_MODAL';
+export const TOGGLE_INFO_MODAL_OPENED = 'APP/TOGGLE_INFO_MODAL_OPENED';
+export const UNAUTHORIZED = 'APP/UNAUTHORIZED';
+export const URL_PARAMS_READ = 'APP/URL_PARAMS_READ';
