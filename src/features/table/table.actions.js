@@ -1,5 +1,6 @@
 import {
   COMPUTED_DATA_UPDATED,
+  DESC,
   FILTERS_UPDATED,
   PREPARED_DATA_UPDATED,
   SET_WEBSITES_DATA,
@@ -331,14 +332,12 @@ export function sortTable() {
     const preparedData = getState().table.preparedData;
     const sort = getState().table.sort;
 
-    let sortedData = preparedData;
-    if (sort.direction) {
-      sortedData = sortTableData(sortedData, sort.column);
-      if (sort.direction === 'desc') {
-        sortedData = sortedData.reverse();
-      }
-    } else {
-      sortedData = sortTableData(sortedData, COLUMNS.website);
+    let sortedData = sortTableData(
+      preparedData,
+      sort.column || COLUMNS.website,
+    );
+    if (sort.direction === DESC) {
+      sortedData = sortedData.reverse();
     }
 
     dispatch({

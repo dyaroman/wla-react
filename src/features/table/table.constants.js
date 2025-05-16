@@ -8,3 +8,7 @@ export const TAGS_UPDATED = 'TABLE/TAGS_UPDATED';
 export const URL_PARAMS_COMBINED_UPDATE = 'TABLE/URL_PARAMS_COMBINED_UPDATE';
 export const WEBSITES_DATA_LOADED = 'TABLE/WEBSITES_DATA_LOADED';
 export const WEBSITES_DATA_SOURCE = 'TABLE/WEBSITES_DATA_SOURCE';
+
+// sort
+export const ASC = 'asc';
+export const DESC = 'desc';
