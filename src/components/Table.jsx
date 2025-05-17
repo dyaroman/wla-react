@@ -8,6 +8,7 @@ import { ColorCell } from './ColorCell';
 import { ImgCell } from './ImgCell';
 import { Checkbox } from './Checkbox';
 import { Pagination } from './Pagination';
+import { FormsCell } from './FormsCell';
 import {
   checkForUpdates,
   filterTable,
@@ -89,7 +90,7 @@ export function Table() {
     copyCellText();
   }
 
-  function searchCell() {
+  function searchCell(event) {
     if (!event.altKey) return;
 
     const cell = event.target.closest('td,th');
@@ -132,7 +133,7 @@ export function Table() {
     }
   }
 
-  async function copyCellText() {
+  async function copyCellText(event) {
     if (!event.metaKey) return;
 
     const cell = event.target.closest('td,th');
@@ -240,7 +241,7 @@ export function Table() {
             </thead>
 
             <tbody onClick={onTableBodyClick}>
-              {currentItems.map((websiteData, index) => {
+              {currentItems.map((websiteData) => {
                 const host =
                   (convertLinks &&
                     convertUrlToEnv(
@@ -424,7 +425,6 @@ export function Table() {
                             </td>
                           );
 
-                        // todo: move to separate component
                         case COLUMNS.forms: {
                           const forms = Object.keys(websiteData[column]);
                           return (
@@ -434,102 +434,11 @@ export function Table() {
                               key={column}
                             >
                               {forms.length ? (
-                                <ul>
-                                  {forms.map((form) => {
-                                    const pages = Object.keys(
-                                      websiteData[column][form],
-                                    );
-                                    return (
-                                      <li key={form}>
-                                        <Highlight
-                                          text={form}
-                                          highlight={filters[column]}
-                                        />
-                                        <ul>
-                                          {pages.map((page) => {
-                                            const config =
-                                              websiteData[column][form][page];
-                                            return (
-                                              <li key={page}>
-                                                <a
-                                                  href={`https://${host}/${page}`}
-                                                  target="_blank"
-                                                  rel="noreferrer"
-                                                >
-                                                  {page}
-                                                </a>
-                                                <ul>
-                                                  {Object.keys(config).map(
-                                                    (key) => {
-                                                      let content;
-                                                      if (
-                                                        Array.isArray(
-                                                          config[key],
-                                                        )
-                                                      ) {
-                                                        content = (
-                                                          <>
-                                                            {key}:{' '}
-                                                            <ul>
-                                                              {config[key].map(
-                                                                (item) => (
-                                                                  <li
-                                                                    key={item}
-                                                                  >
-                                                                    {JSON.stringify(
-                                                                      item,
-                                                                    )}
-                                                                  </li>
-                                                                ),
-                                                              )}
-                                                            </ul>
-                                                          </>
-                                                        );
-                                                      } else if (
-                                                        key === 'primaryColor'
-                                                      ) {
-                                                        content = (
-                                                          <div className="primary-color">
-                                                            {key}:{' '}
-                                                            <span className="primary-color__inner">
-                                                              <span
-                                                                className="color-preview"
-                                                                style={{
-                                                                  backgroundColor:
-                                                                    config[key],
-                                                                }}
-                                                              />
-                                                              {config[key]}
-                                                            </span>
-                                                          </div>
-                                                        );
-                                                      } else {
-                                                        content = (
-                                                          <>
-                                                            {key}:{' '}
-                                                            {JSON.stringify(
-                                                              config[key],
-                                                            )}
-                                                          </>
-                                                        );
-                                                      }
-
-                                                      return (
-                                                        <li key={key}>
-                                                          {content}
-                                                        </li>
-                                                      );
-                                                    },
-                                                  )}
-                                                </ul>
-                                              </li>
-                                            );
-                                          })}
-                                        </ul>
-                                      </li>
-                                    );
-                                  })}
-                                </ul>
+                                <FormsCell
+                                  forms={websiteData[column]}
+                                  filter={filters[column]}
+                                  host
+                                />
                               ) : (
                                 NO_DATA
                               )}
