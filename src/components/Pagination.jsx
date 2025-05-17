@@ -21,6 +21,12 @@ export function Pagination({ position }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      changeCurrentPage(totalPages);
+    }
+  }, [totalPages]);
+
   function onPerPageChange(event) {
     dispatch({
       type: PER_PAGE_UPDATED,
@@ -28,7 +34,7 @@ export function Pagination({ position }) {
     });
   }
 
-  function onCurrentPageChange(value) {
+  function changeCurrentPage(value) {
     dispatch({
       type: CURRENT_PAGE_UPDATED,
       payload: value,
