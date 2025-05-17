@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { gtmEvents } from '../misc/gtm.constants';
-import { SORT_UPDATED } from '../features/table/table.constants';
+import { ASC, DESC, SORT_UPDATED } from '../features/table/table.constants';
+import { URL_PARAMETERS } from '../misc/url.constants';
 
 export function ColumnTitle({ column, text = '' }) {
   const dispatch = useDispatch();
@@ -20,14 +21,14 @@ export function ColumnTitle({ column, text = '' }) {
       label: sortColumn,
     };
     if (sortColumn !== sort.column) {
-      newSort['column'] = sortColumn;
+      newSort[URL_PARAMETERS.column] = sortColumn;
     }
-    if (sortDirection === undefined || sortDirection === 'desc') {
-      newSort['direction'] = 'asc';
-      eventInfo.method = 'asc';
+    if (sortDirection === undefined || sortDirection === DESC) {
+      newSort[URL_PARAMETERS.direction] = ASC;
+      eventInfo.method = ASC;
     } else {
-      newSort['direction'] = 'desc';
-      eventInfo.method = 'desc';
+      newSort[URL_PARAMETERS.direction] = DESC;
+      eventInfo.method = DESC;
     }
     dispatch({
       type: SORT_UPDATED,

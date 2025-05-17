@@ -1,0 +1,39 @@
+@use '../misc/breakpoints';
+@use '../misc/variables';
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  gap: variables.$gap;
+  margin: variables.$gap;
+
+  user-select: none;
+
+  .btn {
+    min-width: unset;
+    width: 44px;
+  }
+
+  .select-wrapper {
+    min-width: 70px;
+  }
+
+  @include breakpoints.media-breakpoint-up(sm) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.pagination__per-page {
+  display: flex;
+  gap: variables.$gap;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: variables.$gap;
+}

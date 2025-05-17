@@ -6,3 +6,4 @@ export const CHECKBOX_STATES = {
   exclude: 'exclude',
 };
 export const EXCLUSION_PREFIX = '!';
+export const PER_PAGE_VALUES = [25, 50, 100];

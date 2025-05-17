@@ -3,7 +3,6 @@ import {
   TOGGLE_IMG_PREVIEW_MODAL,
   TOGGLE_INFO_MODAL_OPENED,
   UNAUTHORIZED,
-  URL_PARAMS_READ,
 } from './app.constants';
 
 const appInitialState = {
@@ -11,7 +10,6 @@ const appInitialState = {
   infoModalOpened: false,
   requestError: null,
   unauthorized: false,
-  urlParamsRead: false,
 };
 
 export function appReducer(state = appInitialState, action) {
@@ -38,12 +36,6 @@ export function appReducer(state = appInitialState, action) {
       return {
         ...state,
         unauthorized: action.payload,
-      };
-
-    case URL_PARAMS_READ:
-      return {
-        ...state,
-        urlParamsRead: action.payload,
       };
 
     default:
