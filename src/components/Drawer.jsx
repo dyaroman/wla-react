@@ -80,7 +80,7 @@ export function Drawer({
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, closeOnEsc, onClose]);
+  }, [isOpen, closeOnEsc]);
 
   // Handle focus management and scroll locking
   useEffect(() => {

@@ -65,5 +65,5 @@ export const useShortcut = (shortcut, callback, node = null) => {
     // remove the event listener
     return () =>
       targetNode && targetNode.removeEventListener('keydown', handleKeyPress);
-  }, [handleKeyPress, node]);
+  }, [node]);
 };

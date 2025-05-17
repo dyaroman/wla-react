@@ -23,9 +23,9 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (websitesDataLoaded) {
-      dispatch(getURLParams());
-    }
+    if (!websitesDataLoaded) return;
+
+    dispatch(getURLParams());
   }, [websitesDataLoaded]);
 
   if (requestError) {

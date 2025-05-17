@@ -46,7 +46,7 @@ export function Toast() {
       });
       return newState;
     });
-  }, [activeToasts, dispatch]);
+  }, [activeToasts]);
 
   // Don't render anything if there are no active toasts and no queue
   if (activeToasts.length === 0 && queue.length === 0) {
