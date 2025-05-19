@@ -39,7 +39,7 @@ export function ToggleButtonsPanel({ position }) {
 
             <button
               onClick={() => dispatch(openDrawer(FILTERS))}
-              className="btn-with-icon"
+              className="btn btn--icon"
               aria-label="filters"
               data-qa="filters"
             >
@@ -60,7 +60,7 @@ export function ToggleButtonsPanel({ position }) {
           <>
             <button
               onClick={() => dispatch(openDrawer(TAGS))}
-              className="btn-with-icon"
+              className="btn btn--icon"
               aria-label="tags"
               data-qa="tags"
             >
@@ -77,7 +77,7 @@ export function ToggleButtonsPanel({ position }) {
 
             <button
               onClick={() => dispatch(openDrawer(CUSTOMIZE_COLUMNS))}
-              className="btn-with-icon"
+              className="btn btn--icon"
               aria-label="customize columns"
               data-qa="customizeColumns"
             >

@@ -13,13 +13,11 @@
   font-size: inherit;
   color: var(--btn-text-color);
   text-decoration: none;
+  user-select: none;
 
   border: 2px solid var(--btn-border-color);
   background-color: var(--btn-bg-color);
-  transition:
-    color 0.15s,
-    background-color 0.15s,
-    border-color 0.15s;
+  transition: 0.3s ease;
 
   @include mixins.hover() {
     color: var(--btn-text-color--hover);
@@ -37,8 +35,36 @@
     --btn-border-color--hover: #b02a37;
   }
 
-  &--icon {
+  &--with-icon {
     padding-top: functions.px2rem(5);
     padding-bottom: functions.px2rem(5);
+  }
+
+  &--icon {
+    padding: 0;
+    min-width: unset;
+
+    border: none;
+
+    svg {
+      transition: 0.3s ease;
+    }
+
+    @include mixins.hover() {
+      color: var(--btn-text-color);
+
+      background: none;
+
+      svg {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &[disabled] {
+    color: var(--border-color);
+
+    border-color: var(--border-color);
+    pointer-events: none;
   }
 }
