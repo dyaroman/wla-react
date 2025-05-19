@@ -1,4 +1,5 @@
 import {
+  CHECKBOX_TOGGLED,
   COMPUTED_DATA_UPDATED,
   CURRENT_PAGE_UPDATED,
   FILTERS_UPDATED,
@@ -19,6 +20,7 @@ const tableInitialState = {
   allTags: [],
   autocompleteLists: [],
   availableTags: [],
+  checkboxes: [],
   currentPage: 1,
   defaultShowColumns: [],
   filters: {},
@@ -37,6 +39,21 @@ const tableInitialState = {
 
 export function tableReducer(state = tableInitialState, action) {
   switch (action.type) {
+    case CHECKBOX_TOGGLED: {
+      const checkboxes = [...state.checkboxes];
+
+      if (checkboxes.includes(action.payload)) {
+        checkboxes.splice(checkboxes.indexOf(action.payload), 1);
+      } else {
+        checkboxes.push(action.payload);
+      }
+
+      return {
+        ...state,
+        checkboxes,
+      };
+    }
+
     case COMPUTED_DATA_UPDATED:
       return {
         ...state,

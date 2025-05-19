@@ -25,7 +25,10 @@ import { openDrawer } from '../features/drawer/drawer.actions';
 import { rgb2hex } from '../misc/color';
 import { gtmEvents } from '../misc/gtm.constants';
 import { NO_DATA, WEBSITES_DATA_FILENAME } from '../misc/misc.constants';
-import { FILTERS_UPDATED } from '../features/table/table.constants';
+import {
+  CHECKBOX_TOGGLED,
+  FILTERS_UPDATED,
+} from '../features/table/table.constants';
 import { COLUMNS } from '../misc/columns.constants';
 import { FILTERS } from '../features/drawer/drawer.constants';
 
@@ -39,6 +42,7 @@ export function Table() {
   const websitesData = useSelector((state) => state['table'].websitesData);
   const currentPage = useSelector((state) => state['table'].currentPage);
   const perPage = useSelector((state) => state['table'].perPage);
+  const checkboxes = useSelector((state) => state['table'].checkboxes);
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
   const currentItems = preparedData.slice(indexOfFirstItem, indexOfLastItem);
@@ -85,9 +89,16 @@ export function Table() {
     dispatch(updateURL());
   }, [filters, tags, sort, showColumns, perPage, currentPage]);
 
-  function onTableBodyClick() {
-    searchCell();
-    copyCellText();
+  function onTableBodyClick(event) {
+    searchCell(event);
+    copyCellText(event);
+  }
+
+  function onCheckboxChange(index) {
+    dispatch({
+      type: CHECKBOX_TOGGLED,
+      payload: index,
+    });
   }
 
   function searchCell(event) {
@@ -249,6 +260,8 @@ export function Table() {
                       convertLinksTo,
                     )) ||
                   websiteData[COLUMNS.host];
+                const websiteIndex = preparedData.indexOf(websiteData) + 1;
+
                 return (
                   <tr key={websiteData[COLUMNS.website]}>
                     {showColumns.map((column) => {
@@ -260,7 +273,7 @@ export function Table() {
                               data-qa={column}
                               key={column}
                             >
-                              {preparedData.indexOf(websiteData) + 1}
+                              {websiteIndex}
                             </td>
                           );
 
@@ -271,7 +284,12 @@ export function Table() {
                               data-qa={column}
                               key={column}
                             >
-                              <Checkbox name={''} label={''} />
+                              <Checkbox
+                                name={''}
+                                label={''}
+                                checked={checkboxes.includes(websiteIndex)}
+                                onChange={() => onCheckboxChange(websiteIndex)}
+                              />
                             </td>
                           );
 
