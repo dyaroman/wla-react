@@ -13,6 +13,16 @@
 
   @include mixins.hover() {
     cursor: pointer;
+
+    span {
+      &:nth-child(1) {
+        top: 8px;
+      }
+
+      &:nth-child(3) {
+        top: 28px;
+      }
+    }
   }
 
   span {
@@ -26,7 +36,7 @@
     background-color: var(--body-color);
 
     &:nth-child(1) {
-      top: 8px;
+      top: 10px;
     }
 
     &:nth-child(2) {
@@ -34,23 +44,7 @@
     }
 
     &:nth-child(3) {
-      top: 28px;
-    }
-  }
-
-  &--open span {
-    &:nth-child(1) {
-      top: 18px;
-      transform: rotate(45deg);
-    }
-
-    &:nth-child(2) {
-      opacity: 0;
-    }
-
-    &:nth-child(3) {
-      top: 18px;
-      transform: rotate(-45deg);
+      top: 26px;
     }
   }
 }
