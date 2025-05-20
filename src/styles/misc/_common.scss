@@ -49,6 +49,11 @@ svg {
   vertical-align: top;
 }
 
+.container {
+  max-width: 960px;
+  margin-inline: auto;
+}
+
 .full-height {
   padding: 0 variables.$gap;
   min-height: 100vh;
