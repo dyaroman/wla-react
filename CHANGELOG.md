@@ -1,3 +1,22 @@
+## v2.1.0 (22.05.2025)
+
+- add Pagination component
+  - it should improve app performance cause now render 25 rows by default, not all, as were before
+- add a reset filter button next to the filter field
+  - to reset filled filter
+- table sort
+  - use 'website' as the default column to sort
+  - fix behaves when passing only 'direction'
+- limit header max-width
+  - to make it easier to use
+- move Forms column to separate component
+- rework btn styles
+- rework burger btn animation
+- change svg icons
+- update Checkbox column logic to make it work properly with pages
+- fix counter mobile view
+- update dependencies
+
 ## v2.0.0 (05.05.2025)
 
 - add a Drawer component
