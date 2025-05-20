@@ -1,0 +1,26 @@
+@use '../misc/variables';
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  gap: variables.$gap;
+  align-items: end;
+}
+
+.filter__title {
+  display: block;
+  flex-grow: 1;
+}
+
+.filter__title-text {
+  display: inline-block;
+  margin-bottom: variables.$gap;
+}
+
+.filter .btn {
+  flex-shrink: 0;
+  padding: 0;
+  min-width: unset;
+  width: 40px;
+  height: 40px;
+}

@@ -37,30 +37,48 @@ export function Filter({ name, placeholder }) {
     });
   }
 
+  function resetFilter() {
+    dispatch({
+      type: FILTERS_UPDATED,
+      payload: {
+        [name]: '',
+      },
+    });
+  }
+
   return (
-    <label className="filter-title">
-      <span className="filter-title__text">{placeholder}</span>
-      <input
-        type="text"
-        name={name}
-        list={autocompleteListName}
-        data-qa={name}
-        className={'input' + (filters[name].length ? ' input--filled' : '')}
-        onChange={onChange}
-        onBlur={onBlur}
-        placeholder={placeholder}
-        value={filters[name]}
-      />
-      {autocompleteList.length > 0 &&
-        !autocompleteList.find(
-          (i) => filters[name].toLowerCase() === String(i).toLowerCase(),
-        ) && (
-          <datalist id={autocompleteListName}>
-            {autocompleteList.map((item) => (
-              <option key={item} value={item} />
-            ))}
-          </datalist>
-        )}
-    </label>
+    <div className="filter">
+      <label className="filter__title">
+        <span className="filter__title-text">{placeholder}</span>
+        <input
+          type="text"
+          name={name}
+          list={autocompleteListName}
+          data-qa={name}
+          className={'input' + (filters[name].length ? ' input--filled' : '')}
+          onChange={onChange}
+          onBlur={onBlur}
+          placeholder={placeholder}
+          value={filters[name]}
+        />
+        {autocompleteList.length > 0 &&
+          !autocompleteList.find(
+            (i) => filters[name].toLowerCase() === String(i).toLowerCase(),
+          ) && (
+            <datalist id={autocompleteListName}>
+              {autocompleteList.map((item) => (
+                <option key={item} value={item} />
+              ))}
+            </datalist>
+          )}
+      </label>
+      <button
+        className="btn btn--danger"
+        onClick={resetFilter}
+        disabled={!filters[name]}
+      >
+        x
+      </button>
+    </div>
   );
 }
