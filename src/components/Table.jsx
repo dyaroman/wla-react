@@ -196,7 +196,7 @@ export function Table() {
 
   if (websitesData['websites'].length === 0) {
     return (
-      <div className="container">
+      <div className="full-height">
         <h4 data-qa="emptyDataFile">
           No data to show. Please check "{WEBSITES_DATA_FILENAME}" file.
         </h4>
@@ -204,13 +204,13 @@ export function Table() {
     );
   } else if (preparedData.length === 0) {
     return (
-      <div className="container">
+      <div className="full-height">
         <h4 data-qa="noResults">No data to show, please check your filters.</h4>
       </div>
     );
   } else if (showColumns.length === 0) {
     return (
-      <div className="container">
+      <div className="full-height">
         <h4 data-qa="noColumns">
           No columns to show, please check customize columns.
         </h4>

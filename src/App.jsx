@@ -31,7 +31,7 @@ export function App() {
   if (requestError) {
     return (
       <section data-qa="loadError">
-        <div className="container">
+        <div className="full-height">
           <h1>Failed to load websites data</h1>
           <p>{requestError}</p>
         </div>
@@ -42,7 +42,7 @@ export function App() {
   if (unauthorized === true) {
     return (
       <section data-qa="unauthorized">
-        <div className="container">
+        <div className="full-height">
           <h1>Unauthorized</h1>
           <p>Please check your connection</p>
         </div>
