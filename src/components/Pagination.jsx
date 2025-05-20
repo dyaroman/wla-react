@@ -74,7 +74,7 @@ export function Pagination({ position }) {
           <button
             onClick={() => changeCurrentPage(1)}
             disabled={currentPage === 1}
-            className="btn"
+            className="btn btn--small"
             aria-label="first page"
             data-qa="firstPage"
           >
@@ -83,7 +83,7 @@ export function Pagination({ position }) {
           <button
             onClick={() => changeCurrentPage(Math.max(currentPage - 1, 1))}
             disabled={currentPage === 1}
-            className="btn"
+            className="btn btn--small"
             aria-label="previous page"
             data-qa="prevPage"
           >
@@ -97,7 +97,7 @@ export function Pagination({ position }) {
               changeCurrentPage(Math.min(currentPage + 1, totalPages))
             }
             disabled={currentPage === totalPages}
-            className="btn"
+            className="btn btn--small"
             aria-label="next page"
             data-qa="nextPage"
           >
@@ -106,7 +106,7 @@ export function Pagination({ position }) {
           <button
             onClick={() => changeCurrentPage(totalPages)}
             disabled={currentPage === totalPages}
-            className="btn"
+            className="btn btn--small"
             aria-label="last page"
             data-qa="lastPage"
           >

@@ -35,6 +35,11 @@
     --btn-border-color--hover: #b02a37;
   }
 
+  &--small {
+    min-width: unset;
+    width: 44px;
+  }
+
   &--with-icon {
     padding-top: functions.px2rem(5);
     padding-bottom: functions.px2rem(5);
