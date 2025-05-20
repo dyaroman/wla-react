@@ -49,7 +49,7 @@ export function ToggleButtonsPanel({ position }) {
               drawerId={FILTERS}
               title="Filters"
               position="left"
-              maxSize="320px"
+              maxSize="500px"
             >
               <Filters />
             </Drawer>
