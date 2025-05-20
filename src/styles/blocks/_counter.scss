@@ -13,7 +13,7 @@
   border-radius: 50px;
   border: variables.$border-width solid var(--body-color);
 
-  @media (min-width: 350px) {
+  @media (min-width: 375px) {
     display: flex;
   }
 }
