@@ -1,3 +1,9 @@
+## v2.2.0 (02.06.2025)
+
+- switch from CF worker to supabase edge function
+  - their free plan offers more leniency in terms of execution time compared to CF workers
+- remove unused styles
+
 ## v2.1.0 (22.05.2025)
 
 - add Pagination component
