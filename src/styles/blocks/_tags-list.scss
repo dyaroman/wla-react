@@ -12,30 +12,3 @@
 
   list-style: none;
 }
-
-.sidebar .tags-list {
-  margin-top: variables.$gap;
-
-  display: block;
-
-  @include breakpoints.media-breakpoint-up(md) {
-    column-count: 2;
-  }
-
-  @include breakpoints.media-breakpoint-up(xl) {
-    column-count: 3;
-  }
-
-  @include breakpoints.media-breakpoint-up(xxl) {
-    column-count: 4;
-  }
-}
-
-.sidebar .tags-list li {
-  margin-top: math.div(variables.$gap, 2);
-  margin-bottom: math.div(variables.$gap, 2);
-
-  &:first-child {
-    margin-top: 0;
-  }
-}
