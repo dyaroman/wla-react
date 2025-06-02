@@ -1,3 +1,7 @@
+## v2.2.1 (02.06.2025)
+
+- hotfix: handle 503 error from DB and use fallback
+
 ## v2.2.0 (02.06.2025)
 
 - switch from CF worker to supabase edge function
