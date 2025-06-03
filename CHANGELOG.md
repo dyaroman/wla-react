@@ -1,3 +1,7 @@
+## v2.2.2 (03.06.2025)
+
+- update wla backend url
+
 ## v2.2.1 (02.06.2025)
 
 - hotfix: handle 503 error from DB and use fallback
