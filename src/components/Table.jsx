@@ -455,7 +455,7 @@ export function Table() {
                                 <FormsCell
                                   forms={websiteData[column]}
                                   filter={filters[column]}
-                                  host
+                                  host={host}
                                 />
                               ) : (
                                 NO_DATA
