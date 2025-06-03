@@ -60,8 +60,8 @@ async function fetchWebsitesData({ method = 'GET' } = {}) {
   if (hostEnv && getQueryParamValue('ds') !== 'file') {
     try {
       const responseFromDB = await _fetchFromDB();
-      if (!responseFromDB.ok) throw new Error(responseFromDB.statusText);
-      return responseFromDB;
+      if (responseFromDB.ok) return responseFromDB;
+      throw new Error(responseFromDB.statusText);
     } catch (error) {
       console.log(
         `Falling back to "${WEBSITES_DATA_FILENAME}", failed to load from DB:`,
