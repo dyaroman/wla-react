@@ -1,3 +1,7 @@
+## v2.3.0 (21.06.2025)
+
+- remove GTM
+
 ## v2.2.2 (03.06.2025)
 
 - update wla backend url
