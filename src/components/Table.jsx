@@ -83,7 +83,7 @@ export function Table() {
 
   useEffect(() => {
     dispatch(sortTable());
-  }, [sort]);
+  }, [sort, filters, tags]);
 
   useEffect(() => {
     dispatch(updateURL());
