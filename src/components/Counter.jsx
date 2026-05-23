@@ -14,7 +14,7 @@ export function Counter() {
     if (env) {
       title += `[${env}]`;
     }
-    title += `: ${import.meta.env.VITE_PAGE_TITLE}`;
+    title += `: ${__PAGE_TITLE__}`;
     document.title = title;
   }, [env, preparedData]);
 

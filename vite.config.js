@@ -13,6 +13,11 @@ export default defineConfig({
     __APP_COMMIT__: JSON.stringify(
       execSync('git rev-parse HEAD').toString().trim().slice(0, 8),
     ),
+    __PAGE_TITLE__: JSON.stringify('WLA'),
+    __WEBSITES_DATA_URL__: JSON.stringify('/data'),
+    __WLA_BACKEND_URL__: JSON.stringify(
+      'https://gkrmkgvtltnbkwkqdxfw.supabase.co/functions/v1/wla-api',
+    ),
   },
   css: {
     devSourcemap: true,

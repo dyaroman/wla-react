@@ -43,17 +43,13 @@ function getEnvironmentConfig() {
 
 async function fetchWebsitesData({ method = 'GET' } = {}) {
   function _fetchFromFile() {
-    return fetch(
-      `${import.meta.env.VITE_WEBSITES_DATA_URL}/${WEBSITES_DATA_FILENAME}`,
-      { method },
-    );
+    return fetch(`${__WEBSITES_DATA_URL__}/${WEBSITES_DATA_FILENAME}`, {
+      method,
+    });
   }
 
   function _fetchFromDB() {
-    return fetch(
-      `${import.meta.env.VITE_WLA_BACKEND_URL}/combined?env=${hostEnv}`,
-      { method },
-    );
+    return fetch(`${__WLA_BACKEND_URL__}/combined?env=${hostEnv}`, { method });
   }
 
   const { hostEnv } = getEnvironmentConfig();
