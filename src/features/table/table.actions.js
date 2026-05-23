@@ -474,11 +474,12 @@ export function updateURL() {
       params.set(URL_PARAMETERS.showColumns, 'none');
     }
 
-    if (params.toString() === '') {
-      window.history.replaceState({}, '', '/');
-    } else {
-      window.history.replaceState({}, '', `?${params}`);
-    }
+    const search = params.toString();
+    const newUrl = search
+      ? `${window.location.pathname}?${search}`
+      : window.location.pathname;
+
+    window.history.replaceState({}, '', newUrl);
   };
 }
 
