@@ -19,7 +19,7 @@ export default defineConfig({
     __PAGE_TITLE__: JSON.stringify('WLA'),
     __WEBSITES_DATA_URL__: JSON.stringify(`${base}data`),
     __WLA_BACKEND_URL__: JSON.stringify(
-      'https://gkrmkgvtltnbkwkqdxfw.supabase.co/functions/v1/wla-api',
+      'https://yawjfabcunhkncinsykk.supabase.co/functions/v1/wla-api',
     ),
   },
   css: {
