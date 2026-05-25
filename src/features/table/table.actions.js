@@ -32,15 +32,6 @@ import {
 } from '../../misc/functions';
 import { showToast } from '../toast/toast.actions';
 
-function getEnvironmentConfig() {
-  let hostEnv = null;
-  const subdomain = window.location.hostname.split('.')[0];
-  if (['localhost', 'rc', 'dev', 'prod'].includes(subdomain)) {
-    hostEnv = subdomain === 'prod' ? 'prod' : 'dev';
-  }
-  return { hostEnv };
-}
-
 async function fetchWebsitesData({ method = 'GET' } = {}) {
   function _fetchFromFile() {
     return fetch(`${__WEBSITES_DATA_URL__}/${WEBSITES_DATA_FILENAME}`, {
@@ -49,11 +40,10 @@ async function fetchWebsitesData({ method = 'GET' } = {}) {
   }
 
   function _fetchFromDB() {
-    return fetch(`${__WLA_BACKEND_URL__}/combined?env=${hostEnv}`, { method });
+    return fetch(`${__WLA_BACKEND_URL__}/combined?env=demo`, { method });
   }
 
-  const { hostEnv } = getEnvironmentConfig();
-  if (hostEnv && getQueryParamValue('ds') !== 'file') {
+  if (getQueryParamValue('ds') !== 'file') {
     try {
       const responseFromDB = await _fetchFromDB();
       if (responseFromDB.ok) return responseFromDB;
@@ -78,7 +68,6 @@ export function getWebsitesData() {
     }
     localStorage.setItem(operationKey, 'running');
 
-    const { hostEnv } = getEnvironmentConfig();
     try {
       const response = await fetchWebsitesData();
       switch (response.status) {
@@ -97,7 +86,7 @@ export function getWebsitesData() {
           const websites = websitesData['websites'];
 
           if (!websitesData['env']) {
-            websitesData['env'] = hostEnv;
+            websitesData['env'] = 'demo';
           }
 
           // collect all filters
