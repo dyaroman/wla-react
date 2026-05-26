@@ -12,7 +12,7 @@ export function TableInfo() {
         <h4 data-qa="commit">
           Commit:{' '}
           <a
-            href={`https://dev.azure.com/myorg/websites/_git/websites/commit/${commit}`}
+            href={`https://dev.azure.com/org/git/repo/commit/${commit}`}
             target="_blank"
             rel="noreferrer"
           >
