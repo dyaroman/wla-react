@@ -110,10 +110,10 @@ export function Table() {
     const filterName = cell && cell.dataset.qa;
     if (!filterName) return;
 
-    for (const column in columns) {
-      if (!columns[column]['renderFilter']) continue;
+    for (const col of columns) {
+      if (!col.renderFilter) continue;
 
-      if (filterName !== column) continue;
+      if (filterName !== col.name) continue;
 
       dispatch(openDrawer(FILTERS));
 

@@ -29,16 +29,16 @@ export function Filters() {
           reset filters
         </button>
 
-        {Object.keys(columns).map((column) => {
-          if (!columns[column]['renderFilter'] || column === COLUMNS.tags) {
+        {columns.map((col) => {
+          if (!col.renderFilter || col.name === COLUMNS.tags) {
             return null;
           }
 
           return (
             <Filter
-              key={column}
-              name={column}
-              placeholder={fromCamelCaseToWords(column)}
+              key={col.name}
+              name={col.name}
+              placeholder={fromCamelCaseToWords(col.name)}
             />
           );
         })}

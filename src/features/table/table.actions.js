@@ -91,12 +91,12 @@ export function getWebsitesData() {
 
           // collect all filters
           const filters = {};
-          for (const column in columns) {
-            if (!columns[column]['renderFilter']) continue;
-            if (column === COLUMNS.tags) continue;
+          columns.forEach((col) => {
+            if (!col.renderFilter) return;
+            if (col.name === COLUMNS.tags) return;
 
-            filters[column] = '';
-          }
+            filters[col.name] = '';
+          });
 
           // collect all unique tags
           const allTags = getUniqueTags(websites).sort();
@@ -109,15 +109,15 @@ export function getWebsitesData() {
           };
 
           // get default show columns
-          const defaultShowColumns = Object.keys(columns).filter(
-            (column) => columns[column]['showColumn'],
-          );
+          const defaultShowColumns = columns
+            .filter((col) => col.showColumn)
+            .map((col) => col.name);
           payload['defaultShowColumns'] = defaultShowColumns;
 
           // get renderable columns
-          const renderableColumns = Object.keys(columns).filter(
-            (column) => columns[column]['renderColumn'],
-          );
+          const renderableColumns = columns
+            .filter((col) => col.renderColumn)
+            .map((col) => col.name);
           payload['renderableColumns'] = renderableColumns;
 
           // get showColumns from URL

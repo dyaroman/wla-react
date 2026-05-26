@@ -227,7 +227,7 @@ export function filterAndSortColumns(columns, state) {
     .filter((column) => state.renderableColumns.includes(column))
     .sort(
       (a, b) =>
-        Object.keys(state.websitesData.columns).indexOf(a) -
-        Object.keys(state.websitesData.columns).indexOf(b),
+        state.websitesData.columns.findIndex((col) => col.name === a) -
+        state.websitesData.columns.findIndex((col) => col.name === b),
     );
 }

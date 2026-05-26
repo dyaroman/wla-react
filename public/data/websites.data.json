@@ -1,182 +1,218 @@
 {
-  "columns": {
-    "index": {
+  "columns": [
+    {
+      "name": "index",
       "renderFilter": false,
       "renderColumn": true,
       "showColumn": true
     },
-    "checkbox": {
+    {
+      "name": "checkbox",
       "renderFilter": false,
       "renderColumn": true,
       "showColumn": false
     },
-    "website": {
+    {
+      "name": "website",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": true
     },
-    "forms": {
+    {
+      "name": "forms",
       "renderFilter": false,
       "renderColumn": true,
       "showColumn": false
     },
-    "pages": {
+    {
+      "name": "pages",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "template": {
+    {
+      "name": "template",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": true
     },
-    "campaignId": {
+    {
+      "name": "campaignId",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": true
     },
-    "campaignUid": {
+    {
+      "name": "campaignUid",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "mainForm": {
+    {
+      "name": "mainForm",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": true
     },
-    "mainFormTheme": {
+    {
+      "name": "mainFormTheme",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": true
     },
-    "mainFormLeadType": {
+    {
+      "name": "mainFormLeadType",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "altForm": {
+    {
+      "name": "altForm",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "altFormTheme": {
+    {
+      "name": "altFormTheme",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "altFormLeadType": {
+    {
+      "name": "altFormLeadType",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "mainFormEs": {
+    {
+      "name": "mainFormEs",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "mainFormEsTheme": {
+    {
+      "name": "mainFormEsTheme",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "mainFormEsLeadType": {
+    {
+      "name": "mainFormEsLeadType",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "gtmKey": {
+    {
+      "name": "gtmKey",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "owner": {
+    {
+      "name": "owner",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "email": {
+    {
+      "name": "email",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "emailLegal": {
+    {
+      "name": "emailLegal",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "emailInfo": {
+    {
+      "name": "emailInfo",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "phoneNumber": {
+    {
+      "name": "phoneNumber",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "effectiveDate": {
+    {
+      "name": "effectiveDate",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "lastModifiedTermsOfUse": {
+    {
+      "name": "lastModifiedTermsOfUse",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "companyName": {
+    {
+      "name": "companyName",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": true
     },
-    "address1": {
+    {
+      "name": "address1",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "address2": {
+    {
+      "name": "address2",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "tags": {
+    {
+      "name": "tags",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     },
-    "ogImage": {
+    {
+      "name": "ogImage",
       "renderFilter": false,
       "renderColumn": true,
       "showColumn": false
     },
-    "favicon": {
+    {
+      "name": "favicon",
       "renderFilter": false,
       "renderColumn": true,
       "showColumn": false
     },
-    "host": {
+    {
+      "name": "host",
       "renderFilter": false,
       "renderColumn": false
     },
-    "mainFormPrimaryColor": {
+    {
+      "name": "mainFormPrimaryColor",
       "renderFilter": false,
       "renderColumn": false
     },
-    "altFormPrimaryColor": {
+    {
+      "name": "altFormPrimaryColor",
       "renderFilter": false,
       "renderColumn": false
     },
-    "mainFormEsPrimaryColor": {
+    {
+      "name": "mainFormEsPrimaryColor",
       "renderFilter": false,
       "renderColumn": false
     },
-    "facebookVerification": {
+    {
+      "name": "facebookVerification",
       "renderFilter": true,
       "renderColumn": true,
       "showColumn": false
     }
-  },
+  ],
   "commit": "8fe33a322494d094b07ffbda6cb22e9de2002259",
   "env": "demo",
   "repoPath": "org/git/repo",
