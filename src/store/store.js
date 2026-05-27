@@ -20,6 +20,7 @@ export const store = configureStore({
           'table.preparedData',
           'table.autocompleteLists',
         ],
+        ignoredActions: ['table/computedDataUpdated', 'table/setWebsitesData'],
       },
     }),
   devTools: {
