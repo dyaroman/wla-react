@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThreeStateCheckbox } from './ThreeStateCheckbox';
 import { triggerGtmEvent } from '../misc/functions';
 import { gtmEvents } from '../misc/gtm.constants';
-import { TAGS_UPDATED } from '../features/table/table.constants';
+import { tagsUpdated } from '../features/table/table.slice';
 import { CHECKBOX_STATES, EXCLUSION_PREFIX } from '../misc/misc.constants';
 
 export function TagsList({ items }) {
@@ -48,10 +48,7 @@ export function TagsList({ items }) {
         break;
     }
 
-    dispatch({
-      type: TAGS_UPDATED,
-      payload: updatedTags,
-    });
+    dispatch(tagsUpdated(updatedTags));
   }
 
   if (items.length === 0) {

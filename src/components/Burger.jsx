@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { openDrawer } from '../features/drawer/drawer.actions';
+import { openDrawer } from '../features/drawer/drawer.slice';
 import { SIDEBAR } from '../features/drawer/drawer.constants';
 
 export function Burger() {

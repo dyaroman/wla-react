@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import './styles/index.scss';
 import { App } from './App';
 import { store } from './store/store';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import packageJson from '../package.json';
 
 const container = document.getElementById('root');
@@ -12,7 +13,9 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </Provider>
   </React.StrictMode>,
 );

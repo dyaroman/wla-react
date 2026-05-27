@@ -1,4 +1,4 @@
-import { Highlight } from './Highlight';
+import { Highlight } from '../Highlight';
 
 export function FormsCell({ forms, host, filter }) {
   const formsList = Object.keys(forms).map((form) => {

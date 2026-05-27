@@ -3,17 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from './Modal';
 import { fromCamelCaseToWords } from '../misc/functions';
 import { COLUMNS } from '../misc/columns.constants';
-import { TOGGLE_INFO_MODAL_OPENED } from '../features/app/app.constants';
+import { toggleInfoModalOpened } from '../features/app/app.slice';
 
 export function InfoModal() {
   const dispatch = useDispatch();
   const infoModalOpened = useSelector((state) => state['app'].infoModalOpened);
 
   function onClose() {
-    dispatch({
-      type: TOGGLE_INFO_MODAL_OPENED,
-      payload: false,
-    });
+    dispatch(toggleInfoModalOpened(false));
   }
 
   return (

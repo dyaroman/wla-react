@@ -8,7 +8,7 @@ import { Icons } from './Icons';
 import { Burger } from './Burger';
 import { TableInfo } from './TableInfo';
 import { ResultsControls } from './ResultsControls';
-import { openDrawer } from '../features/drawer/drawer.actions';
+import { openDrawer } from '../features/drawer/drawer.slice';
 import {
   CUSTOMIZE_COLUMNS,
   FILTERS,

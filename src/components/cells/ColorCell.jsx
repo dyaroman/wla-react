@@ -1,6 +1,6 @@
-import { fromCamelCaseToWords } from '../misc/functions';
-import { getContrastColor } from '../misc/color';
-import { NO_DATA } from '../misc/misc.constants';
+import { fromCamelCaseToWords } from '../../misc/functions';
+import { getContrastColor } from '../../misc/color';
+import { NO_DATA } from '../../misc/misc.constants';
 
 export function ColorCell({ column, bgColor, children }) {
   const styles = {};

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { gtmEvents } from '../misc/gtm.constants';
-import { ASC, DESC, SORT_UPDATED } from '../features/table/table.constants';
+import { ASC, DESC, sortUpdated } from '../features/table/table.slice';
 import { URL_PARAMETERS } from '../misc/url.constants';
 
 export function ColumnTitle({ column, text = '' }) {
@@ -30,10 +30,7 @@ export function ColumnTitle({ column, text = '' }) {
       newSort[URL_PARAMETERS.direction] = DESC;
       eventInfo.method = DESC;
     }
-    dispatch({
-      type: SORT_UPDATED,
-      payload: newSort,
-    });
+    dispatch(sortUpdated(newSort));
     triggerGtmEvent(gtmEvents.tableSort, {
       ...eventInfo,
     });

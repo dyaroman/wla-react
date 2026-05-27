@@ -1,18 +1,18 @@
 import {
+  setWebsitesData,
+  websitesDataSource,
+  computedDataUpdated,
+  filtersUpdated,
+  showColumnsUpdated,
+  sortUpdated,
+  tagsUpdated,
+  urlParamsCombinedUpdate,
+  urlParamsRead,
   ASC,
-  COMPUTED_DATA_UPDATED,
   DESC,
-  FILTERS_UPDATED,
-  PREPARED_DATA_UPDATED,
-  SET_WEBSITES_DATA,
-  SHOW_COLUMNS_UPDATED,
-  SORT_UPDATED,
-  TAGS_UPDATED,
-  URL_PARAMS_COMBINED_UPDATE,
-  URL_PARAMS_READ,
-  WEBSITES_DATA_SOURCE,
-} from './table.constants';
-import { REQUEST_ERROR, UNAUTHORIZED } from '../app/app.constants';
+} from './table.slice';
+import { requestError, unauthorized } from '../app/app.slice';
+import { showToast } from '../toast/toast.slice';
 import {
   PER_PAGE_VALUES,
   WEBSITES_DATA_FILENAME,
@@ -30,7 +30,8 @@ import {
   sortTableData,
   triggerGtmEvent,
 } from '../../misc/functions';
-import { showToast } from '../toast/toast.actions';
+
+let _isFetchingWebsitesData = false;
 
 async function fetchWebsitesData({ method = 'GET' } = {}) {
   function _fetchFromFile() {
@@ -62,11 +63,8 @@ async function fetchWebsitesData({ method = 'GET' } = {}) {
 
 export function getWebsitesData() {
   return async function (dispatch, getState) {
-    const operationKey = '__wla_getWebsitesData__';
-    if (localStorage.getItem(operationKey) === 'running') {
-      return;
-    }
-    localStorage.setItem(operationKey, 'running');
+    if (_isFetchingWebsitesData) return;
+    _isFetchingWebsitesData = true;
 
     try {
       const response = await fetchWebsitesData();
@@ -78,10 +76,8 @@ export function getWebsitesData() {
           const dataSource = response.url.includes(WEBSITES_DATA_FILENAME)
             ? 'file'
             : 'db';
-          dispatch({
-            type: WEBSITES_DATA_SOURCE,
-            payload: dataSource,
-          });
+          dispatch(websitesDataSource(dataSource));
+
           const columns = websitesData['columns'];
           const websites = websitesData['websites'];
 
@@ -158,38 +154,25 @@ export function getWebsitesData() {
 
           payload['websitesDataLoaded'] = true;
 
-          dispatch({
-            type: SET_WEBSITES_DATA,
-            payload,
-          });
+          dispatch(setWebsitesData(payload));
           break;
         }
 
         case 401: {
-          dispatch({
-            type: UNAUTHORIZED,
-            payload: true,
-          });
+          dispatch(unauthorized(true));
           break;
         }
 
         default: {
-          dispatch({
-            type: REQUEST_ERROR,
-            payload: `Status code: ${response.status}`,
-          });
+          dispatch(requestError(`Status code: ${response.status}`));
           break;
         }
       }
     } catch (error) {
       console.error(error);
-
-      dispatch({
-        type: REQUEST_ERROR,
-        payload: error.message,
-      });
+      dispatch(requestError(error.message));
     } finally {
-      localStorage.removeItem(operationKey);
+      _isFetchingWebsitesData = false;
     }
   };
 }
@@ -222,10 +205,7 @@ export function getURLParams() {
     // we should read url params only after websites data loaded, because we get filters from data
     const params = new URLSearchParams(window.location.search);
     if (params.size === 0) {
-      dispatch({
-        type: URL_PARAMS_READ,
-        payload: true,
-      });
+      dispatch(urlParamsRead(true));
     }
 
     const payload = {};
@@ -334,10 +314,7 @@ export function getURLParams() {
     payload['tags'] = newTags;
     payload['urlParamsRead'] = true;
 
-    dispatch({
-      type: URL_PARAMS_COMBINED_UPDATE,
-      payload,
-    });
+    dispatch(urlParamsCombinedUpdate(payload));
   };
 }
 
@@ -472,56 +449,32 @@ export function updateURL() {
   };
 }
 
-export function filterTable() {
+export function filterAndSortTable() {
   return function (dispatch, getState) {
+    const { websitesData, filters, tags, sort } = getState().table;
     const autocompleteLists = {};
-    const websitesData = getState().table.websitesData;
-    const filters = getState().table.filters;
-    const tags = getState().table.tags;
-    const filteredData = filterTableData(
+
+    const filtered = filterTableData(
       [...websitesData['websites']],
       filters,
       tags,
     );
-
-    Object.keys(filters).map(
-      (filter) =>
-        (autocompleteLists[filter] = getUniqueValues(
-          filteredData,
-          filter,
-        ).sort()),
-    );
-
-    dispatch({
-      type: COMPUTED_DATA_UPDATED,
-      payload: {
-        preparedData: filteredData,
-        availableTags: getUniqueTags(filteredData),
-        autocompleteLists,
-      },
+    Object.keys(filters).forEach((f) => {
+      autocompleteLists[f] = getUniqueValues(filtered, f).sort();
     });
-  };
-}
 
-export function sortTable() {
-  return function (dispatch, getState) {
-    const preparedData = getState().table.preparedData;
-    const sort = getState().table.sort;
-
-    let sortedData = sortTableData(
-      preparedData,
-      sort.column || COLUMNS.website,
-    );
+    let sorted = sortTableData(filtered, sort.column || COLUMNS.website);
     if (sort.direction === DESC) {
-      sortedData = sortedData.reverse();
+      sorted = sorted.reverse();
     }
 
-    dispatch({
-      type: PREPARED_DATA_UPDATED,
-      payload: {
-        preparedData: sortedData,
-      },
-    });
+    dispatch(
+      computedDataUpdated({
+        preparedData: sorted,
+        availableTags: getUniqueTags(filtered),
+        autocompleteLists,
+      }),
+    );
   };
 }
 
@@ -531,39 +484,29 @@ export function resetFilters() {
     for (const filter in getState().table.filters) {
       filters[filter] = '';
     }
-    dispatch({
-      type: FILTERS_UPDATED,
-      payload: filters,
-    });
+    dispatch(filtersUpdated(filters));
   };
 }
 
 export function resetTags() {
   return function (dispatch) {
-    dispatch({
-      type: TAGS_UPDATED,
-      payload: [],
-    });
+    dispatch(tagsUpdated([]));
   };
 }
 
 export function resetSort() {
   return function (dispatch) {
-    dispatch({
-      type: SORT_UPDATED,
-      payload: {
+    dispatch(
+      sortUpdated({
         column: '',
         direction: '',
-      },
-    });
+      }),
+    );
   };
 }
 
 export function updateShowColumns(showColumns) {
   return function (dispatch) {
-    dispatch({
-      type: SHOW_COLUMNS_UPDATED,
-      payload: showColumns,
-    });
+    dispatch(showColumnsUpdated(showColumns));
   };
 }

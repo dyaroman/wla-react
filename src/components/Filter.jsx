@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fromCamelCaseToWords, triggerGtmEvent } from '../misc/functions';
 import { updateShowColumns } from '../features/table/table.actions';
 import { gtmEvents } from '../misc/gtm.constants';
-import { FILTERS_UPDATED } from '../features/table/table.constants';
+import { filtersUpdated } from '../features/table/table.slice';
 
 export function Filter({ name, placeholder }) {
   const dispatch = useDispatch();
@@ -22,12 +22,7 @@ export function Filter({ name, placeholder }) {
       dispatch(updateShowColumns([...showColumns, name]));
     }
 
-    dispatch({
-      type: FILTERS_UPDATED,
-      payload: {
-        [name]: event.target.value,
-      },
-    });
+    dispatch(filtersUpdated({ [name]: event.target.value }));
   }
 
   function onBlur(event) {
@@ -38,12 +33,7 @@ export function Filter({ name, placeholder }) {
   }
 
   function resetFilter() {
-    dispatch({
-      type: FILTERS_UPDATED,
-      payload: {
-        [name]: '',
-      },
-    });
+    dispatch(filtersUpdated({ [name]: '' }));
   }
 
   return (

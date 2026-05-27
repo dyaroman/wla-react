@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { hideToast } from '../features/toast/toast.actions';
+import { hideToast } from '../features/toast/toast.slice';
 
 export function Toast() {
   const dispatch = useDispatch();

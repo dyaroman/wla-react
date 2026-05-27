@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { Loader } from './Loader';
-import { Modal } from './Modal';
+import { Loader } from '../Loader';
+import { Modal } from '../Modal';
 
 export function ImgCell({ sources = [] }) {
   const [loading, setLoading] = useState(false);

@@ -18,7 +18,7 @@ export function Tags() {
   return (
     <div className="tags">
       <button
-        className="btn  btn--danger"
+        className="btn btn--danger"
         onClick={onResetTags}
         data-qa="resetTags"
       >

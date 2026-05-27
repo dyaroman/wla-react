@@ -1,25 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  CURRENT_PAGE_UPDATED,
-  PER_PAGE_UPDATED,
-} from '../features/table/table.constants';
+  currentPageUpdated,
+  perPageUpdated,
+} from '../features/table/table.slice';
 import { PER_PAGE_VALUES } from '../misc/misc.constants';
-import { useEffect, useState } from 'react';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 export function Pagination({ position }) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+  const isMobile = useIsMobile();
   const dispatch = useDispatch();
   const currentPage = useSelector((state) => state['table'].currentPage);
   const perPage = useSelector((state) => state['table'].perPage);
   const preparedData = useSelector((state) => state['table'].preparedData);
   const totalPages = Math.ceil(preparedData.length / perPage);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 576);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     if (currentPage > totalPages) {
@@ -28,17 +22,11 @@ export function Pagination({ position }) {
   }, [totalPages]);
 
   function onPerPageChange(event) {
-    dispatch({
-      type: PER_PAGE_UPDATED,
-      payload: Number(event.target.value),
-    });
+    dispatch(perPageUpdated(Number(event.target.value)));
   }
 
   function changeCurrentPage(value) {
-    dispatch({
-      type: CURRENT_PAGE_UPDATED,
-      payload: value,
-    });
+    dispatch(currentPageUpdated(value));
   }
 
   if (!isMobile && position === 'below') {

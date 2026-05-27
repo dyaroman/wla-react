@@ -6,8 +6,8 @@ import { Table } from './components/Table';
 import { Header } from './components/Header';
 import { Toast } from './components/Toast';
 import { ThemeToggle } from './components/ThemeToggle';
-import { Shortcuts } from './components/Shortcuts';
 import { InfoModal } from './components/InfoModal';
+import { useShortcuts } from './hooks/useShortcuts';
 import { getURLParams, getWebsitesData } from './features/table/table.actions';
 
 export function App() {
@@ -17,6 +17,8 @@ export function App() {
   const websitesDataLoaded = useSelector(
     (state) => state['table'].websitesDataLoaded,
   );
+
+  useShortcuts();
 
   useEffect(() => {
     dispatch(getWebsitesData());
@@ -62,7 +64,6 @@ export function App() {
     <section data-qa="app" className="app">
       <Header />
       <ThemeToggle />
-      <Shortcuts />
       <Table />
       <Toast />
       <InfoModal />

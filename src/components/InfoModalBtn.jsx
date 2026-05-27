@@ -2,16 +2,13 @@ import { useDispatch } from 'react-redux';
 
 import { triggerGtmEvent } from '../misc/functions';
 import { gtmEvents } from '../misc/gtm.constants';
-import { TOGGLE_INFO_MODAL_OPENED } from '../features/app/app.constants';
+import { toggleInfoModalOpened } from '../features/app/app.slice';
 
 export function InfoModalBtn() {
   const dispatch = useDispatch();
 
   function onOpen() {
-    dispatch({
-      type: TOGGLE_INFO_MODAL_OPENED,
-      payload: true,
-    });
+    dispatch(toggleInfoModalOpened(true));
     triggerGtmEvent(gtmEvents.openInfoModal);
   }
 

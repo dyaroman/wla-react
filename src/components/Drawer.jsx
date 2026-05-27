@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { closeDrawer } from '../features/drawer/drawer.actions';
+import { closeDrawer } from '../features/drawer/drawer.slice';
 
 export function Drawer({
   drawerId,

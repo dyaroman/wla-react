@@ -22,7 +22,7 @@ export function Filters() {
     <div className="filters">
       <div className="flex-column">
         <button
-          className="btn  btn--danger"
+          className="btn btn--danger"
           onClick={onResetFilters}
           data-qa="resetFilters"
         >

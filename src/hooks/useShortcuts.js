@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useShortcut } from '../hooks/useShortcut';
+import { useShortcut } from './useShortcut';
 import {
   convertUrlToEnv,
   getQueryParamValue,
@@ -8,20 +8,20 @@ import {
   triggerGtmEvent,
 } from '../misc/functions';
 import { gtmEvents } from '../misc/gtm.constants';
-import { showToast } from '../features/toast/toast.actions';
+import { showToast } from '../features/toast/toast.slice';
 import { resetFilters } from '../features/table/table.actions';
-import { openDrawer } from '../features/drawer/drawer.actions';
+import { openDrawer } from '../features/drawer/drawer.slice';
 import { COLUMNS } from '../misc/columns.constants';
-import { TOGGLE_INFO_MODAL_OPENED } from '../features/app/app.constants';
+import { toggleInfoModalOpened } from '../features/app/app.slice';
 import { FILTERS, SIDEBAR } from '../features/drawer/drawer.constants';
 
-export function Shortcuts() {
+export function useShortcuts() {
   const dispatch = useDispatch();
   const websitesData = useSelector((state) => state['table'].websitesData);
   const preparedData = useSelector((state) => state['table'].preparedData);
   const infoModalOpened = useSelector((state) => state['app'].infoModalOpened);
 
-  const env = websitesData['env'];
+  const env = websitesData?.['env'];
   const convertLinksTo =
     getQueryParamValue('convertLinksTo') || getQueryParamValue('clt');
   const convertLinks = convertLinksTo && convertLinksTo !== env;
@@ -94,10 +94,7 @@ export function Shortcuts() {
   useShortcut(['Shift', '/'], (event) => {
     event.preventDefault();
 
-    dispatch({
-      type: TOGGLE_INFO_MODAL_OPENED,
-      payload: !infoModalOpened,
-    });
+    dispatch(toggleInfoModalOpened(!infoModalOpened));
 
     triggerGtmEvent(gtmEvents.openInfoModal);
 

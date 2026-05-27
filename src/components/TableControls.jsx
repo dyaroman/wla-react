@@ -79,14 +79,14 @@ export function TableControls() {
           hide all
         </button>
         <button
-          className="btn  btn--danger"
+          className="btn btn--danger"
           onClick={onClickRestoreDefaultColumns}
           data-qa="restoreDefaultColumns"
         >
           restore default
         </button>
         <button
-          className="btn  btn--danger"
+          className="btn btn--danger"
           onClick={onClickResetSort}
           data-qa="resetSort"
         >
