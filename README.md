@@ -8,7 +8,7 @@
 
 > ⚠️ **Data Privacy Note:** All production data has been replaced with realistic mock data to comply with non-disclosure agreements (NDAs) and prevent legal issues with the data owner.
 
-**v2.3.0** — React 19, Redux, Vite 6, Sass
+**v2.4.0** — React 19, Redux Toolkit, Vite 8, Sass
 
 ---
 

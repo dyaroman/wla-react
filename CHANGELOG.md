@@ -1,3 +1,26 @@
+## v2.4.0 (27.05.2026)
+
+- migrate from Redux to Redux Toolkit (RTK)
+  - replace `legacy_createStore` with `configureStore`
+  - rewrite app, toast, drawer and table reducers as `createSlice` slices
+  - remove `redux`, `redux-thunk`, `@redux-devtools/extension`
+- fix race condition: merge `filterTable` + `sortTable` into `filterAndSortTable`
+  - sort now always runs on freshly filtered data
+- extract cell components to `src/components/cells/`
+  - `WebsiteCell`, `RedirectCell`, `PagesCell`, `FaviconCell`, `TagsCell`, `DefaultCell`
+  - moved `ColorCell`, `ImgCell`, `FormsCell`
+  - `Table.jsx` reduced from ~500 to ~200 lines
+- add `ErrorBoundary` component wrapping the app for graceful crash handling
+- replace `Shortcuts.jsx` with `useShortcuts` hook
+- extract `useIsMobile` hook from `Pagination.jsx`
+- update dependencies
+  - `react` / `react-dom` 19.2.6, `react-redux` 9.3.0
+  - `vite` 8.0.14, `@vitejs/plugin-react` 6.0.2
+  - `sass` 1.100.0, `prettier` 3.8.3, `lint-staged` 17.0.5
+- move build tools to `devDependencies`
+- fix: restore missing `useEffect` import in `Pagination.jsx`
+- fix: replace deprecated Sass `if()` with `@if`/`@else` in `_breakpoints.scss`
+
 ## v2.3.0 (21.06.2025)
 
 - remove GTM
