@@ -12,6 +12,16 @@ export const store = configureStore({
     toast: toastReducer,
     drawer: drawerReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredPaths: [
+          'table.websitesData',
+          'table.preparedData',
+          'table.autocompleteLists',
+        ],
+      },
+    }),
   devTools: {
     trace: true,
     traceLimit: 10,
